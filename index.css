@@ -468,3 +468,7 @@
 .box{
   background-color: var(--footer);
 }
+#imgLogo {
+ width: 80px;
+ height: 80px;
+}
