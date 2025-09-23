@@ -1,13 +1,10 @@
 /* ---------------  DARK / LIGHT --------------- */
 const darkModeToggle = document.getElementById("darkModeToggle");
 const body = document.body;
-
-// restore preference
 if (localStorage.getItem("theme") === "light") {
   body.classList.add("light");
   darkModeToggle.checked = true;
 }
-
 darkModeToggle.addEventListener("change", () => {
   body.classList.toggle("light");
   localStorage.setItem("theme", body.classList.contains("light") ? "light" : "dark");
@@ -16,12 +13,10 @@ darkModeToggle.addEventListener("change", () => {
 /* ---------------  ACTIVE NAV LINK --------------- */
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll(".nav-link");
-
 window.addEventListener("scroll", () => {
   let current = "";
   sections.forEach(sec => {
-    const secTop = sec.offsetTop;
-    if (scrollY >= secTop - 100) current = sec.getAttribute("id");
+    if (scrollY >= sec.offsetTop - 100) current = sec.getAttribute("id");
   });
   navLinks.forEach(link => {
     link.classList.toggle("active", link.getAttribute("href").slice(1) === current);
