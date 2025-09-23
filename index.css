@@ -107,3 +107,40 @@ body.light{--bg:#f2f4fc;--surface:rgba(255,255,255,.7);--text:#1b1c22;--text-dim
   .big-title{font-size:2.4rem}
   .container-certs{grid-template-columns:1fr}
 }
+/* ===== FLOATING BLUR BACKGROUND ===== */
+.floating-bg{
+  position:fixed;
+  inset:0;                     /* top:0 right:0 bottom:0 left:0 */
+  z-index:-1;                  /* keep it behind hero / nav */
+  overflow:hidden;
+}
+
+.blob{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(40px);           /* soft glow – tweak to taste */
+  opacity:.55;
+  animation:floatUp linear infinite;
+  bottom:-200px;               /* start below viewport */
+}
+
+/* --- sizes, colors, timing --- */
+.b1{width:260px;height:260px;background:#45a9e7;left:8%; animation-duration:32s;animation-delay:0s;}
+.b2{width:320px;height:320px;background:#00e5ff;left:30%;animation-duration:45s;animation-delay:3s;}
+.b3{width:220px;height:220px;background:#ff4e50;left:55%;animation-duration:28s;animation-delay:1.5s;}
+.b4{width:380px;height:380px;background:#f9d423;left:75%;animation-duration:50s;animation-delay:5s;}
+.b5{width:240px;height:240px;background:#a1ffce;left:45%;animation-duration:38s;animation-delay:2s;}
+
+/* --- keyframes (same math as cjdeclaro) --- */
+@keyframes floatUp{
+  0%   {bottom:-200px; transform:translateX(0)   scale(1);   opacity:.5;}
+  50%  {                  transform:translateX(50px) scale(1.1); opacity:.75;}
+  100% {bottom:110%;      transform:translateX(-30px) scale(1);   opacity:.5;}
+}
+
+/* ----- LIGHT-MODE PALETTE SWAP ----- */
+body.light .b1{background:#0077cc;}
+body.light .b2{background:#00aaff;}
+body.light .b3{background:#ff4e50;}
+body.light .b4{background:#f9d423;}
+body.light .b5{background:#34c759;}
