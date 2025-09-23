@@ -3,6 +3,10 @@ body {
     margin: 0;
     padding: 0;
     transition: background-image 0.5s;
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    height: 100vh; /* Makes sure the body takes the full viewport height */
 }
 
 header {
@@ -27,6 +31,7 @@ nav a {
 #hero {
     padding: 50px;
     text-align: center;
+    color: white; /* Ensures text is readable over the image */
 }
 
 #hero h2 {
@@ -37,10 +42,15 @@ button {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    background-color: white;
+    color: #333;
+    border: none;
+    border-radius: 5px;
 }
 
 #aboutSection {
     padding: 20px;
+    color: white; /* Ensures text is readable over the image */
 }
 
 #aboutSection h3 {
@@ -49,12 +59,12 @@ button {
 
 /* Day mode styles */
 body.day {
-    background-image: url('assets/urbn_am.png');
+    background-image: url('assets/urbn am.png');
 }
 
 /* Night mode styles */
 body.night {
-    background-image: url('assets/urbn_pm.png');
+    background-image: url('assets/urbn pm.png');
     background-color: #1a1a1a;
     color: #ddd;
 }
@@ -64,7 +74,7 @@ body.night header {
 }
 
 body.night #hero {
-    background-color: #333;
+    background-color: rgba(51, 51, 51, 0.7); /* Semi-transparent black for text readability */
 }
 
 body.night button {
