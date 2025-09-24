@@ -4,6 +4,7 @@ body {
     color: #fff;
     margin: 0;
     padding: 20px;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 .container {
@@ -13,6 +14,7 @@ body {
     gap: 20px;
     max-width: 1400px;
     margin: 0 auto;
+    box-sizing: border-box; /* Include padding in width calculations */
 }
 
 .section {
@@ -24,11 +26,15 @@ body {
     transition: transform 0.2s, box-shadow 0.3s;
     flex: 1;
     min-width: 300px;
+    box-sizing: border-box; /* Prevent padding from causing overflow */
+    position: relative; /* Ensure proper positioning */
+    z-index: 1; /* Establish stacking context */
 }
 
 .section:hover {
     transform: translateY(-5px);
     box-shadow: 0 0 30px #ff0000;
+    z-index: 2; /* Bring hovered section to front */
 }
 
 button {
@@ -41,6 +47,8 @@ button {
     cursor: pointer;
     transition: background-color 0.3s;
     box-shadow: 0 0 10px #ff0000;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 button:hover {
@@ -59,22 +67,31 @@ input, select {
     padding: 5px;
     margin: 5px;
     border-radius: 3px;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
+    table-layout: fixed; /* Prevent table cell overflow */
 }
 
 th, td {
     border: 1px solid #333;
     padding: 8px;
     text-align: center;
+    word-wrap: break-word; /* Handle long content */
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 th {
     background-color: #333;
+    position: sticky;
+    top: 0;
 }
 
 td {
@@ -90,6 +107,8 @@ td {
     background-color: #111;
     border-radius: 5px;
     overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .bar {
@@ -102,6 +121,7 @@ td {
     font-size: 12px;
     color: #000;
     min-width: 20px;
+    flex-shrink: 0; /* Prevent bars from shrinking */
 }
 
 .bar.red { background-color: #f44336; }
@@ -116,6 +136,9 @@ td {
 #readyQueueList {
     list-style: none;
     padding: 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
 }
 
 #readyQueueList li {
@@ -131,16 +154,28 @@ td {
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
+        gap: 15px;
     }
     
     .section {
         min-width: auto;
+        width: 100%;
+        margin: 0;
+    }
+    
+    table {
+        font-size: 12px;
+    }
+    
+    th, td {
+        padding: 5px;
     }
 }
 
 /* Simulation speed slider */
 input[type="range"] {
     width: 100px;
+    vertical-align: middle;
 }
 
 /* Highlight current process */
@@ -148,4 +183,30 @@ input[type="range"] {
     background-color: #ff0000 !important;
     color: white !important;
     box-shadow: 0 0 15px #ff0000;
+}
+
+/* Form elements alignment */
+label {
+    display: inline-block;
+    margin: 5px;
+    vertical-align: middle;
+    min-width: 80px;
+}
+
+/* Ensure no overlapping text */
+.section h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+}
+
+/* Fix for button container */
+.section:first-child {
+    flex-basis: 100%;
+    text-align: center;
+}
+
+.section:first-child button {
+    margin: 2px;
 }

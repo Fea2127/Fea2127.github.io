@@ -10,13 +10,18 @@ class CPUScheduler {
         this.intervalId = null;
         this.algorithm = 'fcfs';
         this.quantum = 4;
-        this.speed = 500; // ms per time unit
+        this.speed = 500;
+        this.timeQuantumUsed = 0; // Track quantum usage for RR
     }
 
     initialize(processes, algorithm, quantum) {
+        // Deep copy processes to avoid reference issues
         this.processes = processes.map(p => ({
-            ...p,
-            remainTime: p.burstTime,
+            id: p.id,
+            arrivalTime: parseInt(p.arrivalTime),
+            burstTime: parseInt(p.burstTime),
+            priority: parseInt(p.priority),
+            remainTime: parseInt(p.burstTime),
             startTime: -1,
             waitTime: 0,
             finishTime: -1,
@@ -25,13 +30,14 @@ class CPUScheduler {
         }));
         
         this.algorithm = algorithm;
-        this.quantum = quantum;
+        this.quantum = parseInt(quantum);
         this.currentTime = 0;
         this.currentProcess = null;
         this.readyQueue = [];
         this.completedProcesses = [];
         this.ganttChart = [];
         this.isRunning = false;
+        this.timeQuantumUsed = 0;
         
         // Sort by arrival time initially
         this.processes.sort((a, b) => a.arrivalTime - b.arrivalTime);
@@ -46,7 +52,6 @@ class CPUScheduler {
             }
             return;
         }
-
         this.getNextProcess();
     }
 
@@ -59,35 +64,40 @@ class CPUScheduler {
             return;
         }
 
-        // Get process with shortest burst time
+        // Get process with shortest remaining time
         const available = this.processes.filter(p => 
             p.arrivalTime <= this.currentTime && 
-            p.remainTime > 0
+            p.remainTime > 0 &&
+            !this.completedProcesses.includes(p)
         );
         
         if (available.length > 0) {
-            available.sort((a, b) => a.burstTime - b.burstTime);
+            available.sort((a, b) => a.remainTime - b.remainTime);
             this.assignProcess(available[0]);
+        } else {
+            this.currentProcess = null;
         }
     }
 
     roundRobin() {
         if (this.currentProcess) {
             this.currentProcess.remainTime--;
-            
-            // Check if time quantum expired or process finished
-            const currentGantt = this.ganttChart[this.ganttChart.length - 1];
-            const timeInCPU = this.currentTime - currentGantt.start + 1;
+            this.timeQuantumUsed++;
             
             if (this.currentProcess.remainTime === 0) {
                 this.completeCurrentProcess();
-            } else if (timeInCPU >= this.quantum) {
+                this.timeQuantumUsed = 0;
+            } else if (this.timeQuantumUsed >= this.quantum) {
+                // Time quantum expired, move to ready queue
                 this.readyQueue.push(this.currentProcess);
                 this.currentProcess = null;
+                this.timeQuantumUsed = 0;
             }
         }
 
-        this.getNextProcess();
+        if (!this.currentProcess) {
+            this.getNextProcess();
+        }
     }
 
     priority() {
@@ -102,19 +112,26 @@ class CPUScheduler {
         // Get process with highest priority (lowest number)
         const available = this.processes.filter(p => 
             p.arrivalTime <= this.currentTime && 
-            p.remainTime > 0
+            p.remainTime > 0 &&
+            !this.completedProcesses.includes(p)
         );
         
         if (available.length > 0) {
             available.sort((a, b) => a.priority - b.priority);
             this.assignProcess(available[0]);
+        } else {
+            this.currentProcess = null;
         }
     }
 
     getNextProcess() {
         // Add arriving processes to ready queue
         this.processes.forEach(p => {
-            if (p.arrivalTime === this.currentTime && p.remainTime > 0) {
+            if (p.arrivalTime === this.currentTime && 
+                p.remainTime > 0 && 
+                !this.readyQueue.includes(p) && 
+                p !== this.currentProcess &&
+                !this.completedProcesses.includes(p)) {
                 this.readyQueue.push(p);
             }
         });
@@ -127,7 +144,7 @@ class CPUScheduler {
                     nextProcess = this.readyQueue.shift();
                     break;
                 case 'sjf':
-                    this.readyQueue.sort((a, b) => a.burstTime - b.burstTime);
+                    this.readyQueue.sort((a, b) => a.remainTime - b.remainTime);
                     nextProcess = this.readyQueue.shift();
                     break;
                 case 'priority':
@@ -142,6 +159,8 @@ class CPUScheduler {
             }
             
             this.assignProcess(nextProcess);
+        } else {
+            this.currentProcess = null;
         }
     }
 
@@ -152,21 +171,32 @@ class CPUScheduler {
         }
 
         // Add to Gantt chart
-        this.ganttChart.push({
-            process: process.id,
-            start: this.currentTime,
-            end: this.currentTime + 1
-        });
+        const lastSegment = this.ganttChart[this.ganttChart.length - 1];
+        if (lastSegment && lastSegment.process === process.id && lastSegment.end === this.currentTime) {
+            // Continue existing segment
+            lastSegment.end = this.currentTime + 1;
+        } else {
+            // New segment
+            this.ganttChart.push({
+                process: process.id,
+                start: this.currentTime,
+                end: this.currentTime + 1
+            });
+        }
     }
 
     completeCurrentProcess() {
+        if (!this.currentProcess) return;
+        
         this.currentProcess.finishTime = this.currentTime + 1;
         this.currentProcess.turnaroundTime = this.currentProcess.finishTime - this.currentProcess.arrivalTime;
         this.currentProcess.waitTime = this.currentProcess.turnaroundTime - this.currentProcess.burstTime;
-        this.currentProcess.percentage = (this.currentProcess.waitTime / this.currentProcess.turnaroundTime) * 100;
+        this.currentProcess.percentage = this.currentProcess.turnaroundTime > 0 ? 
+            (this.currentProcess.waitTime / this.currentProcess.turnaroundTime) * 100 : 0;
         
         this.completedProcesses.push(this.currentProcess);
         this.currentProcess = null;
+        this.timeQuantumUsed = 0;
     }
 
     step() {
@@ -174,9 +204,22 @@ class CPUScheduler {
 
         this.currentTime++;
         
-        // Update wait times for processes in ready queue
+        // Update wait times for processes in ready queue (not being executed)
         this.readyQueue.forEach(p => {
-            p.waitTime++;
+            if (p !== this.currentProcess) {
+                p.waitTime++;
+            }
+        });
+
+        // Add arriving processes
+        this.processes.forEach(p => {
+            if (p.arrivalTime === this.currentTime && 
+                p.remainTime > 0 && 
+                !this.readyQueue.includes(p) && 
+                p !== this.currentProcess &&
+                !this.completedProcesses.includes(p)) {
+                this.readyQueue.push(p);
+            }
         });
 
         // Execute current algorithm
@@ -202,7 +245,7 @@ class CPUScheduler {
         const avgWait = completed.reduce((sum, p) => sum + p.waitTime, 0) / completed.length;
         const avgTurnaround = completed.reduce((sum, p) => sum + p.turnaroundTime, 0) / completed.length;
 
-        return { avgWait, avgTurnaround };
+        return { avgWait: avgWait.toFixed(3), avgTurnaround: avgTurnaround.toFixed(3) };
     }
 
     getUtilization() {
@@ -218,13 +261,26 @@ const scheduler = new CPUScheduler();
 function simulate() {
     if (scheduler.isRunning) return;
     
+    // Initialize if not already done
+    if (scheduler.processes.length === 0) {
+        const processes = getProcessesFromTable();
+        if (processes.length === 0) {
+            alert("Please generate some processes first!");
+            return;
+        }
+        const algorithm = document.getElementById('algorithm').value;
+        const quantum = parseInt(document.getElementById('quantum').value);
+        scheduler.initialize(processes, algorithm, quantum);
+    }
+    
     scheduler.isRunning = true;
-    const speed = document.getElementById('simSpeed').value;
-    scheduler.speed = 600 - (speed * 50); // Convert to ms (5 = 350ms, 1 = 550ms, 10 = 100ms)
+    const speed = parseInt(document.getElementById('simSpeed').value);
+    scheduler.speed = 600 - (speed * 50);
     
     scheduler.intervalId = setInterval(() => {
         if (!scheduler.step()) {
             stop();
+            alert("Simulation completed!");
         }
         updateUI();
     }, scheduler.speed);
@@ -240,14 +296,31 @@ function stop() {
 
 function nextStep() {
     stop();
+    if (scheduler.processes.length === 0) {
+        const processes = getProcessesFromTable();
+        if (processes.length === 0) {
+            alert("Please generate some processes first!");
+            return;
+        }
+        const algorithm = document.getElementById('algorithm').value;
+        const quantum = parseInt(document.getElementById('quantum').value);
+        scheduler.initialize(processes, algorithm, quantum);
+    }
+    
     if (scheduler.step()) {
         updateUI();
+    } else {
+        alert("Simulation completed!");
     }
 }
 
 function restart() {
     stop();
     const processes = getProcessesFromTable();
+    if (processes.length === 0) {
+        alert("Please generate some processes first!");
+        return;
+    }
     const algorithm = document.getElementById('algorithm').value;
     const quantum = parseInt(document.getElementById('quantum').value);
     
@@ -257,6 +330,13 @@ function restart() {
 
 function startAnotherSimulation() {
     stop();
+    scheduler.processes = [];
+    scheduler.currentTime = 0;
+    scheduler.currentProcess = null;
+    scheduler.readyQueue = [];
+    scheduler.completedProcesses = [];
+    scheduler.ganttChart = [];
+    
     document.getElementById('jobPoolBody').innerHTML = '';
     document.getElementById('readyQueueList').innerHTML = '';
     document.getElementById('currentJob').textContent = 'None';
@@ -269,10 +349,23 @@ function startAnotherSimulation() {
 
 function finish() {
     stop();
-    while (scheduler.step()) {
-        // Run all steps
+    if (scheduler.processes.length === 0) {
+        const processes = getProcessesFromTable();
+        if (processes.length === 0) {
+            alert("Please generate some processes first!");
+            return;
+        }
+        const algorithm = document.getElementById('algorithm').value;
+        const quantum = parseInt(document.getElementById('quantum').value);
+        scheduler.initialize(processes, algorithm, quantum);
+    }
+    
+    let hasSteps = true;
+    while (hasSteps) {
+        hasSteps = scheduler.step();
     }
     updateUI();
+    alert("Simulation completed!");
 }
 
 function generateRandomData() {
@@ -288,11 +381,17 @@ function generateRandomData() {
         row.insertCell(3).textContent = Math.floor(Math.random() * 5) + 1;
         row.insertCell(4).textContent = '0';
         row.insertCell(5).textContent = '0';
-        row.insertCell(6).textContent = row.cells[2].textContent; // Remain = Burst
+        row.insertCell(6).textContent = row.cells[2].textContent;
         row.insertCell(7).textContent = '0';
         row.insertCell(8).textContent = '0';
         row.insertCell(9).textContent = '0';
     }
+    
+    // Auto-initialize scheduler with new data
+    const processes = getProcessesFromTable();
+    const algorithm = document.getElementById('algorithm').value;
+    const quantum = parseInt(document.getElementById('quantum').value);
+    scheduler.initialize(processes, algorithm, quantum);
 }
 
 function getProcessesFromTable() {
@@ -303,15 +402,15 @@ function getProcessesFromTable() {
         const cells = rows[i].cells;
         processes.push({
             id: cells[0].textContent,
-            arrivalTime: parseInt(cells[1].textContent),
-            burstTime: parseInt(cells[2].textContent),
-            priority: parseInt(cells[3].textContent),
-            startTime: parseInt(cells[4].textContent),
-            waitTime: parseInt(cells[5].textContent),
-            remainTime: parseInt(cells[6].textContent),
-            finishTime: parseInt(cells[7].textContent),
-            turnaroundTime: parseInt(cells[8].textContent),
-            percentage: parseFloat(cells[9].textContent)
+            arrivalTime: parseInt(cells[1].textContent) || 0,
+            burstTime: parseInt(cells[2].textContent) || 1,
+            priority: parseInt(cells[3].textContent) || 1,
+            startTime: parseInt(cells[4].textContent) || 0,
+            waitTime: parseInt(cells[5].textContent) || 0,
+            remainTime: parseInt(cells[6].textContent) || parseInt(cells[2].textContent) || 1,
+            finishTime: parseInt(cells[7].textContent) || 0,
+            turnaroundTime: parseInt(cells[8].textContent) || 0,
+            percentage: parseFloat(cells[9].textContent) || 0
         });
     }
     
@@ -321,18 +420,23 @@ function getProcessesFromTable() {
 function updateUI() {
     // Update job pool table
     const jobPoolBody = document.getElementById('jobPoolBody');
-    const allProcesses = [...scheduler.processes, ...scheduler.completedProcesses];
+    const allProcesses = scheduler.processes;
     
-    allProcesses.forEach((process, index) => {
-        if (index < jobPoolBody.rows.length) {
-            const cells = jobPoolBody.rows[index].cells;
-            cells[4].textContent = process.startTime !== -1 ? process.startTime : '0';
-            cells[5].textContent = process.waitTime;
-            cells[6].textContent = process.remainTime;
-            cells[7].textContent = process.finishTime !== -1 ? process.finishTime : '0';
-            cells[8].textContent = process.turnaroundTime;
-            cells[9].textContent = process.percentage.toFixed(2);
-        }
+    // Clear and rebuild table to ensure proper ordering
+    jobPoolBody.innerHTML = '';
+    
+    allProcesses.forEach(process => {
+        const row = jobPoolBody.insertRow();
+        row.insertCell(0).textContent = process.id;
+        row.insertCell(1).textContent = process.arrivalTime;
+        row.insertCell(2).textContent = process.burstTime;
+        row.insertCell(3).textContent = process.priority;
+        row.insertCell(4).textContent = process.startTime !== -1 ? process.startTime : '0';
+        row.insertCell(5).textContent = process.waitTime;
+        row.insertCell(6).textContent = process.remainTime;
+        row.insertCell(7).textContent = process.finishTime !== -1 ? process.finishTime : '0';
+        row.insertCell(8).textContent = process.turnaroundTime;
+        row.insertCell(9).textContent = process.percentage.toFixed(2);
     });
 
     // Update CPU section
@@ -350,8 +454,8 @@ function updateUI() {
 
     // Update averages
     const averages = scheduler.calculateAverages();
-    document.getElementById('avgWaiting').textContent = averages.avgWait.toFixed(3);
-    document.getElementById('avgTurnaround').textContent = averages.avgTurnaround.toFixed(3);
+    document.getElementById('avgWaiting').textContent = averages.avgWait;
+    document.getElementById('avgTurnaround').textContent = averages.avgTurnaround;
 
     // Update Gantt chart
     updateGanttChart();
@@ -361,9 +465,14 @@ function updateGanttChart() {
     const ganttChart = document.querySelector('.gantt-chart');
     ganttChart.innerHTML = '';
     
+    if (scheduler.ganttChart.length === 0) return;
+    
     const colors = ['red', 'yellow', 'orange', 'purple', 'blue', 'green', 'cyan', 'magenta'];
     let colorIndex = 0;
     const colorMap = {};
+    
+    // Calculate total simulation time for scaling
+    const totalTime = Math.max(scheduler.currentTime, 1);
     
     scheduler.ganttChart.forEach(segment => {
         if (!colorMap[segment.process]) {
@@ -373,7 +482,10 @@ function updateGanttChart() {
         
         const bar = document.createElement('div');
         bar.className = `bar ${colorMap[segment.process]}`;
-        bar.style.width = `${(segment.end - segment.start) * 5}%`;
+        const duration = segment.end - segment.start;
+        const widthPercent = (duration / totalTime) * 100;
+        bar.style.width = `${widthPercent}%`;
+        bar.textContent = `${segment.process}`;
         bar.title = `${segment.process} (${segment.start}-${segment.end})`;
         ganttChart.appendChild(bar);
     });
@@ -383,19 +495,21 @@ function updateGanttChart() {
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('generateRandomData').addEventListener('click', function() {
         generateRandomData();
-        // Initialize scheduler with generated data
-        const processes = getProcessesFromTable();
-        const algorithm = document.getElementById('algorithm').value;
-        const quantum = parseInt(document.getElementById('quantum').value);
-        scheduler.initialize(processes, algorithm, quantum);
     });
 
-    // Add algorithm options
-    const algorithmSelect = document.getElementById('algorithm');
-    algorithmSelect.innerHTML = `
-        <option value="fcfs">FCFS (First-Come First-Serve)</option>
-        <option value="sjf">SJF (Shortest Job First)</option>
-        <option value="rr">Round Robin</option>
-        <option value="priority">Priority Scheduling</option>
-    `;
+    // Add change listener for algorithm to show/hide quantum
+    document.getElementById('algorithm').addEventListener('change', function() {
+        const quantumLabel = document.querySelector('label[for="quantum"]');
+        const quantumInput = document.getElementById('quantum');
+        if (this.value === 'rr') {
+            quantumLabel.style.display = 'inline';
+            quantumInput.style.display = 'inline';
+        } else {
+            quantumLabel.style.display = 'none';
+            quantumInput.style.display = 'none';
+        }
+    });
+
+    // Initialize quantum visibility
+    document.getElementById('algorithm').dispatchEvent(new Event('change'));
 });
