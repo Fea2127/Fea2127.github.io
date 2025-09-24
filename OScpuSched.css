@@ -1,0 +1,90 @@
+body {
+    font-family: 'Futuristic', Arial, sans-serif; /* You can choose a futuristic font */
+    background-color: #000; /* Black background */
+    color: #fff; /* White text */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.section {
+    background: linear-gradient(135deg, #000 0%, #111 100%); /* Diagonal gradient */
+    border: 2px solid transparent; /* Transparent border for glow effect */
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 20px #ff0000; /* Red glow */
+    transition: transform 0.2s, box-shadow 0.3s; /* Smooth hover effect */
+}
+
+.section:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 0 30px #ff0000; /* Increase glow on hover */
+}
+
+button {
+    background-color: #222; /* Darker shade of black */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-shadow: 0 0 10px #ff0000; /* Red glow on buttons */
+}
+
+button:hover {
+    background-color: #444; /* Lighter shade of black */
+    box-shadow: 0 0 15px #ff0000; /* Increase glow on hover */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid #333;
+    padding: 10px;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+th {
+    background-color: #333; /* Header background */
+}
+
+td {
+    background-color: #222; /* Row background */
+}
+
+.gantt-chart {
+    border: 1px solid #333;
+    height: 100px;
+    position: relative;
+    margin-top: 10px;
+}
+
+.bar {
+    position: absolute;
+    background-color: #4CAF50; /* Green bar */
+    height: 100%;
+    transition: width 0.5s; /* Smooth transition for bar width */
+    box-shadow: 0 0 10px #4CAF50; /* Glow effect on bars */
+}
+
+/* Add color variations for different bars */
+.bar.red { background-color: #f44336; box-shadow: 0 0 10px #f44336; } /* Red */
+.bar.yellow { background-color: #ffeb3b; box-shadow: 0 0 10px #ffeb3b; } /* Yellow */
+.bar.orange { background-color: #ff9800; box-shadow: 0 0 10px #ff9800; } /* Orange */
+.bar.purple { background-color: #9c27b0; box-shadow: 0 0 10px #9c27b0; } /* Purple */
+.bar.blue { background-color: #2196f3; box-shadow: 0 0 10px #2196f3; } /* Blue */

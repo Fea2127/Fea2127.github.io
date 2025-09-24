@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CPU Schedule</title>
+    <link rel="stylesheet" href="OScpuSched.css">
+</head>
+<body>
+    <div class="container">
+        <div class="section">
+            <h3>Data</h3>
+            <label>Num of Jobs:</label> <input type="number" id="numJobs" value="1" min="1">
+            <label>Algorithm:</label> <select id="algorithm"><option>FCFS</option></select>
+            <label>Sim speed:</label> <input type="number" id="simSpeed" value="5">
+            <label>Quantum:</label> <input type="number" id="quantum" value="4">
+            <button id="generateRandomData">Generate Random Data</button>
+            <button onclick="simulate()">Simulate</button>
+            <button onclick="stop()">Stop</button>
+            <button onclick="nextStep()">Next step</button>
+            <button onclick="restart()">Restart</button>
+            <button onclick="startAnotherSimulation()">Start another simulation</button>
+            <button onclick="finish()">Finish</button>
+        </div>
+        <div class="section">
+            <h3>Job pool</h3>
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Arrive</th>
+                    <th>Burst</th>
+                    <th>Priority</th>
+                    <th>Start</th>
+                    <th>Wait</th>
+                    <th>Remain</th>
+                    <th>Finish</th>
+                    <th>Turn</th>
+                    <th>%</th>
+                </tr>
+                <tbody id="jobPoolBody">
+                    <!-- Job rows will be added here -->
+                </tbody>
+            </table>
+        </div>
+        <div class="section">
+            <h3>CPU</h3>
+            <p>Current job: JOB 1</p>
+            <p>Current Time: 3 -> 4</p>
+            <p>Utilization: 100%</p>
+        </div>
+        <div class="section">
+            <h3>Ready Queue</h3>
+            <ul id="readyQueueList">
+                <li>2</li>
+            </ul>
+        </div>
+        <div class="section">
+            <h3>Average</h3>
+            <p>Waiting: 0.125</p>
+            <p>Turnaround: 0.625</p>
+        </div>
+        <div class="section">
+            <h3>Gantt Chart</h3>
+            <div class="gantt-chart">
+                <div class="bar" style="width: 20%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="OScpuSched.js"></script>
+</body>
+</html>
