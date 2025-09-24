@@ -2,17 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CPU Schedule</title>
+    <title>CPU Scheduling Simulator</title>
     <link rel="stylesheet" href="OScpuSched.css">
 </head>
 <body>
     <div class="container">
         <div class="section">
-            <h3>Data</h3>
-            <label>Num of Jobs:</label> <input type="number" id="numJobs" value="1" min="1">
-            <label>Algorithm:</label> <select id="algorithm"><option>FCFS</option></select>
-            <label>Sim speed:</label> <input type="number" id="simSpeed" value="5">
-            <label>Quantum:</label> <input type="number" id="quantum" value="4">
+            <h3>Simulation Controls</h3>
+            <label>Num of Jobs:</label> <input type="number" id="numJobs" value="5" min="1" max="10">
+            <label>Algorithm:</label> 
+            <select id="algorithm">
+                <option value="fcfs">FCFS (First-Come First-Serve)</option>
+                <option value="sjf">SJF (Shortest Job First)</option>
+                <option value="rr">Round Robin</option>
+                <option value="priority">Priority Scheduling</option>
+            </select>
+            <label>Sim speed:</label> <input type="range" id="simSpeed" value="5" min="1" max="10">
+            <label>Quantum:</label> <input type="number" id="quantum" value="4" min="1">
+            <br><br>
             <button id="generateRandomData">Generate Random Data</button>
             <button onclick="simulate()">Simulate</button>
             <button onclick="stop()">Stop</button>
@@ -21,47 +28,54 @@
             <button onclick="startAnotherSimulation()">Start another simulation</button>
             <button onclick="finish()">Finish</button>
         </div>
+        
         <div class="section">
-            <h3>Job pool</h3>
+            <h3>Job Pool</h3>
             <table>
-                <tr>
-                    <th>#</th>
-                    <th>Arrive</th>
-                    <th>Burst</th>
-                    <th>Priority</th>
-                    <th>Start</th>
-                    <th>Wait</th>
-                    <th>Remain</th>
-                    <th>Finish</th>
-                    <th>Turn</th>
-                    <th>%</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Arrive</th>
+                        <th>Burst</th>
+                        <th>Priority</th>
+                        <th>Start</th>
+                        <th>Wait</th>
+                        <th>Remain</th>
+                        <th>Finish</th>
+                        <th>Turn</th>
+                        <th>%</th>
+                    </tr>
+                </thead>
                 <tbody id="jobPoolBody">
                     <!-- Job rows will be added here -->
                 </tbody>
             </table>
         </div>
+        
         <div class="section">
             <h3>CPU</h3>
-            <p>Current job: JOB 1</p>
-            <p>Current Time: 3 -> 4</p>
-            <p>Utilization: 100%</p>
+            <p>Current job: <span id="currentJob">None</span></p>
+            <p>Current Time: <span id="currentTime">0</span></p>
+            <p>Utilization: <span id="utilization">0%</span></p>
         </div>
+        
         <div class="section">
             <h3>Ready Queue</h3>
             <ul id="readyQueueList">
-                <li>2</li>
+                <!-- Ready processes will appear here -->
             </ul>
         </div>
+        
         <div class="section">
-            <h3>Average</h3>
-            <p>Waiting: 0.125</p>
-            <p>Turnaround: 0.625</p>
+            <h3>Average Metrics</h3>
+            <p>Waiting: <span id="avgWaiting">0</span></p>
+            <p>Turnaround: <span id="avgTurnaround">0</span></p>
         </div>
-        <div class="section">
+        
+        <div class="section" style="flex-basis: 100%;">
             <h3>Gantt Chart</h3>
             <div class="gantt-chart">
-                <div class="bar" style="width: 20%;"></div>
+                <!-- Gantt bars will be dynamically added here -->
             </div>
         </div>
     </div>
