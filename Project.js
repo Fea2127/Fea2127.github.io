@@ -20,6 +20,13 @@ const siteData={
       description:"Custom error page with CSS animations.",
       viewLink:"proj3.html",
       docLink:"#"
+    },
+    {
+      title:"OS CPU Scheduling",
+      image:"assets/OS CPU.png",
+      description:"OS CPU Scheduling Simulation.",
+      viewLink:"OScpuSched.html",
+      docLink:"https://fea2127.github.io/OScpuSched.html"
     }
     // …add more objects here
   ]
