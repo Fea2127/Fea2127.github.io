@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AAVM</title>
+    <style>
+      body {
+        margin: auto;
+        background-color: #ccc;
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        background-color: #5c8f92;
+        padding: 20px;
+        text-align: center;
+      }
+      footer {
+        background-color: #dde1e1;
+        padding: 20px;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 30px;
+        color: #ffffff;
+      }
+
+      nav {
+        background-color: #8a8786;
+        padding: 10px;
+        text-align: center;
+      }
+
+      nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      nav li {
+        display: inline-block;
+        margin: 0 10px;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: #ffffff;
+        font-weight: bold;
+      }
+
+      main {
+        padding: 20px;
+      }
+
+      article {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      img {
+        margin: auto;
+        width: 30%;
+        height: auto;
+        border: 3px solid black;
+        border-radius: 25px;
+      }
+
+      *{box-sizing: border-box;}
+        .slider {
+            width: 100%;
+            height:400px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slides {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            animation: slide 16s infinite;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @keyframes slide {
+            0% {margin-left: 0%;}
+            20% {margin-left: -100%;}
+            40% {margin-left: -200%;}
+            60% {margin-left: -300%;}
+            80% {margin-left: -400%;}
+            100% {margin-left: -500%;}
+        }
+
+      #img-ko {
+        margin: auto;
+        border-radius: 50px;
+      }
+
+      #sticky-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
+        background-color: #013c58;
+        color: #fff;
+        padding: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>My Art Gallery</h1>
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="#ref">Reference</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#cont">Contact</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <article>
+        <h2>Welcome to My Website</h2>
+        <p>
+          The purpose of this gallery is to show my artworks and to know what to
+          improve in every piece that I share here, enjoy browsing.
+        </p>
+        <img src="https://picjumbo.com/wp-content/uploads/red-sunset-through-a-glass-ball-free-photo.jpg" alt="Image of a sunset" />
+        <p id="ref">Here are some of my artworks.</p>
+      </article>
+
+      <div class="slider">
+      <div class= "slides">
+        <img class="slide" src="https://scontent.fmnl17-2.fna.fbcdn.net/v/t39.30808-6/406030090_317050051214136_257050091087313386_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeEz5CwNzYNP6wWeKRuMS8AtB-FFm4cV9aQH4UWbhxX1pFIe2kWnWK7d86QZk_cfLqNBNSh0E8pqKyJtK1hHqtW-&_nc_ohc=MEnpiwzll4EAX_GLBeD&_nc_ht=scontent.fmnl17-2.fna&oh=00_AfD_UEwhYP1Dsgd9ZoDNeYgBPUREL8lKwM30FM2FKxqsLQ&oe=656844F5">
+        <img class="slide" src="https://scontent.fmnl17-5.fna.fbcdn.net/v/t39.30808-6/406009203_317050017880806_2965878144416021894_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeETDJISAb5cUGEwZoHK64giMrCIZEmFHd8ysIhkSYUd351KBcuOC7N1osI_CzcDTJHgUZ2VoWOUAql51-m2mYgK&_nc_ohc=1V_nZpJmh5YAX-1VDgk&_nc_ht=scontent.fmnl17-5.fna&oh=00_AfDGJwTBI5QkCQE9N8Y50g-KlMQB0WzkZ0HV4y9doRCdJQ&oe=6568229F">
+        <img class="slide" src="https://scontent.fmnl17-2.fna.fbcdn.net/v/t39.30808-6/405765464_317050161214125_8672361067642152395_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeGdzxykVYVUNnJQU16Ew63uPlB9JqbFTuc-UH0mpsVO55pwtTUKLdHY-haYDFI7FU73k5OIgfB6hxy2Pee5KBuL&_nc_ohc=5gnMnxdwP68AX8WHIXk&_nc_ht=scontent.fmnl17-2.fna&oh=00_AfDCJtfW9GW7T5VkbdcYd0g_rsFDxy7XF7Ae-60pX_C71A&oe=65686097">
+        <img class="slide"src= "https://scontent.fmnl17-3.fna.fbcdn.net/v/t39.30808-6/406043671_317050197880788_3685563106796827802_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeGAWCuSvtXWI-oFiZhQ-WvZTNrSolYSgAJM2tKiVhKAApl7JCMFahWNrkI0GBn5h-RuXirIp_3A3LRPP2-nSOrt&_nc_ohc=-IwOX1BRXvAAX-LkBM0&_nc_ht=scontent.fmnl17-3.fna&oh=00_AfDZoTryGxIl8etT75bmKIVtCFwx7UgKKcyJcVaQe7bA0w&oe=6568E377">
+        <img class="slide"src= "https://scontent.fmnl17-3.fna.fbcdn.net/v/t39.30808-6/405769737_317050267880781_2224613188832601179_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeFNB4BNgdJJFPsw9mtFZXgCmE27fajZeTOYTbt9qNl5M0zupppGwG3ewXgyDc4q7Q--gMjL42bwrVZkilIpFofz&_nc_ohc=_nSB0S1fD6wAX-XBzsK&_nc_ht=scontent.fmnl17-3.fna&oh=00_AfDie3WtSIkj2HKaM0BoMff9x4_e_cjArC672yvMHOjWkw&oe=65688036">
+        <img class="slide"src= "https://scontent.fmnl17-3.fna.fbcdn.net/v/t39.30808-6/406037043_317050324547442_1492205033217697211_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeHX4Bh2mdCATvxUxZl5S4OJGvffO0oYfC8a9987Shh8L3qvc9IfUu8qz_Ie4UQgj4u2ch5AY9I-xF4aReOyCHcF&_nc_ohc=duVlV6OhS2MAX83vcEX&_nc_oc=AQkb5HFTM-G5BZ-q9xh3-3hnKGrtnDDQ0D9LNnEw0Z9-LZHiJ77Xr-9qWxrl67mawO0&_nc_ht=scontent.fmnl17-3.fna&oh=00_AfBmuPc130P0a5mdGcMChohG5uK9PSyFY-G5PxqQFgg60A&oe=65687F99">
+        <img class="slide"src= "https://scontent.fmnl17-2.fna.fbcdn.net/v/t39.30808-6/405765464_317050347880773_5761734751967882854_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeFlOGubIRwJV3M5q5aJcIpnFX1kxkp6T2gVfWTGSnpPaLHbegYL9C0nQkzJSGwu8sSK_TCULVkeaZ2MbHf19ztr&_nc_ohc=aPUvsbCGvfwAX_LCKwu&_nc_ht=scontent.fmnl17-2.fna&oh=00_AfBibhmqqoFkZfrqBF6m4nNT-Fv5jflHtmGL-E7IhWqaoQ&oe=65684477">
+        <img class="slide"src= "https://scontent.fmnl17-2.fna.fbcdn.net/v/t39.30808-6/406013572_317050367880771_4846053818422802887_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeFaZR5eKlRp61a2sdZI4Xpdp7Xye4MXFQentfJ7gxcVB80IlL8f2zAZixmQypZiQUuOCGiyzrlfgqtrkgsz-jr6&_nc_ohc=CHs3cibh4HEAX8sjKLv&_nc_ht=scontent.fmnl17-2.fna&oh=00_AfCuL4Mb2Ny3-Hc71qvRo8WowDBUeRs3GkkUPYRvT6NwIg&oe=65684981">
+        <img class="slide"src= "https://scontent.fmnl17-4.fna.fbcdn.net/v/t39.30808-6/405764293_317050387880769_5049028626536201430_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeFcRyS_rNPCdecCWXz5O6WzsYKIt-y1MHexgoi37LUwdxlK4bhqri8YRUonzIE2jDYo2MpNi3-3kMXS92Gvx2Pu&_nc_ohc=Lq_ojVIh0e8AX-PcgRJ&_nc_ht=scontent.fmnl17-4.fna&oh=00_AfD2hxCEJPkiTXG5VpI7Ov-Xc4Wdv4DvcK3OT6KIF2_t2Q&oe=6567CD00">
+        <img class="slide"src= "https://scontent.fmnl17-3.fna.fbcdn.net/v/t39.30808-6/406041257_317044654548009_6349172370239644227_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeHbKGcR9EAa9q1DViQ48KFGtm_VG7pwJhy2b9UbunAmHEKwsD7FivqsPiGlvtctYIWX5BY8jkL0_k_swlM_lLl0&_nc_ohc=X0clHWdI2ggAX-YvBF3&_nc_ht=scontent.fmnl17-3.fna&oh=00_AfAIW5UhkX2Dy6Z4D9u9rmds-pLFSelPnJM8oZ8gZVGg8Q&oe=65678D31">
+        <img class="slide"src= "https://scontent.fmnl17-3.fna.fbcdn.net/v/t39.30808-6/406052302_317044731214668_7991270855517637557_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeESjC3GR8YBDjzBFdstutVJkv4gRJZpP3uS_iBElmk_e7zUh_cyvc-l_tCAxeVOZ4iPBcWkN8CX1T2ce5OaILaD&_nc_ohc=bK_s4Qv4uA8AX-nZ0BR&_nc_oc=AQnEAmBL-gMIqv53jR25oYpbL6xMAjEPG2wjBdHxAPDg3usq7thtOntHCDjNwiRMqhg&_nc_ht=scontent.fmnl17-3.fna&oh=00_AfCIeoYtE3Jkw9uww-eXn3UTcA9n37e8-fZsOXR7sXRw7A&oe=6568B181">
+        <img class="slide"src= "https://scontent.fmnl17-1.fna.fbcdn.net/v/t39.30808-6/405764337_317047877881020_8584890326877443784_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeEo4AqgkUO-uT7aLHIJ6G6FrYcQxDgnT32thxDEOCdPfTC5NhENI5_giRoq__2WltqufvrdM4aB0DIsecFmmSm5&_nc_ohc=a2ibh07ccxwAX-5Tb_c&_nc_ht=scontent.fmnl17-1.fna&oh=00_AfDcyaUqRW72xviz-erdeELt6ndhfZ_igCw8FJWey4hAvA&oe=6567A677">
+        <img class="slide"src= "https://scontent.fmnl17-1.fna.fbcdn.net/v/t39.30808-6/405761859_317042341214907_7912125190388795230_n.jpg?stp=dst-jpg_p296x100&_nc_cat=101&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeGwevTw4xnXC-fOhzWfIYAOXzsOQU_U2CtfOw5BT9TYK5BghdTLQnHx4RjkomRK-vcMSITSSZmPqDBDqucN3xMh&_nc_ohc=1ZfIQarwGD0AX9zjWbM&_nc_oc=AQmDew9FVyrbeN8eyz8K2q2NuwNgyq3epbln9IX4whuqUPhWl4XswIMDWn1PVD9lygI&_nc_ht=scontent.fmnl17-1.fna&oh=00_AfD9mipwPFHA2ePZ8yvYwG5F4rqp_MGTpbo2Z8jlgtpKkw&oe=6567EFAF">
+        <img class="slide"src= "https://scontent.fmnl17-1.fna.fbcdn.net/v/t39.30808-6/405757577_317042397881568_3615854747847026507_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeG_LM7QFZP3-ouhLyywHCxTSBCd-patk15IEJ36lq2TXnufSbOmnjx_FibKZwjFg3eqMmuKiK2S9DLaMX0desgG&_nc_ohc=rLGErca08joAX-OzBmN&_nc_ht=scontent.fmnl17-1.fna&oh=00_AfCp7dua5fER5IqDn1ZjRnXrpLutKy5PIGLidY6HdVwsMw&oe=65677B7C">
+        <img class="slide"src= "https://scontent.fmnl17-2.fna.fbcdn.net/v/t39.30808-6/405768392_317042434548231_2876824553018570610_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeEf1XseJ77ErBiGMG7lyUhs9Pu9sYiWj4H0-72xiJaPgRL9MuivHP3rDsbhN5jUdNONov9SFmGsaHn3VZHxct_-&_nc_ohc=gCDybQbRpywAX-VSA7V&_nc_ht=scontent.fmnl17-2.fna&oh=00_AfC-xrtHaalpjJBYRyVDi1_FX2AJ7st818B-VlkucFuIDw&oe=6568927C">
+        </div>
+        </div>
+      
+      <br>
+      <div class= "refer">
+       <ul>Christopher Jay De Claro <br>
+        Aenjel Joy Delos Reyes <br>
+        Jermaine Jefferson Doria <br>
+        Cole Mitchell Sprouse <br>
+        Random artworks
+        </ul></div>
+
+      <article>
+        <h2 id="about">About Me</h2>
+        <img src="https://scontent.fmnl4-2.fna.fbcdn.net/v/t39.30808-6/405773587_316459854606489_4439870817092542682_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeGBNOXp1TEseHRUo0VuwTPvv30NTqdPkn-_fQ1Op0-SfwYHSHTbB1Ijlq88HZp8ozeXqAoojnptY9nKARSFh1qY&_nc_ohc=3VEEnMitYNcAX8IQCXw&_nc_ht=scontent.fmnl4-2.fna&oh=00_AfAq6f6uTzReyh-n2x_Htt1DHr7XoWqLZzDrwJQ_7n5XgA&oe=656656E4" id="img-ko" alt="Image ko" />
+        <p>
+          Hi, I'm Alfea Aemiel V. Mingua currently studying in Polytechnic
+          University of the Philippines taking Bachelor of Science In
+          Information Technology.I am not a professional artist but I love to
+          draw things and people that inspire me and that is the reason why I'm
+          not accepting any art commission because doing something you love
+          makes you do it in the best.
+        </p>
+      </article>
+
+      
+    </main>
+    <a href="#" id="sticky-button">Back to Top</a>
+
+    <footer id="cont">
+      <p>
+        &copy; Art Gallery 2023 <br />
+        <a
+          href="https://www.facebook.com/profile.php?id=10008727431500&mibextid=ZbWKwL">Facebook</a>
+        <a href="instagram.com/fea21_27/">Instagram</a>
+        <a href="mingualynx@gmail.com">Email</a>
+      </p>
+    </footer>
+
+    <script>
+      window.addEventListener("scroll", function () {
+        if (
+          document.body.scrollTop > 200 ||
+          document.documentElement.scrollTop > 200
+        ) {
+          document.getElementById("sticky-button").style.display = "block";
+        } else {
+          document.getElementById("sticky-button").style.display = "none";
+        }
+      });
+
+      document
+        .getElementById("sticky-button")
+        .addEventListener("click", function () {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+    </script>
+
+    
+  </body>
+</html>
