@@ -81,7 +81,7 @@ input:checked + .slider .moon{transform:translateX(-34px);color:#fff}
 .about{padding:5rem 1.2rem}
 .about-container{display:grid;gap:4rem}
 .about-card{background:var(--surface);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:3rem 2rem;max-width:700px;margin-inline:auto;text-align:center;backdrop-filter:var(--blur)}
-.avatar{width:190px;height:200px;border-radius:50%;margin:0 auto 1.5rem;border:2px solid var(--accent)}
+.avatar{width: 250px;height:300px;border-radius:50%;margin:0 auto 1.5rem;border:2px solid var(--accent)}
 .section-title{text-align:center;margin-bottom:3rem;font-size:2rem;position:relative}
 .section-title::after{content:"";width:60px;height:3px;background:var(--accent);position:absolute;left:50%;bottom:-10px;transform:translateX(-50%)}
 .container-certs{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
