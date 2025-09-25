@@ -70,6 +70,46 @@ const portfolioData = {
       viewLink: "bCard.html",
       docLink: "https://fea2127.github.io/bCard.html",
       category: "animation"
+    },
+    {
+      id: 8,
+      title: "CSS Birthday Greeting Animation V2",  
+      image: "assets/CSS Animation V2.png",
+      description: "CSS Birthday Greeting Animation V2",
+      technologies: ["CSS", "HTML"],
+      viewLink: "bCard2.html",
+      docLink: "https://fea2127.github.io/bCard2.html",
+      category: "animation"
+    },
+    {
+      id: 9,  
+      title: "CSS Birthday Greeting Animation V3",
+      image: "assets/CSS Animation V3.png",
+      description: "CSS Birthday Greeting Animation V3",    
+      technologies: ["CSS", "HTML"],
+      viewLink: "bCard3.html",
+      docLink: "https://fea2127.github.io/bCard3.html", 
+      category: "animation"
+    },
+    {
+      id: 10, 
+      title: "CSS Birthday Greeting Animation V4",
+      image: "assets/CSS Animation V4.png",
+      description: "CSS Birthday Greeting Animation V4",
+      technologies: ["CSS", "HTML"],
+      viewLink: "bCard4.html",
+      docLink: "https://fea2127.github.io/bCard4.html",
+      category: "animation"
+    },
+    {
+      id: 11,
+      title: "Church Website",
+      image: "assets/Church Website.png",
+      description: "A simple church website template.",
+      technologies: ["HTML", "CSS", "JavaScript"],
+      viewLink: "https://ccfjnt.github.io/",
+      docLink: "https://ccfjnt.github.io/",
+      category: "web"
     }
   ],
   categories: ["all", "web", "simulation", "animation"]
