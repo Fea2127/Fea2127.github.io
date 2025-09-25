@@ -24,7 +24,7 @@ const portfolioData = {
     {
       id: 3,
       title: "404 Page",
-      image: "assets/404 page.png",
+      image: "assets/404new.png",
       description: "Custom error page with CSS animations.",
       technologies: ["CSS", "HTML"],
       viewLink: "proj3.html",
@@ -104,7 +104,7 @@ const portfolioData = {
     {
       id: 11,
       title: "Church Website",
-      image: "assets/Church Website.png",
+      image: "assets/ccfjnt new.png",
       description: "A simple church website template.",
       technologies: ["HTML", "CSS", "JavaScript"],
       viewLink: "https://ccfjnt.github.io/",
