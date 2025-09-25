@@ -46,3 +46,10 @@ window.addEventListener('DOMContentLoaded', function() {
     document.getElementById('spread').setAttribute('data-speed', '0.02');
     document.getElementById('revelation').setAttribute('data-speed', '0.01');
 });
+
+function showMore(sectionId) {
+    const moreInfo = document.getElementById(sectionId + 'More');
+    if (moreInfo) {
+        moreInfo.style.display = moreInfo.style.display === 'none' ? 'block' : 'none';
+    }
+}

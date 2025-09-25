@@ -3,77 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parallax Bible Timeline for Kids</title>
+    <title>Interactive Parallax Bible Timeline for Kids</title>
     <link rel="stylesheet" href="parallax.css">
 </head>
 <body>
+    <div class="stars-background"></div>
     <div class="parallax-container">
         <section class="parallax-item" id="creation">
             <h2>Creation</h2>
             <img src="assets/creation.png" alt="Creation" class="section-image">
-            <p>Light breaking into darkness, a smiling globe forming...</p>
+            <p>Once upon a time, God said, "Let there be light!" And there was light. He saw that it was good and separated the light from the darkness.</p>
+            <button onclick="showMore('creation')">Learn More</button>
+            <div id="creationMore" class="more-info" style="display:none;">
+                <p>God created the sky, the land, and all the creatures of the sea. On the sixth day, He created man and woman. He was so happy with His creation that He rested on the seventh day.</p>
+            </div>
         </section>
         <section class="parallax-item" id="fall">
             <h2>The Fall of Man</h2>
             <img src="assets/mans fall.png" alt="The Fall of Man" class="section-image">
-            <p>A playful garden with flowers and animals...</p>
+            <p>In a beautiful garden, there was a tree that God said not to eat from. But a sneaky serpent convinced them to eat the fruit.</p>
+            <button onclick="showMore('fall')">Learn More</button>
+            <div id="fallMore" class="more-info" style="display:none;">
+                <p>Because they didn't listen, they were sent away from the garden. They learned about good and bad, and they started to work hard.</p>
+            </div>
         </section>
         <section class="parallax-item" id="noah">
             <h2>Noah's Flood</h2>
             <img src="assets/noahs flood.png" alt="Noah's Flood" class="section-image">
-            <p>A big cartoon ark floating on cheerful waves...</p>
+            <p>Noah was a good man. God told him to build a big boat because He would send a flood to clean the world.</p>
+            <button onclick="showMore('noah')">Learn More</button>
+            <div id="noahMore" class="more-info" style="display:none;">
+                <p>Noah did what God said, and the flood came. After the flood, God promised never to flood the world again.</p>
+            </div>
         </section>
         <section class="parallax-item" id="abraham">
             <h2>Abraham's Covenant</h2>
             <img src="assets/abrahams covenant.png" alt="Abraham's Covenant" class="section-image">
-            <p>A cozy desert night scene with a little tent...</p>
+            <p>God made a promise to Abraham. He would have many children, and they would be a great nation.</p>
+            <button onclick="showMore('abraham')">Learn More</button>
+            <div id="abrahamMore" class="more-info" style="display:none;">
+                <p>Abraham believed God, and God was happy. This promise was very important for the future.</p>
+            </div>
         </section>
         <section class="parallax-item" id="moses">
             <h2>Moses & The Exodus</h2>
             <img src="assets/moses exodus.png" alt="Moses & The Exodus" class="section-image">
-            <p>A glowing burning bush beside Moses...</p>
+            <p>Moses led the Israelites out of Egypt, where they were slaves. They crossed the Red Sea and went to the Promised Land.</p>
+            <button onclick="showMore('moses')">Learn More</button>
+            <div id="mosesMore" class="more-info" style="display:none;">
+                <p>God gave Moses the Ten Commandments. These rules helped the Israelites live well together.</p>
+            </div>
         </section>
         <section class="parallax-item" id="kingdom">
             <h2>David & Solomon's Kingdom</h2>
             <img src="assets/david solomon kingdom.png" alt="David & Solomon's Kingdom" class="section-image">
-            <p>A joyful cartoon castle with golden walls...</p>
+            <p>David was a great king. He built a strong kingdom and wrote beautiful songs. His son Solomon built a beautiful temple for God.</p>
+            <button onclick="showMore('kingdom')">Learn More</button>
+            <div id="kingdomMore" class="more-info" style="display:none;">
+                <p>Solomon was very wise. He made the kingdom rich and peaceful. People from all over came to visit.</p>
+            </div>
         </section>
         <section class="parallax-item" id="prophets">
             <h2>Prophets Foretelling the Messiah</h2>
             <img src="assets/prophets foretelling.png" alt="Prophets Foretelling the Messiah" class="section-image">
-            <p>Cute prophets holding scrolls...</p>
+            <p>The prophets told about a special person who would come to save the world. They wrote about His life and what He would do.</p>
+            <button onclick="showMore('prophets')">Learn More</button>
+            <div id="prophetsMore" class="more-info" style="display:none;">
+                <p>These messages were very important. They helped people understand what to expect from the Messiah.</p>
+            </div>
         </section>
         <section class="parallax-item" id="birth">
             <h2>Birth of Jesus</h2>
             <img src="assets/birth of Jesus.png" alt="Birth of Jesus" class="section-image">
-            <p>A cozy Bethlehem stable under a glowing star...</p>
+            <p>Jesus was born in a stable because there was no room in the inn. Angels told shepherds about His birth.</p>
+            <button onclick="showMore('birth')">Learn More</button>
+            <div id="birthMore" class="more-info" style="display:none;">
+                <p>Jesus grew up to be a great teacher. He taught people about love and forgiveness.</p>
+            </div>
         </section>
         <section class="parallax-item" id="ministry">
             <h2>Ministry of Jesus</h2>
             <img src="assets/ministry of Jesus.png" alt="Ministry of Jesus" class="section-image">
-            <p>A bright green field with Jesus smiling warmly...</p>
+            <p>Jesus healed the sick, fed the hungry, and taught many people. He showed them how to live a good life.</p>
+            <button onclick="showMore('ministry')">Learn More</button>
+            <div id="ministryMore" class="more-info" style="display:none;">
+                <p>Jesus' teachings were very powerful. They changed many lives and spread all over the world.</p>
+            </div>
         </section>
         <section class="parallax-item" id="crucifixion">
             <h2>Crucifixion & Resurrection</h2>
             <img src="assets/crucifixtion.png" alt="Crucifixion & Resurrection" class="section-image">
-            <p>A gentle cross silhouette on a hill...</p>
+            <p>Jesus was put on a cross and died. But on the third day, He rose from the dead!</p>
+            <button onclick="showMore('crucifixion')">Learn More</button>
+            <div id="crucifixionMore" class="more-info" style="display:none;">
+                <p>This was a miracle! It showed that Jesus had power over death and that He was truly the Son of God.</p>
+            </div>
         </section>
         <section class="parallax-item" id="pentecost">
             <h2>Pentecost</h2>
             <img src="assets/pentecost.png" alt="Pentecost" class="section-image">
-            <p>Disciples gathered indoors...</p>
+            <p>The Holy Spirit came to the followers of Jesus. They spoke in different languages and told people about Jesus.</p>
+            <button onclick="showMore('pentecost')">Learn More</button>
+            <div id="pentecostMore" class="more-info" style="display:none;">
+                <p>This event helped the followers spread the message of Jesus all over the world.</p>
+            </div>
         </section>
         <section class="parallax-item" id="spread">
             <h2>Spread of the Church</h2>
             <img src="assets/spread of church.png" alt="Spread of the Church" class="section-image">
-            <p>Cartoon ships with open sails carrying scrolls...</p>
+            <p>People started churches in many places. They shared the story of Jesus and helped others learn about Him.</p>
+            <button onclick="showMore('spread')">Learn More</button>
+            <div id="spreadMore" class="more-info" style="display:none;">
+                <p>The church grew and spread all over the world. It helped many people find hope and comfort.</p>
+            </div>
         </section>
         <section class="parallax-item" id="revelation">
             <h2>Revelation</h2>
             <img src="assets/final.png" alt="Revelation" class="section-image">
-            <p>A dazzling golden city shining with light...</p>
+            <p>In the end, there will be a new heaven and a new earth. God will wipe away all tears, and there will be no more death or mourning or pain.</p>
+            <button onclick="showMore('revelation')">Learn More</button>
+            <div id="revelationMore" class="more-info" style="display:none;">
+                <p>The New Jerusalem will come down from heaven, shining like a jewel. It will be a place of peace and joy, where God will live with His people forever.</p>
+            </div>
         </section>
     </div>
+    
+    <footer>
+        <p>Created by <a href="https://fea2127.github.io" target="_blank">FEA2127</a></p>
+    </footer>
+    
     <script src="parallax.js"></script>
 </body>
 </html>

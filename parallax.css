@@ -6,16 +6,53 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden; /* Prevent body scrolling */
+    overflow: hidden;
     font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #0a0a2a;
+    color: white;
+}
+
+.stars-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: transparent;
+}
+
+.stars-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 1px, transparent 2px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+        radial-gradient(white, rgba(255,255,255,.1) 1px, transparent 2px);
+    background-size: 350px 350px, 200px 200px, 150px 150px;
+    background-position: 0 0, 50px 100px, 100px 200px;
+    animation: twinkle 30s linear infinite;
+}
+
+@keyframes twinkle {
+    0% {
+        background-position: 0 0, 50px 100px, 100px 200px;
+    }
+    100% {
+        background-position: 350px 350px, 250px 300px, 250px 400px;
+    }
 }
 
 .parallax-container {
     position: relative;
-    height: 100vh; /* Full viewport height */
-    overflow-y: auto; /* Enable scrolling only in container */
+    height: 100vh;
+    overflow-y: auto;
     overflow-x: hidden;
-    scroll-behavior: smooth; /* Smooth scrolling */
+    scroll-behavior: smooth;
 }
 
 .parallax-item {
@@ -25,10 +62,13 @@ body, html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #333;
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
+    transition: background-color 0.5s ease;
+    background-color: rgba(10, 10, 42, 0.85);
+    backdrop-filter: blur(3px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .section-image {
@@ -38,61 +78,88 @@ body, html {
     opacity: 1;
     transition: transform 0.3s ease;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    object-fit: cover; /* Ensure images maintain aspect ratio */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Background colors for each section */
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4a4a8a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #6a6aaa;
+}
+
+.more-info {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    text-align: center;
+    max-width: 80%;
+    border-left: 3px solid #4a4a8a;
+}
+
+/* Background colors for each section (as subtle accents) */
 #creation {
-    background-color: #f0e68c;
+    border-left: 5px solid #f0e68c;
 }
 
 #fall {
-    background-color: #90ee90;
+    border-left: 5px solid #90ee90;
 }
 
 #noah {
-    background-color: #add8e6;
+    border-left: 5px solid #add8e6;
 }
 
 #abraham {
-    background-color: #f08080;
+    border-left: 5px solid #f08080;
 }
 
 #moses {
-    background-color: #87ceeb;
+    border-left: 5px solid #87ceeb;
 }
 
 #kingdom {
-    background-color: #b0e0e6;
+    border-left: 5px solid #b0e0e6;
 }
 
 #prophets {
-    background-color: #ff69b4;
+    border-left: 5px solid #ff69b4;
 }
 
 #birth {
-    background-color: #f0e68c;
+    border-left: 5px solid #f0e68c;
 }
 
 #ministry {
-    background-color: #98fb98;
+    border-left: 5px solid #98fb98;
 }
 
 #crucifixion {
-    background-color: #d3d3d3;
+    border-left: 5px solid #d3d3d3;
 }
 
 #pentecost {
-    background-color: #b0c4de;
+    border-left: 5px solid #b0c4de;
 }
 
 #spread {
-    background-color: #87cefa;
+    border-left: 5px solid #87cefa;
 }
 
 #revelation {
-    background-color: #ffd700;
+    border-left: 5px solid #ffd700;
 }
 
 /* Animation for section content */
@@ -117,15 +184,37 @@ body, html {
 }
 
 .parallax-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
 }
 
 .parallax-container::-webkit-scrollbar-thumb {
-    background: #888;
+    background: #4a4a8a;
     border-radius: 10px;
 }
 
 .parallax-container::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: #6a6aaa;
+}
+
+/* Footer styles */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(10, 10, 42, 0.9);
+    text-align: center;
+    padding: 10px;
+    z-index: 100;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+footer a {
+    color: #ffd700;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
 }
