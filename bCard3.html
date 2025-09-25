@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Birthday Card</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #ffe4e1;
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        perspective: 2000px;
+      }
+
+      .card {
+        width: 700px;
+        height: 450px;
+        display: flex;
+        transform-style: preserve-3d;
+        transition: transform 1s;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .card.open {
+        transform: rotateY(180deg);
+      }
+
+      .page {
+        width: 50%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        backface-visibility: hidden;
+        border: 2px solid #d4af37;
+        background: #fff;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+      }
+
+      /* Front cover */
+      .front {
+        left: 0;
+        background: linear-gradient(135deg, #ff7eb9, #ff65a3, #7afcff);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.5em;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      /* Back cover */
+      .back {
+        right: 0;
+        transform: rotateY(180deg);
+        background: #ff7eb9;
+      }
+
+      /* Inside left page */
+      .inside-left {
+        left: 0;
+        transform: rotateY(180deg);
+        background: #fffdf5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.6em;
+        padding: 20px;
+        text-align: center;
+        color: #333;
+      }
+
+      /* Inside right page */
+      .inside-right {
+        right: 0;
+        transform: rotateY(180deg);
+        background: #fffdf5;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        height: 490px;
+      }
+
+      /* Gift box */
+      .gift {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        background: #ff4081;
+        border-radius: 10px;
+        transition: all 1s ease-in-out;
+        cursor: pointer;
+        overflow: hidden;
+      }
+
+      .gift::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 30px;
+        height: 100%;
+        background: #fff;
+        transform: translateX(-50%);
+      }
+
+      .gift::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 30px;
+        background: #fff;
+        transform: translateY(-50%);
+      }
+
+      /* Cake hidden */
+      .cake {
+        position: absolute;
+        bottom: -200px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        transition: bottom 1s ease-in-out;
+      }
+
+      .gift.open {
+        background: transparent;
+      }
+
+      .gift.open .cake {
+        bottom: 0;
+      }
+
+      /* Cake layers */
+      .layer {
+        width: 100%;
+        height: 40px;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        position: relative;
+      }
+
+      .layer:nth-child(3) {
+        background: #ffb347;
+      }
+      .layer:nth-child(2) {
+        background: #ffcc70;
+        width: 90%;
+        margin: 0 auto 5px;
+      }
+      .layer:nth-child(1) {
+        background: #ffe4b5;
+        width: 75%;
+        margin: 0 auto;
+      }
+
+      /* Frosting */
+      .frosting {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 8px;
+        background: white;
+        border-radius: 50%;
+      }
+
+      /* Candles */
+      .candles {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: -15px;
+      }
+
+      .candle {
+        width: 10px;
+        height: 25px;
+        background: #4caf50;
+        position: relative;
+        border-radius: 2px;
+      }
+
+      .flame {
+        width: 12px;
+        height: 20px;
+        background: radial-gradient(circle at center, #ffeb3b 40%, #ff9800 90%);
+        border-radius: 50% 50% 50% 50%;
+        position: absolute;
+        top: -20px;
+        left: -1px;
+        animation: flicker 0.3s infinite alternate;
+        opacity: 0.9;
+      }
+
+      @keyframes flicker {
+        from {
+          transform: scale(1) rotate(-5deg);
+          opacity: 1;
+        }
+        to {
+          transform: scale(1.1) rotate(5deg);
+          opacity: 0.8;
+        }
+      }
+
+      .celebrate-btn {
+        background: #ff4081;
+        border: none;
+        color: white;
+        padding: 12px 24px;
+        font-size: 1em;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .celebrate-btn:hover {
+        background: #e91e63;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card" id="card">
+      <!-- Outside -->
+      <div class="page front">🎉 Happy Birthday! 🎉</div>
+      <div class="page back"></div>
+
+      <!-- Inside -->
+      <div class="page inside-left">
+        Wishing you endless joy, love, and blessings on your special day! 🥳
+      </div>
+      <div class="page inside-right">
+        <div class="gift" id="gift">
+          <div class="cake">
+            <div class="candles">
+              <div class="candle"><div class="flame"></div></div>
+              <div class="candle"><div class="flame"></div></div>
+              <div class="candle"><div class="flame"></div></div>
+            </div>
+            <div class="layer"><div class="frosting"></div></div>
+            <div class="layer"><div class="frosting"></div></div>
+            <div class="layer"><div class="frosting"></div></div>
+          </div>
+        </div>
+        <button class="celebrate-btn" id="celebrateBtn">Celebrate 🎁</button>
+      </div>
+    </div>
+
+    <script>
+      const card = document.getElementById("card");
+      const celebrateBtn = document.getElementById("celebrateBtn");
+      const gift = document.getElementById("gift");
+
+      // Flip card
+      card.addEventListener("click", () => {
+        card.classList.toggle("open");
+      });
+
+      // Gift -> Cake transformation
+      celebrateBtn.addEventListener("click", (e) => {
+        e.stopPropagation(); // stop from flipping
+        gift.classList.toggle("open");
+      });
+    </script>
+  </body>
+</html>

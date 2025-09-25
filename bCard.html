@@ -1,159 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday!</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>Birthday Card</title>
   <style>
+    :root {
+      --card-w: 700px;
+      --card-h: 450px;
+      --border: 4px;
+      --gold: #d4af37;
+    }
+    * { box-sizing: border-box; margin:0; padding:0; }
+
     body {
-      margin: 0;
-      font-family: 'Baloo 2', cursive;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       min-height: 100vh;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg,#ffeef0,#fff5e6);
+      font-family: "Segoe UI", sans-serif;
       overflow: hidden;
     }
 
-    .card-wrapper {
-      width: 600px;
-      height: 300px;
-      perspective: 2500px;
+    .card {
+      width: var(--card-w);
+      height: var(--card-h);
       position: relative;
+      perspective: 2000px;
+      border: var(--border) solid var(--gold);
+      border-radius: 12px;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.18);
+      overflow: hidden;
+      background: transparent;
+      display: flex;
     }
 
-    /* The front flap that flips */
-    .card-front {
-      position: absolute;
-      width: 100%;
+    /* FRONT COVER */
+    .front {
+      width: 50%;
       height: 100%;
-      left: 0;
-      top: 0;
-      background: linear-gradient(45deg, #ff6b6b, #ffa36c);
+      background: linear-gradient(135deg,#ff7eb9,#ff65a3 60%, #7afcff 100%);
       color: white;
-      border-radius: 10px 0 0 10px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 8px 0 0 8px;
+      transform-origin: left center;
+      backface-visibility: hidden;
+      transition: transform 1s ease;
+      z-index: 3;
+      position: absolute;
+      left:0;
+      top:0;
+    }
+    .front.flipped {
+      transform: rotateY(-180deg);
+      z-index: 0;
+    }
+
+    /* INSIDE PAGES */
+    .inside {
+      width: 50%;
+      height: 100%;
+      background: #fffdf5;
+      padding: 24px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      transform-origin: left center;
-      transform-style: preserve-3d;
-      transition: transform 1.5s ease-in-out;
-      cursor: pointer;
-      z-index: 5;
-    }
-
-    .card-front.open {
-      transform: rotateY(-180deg);
-    }
-
-    /* Inside right page (fixed) */
-    .card-inside {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      right: 0;
-      top: 0;
-      background: linear-gradient(45deg, #ffa36c, #ff6b6b);
-      color: white;
-      border-radius: 0 10px 10px 0;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 30px;
       text-align: center;
+      visibility: hidden; /* hidden until flip */
+    }
+    #insideleft { border-right: 1px solid #eee; }
+    #insideright { border-left: 1px solid #eee; }
+
+    .inside h2 {
+      font-family: "Pacifico", cursive;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    .inside p {
+      margin-bottom: 20px;
+      color:#333;
     }
 
-    .card-inside h2 {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-      font-family: 'Pacifico', cursive;
+    /* GIFT */
+    .gift {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      background: #ff4081;
+      border-radius: 10px;
+      transition: all 1s ease-in-out;
+      margin-bottom: 20px;
+      overflow: visible;
     }
-
-    .card-inside p {
-      font-size: 1.2rem;
-      line-height: 1.5;
-    }
-
-    /* Confetti styles */
-    .confetti {
+    .gift::before, .gift::after {
+      content:"";
       position: absolute;
-      width: 10px;
-      height: 10px;
-      opacity: 0;
-      z-index: 5;
+      background:#fff;
+    }
+    .gift::before {
+      top:0; left:50%; transform:translateX(-50%);
+      width:30px; height:100%;
+    }
+    .gift::after {
+      top:50%; left:0; transform:translateY(-50%);
+      width:100%; height:30px;
+    }
+    .gift.open { background: transparent; }
+    .gift.open::before, .gift.open::after { display:none; }
+
+    /* CAKE */
+    .cake {
+      position: absolute;
+      bottom:-220px;
+      left:50%;
+      transform:translateX(-50%);
+      width:130px;
+      transition: bottom 1s ease-in-out;
+    }
+    .gift.open .cake { bottom:0; }
+
+    .layer { width:100%; height:40px; border-radius:5px; margin-bottom:5px; position:relative; }
+    .layer:nth-child(3) { background:#ffb347; }
+    .layer:nth-child(2) { background:#ffcc70; width:90%; margin:0 auto 5px; }
+    .layer:nth-child(1) { background:#ffe4b5; width:75%; margin:0 auto; }
+    .frosting { position:absolute; bottom:0; left:0; width:100%; height:8px; background:#fff; border-radius:50%; }
+
+    /* CANDLES */
+    .candles { display:flex; justify-content:center; gap:15px; margin-top:-15px; }
+    .candle { width:10px; height:25px; background:#4caf50; position:relative; border-radius:2px; }
+    .flame {
+      width:12px; height:20px;
+      background: radial-gradient(circle at center, #ffeb3b 40%, #ff9800 90%);
+      border-radius:50%;
+      position:absolute; top:-20px; left:-1px;
+      animation:flicker 0.3s infinite alternate;
+    }
+    @keyframes flicker {
+      from { transform: scale(1) rotate(-5deg); opacity:1; }
+      to { transform: scale(1.1) rotate(5deg); opacity:0.8; }
+    }
+
+    /* BUTTON */
+    .celebrate {
+      background:#ff4081; border:none; color:white;
+      padding:12px 24px; font-size:1em; border-radius:8px;
+      cursor:pointer; transition:0.3s;
+    }
+    .celebrate:hover { background:#e91e63; }
+
+    /* CONFETTI & POPPERS */
+    .confetti {
+      position:absolute; width:10px; height:10px;
+      opacity:0; z-index:1000;
     }
     .confetti.active {
       animation: confetti-fall 3s linear forwards;
     }
     @keyframes confetti-fall {
-      0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+      0% { transform: translateY(-50px) rotate(0deg); opacity:1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity:0; }
     }
-
-    /* Button */
-    .btn {
-      margin-top: 20px;
-      padding: 10px 25px;
-      border: none;
-      border-radius: 50px;
-      background: #FFD700;
-      color: #8B4513;
-      font-weight: bold;
-      font-size: 1.1rem;
-      cursor: pointer;
-      box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+    .popper {
+      position:absolute; width:20px; height:20px;
+      background:gold; border-radius:50%;
+      animation: pop 1s ease forwards; z-index:1001;
     }
-    .btn:hover {
-      background: #FFC145;
+    @keyframes pop {
+      0% { transform:scale(0.5); opacity:1; }
+      100% { transform:scale(2) translateY(-100px); opacity:0; }
     }
   </style>
 </head>
 <body>
-  <div class="card-wrapper">
-    <!-- Front cover -->
-    <div class="card-front" id="cardFront">
-      <h1 style="font-family: 'Pacifico', cursive; font-size: 3rem;">HAPPY</h1>
-      <h1 style="font-family: 'Pacifico', cursive; font-size: 3rem;">BIRTHDAY</h1>
-      <h2 style="color: #FFD700; font-size: 3.5rem; margin-top: 10px;">NAME</h2>
+  <div class="card" id="card">
+    <!-- Front Cover -->
+    <div class="front" id="front">
+      <div>
+        <div style="font-family: 'Pacifico', cursive; font-size: 2.1rem;">HAPPY</div>
+        <div style="font-family: 'Pacifico', cursive; font-size: 2.1rem;">BIRTHDAY</div>
+        <div style="color:#ffd700; font-weight:700; margin-top:8px;">NAME</div>
+      </div>
     </div>
 
-    <!-- Inside fixed page -->
-    <div class="card-inside">
-      <div>
-        <h2>Happy Birthday!</h2>
-        <p>Wishing you a day filled with happiness and a year filled with joy.</p>
-        <p>May all your dreams come true on this special day!</p>
-        <button class="btn" id="confettiBtn">Celebrate 🎉</button>
+    <!-- Inside Left -->
+    <div class="inside" id="insideleft">
+      <h2>Happy Birthday!</h2>
+      <p>Wishing you a day filled with happiness and a year filled with joy.</p>
+    </div>
+
+    <!-- Inside Right -->
+    <div class="inside" id="insideright">
+      <div class="gift" id="gift">
+        <div class="cake">
+          <div class="candles">
+            <div class="candle"><div class="flame"></div></div>
+            <div class="candle"><div class="flame"></div></div>
+            <div class="candle"><div class="flame"></div></div>
+          </div>
+          <div class="layer"><div class="frosting"></div></div>
+          <div class="layer"><div class="frosting"></div></div>
+          <div class="layer"><div class="frosting"></div></div>
+        </div>
       </div>
+      <button class="celebrate" id="celebrateBtn">Celebrate 🎁</button>
     </div>
   </div>
 
   <script>
-    const cardFront = document.getElementById("cardFront");
-    const confettiBtn = document.getElementById("confettiBtn");
+    const front = document.getElementById('front');
+    const insideL = document.getElementById('insideleft');
+    const insideR = document.getElementById('insideright');
+    const gift = document.getElementById('gift');
+    const celebrateBtn = document.getElementById('celebrateBtn');
 
-    // Toggle card flap
-    cardFront.addEventListener("click", () => {
-      cardFront.classList.toggle("open");
+    // Flip front to open card
+    front.addEventListener('click', () => {
+      front.classList.toggle('flipped');
+      if (front.classList.contains('flipped')) {
+        insideL.style.visibility = 'visible';
+        insideR.style.visibility = 'visible';
+      } else {
+        insideL.style.visibility = 'hidden';
+        insideR.style.visibility = 'hidden';
+      }
     });
 
-    // Confetti
-    confettiBtn.addEventListener("click", () => {
-      for (let i = 0; i < 150; i++) {
+    // Celebrate button
+    celebrateBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      gift.classList.add('open');
+
+      // Confetti
+      for (let i = 0; i < 100; i++) {
         const confetti = document.createElement("div");
         confetti.className = "confetti";
         confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.backgroundColor = ["#FF6B6B", "#FFD166", "#06D6A0", "#118AB2", "#FF69B4"][Math.floor(Math.random() * 5)];
-        confetti.style.width = Math.random() * 8 + 6 + "px";
-        confetti.style.height = confetti.style.width;
+        confetti.style.backgroundColor = ["#FF6B6B","#FFD166","#06D6A0","#118AB2","#FF69B4"][Math.floor(Math.random()*5)];
+        confetti.style.width = confetti.style.height = Math.random()*8+6+"px";
         document.body.appendChild(confetti);
         setTimeout(() => confetti.classList.add("active"), 10);
         setTimeout(() => confetti.remove(), 3000);
+      }
+
+      // Party poppers
+      for (let i = 0; i < 8; i++) {
+        const popper = document.createElement("div");
+        popper.className = "popper";
+        popper.style.left = 50 + (Math.random()*40-20) + "vw";
+        popper.style.top = "50vh";
+        popper.style.background = ["gold","red","blue","green"][i%4];
+        document.body.appendChild(popper);
+        setTimeout(() => popper.remove(), 1000);
       }
     });
   </script>
