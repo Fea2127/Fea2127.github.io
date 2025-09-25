@@ -50,6 +50,26 @@ const portfolioData = {
       viewLink: "parallax.html",
       docLink: "https://fea2127.github.io/OScpuSched.html",
       category: "web"
+    },
+    {
+      id: 6,
+      title: "AICS OJT Project",
+      image: "assets/AICS OJT.png",
+      description: "AICS OJT Project",
+      technologies: ["JavaScript", "HTML", "CSS"],
+      viewLink: "AICS.html",
+      docLink: "https://mswd-alaminos-laguna.github.io/aics.html",
+      category: "web"
+    },
+    {
+      id: 7,
+      title: "CSS Birthday Greeting Animation",
+      image: "assets/CSS Animation.png",
+      description: "CSS Birthday Greeting Animation",
+      technologies: ["CSS", "HTML"],
+      viewLink: "bCard.html",
+      docLink: "https://fea2127.github.io/bCard.html",
+      category: "animation"
     }
   ],
   categories: ["all", "web", "simulation", "animation"]
