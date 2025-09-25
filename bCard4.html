@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Birthday Card</title><!--The One I Want  -->
+  <title>Birthday Card</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
     :root {
@@ -14,9 +14,16 @@
     body {
       display: flex; align-items: center; justify-content: center;
       min-height: 100vh;
-      background: linear-gradient(135deg,#ffeef0,#fff5e6);
+      background: black;
       font-family: "Segoe UI", sans-serif;
       overflow: hidden;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
     }
 
     .book {
@@ -30,6 +37,7 @@
       background: #fffdf5;
       overflow: hidden;
       transition: width 1s ease;
+      z-index: 2;
     }
     .book.open { width: var(--card-w); }
 
@@ -41,7 +49,7 @@
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       padding: 20px; text-align: center;
       visibility: hidden;
-      z-index: 0;
+      z-index: 1;
     }
     .inside-left { left: 0; border-right: 1px solid #eee; }
     .inside-right { right: 0; border-left: 1px solid #eee; }
@@ -64,19 +72,17 @@
       transform-style: preserve-3d;
       backface-visibility: hidden;
       transition: transform 1s cubic-bezier(.2,.9,.2,1), width 1s ease, border-radius 1s ease;
-      z-index: 2;
+      z-index: 3;
       cursor: pointer;
     }
     .cover-right .name { color: #ffd700; font-weight: 700; font-size: 16px; margin-top: 8px; }
 
-    /* Flip + resize when open */
     .book.open .cover-right {
       width: 50%; /* becomes right page */
       border-radius: 0 10px 10px 0;
       transform: rotateY(-180deg);
     }
 
-    /* Crease shadow */
     .crease {
       position: absolute;
       top: 0; bottom: 0;
@@ -95,6 +101,7 @@
       width: 160px; height: 160px;
       background: #ff4081; border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
+      z-index: 2;
     }
     .gift::before, .gift::after { content: ""; position: absolute; background: #fff; }
     .gift::before { width: 28px; height: 100%; left: 50%; top: 0; transform: translateX(-50%); }
@@ -129,10 +136,11 @@
       margin-top: 12px; padding: 10px 18px;
       background: #ff4081; color: #fff; border: 0; border-radius: 10px;
       cursor: pointer; transition: background .3s;
+      z-index: 2;
+      position: relative;
     }
     .celebrate:hover { background: #e91e63; }
 
-    /* Confetti */
     .confetti {
       position: absolute; width: 10px; height: 10px;
       border-radius: 2px; opacity: 1; z-index: 1100;
@@ -140,14 +148,12 @@
   </style>
 </head>
 <body>
-  <div class="book" id="book">
-    <!-- Cover -->
-    <div class="cover-right">HAPPY BIRTHDAY 🥳<div class="name"><h2>🎉NAME🎉</h2></div>Click to open</div>
+  <canvas id="particles"></canvas>
 
-    <!-- Crease shadow -->
+  <div class="book" id="book">
+    <div class="cover-right">HAPPY BIRTHDAY 🥳<div class="name"><h2>🎉NAME🎉</h2></div>Click to open</div>
     <div class="crease"></div>
 
-    <!-- Inside Pages -->
     <div class="inside-left">
       <h2>🎉Happy Birthday!🎉</h2>
       <h3>Wishing you a day filled with happiness and a year filled with joy.🥳🎁🎉</h3>
@@ -174,18 +180,15 @@
     const gift = document.getElementById('gift');
     const celebrateBtn = document.getElementById('celebrateBtn');
 
-    // Toggle open/close
     book.addEventListener('click', e => {
       if (e.target === celebrateBtn || gift.contains(e.target)) return;
       book.classList.toggle('open');
       if (!book.classList.contains('open')) gift.classList.remove('open');
     });
 
-    // Celebrate button
     celebrateBtn.addEventListener('click', e => {
       e.stopPropagation();
       gift.classList.add('open');
-      // Confetti burst
       for (let i = 0; i < 80; i++) {
         const c = document.createElement('div');
         c.className = 'confetti';
@@ -204,6 +207,61 @@
         });
         setTimeout(()=>c.remove(),2600);
       }
+    });
+
+    // --- Particle Animation Background ---
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = (Math.random() - 0.5) * 4;
+        this.speedY = Math.random() * 6 + 2;
+        this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.y > canvas.height || this.x < 0 || this.x > canvas.width) {
+          this.reset();
+          this.y = 0;
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    const particlesArray = [];
+    for (let i = 0; i < 150; i++) {
+      particlesArray.push(new Particle());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particlesArray.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     });
   </script>
 </body>

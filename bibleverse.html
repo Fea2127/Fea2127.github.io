@@ -5,189 +5,163 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bible Verse Fetcher</title>
   <style>
-    /* Background with gradient + floating particles */
     body {
+      font-family: Arial, sans-serif;
+      background: black;
+      color: white;
       margin: 0;
       height: 100vh;
-      font-family: "Poppins", sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: white;
       overflow: hidden;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
     }
-
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    canvas {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1;
-    }
-
     h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      text-shadow: 0 0 15px rgba(255,255,255,0.6);
+      color: #fff;
+      z-index: 2;
     }
-
-    .card {
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-      text-align: center;
-      max-width: 500px;
-      width: 90%;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card:hover {
-      transform: scale(1.03);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
-    }
-
     input {
-      padding: 12px;
+      padding: 10px;
       font-size: 16px;
       margin: 10px;
-      width: 220px;
-      border: none;
-      border-radius: 8px;
-      outline: none;
-      text-align: center;
-      transition: 0.3s;
+      width: 200px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      z-index: 2;
+      position: relative;
     }
-    input:focus {
-      box-shadow: 0 0 15px rgba(255,255,255,0.5);
-    }
-
     button {
-      padding: 12px 20px;
+      padding: 10px 15px;
       font-size: 16px;
-      background: linear-gradient(135deg, #4cafef, #0077ff);
+      background: #4caf50;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin: 5px;
+      z-index: 2;
+      position: relative;
     }
     button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(0, 120, 255, 0.6);
+      background: #45a049;
     }
-
     #output {
       margin-top: 20px;
       padding: 15px;
-      background: rgba(255,255,255,0.15);
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      font-size: 18px;
-      line-height: 1.5;
-      color: #f1f1f1;
+      background: rgba(0,0,0,0.7);
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+      max-width: 500px;
+      text-align: center;
+      z-index: 2;
+      position: relative;
     }
-
-    #output strong {
-      font-size: 20px;
-      display: block;
-      margin-bottom: 8px;
-      color: #ffe680;
-      text-shadow: 0 0 10px rgba(255, 230, 128, 0.8);
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
     }
   </style>
 </head>
 <body>
   <canvas id="particles"></canvas>
-  <h1>📖 Bible Verse Finder</h1>
-  <div class="card">
-    <input type="text" id="verseInput" placeholder="e.g. John 3:16">
-    <br>
-    <button onclick="getVerse()">✨ Fetch Verse</button>
-    <div id="output"></div>
+
+  <h1>📖 Bible Verse Fetcher</h1>
+  <input type="text" id="verseInput" placeholder="e.g. John 3:16">
+  <div>
+    <button onclick="getVerse()">Fetch Verse</button>
+    <button onclick="getRandomVerse()">Random Verse</button>
   </div>
+  <div id="output"></div>
 
   <script>
+    // --- Bible API Fetch Functions ---
     async function getVerse() {
       const verse = document.getElementById("verseInput").value.trim();
-      const output = document.getElementById("output");
       if (!verse) {
-        output.innerText = "Please enter a verse (e.g. John 3:16)";
+        document.getElementById("output").innerText = "Please enter a verse (e.g. John 3:16)";
         return;
       }
-      output.innerHTML = "⏳ Fetching verse...";
       try {
         const response = await fetch(`https://bible-api.com/${encodeURIComponent(verse)}`);
         if (!response.ok) throw new Error("Verse not found!");
         const data = await response.json();
-        output.innerHTML = `
-          <strong>${data.reference}</strong>
+        document.getElementById("output").innerHTML = `
+          <strong>${data.reference}</strong><br>
           ${data.text}
           <br><em>${data.translation_name}</em>
         `;
       } catch (error) {
-        output.innerText = "⚠️ Could not fetch verse. Try again.";
+        document.getElementById("output").innerText = "⚠️ Could not fetch verse. Try again.";
       }
     }
 
-    // Particle background effect
+    async function getRandomVerse() {
+      try {
+        const response = await fetch(`https://bible-api.com/?random=verse`);
+        if (!response.ok) throw new Error("Verse not found!");
+        const data = await response.json();
+        document.getElementById("output").innerHTML = `
+          <strong>${data.reference}</strong><br>
+          ${data.text}
+          <br><em>${data.translation_name}</em>
+        `;
+      } catch (error) {
+        document.getElementById("output").innerText = "⚠️ Could not fetch random verse.";
+      }
+    }
+
+    // --- Particle Animation (Netflix-like meteor shower) ---
     const canvas = document.getElementById("particles");
     const ctx = canvas.getContext("2d");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const particlesArray = [];
-    const numberOfParticles = 80;
-
     class Particle {
       constructor() {
+        this.reset();
+      }
+      reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
         this.size = Math.random() * 3 + 1;
-        this.speedX = (Math.random() - 0.5) * 1.5;
-        this.speedY = (Math.random() - 0.5) * 1.5;
+        this.speedX = (Math.random() - 0.5) * 4;
+        this.speedY = Math.random() * 6 + 2;
+        this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
       }
       update() {
         this.x += this.speedX;
         this.y += this.speedY;
-        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+        if (this.y > canvas.height || this.x < 0 || this.x > canvas.width) {
+          this.reset();
+          this.y = 0;
+        }
       }
       draw() {
-        ctx.fillStyle = "rgba(255,255,255,0.7)";
         ctx.beginPath();
+        ctx.fillStyle = this.color;
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
       }
     }
 
-    function initParticles() {
-      for (let i = 0; i < numberOfParticles; i++) {
-        particlesArray.push(new Particle());
-      }
+    const particlesArray = [];
+    for (let i = 0; i < 150; i++) {
+      particlesArray.push(new Particle());
     }
 
-    function animateParticles() {
+    function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particlesArray.forEach(p => {
-        p.update();
-        p.draw();
+      particlesArray.forEach(particle => {
+        particle.update();
+        particle.draw();
       });
-      requestAnimationFrame(animateParticles);
+      requestAnimationFrame(animate);
     }
 
-    initParticles();
-    animateParticles();
+    animate();
 
     window.addEventListener("resize", () => {
       canvas.width = window.innerWidth;
