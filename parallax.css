@@ -1,0 +1,106 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.parallax-container {
+    position: relative;
+    height: 1300vh; /* Adjusted for 13 sections */
+    overflow-y: auto;
+}
+
+.parallax-item {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #333; /* Changed for better contrast */
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    transition: background 0.5s ease;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.section-image {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+    opacity: 1; /* Changed from 0 to 1 so images are visible */
+    transition: transform 0.3s ease; /* Added for smoother parallax */
+    border-radius: 10px; /* Added for better appearance */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Added for depth */
+}
+
+#creation {
+    background-color: #f0e68c;
+}
+
+#fall {
+    background-color: #90ee90;
+}
+
+#noah {
+    background-color: #add8e6;
+}
+
+#abraham {
+    background-color: #f08080;
+}
+
+#moses {
+    background-color: #87ceeb;
+}
+
+#kingdom {
+    background-color: #b0e0e6;
+}
+
+#prophets {
+    background-color: #ff69b4;
+}
+
+#birth {
+    background-color: #f0e68c;
+}
+
+#ministry {
+    background-color: #98fb98;
+}
+
+#crucifixion {
+    background-color: #d3d3d3;
+}
+
+#pentecost {
+    background-color: #b0c4de;
+}
+
+#spread {
+    background-color: #87cefa;
+}
+
+#revelation {
+    background-color: #ffd700;
+}
+
+/* Animation for section content */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.parallax-item h2, .parallax-item p {
+    animation: fadeInUp 0.8s ease forwards;
+}
