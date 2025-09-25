@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Birthday Card</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #ffe4e1;
+      font-family: 'Segoe UI', sans-serif;
+      perspective: 1500px;
+      margin: 0;
+    }
+
+    .card {
+      width: 600px;
+      height: 400px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1s;
+      cursor: pointer;
+    }
+
+    .card.open {
+      transform: rotateY(180deg);
+    }
+
+    .side {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    }
+
+    /* Front Cover */
+    .front {
+      background: linear-gradient(135deg, #ff7eb9, #ff65a3, #7afcff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      font-size: 2.5em;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .popper {
+      position: absolute;
+      width: 40px;
+      height: 80px;
+      background: #ffcc00;
+      border-radius: 5px;
+    }
+
+    .popper::before {
+      content: "";
+      position: absolute;
+      top: -15px;
+      left: 5px;
+      width: 30px;
+      height: 15px;
+      background: #ff5733;
+      border-radius: 50%;
+    }
+
+    .popper.left { left: 20px; bottom: 40px; transform: rotate(-30deg); }
+    .popper.right { right: 20px; bottom: 40px; transform: rotate(30deg); }
+
+    .confetti {
+      position: absolute;
+      width: 8px;
+      height: 14px;
+      background: red;
+      animation: fall 2s linear forwards;
+    }
+
+    @keyframes fall {
+      from { opacity: 1; transform: translateY(0) rotate(0deg); }
+      to { opacity: 0; transform: translateY(300px) rotate(360deg); }
+    }
+
+    /* Inside Page */
+    .back {
+      background: #fff7e6;
+      transform: rotateY(180deg);
+      padding: 40px;
+      text-align: center;
+    }
+
+    .message {
+      font-size: 1.6em;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .gift {
+      position: relative;
+      display: inline-block;
+      width: 120px;
+      height: 120px;
+      background: #ff69b4;
+      border-radius: 10px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: all 1s;
+      margin-bottom: 20px;
+    }
+
+    .gift:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 20px;
+      height: 100%;
+      background: #fff;
+      transform: translateX(-50%);
+    }
+
+    .gift:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      height: 20px;
+      background: #fff;
+      transform: translateY(-50%);
+    }
+
+    .cake {
+      position: absolute;
+      bottom: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 80px;
+      background: #f4a460;
+      border-radius: 5px;
+      transition: bottom 1s;
+    }
+
+    .cake::before {
+      content: "🎂";
+      position: absolute;
+      top: -35px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 40px;
+    }
+
+    .gift.open .cake {
+      bottom: 10px;
+    }
+
+    .celebrate-btn {
+      background: #ff4081;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .celebrate-btn:hover {
+      background: #e91e63;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="card" id="card">
+    <!-- Front -->
+    <div class="side front">
+      🎉 Happy Birthday!  Alfea🎉
+      <div class="popper left"></div>
+      <div class="popper right"></div>
+    </div>
+
+    <!-- Back -->
+    <div class="side back">
+      <div class="message">Wishing you joy, love, and blessings on your special day! 🥳</div>
+      <div class="gift" id="gift">
+        <div class="cake"></div>
+      </div>
+      <br>
+      <button class="celebrate-btn" id="celebrateBtn">Celebrate 🎁</button>
+    </div>
+  </div>
+
+  <script>
+    const card = document.getElementById("card");
+    const celebrateBtn = document.getElementById("celebrateBtn");
+    const gift = document.getElementById("gift");
+
+    // Flip card when clicked
+    card.addEventListener("click", () => {
+      card.classList.toggle("open");
+
+      if (card.classList.contains("open")) {
+        // Trigger confetti when opened
+        for (let i = 0; i < 40; i++) {
+          const confetti = document.createElement("div");
+          confetti.classList.add("confetti");
+          confetti.style.left = Math.random() * card.offsetWidth + "px";
+          confetti.style.top = Math.random() * 50 + "px";
+          confetti.style.background = ["#ff4081","#3f51b5","#ffeb3b","#4caf50","#ff9800"][Math.floor(Math.random()*5)];
+          confetti.style.animationDuration = (1 + Math.random()*2) + "s";
+          card.appendChild(confetti);
+          setTimeout(() => confetti.remove(), 3000);
+        }
+      }
+    });
+
+    // Gift reveal
+    celebrateBtn.addEventListener("click", (e) => {
+      e.stopPropagation(); // prevent card flip
+      gift.classList.toggle("open");
+    });
+  </script>
+</body>
+</html>

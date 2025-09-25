@@ -1,569 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Baloo 2', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      overflow: hidden;
+    }
 
-        body {
-            font-family: 'Baloo 2', cursive;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-            overflow: hidden;
-            padding: 20px;
-        }
+    .card-wrapper {
+      width: 600px;
+      height: 300px;
+      perspective: 2500px;
+      position: relative;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 800px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 30px;
-        }
+    /* The front flap that flips */
+    .card-front {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background: linear-gradient(45deg, #ff6b6b, #ffa36c);
+      color: white;
+      border-radius: 10px 0 0 10px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transform-origin: left center;
+      transform-style: preserve-3d;
+      transition: transform 1.5s ease-in-out;
+      cursor: pointer;
+      z-index: 5;
+    }
 
-        .card-wrapper {
-            position: relative;
-            width: 700px;
-            height: 600px;
-            perspective: 2000px;
-        }
+    .card-front.open {
+      transform: rotateY(-180deg);
+    }
 
-        .card {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 1.5s ease-in-out;
-            cursor: pointer;
-            transform-origin: left center;
-        }
+    /* Inside right page (fixed) */
+    .card-inside {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      right: 0;
+      top: 0;
+      background: linear-gradient(45deg, #ffa36c, #ff6b6b);
+      color: white;
+      border-radius: 0 10px 10px 0;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      text-align: center;
+    }
 
-        .card.open {
-            transform: rotateY(-180deg);
-        }
+    .card-inside h2 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      font-family: 'Pacifico', cursive;
+    }
 
-        .card-page {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-            text-align: center;
-            overflow: hidden;
-            transition: transform 0.5s ease-in-out;
-        }
+    .card-inside p {
+      font-size: 1.2rem;
+      line-height: 1.5;
+    }
 
-        .card-front {
-            background: linear-gradient(45deg, #ff6b6b, #ffa36c);
-            color: white;
-            z-index: 3;
-        }
+    /* Confetti styles */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      opacity: 0;
+      z-index: 5;
+    }
+    .confetti.active {
+      animation: confetti-fall 3s linear forwards;
+    }
+    @keyframes confetti-fall {
+      0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
 
-        .card-inside {
-            background: linear-gradient(45deg, #ffa36c, #ff6b6b);
-            color: white;
-            transform: rotateY(180deg);
-            z-index: 2;
-        }
-
-        .card-greeting {
-            background: linear-gradient(45deg, #ffa36c, #ff6b6b);
-            color: white;
-            transform: translateX(100%);
-            z-index: 1;
-        }
-
-        .card.open .card-greeting {
-            transform: translateX(0);
-        }
-
-        .birthday-text {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-        }
-
-        .happy, .birthday {
-            font-family: 'Pacifico', cursive;
-            font-size: 4.5rem;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
-            line-height: 1;
-        }
-
-        .name {
-            font-family: 'Pacifico', cursive;
-            font-size: 5.5rem;
-            color: #FFD700;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
-            margin: 20px 0;
-            line-height: 1;
-        }
-
-        .cake-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 30px;
-        }
-
-        /* Realistic Cake Design */
-        .cake {
-            position: relative;
-            width: 280px;
-            height: 200px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .cake-base {
-            width: 250px;
-            height: 30px;
-            background: #8B4513;
-            border-radius: 10px;
-            z-index: 5;
-        }
-
-        .cake-layer {
-            width: 220px;
-            height: 60px;
-            background: #FFB6C1;
-            border-radius: 10px 10px 0 0;
-            position: relative;
-            z-index: 4;
-            box-shadow: inset 0 -10px 10px rgba(0,0,0,0.1);
-        }
-
-        .cake-layer.middle {
-            width: 190px;
-            height: 50px;
-            background: #FF69B4;
-            z-index: 3;
-            margin-top: -5px;
-        }
-
-        .cake-layer.top {
-            width: 160px;
-            height: 40px;
-            background: #FF1493;
-            z-index: 2;
-            margin-top: -5px;
-        }
-
-        .frosting {
-            position: absolute;
-            background: #FFF;
-            border-radius: 50%;
-            z-index: 6;
-        }
-
-        .frosting-1 {
-            width: 30px;
-            height: 20px;
-            top: -10px;
-            left: 50px;
-        }
-
-        .frosting-2 {
-            width: 25px;
-            height: 15px;
-            top: -8px;
-            left: 120px;
-        }
-
-        .frosting-3 {
-            width: 20px;
-            height: 12px;
-            top: -6px;
-            left: 180px;
-        }
-
-        .candles {
-            display: flex;
-            justify-content: space-around;
-            width: 160px;
-            margin-top: -30px;
-            z-index: 7;
-            position: relative;
-        }
-
-        .candle {
-            width: 12px;
-            height: 40px;
-            background: #FFD700;
-            border-radius: 5px 5px 0 0;
-            position: relative;
-        }
-
-        .flame {
-            width: 15px;
-            height: 25px;
-            background: #FF4500;
-            border-radius: 50% 50% 20% 20%;
-            position: absolute;
-            top: -25px;
-            left: -1.5px;
-            animation: flicker 0.8s infinite alternate;
-            box-shadow: 0 0 15px #FF4500;
-        }
-
-        @keyframes flicker {
-            0% { transform: scale(1); opacity: 0.9; }
-            100% { transform: scale(1.1); opacity: 1; }
-        }
-
-        .inside-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            width: 100%;
-            padding: 20px;
-        }
-
-        .inside-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .inside-content p {
-            font-size: 1.3rem;
-            line-height: 1.6;
-            margin-bottom: 15px;
-            max-width: 80%;
-        }
-
-        .message {
-            margin-top: 20px;
-            font-style: italic;
-            font-size: 1.4rem;
-        }
-
-        .btn {
-            margin-top: 30px;
-            padding: 12px 30px;
-            background: #FFD700;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.3rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            font-weight: bold;
-            color: #8B4513;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            background:#FFC145;
-        }
-
-        .btn:active {
-            transform: translateY(1px);
-        }
-
-        .instructions {
-            color: white;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 10px 20px;
-            border-radius: 10px;
-            max-width: 350px;
-            font-size: 1.1rem;
-        }
-
-        footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            text-align: center;
-            padding: 15px 0;
-            font-size: 1.1rem;
-            z-index: 100;
-        }
-
-        footer a {
-            color: #FFD700;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        footer a:hover {
-            color: #FFA726;
-            text-decoration: underline;
-        }
-
-        .confetti {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            opacity: 0;
-            z-index: 1;
-        }
-
-        .confetti.active {
-            animation: confetti-fall 3s linear forwards;
-        }
-
-        @keyframes confetti-fall {
-            0% {
-                transform: translateY(-100px) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        .balloons {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-        }
-
-        .balloon {
-            position: absolute;
-            width: 60px;
-            height: 70px;
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-        }
-
-        .balloon:nth-child(1) {
-            background: #FF6B6B;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .balloon:nth-child(2) {
-            background: #4ECDC4;
-            left: 30%;
-            animation-delay: 2s;
-        }
-
-        .balloon:nth-child(3) {
-            background: #FFD166;
-            left: 50%;
-            animation-delay: 4s;
-        }
-
-        .balloon:nth-child(4) {
-            background: #06D6A0;
-            left: 70%;
-            animation-delay: 6s;
-        }
-
-        .balloon:nth-child(5) {
-            background: #118AB2;
-            left: 90%;
-            animation-delay: 8s;
-        }
-
-        .balloon::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 30px;
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-            }
-        }
-
-        @media (max-width: 750px) {
-            .card-wrapper {
-                width: 90vw;
-                height: 70vh;
-            }
-            
-            .happy, .birthday {
-                font-size: 3rem;
-            }
-            
-            .name {
-                font-size: 4rem;
-            }
-            
-            .cake {
-                width: 200px;
-                height: 150px;
-            }
-            
-            .cake-layer {
-                width: 180px;
-                height: 50px;
-            }
-            
-            .cake-layer.middle {
-                width: 150px;
-                height: 40px;
-            }
-            
-            .cake-layer.top {
-                width: 120px;
-                height: 30px;
-            }
-        }
-    </style>
+    /* Button */
+    .btn {
+      margin-top: 20px;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 50px;
+      background: #FFD700;
+      color: #8B4513;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+    }
+    .btn:hover {
+      background: #FFC145;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="card-wrapper">
-            <div class="card">
-                <!-- Page 1: Front Cover -->
-                <div class="card-page card-front">
-                    <div class="birthday-text">
-                        <div class="happy">HAPPY</div>
-                        <div class="birthday">BIRTHDAY</div>
-                        <div class="name">NAME</div>
-                    </div>
-                    <div class="cake-container">
-                        <div class="cake">
-                            <div class="candles">
-                                <div class="candle">
-                                    <div class="flame"></div>
-                                </div>
-                                <div class="candle">
-                                    <div class="flame"></div>
-                                </div>
-                                <div class="candle">
-                                    <div class="flame"></div>
-                                </div>
-                            </div>
-                            <div class="cake-layer top"></div>
-                            <div class="cake-layer middle"></div>
-                            <div class="cake-layer">
-                                <div class="frosting frosting-1"></div>
-                                <div class="frosting frosting-2"></div>
-                                <div class="frosting frosting-3"></div>
-                            </div>
-                            <div class="cake-base"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Page 2: Inside Message (flips) -->
-                <div class="card-page card-inside">
-                    <div class="inside-content">
-                        <h2>Happy Birthday!</h2>
-                        <p>Wishing you a day filled with happiness and a year filled with joy.</p>
-                        <p>May all your dreams and wishes come true on this special day!</p>
-                    </div>
-                </div>
-                
-                <!-- Page 3: Greeting (slides in, doesn't flip) -->
-                <div class="card-page card-greeting">
-                    <div class="inside-content">
-                        <p class="message">Hope your birthday is as wonderful as you are!</p>
-                        <button class="btn" id="confettiBtn">Celebrate!</button>
-                    </div>
-                    <div class="balloons">
-                        <div class="balloon"></div>
-                        <div class="balloon"></div>
-                        <div class="balloon"></div>
-                        <div class="balloon"></div>
-                        <div class="balloon"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="instructions">
-            <p>Click the card to open it, then press the "Celebrate!" button for a surprise!</p>
-        </div>
+  <div class="card-wrapper">
+    <!-- Front cover -->
+    <div class="card-front" id="cardFront">
+      <h1 style="font-family: 'Pacifico', cursive; font-size: 3rem;">HAPPY</h1>
+      <h1 style="font-family: 'Pacifico', cursive; font-size: 3rem;">BIRTHDAY</h1>
+      <h2 style="color: #FFD700; font-size: 3.5rem; margin-top: 10px;">NAME</h2>
     </div>
-    <footer>
-        Made with ❤️ by <a href="https://fea2127.github.io" target="_blank">fea2127</a>
-    </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const card = document.querySelector('.card');
-            const confettiBtn = document.getElementById('confettiBtn');
-            
-            // Open/close card on click
-            card.addEventListener('click', function() {
-                card.classList.toggle('open');
-            });
-            
-            // Confetti effect
-            confettiBtn.addEventListener('click', function() {
-                createConfetti();
-            });
-            
-            function createConfetti() {
-                const colors = ['#FF6B6B', '#4ECDC4', '#FFD166', '#06D6A0', '#118AB2', '#FF69B4', '#FF4500', '#9370DB', '#20B2AA'];
-                
-                for (let i = 0; i < 200; i++) {
-                    const confetti = document.createElement('div');
-                    confetti.className = 'confetti';
-                    confetti.style.left = Math.random() * 100 + 'vw';
-                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    confetti.style.width = Math.random() * 12 + 8 + 'px';
-                    confetti.style.height = Math.random() * 12 + 8 + 'px';
-                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-                    
-                    // Random shapes
-                    if (Math.random() > 0.7) {
-                        confetti.style.borderRadius = '0';
-                        confetti.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
-                    } else if (Math.random() > 0.5) {
-                        confetti.style.borderRadius = '50%';
-                    }
-                    
-                    document.body.appendChild(confetti);
-                    
-                    // Trigger animation
-                    setTimeout(() => {
-                        confetti.classList.add('active');
-                    }, 10);
-                    
-                    // Remove confetti after animation
-                    setTimeout(() => {
-                        if (confetti.parentNode) {
-                            confetti.remove();
-                        }
-                    }, 3000);
-                }
-            }
-        });
-    </script>
+    <!-- Inside fixed page -->
+    <div class="card-inside">
+      <div>
+        <h2>Happy Birthday!</h2>
+        <p>Wishing you a day filled with happiness and a year filled with joy.</p>
+        <p>May all your dreams come true on this special day!</p>
+        <button class="btn" id="confettiBtn">Celebrate 🎉</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const cardFront = document.getElementById("cardFront");
+    const confettiBtn = document.getElementById("confettiBtn");
+
+    // Toggle card flap
+    cardFront.addEventListener("click", () => {
+      cardFront.classList.toggle("open");
+    });
+
+    // Confetti
+    confettiBtn.addEventListener("click", () => {
+      for (let i = 0; i < 150; i++) {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti";
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.backgroundColor = ["#FF6B6B", "#FFD166", "#06D6A0", "#118AB2", "#FF69B4"][Math.floor(Math.random() * 5)];
+        confetti.style.width = Math.random() * 8 + 6 + "px";
+        confetti.style.height = confetti.style.width;
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.classList.add("active"), 10);
+        setTimeout(() => confetti.remove(), 3000);
+      }
+    });
+  </script>
 </body>
 </html>
