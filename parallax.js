@@ -1,46 +1,17 @@
-window.addEventListener('scroll', function() {
-    const scrollPosition = window.scrollY;
-
-    const creation = document.getElementById('creation');
-    const fall = document.getElementById('fall');
-    const noah = document.getElementById('noah');
-    const abraham = document.getElementById('abraham');
-    const moses = document.getElementById('moses');
-    const kingdom = document.getElementById('kingdom');
-    const prophets = document.getElementById('prophets');
-    const birth = document.getElementById('birth');
-    const ministry = document.getElementById('ministry');
-    const crucifixion = document.getElementById('crucifixion');
-    const pentecost = document.getElementById('pentecost');
-    const spread = document.getElementById('spread');
-    const revelation = document.getElementById('revelation');
-
-    // Apply parallax effect with requestAnimationFrame for smoother animation
-    requestAnimationFrame(() => {
-        creation.style.transform = `translateY(${scrollPosition * 0.5}px)`;
-        fall.style.transform = `translateY(${scrollPosition * 0.3}px)`;
-        noah.style.transform = `translateY(${scrollPosition * 0.2}px)`;
-        abraham.style.transform = `translateY(${scrollPosition * 0.15}px)`;
-        moses.style.transform = `translateY(${scrollPosition * 0.1}px)`;
-        kingdom.style.transform = `translateY(${scrollPosition * 0.08}px)`;
-        prophets.style.transform = `translateY(${scrollPosition * 0.06}px)`;
-        birth.style.transform = `translateY(${scrollPosition * 0.04}px)`;
-        ministry.style.transform = `translateY(${scrollPosition * 0.03}px)`;
-        crucifixion.style.transform = `translateY(${scrollPosition * 0.02}px)`;
-        pentecost.style.transform = `translateY(${scrollPosition * 0.01}px)`;
-        spread.style.transform = `translateY(${scrollPosition * 0.008}px)`;
-        revelation.style.transform = `translateY(${scrollPosition * 0.005}px)`;
-    });
-});
-
-// Add fade-in effect for images when they come into view
 window.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('.parallax-container');
+    const sections = document.querySelectorAll('.parallax-item');
     const images = document.querySelectorAll('.section-image');
     
+    // Add fade-in effect for images when they come into view
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = 1;
+                entry.target.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    entry.target.style.transform = 'scale(1)';
+                }, 300);
             }
         });
     }, { threshold: 0.5 });
@@ -48,4 +19,30 @@ window.addEventListener('DOMContentLoaded', function() {
     images.forEach(image => {
         observer.observe(image);
     });
+    
+    // Parallax effect on scroll
+    container.addEventListener('scroll', function() {
+        const scrollPosition = container.scrollTop;
+        
+        sections.forEach(section => {
+            const speed = parseFloat(section.getAttribute('data-speed')) || 0.5;
+            const yPos = -(scrollPosition * speed);
+            section.style.transform = `translateY(${yPos}px)`;
+        });
+    });
+    
+    // Set different parallax speeds for each section
+    document.getElementById('creation').setAttribute('data-speed', '0.5');
+    document.getElementById('fall').setAttribute('data-speed', '0.4');
+    document.getElementById('noah').setAttribute('data-speed', '0.3');
+    document.getElementById('abraham').setAttribute('data-speed', '0.25');
+    document.getElementById('moses').setAttribute('data-speed', '0.2');
+    document.getElementById('kingdom').setAttribute('data-speed', '0.15');
+    document.getElementById('prophets').setAttribute('data-speed', '0.1');
+    document.getElementById('birth').setAttribute('data-speed', '0.08');
+    document.getElementById('ministry').setAttribute('data-speed', '0.06');
+    document.getElementById('crucifixion').setAttribute('data-speed', '0.04');
+    document.getElementById('pentecost').setAttribute('data-speed', '0.03');
+    document.getElementById('spread').setAttribute('data-speed', '0.02');
+    document.getElementById('revelation').setAttribute('data-speed', '0.01');
 });
