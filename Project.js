@@ -110,6 +110,16 @@ const portfolioData = {
       viewLink: "https://ccfjnt.github.io/",
       docLink: "https://ccfjnt.github.io/",
       category: "web"
+    },
+    {
+      id: 12,
+      title: "3D Particle Animation",
+      image: "assets/hyper 404.png",
+      description: "3D Particle Animation using Three.js.",
+      technologies: ["JavaScript", "Three.js"],
+      viewLink: "404.html",
+      docLink: "https://fea2127.github.io/404.html",
+      category: "animation"
     }
   ],
   categories: ["all", "web", "simulation", "animation"]

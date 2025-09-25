@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 Not Found</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+    color: #ff2a2a; /* Tron ARES red */
+  }
+
+  canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+  }
+
+  h1 {
+    font-size: 10vw;
+    letter-spacing: 0.1em;
+    text-shadow: 
+      0 0 10px #ff2a2a,
+      0 0 30px #ff2a2a,
+      0 0 60px #ff2a2a;
+    animation: glowPulse 2s infinite alternate;
+  }
+
+  p {
+    font-size: 1.5rem;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 42, 42, 0.6);
+    margin-top: -20px;
+    margin-bottom: 30px;
+  }
+
+  a {
+    display: inline-block;
+    padding: 12px 30px;
+    border: 2px solid #ff2a2a;
+    border-radius: 30px;
+    color: #ff2a2a;
+    text-decoration: none;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    transition: 0.3s;
+    text-shadow: 0 0 10px #ff2a2a;
+  }
+
+  a:hover {
+    background: #ff2a2a;
+    color: black;
+    box-shadow: 0 0 20px #ff2a2a;
+  }
+
+  @keyframes glowPulse {
+    from { text-shadow: 0 0 10px #ff2a2a, 0 0 30px #ff2a2a; }
+    to { text-shadow: 0 0 30px #ff2a2a, 0 0 60px #ff2a2a; }
+  }
+</style>
+</head>
+<body>
+  <canvas id="space"></canvas>
+  <h1>404</h1>
+  <p>Hyperloop not found. You are lost in space.</p>
+  <a href="/">Return Home</a>
+
+<script>
+  const canvas = document.getElementById("space");
+  const ctx = canvas.getContext("2d");
+  let stars = [];
+  let numStars = 1000;
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
+
+  class Star {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = (Math.random() - 0.5) * canvas.width;
+      this.y = (Math.random() - 0.5) * canvas.height;
+      this.z = Math.random() * canvas.width;
+    }
+    update() {
+      this.z -= 10; // speed
+      if (this.z <= 0) this.reset();
+    }
+    draw() {
+      let sx = (this.x / this.z) * canvas.width + canvas.width / 2;
+      let sy = (this.y / this.z) * canvas.height + canvas.height / 2;
+      let r = (1 - this.z / canvas.width) * 3;
+      ctx.beginPath();
+      ctx.arc(sx, sy, r, 0, Math.PI * 2);
+      ctx.fillStyle = "#ff2a2a";
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < numStars; i++) {
+    stars.push(new Star());
+  }
+
+  function animate() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(star => {
+      star.update();
+      star.draw();
+    });
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
+</body>
+</html>
