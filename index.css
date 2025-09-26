@@ -160,13 +160,19 @@ body.light .b4{background:#f9d423;}
 body.light .b5{background:#34c759;}
 
 /* ---------------  VISITOR COUNT  --------------- */
- #visitor-count {
+#visitor-counter {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px 40px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
       font-size: 2rem;
-      color: #e63946; /* bright accent */
       font-weight: bold;
- }
- .visit {
-      margin: 2rem;
-      font-size: 1.2rem;
-      color: var(--text-dim);
- }
+      color: #e63946;
+      box-shadow: 0 0 15px rgba(255,0,0,0.3);
+      transition: transform 0.2s ease;
+    }
+
+    #visitor-counter:hover {
+      transform: scale(1.05);
+    }

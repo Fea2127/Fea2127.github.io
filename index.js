@@ -24,12 +24,14 @@ window.addEventListener("scroll", () => {
 });
 /* ---------------  VISITOR COUNT --------------- */
   async function updateVisitorCount() {
-    try {
-      const response = await fetch('https://api.countapi.xyz/hit/fea2127-github-io/portfolio');
-      const data = await response.json();
-      document.getElementById('visitor-count').textContent = data.value;
-    } catch (error) {
-      console.error('Failed to fetch visitor count:', error);
+      try {
+        const response = await fetch('https://api.countapi.xyz/hit/fea2127-github-io/portfolio');
+        const data = await response.json();
+        document.getElementById('visitor-counter').textContent = 'Visitors: ' + data.value;
+      } catch (err) {
+        console.error('Error fetching visitor count:', err);
+      }
     }
-  }
-  updateVisitorCount();
+
+    // Update count on page load
+    updateVisitorCount();
