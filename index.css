@@ -35,7 +35,7 @@ a{color:inherit;text-decoration:none}
   margin-inline:auto;
 }
 .logo img{width:48px;height:48px}
-.nav-list{display:flex;margin-top:60px;gap:2rem;list-style:none ;background:var(--bg);}
+.nav-list{display:flex;gap:2rem;list-style:none ;background:var(--bg);}
 .nav-link{font-weight:500;position:relative}
 .nav-link::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--accent);transition:width .3s}
 .nav-link:hover::after,.nav-link.active::after{width:100%}
@@ -99,7 +99,20 @@ footer .socials{justify-content:center;margin-top:1rem}
 body.light{--bg:#f2f4fc;--surface:rgba(255,255,255,.7);--text:#1b1c22;--text-dim:#5c6270;--primary:#0077cc;--accent:#00aaff}
 /* ---------------  MOBILE  --------------- */
 @media (max-width: 768px) {
-  .nav-list{position:fixed;inset:0; background:var(--bg); flex-direction:column; align-items:center; justify-content:center; gap:2rem; font-size:1.4rem; transform:translateX(100%); transition:transform .4s}
+  .nav-list{
+    margin-top: 290px;  /* Added to push nav links below the header */
+    position:fixed;
+    inset:0;                     /* Changed from just 'inset:0' to better structure */
+    background:var(--bg);
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;      /* Added/Changed for vertical centering */
+    gap:2rem;
+    font-size:1.4rem;
+    transform:translateX(100%);
+    transition:transform .4s ease-in-out; /* Added ease-in-out */
+    z-index:1000;                /* Added to ensure it covers all content */
+  }
   #navCheck:checked ~ .nav-list{transform:translateX(0)}
   .hamburger{display:block}
   .close-btn{display:block}
