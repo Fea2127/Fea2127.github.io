@@ -35,7 +35,7 @@ a{color:inherit;text-decoration:none}
   margin-inline:auto;
 }
 .logo img{width:48px;height:48px}
-.nav-list{display:flex;gap:2rem;list-style:none}
+.nav-list{display:flex;margin-top:60px;gap:2rem;list-style:none ;background:var(--bg);}
 .nav-link{font-weight:500;position:relative}
 .nav-link::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--accent);transition:width .3s}
 .nav-link:hover::after,.nav-link.active::after{width:100%}
