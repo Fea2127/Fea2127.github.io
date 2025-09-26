@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technology Evolution & Innovation Timeline</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0a0f1f;
+      color: #fff;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    section {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    section::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.2);
+      z-index: -2;
+      opacity: 0.4;
+    }
+
+    .content {
+      background: rgba(0,0,0,0.5);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0,255,255,0.3);
+      backdrop-filter: blur(8px);
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    .content h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      color: #00eaff;
+      text-shadow: 0 0 15px #00f6ff;
+    }
+
+    .content p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .date {
+      margin-top: 1rem;
+      font-weight: bold;
+      color: #ff0077;
+      text-shadow: 0 0 10px #ff0077;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+/* Background images  */
+    #tools::before { background-image: url("assets/Dawn\ of\ Tools\ \(Prehistoric\ –\ 3000\ BC\).png"); }
+    #writing::before { background-image: url("assets/Invention\ of\ Writing\ \(c.\ 3200\ BC\).png"); }
+    #printing::before { background-image: url("assets/The\ Printing\ Press\ \(1440\).png"); }
+    #industrial::before { background-image: url("assets/Industrial\ Revolution\ \(1760\ –\ 1840s\).png"); }
+    #telegraph::before { background-image: url("assets/Telegraph\ &\ Telephone\ \(1837\ –\ 1876\).png"); }
+    #lightbulb::before { background-image: url("assets/Electricity\ &\ Light\ Bulb\ \(1879\).png"); }
+    #auto::before { background-image: url("assets/Automobile\ &\ Airplane\ \(1886\ –\ 1903\).png"); }
+    #radio::before { background-image: url("assets/Radio\ &\ Television\ \(1895\ –\ 1927\).png"); }
+    #computer::before { background-image: url("assets/Computer\ Age\ \(1936\ –\ 1945\).png"); }
+    #space::before { background-image: url("assets/Space\ Age\ \(1957\ –\ 1969\).png"); }
+    #internet::before { background-image: url("assets/Internet\ Revolution\ \(1969\ –\ 1991\).png"); }
+    #mobile::before { background-image: url("assets/Mobile\ Phones\ &\ Laptops\ \(1973\ –\ 1990s\).png"); }
+    #digital::before { background-image: url("assets/Digital\ Era\ \(2000s\).png"); }
+    #ai::before { background-image: url("assets/Artificial\ Intelligence\ &\ Automation\ \(2010s\ –\ Present\).png"); }
+
+
+    /* Canvas for futuristic particles */
+    /* canvas#particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      background: transparent;
+    } */
+  </style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<!-- TIMELINE SECTIONS -->
+
+<section id="tools">
+  <div class="content">
+    <h1>Dawn of Tools</h1>
+    <p>Early humans crafted stone tools, discovered fire, and invented the wheel.</p>
+    <div class="date">~2.5M years ago – 3000 BC</div>
+  </div>
+</section>
+
+<section id="writing">
+  <div class="content">
+    <h1>Invention of Writing</h1>
+    <p>Sumerians developed cuneiform, enabling knowledge storage and communication.</p>
+    <div class="date">c. 3200 BC</div>
+  </div>
+</section>
+
+<section id="printing">
+  <div class="content">
+    <h1>The Printing Press</h1>
+    <p>Gutenberg’s press revolutionized knowledge sharing across Europe and beyond.</p>
+    <div class="date">1440</div>
+  </div>
+</section>
+
+<section id="industrial">
+  <div class="content">
+    <h1>Industrial Revolution</h1>
+    <p>Steam engines and factories reshaped economies and society.</p>
+    <div class="date">1760 – 1840s</div>
+  </div>
+</section>
+
+<section id="telegraph">
+  <div class="content">
+    <h1>Telegraph & Telephone</h1>
+    <p>Telegraph (1837) and telephone (1876) transformed long-distance communication.</p>
+    <div class="date">1837 – 1876</div>
+  </div>
+</section>
+
+<section id="lightbulb">
+  <div class="content">
+    <h1>Electricity & Light Bulb</h1>
+    <p>Edison’s bulb and Tesla’s electrical systems powered the modern age.</p>
+    <div class="date">1879</div>
+  </div>
+</section>
+
+<section id="auto">
+  <div class="content">
+    <h1>Automobile & Airplane</h1>
+    <p>Karl Benz built the first car, and the Wright brothers achieved flight.</p>
+    <div class="date">1886 – 1903</div>
+  </div>
+</section>
+
+<section id="radio">
+  <div class="content">
+    <h1>Radio & Television</h1>
+    <p>Marconi pioneered radio, and Farnsworth invented electronic television.</p>
+    <div class="date">1895 – 1927</div>
+  </div>
+</section>
+
+<section id="computer">
+  <div class="content">
+    <h1>Computer Age</h1>
+    <p>Turing’s universal machine and ENIAC began the era of computing.</p>
+    <div class="date">1936 – 1945</div>
+  </div>
+</section>
+
+<section id="space">
+  <div class="content">
+    <h1>Space Age</h1>
+    <p>Sputnik’s launch and Apollo 11’s Moon landing marked space exploration.</p>
+    <div class="date">1957 – 1969</div>
+  </div>
+</section>
+
+<section id="internet">
+  <div class="content">
+    <h1>Internet Revolution</h1>
+    <p>ARPANET evolved into the internet; Tim Berners-Lee created the WWW.</p>
+    <div class="date">1969 – 1991</div>
+  </div>
+</section>
+
+<section id="mobile">
+  <div class="content">
+    <h1>Mobile Phones & Laptops</h1>
+    <p>First mobile call in 1973 and laptops entered the mainstream in the 1990s.</p>
+    <div class="date">1973 – 1990s</div>
+  </div>
+</section>
+
+<section id="digital">
+  <div class="content">
+    <h1>Digital Era</h1>
+    <p>Smartphones, cloud computing, and social media redefined life in the 2000s.</p>
+    <div class="date">2000s</div>
+  </div>
+</section>
+
+<section id="ai">
+  <div class="content">
+    <h1>Artificial Intelligence & Automation</h1>
+    <p>AI, robotics, and blockchain are reshaping industries and society.</p>
+    <div class="date">2010s – Present</div>
+  </div>
+</section>
+
+<script>
+  // Futuristic particles background
+//   const canvas = document.getElementById("particles");
+//   const ctx = canvas.getContext("2d");
+//   canvas.width = window.innerWidth;
+//   canvas.height = window.innerHeight;
+
+//   let particlesArray = [];
+//   const numParticles = 120;
+
+//   class Particle {
+//     constructor(){
+//       this.x = Math.random() * canvas.width;
+//       this.y = Math.random() * canvas.height;
+//       this.size = Math.random() * 2 + 1;
+//       this.speedX = Math.random() * 1 - 0.5;
+//       this.speedY = Math.random() * 1 - 0.5;
+//       this.color = Math.random() > 0.5 ? "#00f6ff" : "#ff0077";
+//     }
+//     update(){
+//       this.x += this.speedX;
+//       this.y += this.speedY;
+//       if(this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+//       if(this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+//     }
+//     draw(){
+//       ctx.fillStyle = this.color;
+//       ctx.beginPath();
+//       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+//       ctx.fill();
+//     }
+//   }
+
+//   function initParticles(){
+//     particlesArray = [];
+//     for(let i=0; i<numParticles; i++){
+//       particlesArray.push(new Particle());
+//     }
+//   }
+
+//   function animateParticles(){
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
+//     particlesArray.forEach(p => {
+//       p.update();
+//       p.draw();
+//     });
+//     requestAnimationFrame(animateParticles);
+//   }
+
+//   window.addEventListener("resize", () => {
+//     canvas.width = window.innerWidth;
+//     canvas.height = window.innerHeight;
+//     initParticles();
+//   });
+
+//   initParticles();
+//   animateParticles();
+</script>
+
+</body>
+</html>
