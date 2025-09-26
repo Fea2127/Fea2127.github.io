@@ -23,15 +23,15 @@ window.addEventListener("scroll", () => {
   });
 });
 /* ---------------  VISITOR COUNT --------------- */
-  async function updateVisitorCount() {
-      try {
-        const response = await fetch('https://api.countapi.xyz/hit/fea2127-github-io/portfolio');
-        const data = await response.json();
-        document.getElementById('visitor-counter').textContent = 'Visitors: ' + data.value;
-      } catch (err) {
-        console.error('Error fetching visitor count:', err);
-      }
-    }
+  // async function updateVisitorCount() {
+  //     try {
+  //       const response = await fetch('https://api.countapi.xyz/hit/fea2127-github-io/portfolio');
+  //       const data = await response.json();
+  //       document.getElementById('visitor-counter').textContent = 'Visitors: ' + data.value;
+  //     } catch (err) {
+  //       console.error('Error fetching visitor count:', err);
+  //     }
+  //   }
 
     // Update count on page load
-    updateVisitorCount();
+    // updateVisitorCount();
