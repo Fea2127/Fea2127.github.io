@@ -157,3 +157,15 @@ body.light .b2{background:#00aaff;}
 body.light .b3{background:#ff4e50;}
 body.light .b4{background:#f9d423;}
 body.light .b5{background:#34c759;}
+
+/* ---------------  VISITOR COUNT  --------------- */
+ #visitor-count {
+      font-size: 2rem;
+      color: #e63946; /* bright accent */
+      font-weight: bold;
+ }
+ .visit {
+      margin: 2rem;
+      font-size: 1.2rem;
+      color: var(--text-dim);
+ }

@@ -22,3 +22,16 @@ window.addEventListener("scroll", () => {
     link.classList.toggle("active", link.getAttribute("href").slice(1) === current);
   });
 });
+/* ---------------  VISITOR COUNT --------------- */
+ async function updateVisitorCount() {
+      try {
+        const response = await fetch('https://api.countapi.xyz/hit/fea2127.github.io/portfolio');
+        const data = await response.json();
+        document.getElementById('visitor-count').textContent = data.value;
+      } catch (error) {
+        console.error('Failed to fetch visitor count:', error);
+      }
+    }
+
+    // Update the visitor count when page loads
+    updateVisitorCount();
