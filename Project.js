@@ -120,6 +120,16 @@ const portfolioData = {
       viewLink: "404.html",
       docLink: "https://fea2127.github.io/404.html",
       category: "animation"
+    },
+    {
+      id: 13,
+      title: "Simple Portfolio GDG Workshop",
+      image: "assets/portfolio gdg.png",
+      description: "Portfolio from GDG Workshop.",
+      technologies: ["HTML", "CSS", "JavaScript"],
+      viewLink: "indexNew.html",
+      docLink: "https://fea2127.github.io/indexNew.html",
+      category: "web"
     }
   ],
   categories: ["all", "web", "simulation", "animation"]

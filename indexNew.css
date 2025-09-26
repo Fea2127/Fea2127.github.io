@@ -1,0 +1,20 @@
+canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+  }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #121212;
+        color: #ffffff;
+        margin: 0;
+        padding: 20px;
+        text-align: center;
+        height: 100vh;
+    }
+
+@keyframes glowPulse {
+    from { text-shadow: 0 0 10px #ff2a2a, 0 0 30px #ff2a2a; }
+    to { text-shadow: 0 0 30px #ff2a2a, 0 0 60px #ff2a2a; }
+  }
