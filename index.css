@@ -217,3 +217,12 @@ body.light .b5{background:#34c759;}
 button#loadMore {
  border-radius:var(--radius);box-shadow:0 0 20px -5px var(--primary);padding:0.8rem 1.5rem;border:1px solid var(--primary);background:var(--surface);color:var(--text);cursor:pointer;transition:var(--transition);margin:2rem auto;display:block;font-size:1rem;font-weight:500;
 }
+.org-logo {
+  margin: auto;
+  width: 100px;
+  height: auto;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
