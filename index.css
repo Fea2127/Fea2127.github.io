@@ -264,7 +264,7 @@ body.light .b5{background:#34c759;}
 }
 /* know more modal */
 #knowMoreModal {
-  display: flex;
+  display: none;
   position: fixed;
   z-index: 1000;
   left: 0; top: 0;
