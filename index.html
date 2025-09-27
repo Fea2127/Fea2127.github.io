@@ -47,7 +47,9 @@
             ></label>
             <li><a href="#home" class="nav-link active">Home</a></li>
             <li><a href="#about" class="nav-link">About</a></li>
-            <li><a href="Project.html" class="nav-link" id="proj">Projects</a></li>
+            <li>
+              <a href="Project.html" class="nav-link" id="proj">Projects</a>
+            </li>
             <li>
               <a href="https://lynx212427.github.io/" class="nav-link"
                 >Old Portfolio</a
@@ -109,10 +111,10 @@
         </div>
       </div>
     </section>
-    <hr>
-    <br>
+    <hr />
+    <br />
     <!-- <div id="visitor-counter">Visitors Count: 0</div> -->
-    <hr>
+    <hr />
     <!-- ---------------  ABOUT  --------------- -->
     <section id="about" class="about">
       <div class="about-container">
@@ -125,7 +127,12 @@
             connect!
           </p>
         </div>
-
+        <!-- Popup Image Modal -->
+        <div id="imgModal" class="modal">
+          <span class="close">&times;</span>
+          <img class="modal-content" id="modalImg" />
+        </div>
+        <!-- Certificates Section -->
         <h2 class="section-title">Certificates</h2>
         <div class="container-certs" id="certs">
           <!-- 16 cert cards -->

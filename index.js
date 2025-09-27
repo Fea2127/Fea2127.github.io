@@ -35,3 +35,21 @@ window.addEventListener("scroll", () => {
 
     // Update count on page load
     // updateVisitorCount();
+// Image Popup Script
+      const modal = document.getElementById("imgModal");
+      const modalImg = document.getElementById("modalImg");
+      const closeBtn = document.querySelector(".modal .close");
+
+      // Select all gallery images
+      document.querySelectorAll(".card img").forEach((img) => {
+        img.addEventListener("click", () => {
+          modal.style.display = "flex";
+          modalImg.src = img.src;
+        });
+      });
+
+      // Close modal
+      closeBtn.onclick = () => (modal.style.display = "none");
+      modal.onclick = (e) => {
+        if (e.target === modal) modal.style.display = "none";
+      };
