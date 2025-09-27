@@ -214,7 +214,7 @@ body.light .b5{background:#34c759;}
 .close:hover {
   color: #d7bb5e;
 }
-button#loadMore {
+#loadMore {
  border-radius:var(--radius);box-shadow:0 0 20px -5px var(--primary);padding:0.8rem 1.5rem;border:1px solid var(--primary);background:var(--surface);color:var(--text);cursor:pointer;transition:var(--transition);margin:2rem auto;display:block;font-size:1rem;font-weight:500;
 }
 .org-logo {
@@ -225,4 +225,40 @@ button#loadMore {
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.org-logo:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+.org-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: center;
+}
+.org-name:hover {
+  color: var(--primary);
+}
+/* edu pics */
+.edu-logo {
+  margin: auto;
+  width: 100px;
+  height: auto;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.edu-logo:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+.edu-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: center;
+}
+.edu-name:hover {
+  color: var(--primary);
 }

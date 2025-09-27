@@ -53,3 +53,15 @@ window.addEventListener("scroll", () => {
       modal.onclick = (e) => {
         if (e.target === modal) modal.style.display = "none";
       };
+//Know more Popup
+      const knowMoreModal = document.getElementById("knowMoreModal");
+      const closeKnowMoreBtn = document.querySelector("#knowMoreModal .close");
+      const knowMoreButtons = document.querySelectorAll(".know-more-btn");
+      const knowMoreContent = document.getElementById("knowMoreContent");
+
+      knowMoreButtons.forEach((button) => {});
+      button.addEventListener("click", () => {
+        const content = button.getAttribute("data-content");
+        knowMoreContent.textContent = content;
+        knowMoreModal.style.display = "flex";
+      });
