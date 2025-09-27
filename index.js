@@ -35,33 +35,39 @@ window.addEventListener("scroll", () => {
 
     // Update count on page load
     // updateVisitorCount();
-// Image Popup Script
-      const modal = document.getElementById("imgModal");
-      const modalImg = document.getElementById("modalImg");
-      const closeBtn = document.querySelector(".modal .close");
+// IMAGE / CERTIFICATE POPUP
+const imgModal = document.getElementById("imgModal");
+const modalImg = document.getElementById("modalImg");
+const closeImgBtn = imgModal.querySelector(".close");
 
-      // Select all gallery images
-      document.querySelectorAll(".card img").forEach((img) => {
-        img.addEventListener("click", () => {
-          modal.style.display = "flex";
-          modalImg.src = img.src;
-        });
-      });
+// Show certificate image in modal
+document.querySelectorAll(".card img").forEach((img) => {
+  img.addEventListener("click", () => {
+    imgModal.style.display = "flex";
+    modalImg.src = img.src;
+  });
+});
 
-      // Close modal
-      closeBtn.onclick = () => (modal.style.display = "none");
-      modal.onclick = (e) => {
-        if (e.target === modal) modal.style.display = "none";
-      };
-//Know more Popup
-      const knowMoreModal = document.getElementById("knowMoreModal");
-      const closeKnowMoreBtn = document.querySelector("#knowMoreModal .close");
-      const knowMoreButtons = document.querySelectorAll(".know-more-btn");
-      const knowMoreContent = document.getElementById("knowMoreContent");
+// Close by clicking X
+closeImgBtn.onclick = () => {
+  imgModal.style.display = "none";
+};
 
-      knowMoreButtons.forEach((button) => {});
-      button.addEventListener("click", () => {
-        const content = button.getAttribute("data-content");
-        knowMoreContent.textContent = content;
-        knowMoreModal.style.display = "flex";
-      });
+// Close by clicking outside
+imgModal.onclick = (e) => {
+  if (e.target === imgModal) imgModal.style.display = "none";
+};
+
+
+// KNOW MORE (Education Modal)
+const knowMoreModal = document.getElementById("knowMoreModal");
+const knowMoreBtn = document.getElementById("loadMore");
+const closeKnowMoreBtn = knowMoreModal.querySelector(".close");
+
+knowMoreBtn.onclick = () => {
+  knowMoreModal.style.display = "flex";
+};
+
+closeKnowMoreBtn.onclick = () => {
+  knowMoreModal.style.display = "none";
+};
