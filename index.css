@@ -214,3 +214,6 @@ body.light .b5{background:#34c759;}
 .close:hover {
   color: #d7bb5e;
 }
+button#loadMore {
+ border-radius:var(--radius);box-shadow:0 0 20px -5px var(--primary);padding:0.8rem 1.5rem;border:1px solid var(--primary);background:var(--surface);color:var(--text);cursor:pointer;transition:var(--transition);margin:2rem auto;display:block;font-size:1rem;font-weight:500;
+}
