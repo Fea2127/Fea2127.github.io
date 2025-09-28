@@ -15,71 +15,76 @@
       --macaroon-green: #98FB98;
       --macaroon-purple: #DDA0DD;
       --gold: #FFD700;
+      --dark-bg: #1a1a2e;
+      --dark-card: #16213e;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       display: flex; align-items: center; justify-content: center;
       min-height: 100vh; 
-      background: linear-gradient(135deg, #FFF9F9, #F0F8FF);
+      background: var(--dark-bg);
       font-family: 'Comic Neue', cursive, sans-serif;
       overflow: hidden;
       padding: 20px;
+      color: white;
     }
 
-    /* Single card state */
-    .single-card {
+    /* Container for the card and poppers */
+    .card-container {
+      position: relative;
+      width: var(--card-w);
+      height: var(--card-h);
+    }
+
+    /* Single front page */
+    .front-page {
       width: var(--card-w);
       height: var(--card-h);
       position: relative;
       border: 6px solid var(--gold);
       border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.2);
-      background: linear-gradient(135deg, var(--macaroon-pink), var(--macaroon-blue));
+      background: linear-gradient(135deg, var(--macaroon-pink), var(--macaroon-purple));
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      overflow: hidden;
-      transition: transform 0.5s ease;
+      z-index: 20;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
     }
     
-    .single-card:hover {
-      transform: scale(1.02);
-    }
-    
-    .single-card h1 {
+    .front-page h1 {
       font-family: 'Fredoka One', cursive;
       font-size: 60px;
       color: white;
-      text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+      text-shadow: 3px 3px 0 rgba(0,0,0,0.3);
       margin-bottom: 15px;
       letter-spacing: 2px;
     }
     
-    .single-card .name {
+    .front-page .name {
       font-family: 'Fredoka One', cursive;
       font-size: 32px;
       color: var(--gold);
-      text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+      text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
       margin-top: 10px;
     }
     
-    /* Party poppers */
+    /* Party poppers outside the card */
     .party-popper {
       position: absolute;
       width: 60px;
       height: 80px;
-      z-index: 10;
+      z-index: 5;
       opacity: 0;
-      animation: pop 1.5s infinite;
+      animation: pop 3s infinite;
     }
     
-    .party-popper-1 { top: -30px; left: 20%; animation-delay: 0s; }
-    .party-popper-2 { top: -30px; left: 50%; animation-delay: 0.5s; }
-    .party-popper-3 { top: -30px; right: 20%; animation-delay: 1s; }
-    .party-popper-4 { bottom: -30px; left: 20%; animation-delay: 0.3s; }
-    .party-popper-5 { bottom: -30px; right: 20%; animation-delay: 0.7s; }
+    .party-popper-1 { top: -100px; left: 20%; animation-delay: 0s; }
+    .party-popper-2 { top: -100px; left: 50%; animation-delay: 0.8s; }
+    .party-popper-3 { top: -100px; right: 20%; animation-delay: 1.6s; }
+    .party-popper-4 { bottom: -100px; left: 20%; animation-delay: 0.4s; }
+    .party-popper-5 { bottom: -100px; right: 20%; animation-delay: 1.2s; }
     
     .popper-body {
       position: absolute;
@@ -90,7 +95,7 @@
       border-radius: 20px 20px 5px 5px;
       left: 50%;
       transform: translateX(-50%);
-      box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+      box-shadow: 0 4px 0 rgba(0,0,0,0.3);
     }
     
     .popper-cone {
@@ -128,27 +133,27 @@
       }
       10% {
         opacity: 1;
-        transform: translateY(-20px);
+        transform: translateY(-30px);
       }
       20% {
         opacity: 1;
-        transform: translateY(-40px);
+        transform: translateY(-60px);
       }
       30% {
         opacity: 1;
-        transform: translateY(-60px);
+        transform: translateY(-90px);
       }
       40% {
         opacity: 1;
-        transform: translateY(-80px);
+        transform: translateY(-120px);
       }
       50% {
         opacity: 0;
-        transform: translateY(-100px);
+        transform: translateY(-150px);
       }
       100% {
         opacity: 0;
-        transform: translateY(-100px);
+        transform: translateY(-150px);
       }
     }
     
@@ -160,22 +165,24 @@
       position: relative;
       border: 6px solid var(--gold);
       border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.2);
-      background: #FFFFFF;
+      background: var(--dark-card);
       overflow: hidden;
       display: none;
+      z-index: 20;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
     }
     
     /* Inside pages */
     .inside-left, .inside-right {
       position: absolute;
       top: 0; height: 100%; width: 50%;
-      background: linear-gradient(180deg, #FFFFFF, #F8F8F8);
+      background: linear-gradient(180deg, var(--dark-card), #0f172a);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       padding: 30px; 
       text-align: center;
       visibility: hidden;
       z-index: 10;
+      color: white;
     }
     .inside-left { left: 0; border-right: 2px dashed var(--gold); }
     .inside-right { right: 0; border-left: 2px dashed var(--gold); }
@@ -186,11 +193,11 @@
       font-size: 42px; 
       margin-bottom: 20px; 
       color: var(--macaroon-pink);
-      text-shadow: 2px 2px 0 var(--macaroon-yellow);
+      text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
       letter-spacing: 1px;
     }
     .inside-left p { 
-      color: #555; 
+      color: #e2e8f0; 
       line-height: 1.5; 
       max-width: 90%;
       font-size: 20px;
@@ -213,8 +220,8 @@
       background: linear-gradient(135deg, var(--macaroon-pink), var(--macaroon-blue));
       cursor: pointer;
       font-family: 'Fredoka One', cursive;
-      text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+      text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
     }
     .cover-left { 
       left: 0; 
@@ -236,7 +243,7 @@
       font-weight: 800; 
       font-size: 28px; 
       margin-top: 15px;
-      text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+      text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
     }
 
     /* Hide left cover when open */
@@ -255,7 +262,7 @@
       display: flex; 
       align-items: center; 
       justify-content: center;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
       transition: all 0.5s ease;
     }
     .gift::before, .gift::after { 
@@ -303,7 +310,7 @@
       border-radius: 10px; 
       margin-bottom: 8px; 
       position: relative; 
-      box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 3px 5px rgba(0,0,0,0.2);
     }
     .layer.l1 { 
       width: 75%; 
@@ -355,7 +362,7 @@
       border-radius: 50%;
       background: radial-gradient(circle at center, #FFD700 40%, #FFA500 90%);
       animation: flicker 0.3s infinite alternate;
-      box-shadow: 0 0 10px #FFD700;
+      box-shadow: 0 0 15px #FFD700;
     }
     @keyframes flicker { 
       from { transform: rotate(-8deg) scale(1); } 
@@ -374,13 +381,13 @@
       font-family: 'Fredoka One', cursive;
       font-size: 22px;
       font-weight: bold;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
       letter-spacing: 1px;
     }
     .celebrate:hover { 
       background: var(--macaroon-blue); 
       transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
     }
 
     /* Confetti */
@@ -399,86 +406,99 @@
         --card-w: 95vw;
         --card-h: 60vh;
       }
-      .single-card h1 {
+      .front-page h1 {
         font-size: 40px;
       }
-      .single-card .name {
+      .front-page .name {
         font-size: 24px;
+      }
+      .party-popper {
+        width: 40px;
+        height: 60px;
+      }
+      .popper-body {
+        width: 30px;
+        height: 45px;
+      }
+      .popper-cone {
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-bottom: 22px solid var(--macaroon-yellow);
       }
     }
   </style>
 </head>
 <body>
-  <!-- Single card state -->
-  <div class="single-card" id="singleCard">
-    <h1>HAPPY BIRTHDAY!</h1>
-    <div class="name">SWEETIE</div>
-    
-    <!-- Party poppers -->
+  <!-- Particle -->
+   <canvas id="particles"></canvas>
+  <!-- Container for card and poppers -->
+  <div class="card-container">
+    <!-- Party poppers outside the card -->
     <div class="party-popper party-popper-1">
       <div class="popper-body"></div>
       <div class="popper-cone"></div>
-      <div class="confetti-stream"></div>
     </div>
     <div class="party-popper party-popper-2">
       <div class="popper-body"></div>
       <div class="popper-cone"></div>
-      <div class="confetti-stream"></div>
     </div>
     <div class="party-popper party-popper-3">
       <div class="popper-body"></div>
       <div class="popper-cone"></div>
-      <div class="confetti-stream"></div>
     </div>
     <div class="party-popper party-popper-4">
       <div class="popper-body"></div>
       <div class="popper-cone"></div>
-      <div class="confetti-stream"></div>
     </div>
     <div class="party-popper party-popper-5">
       <div class="popper-body"></div>
       <div class="popper-cone"></div>
-      <div class="confetti-stream"></div>
     </div>
-  </div>
-
-  <!-- Book state (hidden initially) -->
-  <div class="book" id="book">
-    <!-- Covers -->
-    <div class="cover-left">HAPPY</div>
-    <div class="cover-right">BIRTHDAY <div class="name">SWEETIE</div></div>
-
-    <!-- Inside Pages -->
-    <div class="inside-left">
-      <h2>Happy Birthday!</h2>
-      <p>Wishing you a super fun day filled with cupcakes, giggles, and all your favorite things!</p>
+    
+    <!-- Single front page -->
+    <div class="front-page" id="frontPage">
+      <h1>HAPPY BIRTHDAY!</h1>
+      <div class="name">SWEETIE</div>
     </div>
-    <div class="inside-right">
-      <div class="gift" id="gift">
-        <div class="cake">
-          <div class="candles">
-            <div class="candle"><div class="flame"></div></div>
-            <div class="candle"><div class="flame"></div></div>
-            <div class="candle"><div class="flame"></div></div>
-          </div>
-          <div class="layer l1"><div class="frosting"></div></div>
-          <div class="layer l2"><div class="frosting"></div></div>
-          <div class="layer l3"><div class="frosting"></div></div>
-        </div>
+
+    <!-- Book state (hidden initially) -->
+    <div class="book" id="book">
+      <!-- Covers -->
+      <div class="cover-left">HAPPY</div>
+      <div class="cover-right">BIRTHDAY <div class="name">SWEETIE</div></div>
+
+      <!-- Inside Pages -->
+      <div class="inside-left">
+        <h2>Happy Birthday!</h2>
+        <p>Wishing you a super fun day filled with cupcakes, giggles, and all your favorite things!</p>
       </div>
-      <button class="celebrate" id="celebrateBtn">Celebrate 🎉</button>
+      <div class="inside-right">
+        <div class="gift" id="gift">
+          <div class="cake">
+            <div class="candles">
+              <div class="candle"><div class="flame"></div></div>
+              <div class="candle"><div class="flame"></div></div>
+              <div class="candle"><div class="flame"></div></div>
+            </div>
+            <div class="layer l1"><div class="frosting"></div></div>
+            <div class="layer l2"><div class="frosting"></div></div>
+            <div class="layer l3"><div class="frosting"></div></div>
+          </div>
+        </div>
+        <button class="celebrate" id="celebrateBtn">Celebrate 🎉</button>
+      </div>
     </div>
   </div>
 
   <script>
-    const singleCard = document.getElementById('singleCard');
+    const frontPage = document.getElementById('frontPage');
     const book = document.getElementById('book');
     const gift = document.getElementById('gift');
     const celebrateBtn = document.getElementById('celebrateBtn');
 
-    // Switch from single card to book when clicked
-    singleCard.addEventListener('click', () => {
-      singleCard.style.display = 'none';
+    // Switch from front page to book when clicked
+    frontPage.addEventListener('click', () => {
+      frontPage.style.display = 'none';
       book.style.display = 'block';
       
       // Trigger the book open animation after a short delay
@@ -523,6 +543,60 @@
         });
         setTimeout(()=>c.remove(),2600);
       }
+    });
+    // --- Particle Animation Background ---
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = (Math.random() - 0.5) * 4;
+        this.speedY = Math.random() * 6 + 2;
+        this.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.y > canvas.height || this.x < 0 || this.x > canvas.width) {
+          this.reset();
+          this.y = 0;
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    const particlesArray = [];
+    for (let i = 0; i < 150; i++) {
+      particlesArray.push(new Particle());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particlesArray.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     });
   </script>
 </body>
