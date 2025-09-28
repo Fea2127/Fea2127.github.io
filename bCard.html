@@ -18,22 +18,51 @@
       --dark-bg: #1a1a2e;
       --dark-card: #16213e;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
+    
     body {
-      display: flex; align-items: center; justify-content: center;
       min-height: 100vh; 
       background: var(--dark-bg);
       font-family: 'Comic Neue', cursive, sans-serif;
       overflow: hidden;
-      padding: 20px;
       color: white;
+      position: relative;
+    }
+    
+    /* Particle background */
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    
+    /* Main container for everything */
+    .main-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
     }
 
-    /* Container for the card and poppers */
+    /* Card container - centered with proper positioning */
     .card-container {
       position: relative;
       width: var(--card-w);
       height: var(--card-h);
+      z-index: 20;
     }
 
     /* Single front page */
@@ -70,90 +99,54 @@
       margin-top: 10px;
     }
     
-    /* Party poppers outside the card */
+    /* Real party poppers using emojis */
     .party-popper {
       position: absolute;
-      width: 60px;
-      height: 80px;
-      z-index: 5;
+      font-size: 40px;
+      z-index: 15;
       opacity: 0;
-      animation: pop 3s infinite;
+      animation: popperAnimation 3s infinite;
+      pointer-events: none;
     }
     
-    .party-popper-1 { top: -100px; left: 20%; animation-delay: 0s; }
-    .party-popper-2 { top: -100px; left: 50%; animation-delay: 0.8s; }
-    .party-popper-3 { top: -100px; right: 20%; animation-delay: 1.6s; }
-    .party-popper-4 { bottom: -100px; left: 20%; animation-delay: 0.4s; }
-    .party-popper-5 { bottom: -100px; right: 20%; animation-delay: 1.2s; }
+    .party-popper-1 { top: -60px; left: 15%; animation-delay: 0s; }
+    .party-popper-2 { top: -60px; left: 50%; animation-delay: 0.8s; transform: translateX(-50%); }
+    .party-popper-3 { top: -60px; right: 15%; animation-delay: 1.6s; }
+    .party-popper-4 { bottom: -60px; left: 15%; animation-delay: 0.4s; }
+    .party-popper-5 { bottom: -60px; right: 15%; animation-delay: 1.2s; }
     
-    .popper-body {
-      position: absolute;
-      bottom: 0;
-      width: 40px;
-      height: 60px;
-      background: var(--macaroon-purple);
-      border-radius: 20px 20px 5px 5px;
-      left: 50%;
-      transform: translateX(-50%);
-      box-shadow: 0 4px 0 rgba(0,0,0,0.3);
-    }
-    
-    .popper-cone {
-      position: absolute;
-      bottom: 60px;
-      width: 0;
-      height: 0;
-      border-left: 20px solid transparent;
-      border-right: 20px solid transparent;
-      border-bottom: 30px solid var(--macaroon-yellow);
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    
-    .confetti-stream {
-      position: absolute;
-      top: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 40px;
-      height: 0;
-      background: linear-gradient(to bottom, 
-        var(--macaroon-pink) 20%, 
-        var(--macaroon-blue) 40%, 
-        var(--macaroon-yellow) 60%, 
-        var(--macaroon-green) 80%, 
-        var(--macaroon-purple) 100%);
-      opacity: 0;
-    }
-    
-    @keyframes pop {
+    @keyframes popperAnimation {
       0% {
         opacity: 0;
-        transform: translateY(0);
+        transform: translateY(0) rotate(0deg);
       }
       10% {
         opacity: 1;
-        transform: translateY(-30px);
+        transform: translateY(-20px) rotate(-10deg);
       }
       20% {
         opacity: 1;
-        transform: translateY(-60px);
+        transform: translateY(-40px) rotate(10deg);
       }
       30% {
         opacity: 1;
-        transform: translateY(-90px);
+        transform: translateY(-60px) rotate(-15deg);
       }
       40% {
         opacity: 1;
-        transform: translateY(-120px);
+        transform: translateY(-80px) rotate(20deg);
       }
       50% {
-        opacity: 0;
-        transform: translateY(-150px);
+        opacity: 0.7;
+        transform: translateY(-100px) rotate(-25deg);
+      }
+      60% {
+        opacity: 0.4;
+        transform: translateY(-120px) rotate(30deg);
       }
       100% {
         opacity: 0;
-        transform: translateY(-150px);
+        transform: translateY(-150px) rotate(0deg);
       }
     }
     
@@ -413,79 +406,58 @@
         font-size: 24px;
       }
       .party-popper {
-        width: 40px;
-        height: 60px;
-      }
-      .popper-body {
-        width: 30px;
-        height: 45px;
-      }
-      .popper-cone {
-        border-left: 15px solid transparent;
-        border-right: 15px solid transparent;
-        border-bottom: 22px solid var(--macaroon-yellow);
+        font-size: 30px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Particle -->
-   <canvas id="particles"></canvas>
-  <!-- Container for card and poppers -->
-  <div class="card-container">
-    <!-- Party poppers outside the card -->
-    <div class="party-popper party-popper-1">
-      <div class="popper-body"></div>
-      <div class="popper-cone"></div>
-    </div>
-    <div class="party-popper party-popper-2">
-      <div class="popper-body"></div>
-      <div class="popper-cone"></div>
-    </div>
-    <div class="party-popper party-popper-3">
-      <div class="popper-body"></div>
-      <div class="popper-cone"></div>
-    </div>
-    <div class="party-popper party-popper-4">
-      <div class="popper-body"></div>
-      <div class="popper-cone"></div>
-    </div>
-    <div class="party-popper party-popper-5">
-      <div class="popper-body"></div>
-      <div class="popper-cone"></div>
-    </div>
-    
-    <!-- Single front page -->
-    <div class="front-page" id="frontPage">
-      <h1>HAPPY BIRTHDAY!</h1>
-      <div class="name">SWEETIE</div>
-    </div>
-
-    <!-- Book state (hidden initially) -->
-    <div class="book" id="book">
-      <!-- Covers -->
-      <div class="cover-left">HAPPY</div>
-      <div class="cover-right">BIRTHDAY <div class="name">SWEETIE</div></div>
-
-      <!-- Inside Pages -->
-      <div class="inside-left">
-        <h2>Happy Birthday!</h2>
-        <p>Wishing you a super fun day filled with cupcakes, giggles, and all your favorite things!</p>
+  <!-- Particle background -->
+  <canvas id="particles"></canvas>
+  
+  <!-- Main container for centering -->
+  <div class="main-container">
+    <!-- Container for card and poppers -->
+    <div class="card-container">
+      <!-- Real party poppers using emojis -->
+      <div class="party-popper party-popper-1">🎉</div>
+      <div class="party-popper party-popper-2">🎉</div>
+      <div class="party-popper party-popper-3">🎉</div>
+      <div class="party-popper party-popper-4">🎉</div>
+      <div class="party-popper party-popper-5">🎉</div>
+      
+      <!-- Single front page -->
+      <div class="front-page" id="frontPage">
+        <h1>HAPPY BIRTHDAY!</h1>
+        <div class="name">SWEETIE</div>
       </div>
-      <div class="inside-right">
-        <div class="gift" id="gift">
-          <div class="cake">
-            <div class="candles">
-              <div class="candle"><div class="flame"></div></div>
-              <div class="candle"><div class="flame"></div></div>
-              <div class="candle"><div class="flame"></div></div>
-            </div>
-            <div class="layer l1"><div class="frosting"></div></div>
-            <div class="layer l2"><div class="frosting"></div></div>
-            <div class="layer l3"><div class="frosting"></div></div>
-          </div>
+
+      <!-- Book state (hidden initially) -->
+      <div class="book" id="book">
+        <!-- Covers -->
+        <div class="cover-left">HAPPY</div>
+        <div class="cover-right">BIRTHDAY <div class="name">SWEETIE</div></div>
+
+        <!-- Inside Pages -->
+        <div class="inside-left">
+          <h2>Happy Birthday!</h2>
+          <p>Wishing you a super fun day filled with cupcakes, giggles, and all your favorite things!</p>
         </div>
-        <button class="celebrate" id="celebrateBtn">Celebrate 🎉</button>
+        <div class="inside-right">
+          <div class="gift" id="gift">
+            <div class="cake">
+              <div class="candles">
+                <div class="candle"><div class="flame"></div></div>
+                <div class="candle"><div class="flame"></div></div>
+                <div class="candle"><div class="flame"></div></div>
+              </div>
+              <div class="layer l1"><div class="frosting"></div></div>
+              <div class="layer l2"><div class="frosting"></div></div>
+              <div class="layer l3"><div class="frosting"></div></div>
+            </div>
+          </div>
+          <button class="celebrate" id="celebrateBtn">Celebrate 🎉</button>
+        </div>
       </div>
     </div>
   </div>
@@ -544,6 +516,7 @@
         setTimeout(()=>c.remove(),2600);
       }
     });
+    
     // --- Particle Animation Background ---
     const canvas = document.getElementById("particles");
     const ctx = canvas.getContext("2d");
