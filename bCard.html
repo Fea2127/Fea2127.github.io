@@ -26,6 +26,133 @@
       padding: 20px;
     }
 
+    /* Single card state */
+    .single-card {
+      width: var(--card-w);
+      height: var(--card-h);
+      position: relative;
+      border: 6px solid var(--gold);
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.2);
+      background: linear-gradient(135deg, var(--macaroon-pink), var(--macaroon-blue));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.5s ease;
+    }
+    
+    .single-card:hover {
+      transform: scale(1.02);
+    }
+    
+    .single-card h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 60px;
+      color: white;
+      text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+    }
+    
+    .single-card .name {
+      font-family: 'Fredoka One', cursive;
+      font-size: 32px;
+      color: var(--gold);
+      text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+      margin-top: 10px;
+    }
+    
+    /* Party poppers */
+    .party-popper {
+      position: absolute;
+      width: 60px;
+      height: 80px;
+      z-index: 10;
+      opacity: 0;
+      animation: pop 1.5s infinite;
+    }
+    
+    .party-popper-1 { top: -30px; left: 20%; animation-delay: 0s; }
+    .party-popper-2 { top: -30px; left: 50%; animation-delay: 0.5s; }
+    .party-popper-3 { top: -30px; right: 20%; animation-delay: 1s; }
+    .party-popper-4 { bottom: -30px; left: 20%; animation-delay: 0.3s; }
+    .party-popper-5 { bottom: -30px; right: 20%; animation-delay: 0.7s; }
+    
+    .popper-body {
+      position: absolute;
+      bottom: 0;
+      width: 40px;
+      height: 60px;
+      background: var(--macaroon-purple);
+      border-radius: 20px 20px 5px 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+    }
+    
+    .popper-cone {
+      position: absolute;
+      bottom: 60px;
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 30px solid var(--macaroon-yellow);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .confetti-stream {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 0;
+      background: linear-gradient(to bottom, 
+        var(--macaroon-pink) 20%, 
+        var(--macaroon-blue) 40%, 
+        var(--macaroon-yellow) 60%, 
+        var(--macaroon-green) 80%, 
+        var(--macaroon-purple) 100%);
+      opacity: 0;
+    }
+    
+    @keyframes pop {
+      0% {
+        opacity: 0;
+        transform: translateY(0);
+      }
+      10% {
+        opacity: 1;
+        transform: translateY(-20px);
+      }
+      20% {
+        opacity: 1;
+        transform: translateY(-40px);
+      }
+      30% {
+        opacity: 1;
+        transform: translateY(-60px);
+      }
+      40% {
+        opacity: 1;
+        transform: translateY(-80px);
+      }
+      50% {
+        opacity: 0;
+        transform: translateY(-100px);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100px);
+      }
+    }
+    
+    /* Book state (hidden initially) */
     .book {
       width: var(--card-w);
       height: var(--card-h);
@@ -36,8 +163,9 @@
       box-shadow: 0 20px 60px rgba(0,0,0,.2);
       background: #FFFFFF;
       overflow: hidden;
+      display: none;
     }
-
+    
     /* Inside pages */
     .inside-left, .inside-right {
       position: absolute;
@@ -265,67 +393,57 @@
       z-index: 1100; 
     }
 
-    /* Decorations */
-    .decoration {
-      position: absolute;
-      z-index: 5;
-    }
-    .balloon {
-      width: 40px;
-      height: 50px;
-      border-radius: 50%;
-      position: absolute;
-    }
-    .balloon-1 { top: 30px; left: 30px; background: var(--macaroon-pink); }
-    .balloon-2 { top: 20px; right: 40px; background: var(--macaroon-blue); }
-    .balloon-3 { bottom: 30px; left: 40px; background: var(--macaroon-green); }
-    .balloon-4 { bottom: 20px; right: 30px; background: var(--macaroon-purple); }
-    
-    .string {
-      position: absolute;
-      width: 2px;
-      height: 60px;
-      background: var(--gold);
-      top: 50px;
-    }
-    .string-1 { left: 48px; }
-    .string-2 { right: 48px; }
-    .string-3 { left: 58px; bottom: 50px; }
-    .string-4 { right: 48px; bottom: 50px; }
-    
     /* Responsive adjustments */
     @media (max-width: 768px) {
       :root {
         --card-w: 95vw;
         --card-h: 60vh;
       }
-      .cover-left, .cover-right {
-        font-size: 1.8em;
+      .single-card h1 {
+        font-size: 40px;
       }
-      .cover-right .name {
-        font-size: 20px;
-      }
-      .inside-left h2 {
-        font-size: 32px;
-      }
-      .inside-left p {
-        font-size: 16px;
+      .single-card .name {
+        font-size: 24px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="book" id="book">
-    <!-- Decorations -->
-    <div class="decoration balloon balloon-1"></div>
-    <div class="decoration balloon balloon-2"></div>
-    <div class="decoration balloon balloon-3"></div>
-    <div class="decoration balloon balloon-4"></div>
-    <div class="decoration string string-1"></div>
-    <div class="decoration string string-2"></div>
-    <div class="decoration string string-3"></div>
-    <div class="decoration string string-4"></div>
+  <!-- Single card state -->
+  <div class="single-card" id="singleCard">
+    <h1>HAPPY BIRTHDAY!</h1>
+    <div class="name">SWEETIE</div>
     
+    <!-- Party poppers -->
+    <div class="party-popper party-popper-1">
+      <div class="popper-body"></div>
+      <div class="popper-cone"></div>
+      <div class="confetti-stream"></div>
+    </div>
+    <div class="party-popper party-popper-2">
+      <div class="popper-body"></div>
+      <div class="popper-cone"></div>
+      <div class="confetti-stream"></div>
+    </div>
+    <div class="party-popper party-popper-3">
+      <div class="popper-body"></div>
+      <div class="popper-cone"></div>
+      <div class="confetti-stream"></div>
+    </div>
+    <div class="party-popper party-popper-4">
+      <div class="popper-body"></div>
+      <div class="popper-cone"></div>
+      <div class="confetti-stream"></div>
+    </div>
+    <div class="party-popper party-popper-5">
+      <div class="popper-body"></div>
+      <div class="popper-cone"></div>
+      <div class="confetti-stream"></div>
+    </div>
+  </div>
+
+  <!-- Book state (hidden initially) -->
+  <div class="book" id="book">
     <!-- Covers -->
     <div class="cover-left">HAPPY</div>
     <div class="cover-right">BIRTHDAY <div class="name">SWEETIE</div></div>
@@ -353,11 +471,23 @@
   </div>
 
   <script>
+    const singleCard = document.getElementById('singleCard');
     const book = document.getElementById('book');
     const gift = document.getElementById('gift');
     const celebrateBtn = document.getElementById('celebrateBtn');
 
-    // Toggle open/close
+    // Switch from single card to book when clicked
+    singleCard.addEventListener('click', () => {
+      singleCard.style.display = 'none';
+      book.style.display = 'block';
+      
+      // Trigger the book open animation after a short delay
+      setTimeout(() => {
+        book.classList.add('open');
+      }, 100);
+    });
+
+    // Toggle open/close for the book
     book.addEventListener('click', e => {
       if (e.target === celebrateBtn || gift.contains(e.target)) return;
       book.classList.toggle('open');
