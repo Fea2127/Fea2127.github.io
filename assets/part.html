@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode Particle Background</title>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            background: #121212;
+            color: #e0e0e0;
+        }
+        
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: #121212;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #eecf96;
+            text-shadow: 0 0 10px rgba(238, 207, 150, 0.3);
+        }
+        
+        p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            margin-top: 1rem;
+            padding: 12px 24px;
+            background: #eecf96;
+            color: #121212;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn:hover {
+            background: #e6c086;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(238, 207, 150, 0.4);
+        }
+        
+        .controls {
+            margin-top: 2rem;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .control-btn {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .info-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(30, 30, 30, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 300px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .info-panel h3 {
+            color: #eecf96;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .info-panel p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+        
+        .particle-count {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #a0a0a0;
+        }
+        
+        .color-scheme {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .color-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .color-dot.active {
+            border-color: #fff;
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle Background Container -->
+    <div id="particles-js"></div>
+    
+    <!-- Content Section -->
+    <div class="content">
+        <h1>Dark Mode Particle Background</h1>
+        <p>A beautiful, interactive particle system with a dark theme. Hover over particles to see connections, click to add more, and use the controls to customize the experience.</p>
+        
+        <div class="controls">
+            <button class="btn" onclick="toggleParticles()">Toggle Particles</button>
+            <button class="control-btn" onclick="increaseParticles()">More Particles</button>
+            <button class="control-btn" onclick="decreaseParticles()">Fewer Particles</button>
+            <button class="control-btn" onclick="toggleLines()">Toggle Lines</button>
+            <button class="control-btn" onclick="changeSpeed('faster')">Faster</button>
+            <button class="control-btn" onclick="changeSpeed('slower')">Slower</button>
+        </div>
+        
+        <div class="color-scheme">
+            <div class="color-dot active" style="background: #eecf96;" onclick="changeColorScheme('gold')"></div>
+            <div class="color-dot" style="background: #6a8ea0;" onclick="changeColorScheme('blue')"></div>
+            <div class="color-dot" style="background: #a06a8e;" onclick="changeColorScheme('purple')"></div>
+            <div class="color-dot" style="background: #6aa06a;" onclick="changeColorScheme('green')"></div>
+        </div>
+    </div>
+    
+    <!-- Info Panel -->
+    <div class="info-panel">
+        <h3>Particle Controls</h3>
+        <p>Hover: Creates connections between particles</p>
+        <p>Click: Adds new particles</p>
+        <p>Use buttons below to customize</p>
+        <div class="particle-count" id="particleCount">Particles: 80</div>
+    </div>
+
+    <script>
+        // Particle configuration
+        let particlesConfig = {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: ['#EECF96', '#6A8EA0', '#A0A0A0']
+                },
+                shape: {
+                    type: 'circle',
+                    stroke: {
+                        width: 0,
+                        color: '#000000'
+                    }
+                },
+                opacity: {
+                    value: 0.7,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.3,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 2,
+                        size_min: 0.5,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#EECF96',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 1.5,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'grab'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 0.8
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        };
+
+        // Initialize particles.js
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', particlesConfig);
+            updateParticleCount();
+        });
+
+        // Function to toggle particles on/off
+        function toggleParticles() {
+            const particles = document.getElementById('particles-js');
+            if (particles.style.display === 'none') {
+                particles.style.display = 'block';
+                particlesJS('particles-js', particlesConfig);
+            } else {
+                particles.style.display = 'none';
+            }
+        }
+
+        // Function to increase particles
+        function increaseParticles() {
+            particlesConfig.particles.number.value += 20;
+            particlesJS('particles-js', particlesConfig);
+            updateParticleCount();
+        }
+
+        // Function to decrease particles
+        function decreaseParticles() {
+            if (particlesConfig.particles.number.value > 20) {
+                particlesConfig.particles.number.value -= 20;
+                particlesJS('particles-js', particlesConfig);
+                updateParticleCount();
+            }
+        }
+
+        // Function to toggle lines between particles
+        function toggleLines() {
+            particlesConfig.particles.line_linked.enable = !particlesConfig.particles.line_linked.enable;
+            particlesJS('particles-js', particlesConfig);
+        }
+
+        // Function to change particle speed
+        function changeSpeed(direction) {
+            if (direction === 'faster') {
+                particlesConfig.particles.move.speed += 0.5;
+            } else if (direction === 'slower' && particlesConfig.particles.move.speed > 0.5) {
+                particlesConfig.particles.move.speed -= 0.5;
+            }
+            particlesJS('particles-js', particlesConfig);
+        }
+
+        // Function to change color scheme
+        function changeColorScheme(scheme) {
+            // Update active color dot
+            document.querySelectorAll('.color-dot').forEach(dot => {
+                dot.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Change colors based on scheme
+            switch(scheme) {
+                case 'gold':
+                    particlesConfig.particles.color.value = ['#EECF96', '#6A8EA0', '#A0A0A0'];
+                    particlesConfig.particles.line_linked.color = '#EECF96';
+                    break;
+                case 'blue':
+                    particlesConfig.particles.color.value = ['#6A8EA0', '#8EA06A', '#A0A0A0'];
+                    particlesConfig.particles.line_linked.color = '#6A8EA0';
+                    break;
+                case 'purple':
+                    particlesConfig.particles.color.value = ['#A06A8E', '#6A8EA0', '#8EA06A'];
+                    particlesConfig.particles.line_linked.color = '#A06A8E';
+                    break;
+                case 'green':
+                    particlesConfig.particles.color.value = ['#6AA06A', '#A06A8E', '#8EA06A'];
+                    particlesConfig.particles.line_linked.color = '#6AA06A';
+                    break;
+            }
+            
+            particlesJS('particles-js', particlesConfig);
+        }
+
+        // Function to update particle count display
+        function updateParticleCount() {
+            document.getElementById('particleCount').textContent = 
+                `Particles: ${particlesConfig.particles.number.value}`;
+        }
+    </script>
+</body>
+</html>
