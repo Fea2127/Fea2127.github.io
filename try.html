@@ -15,6 +15,9 @@
       rel="stylesheet"
     />
 
+    <!-- PARTICLES.JS -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
     <!-- CUSTOM -->
     <style>
         /* ---------------  ROOT TOKENS  --------------- */
@@ -44,12 +47,11 @@ a{color:inherit;text-decoration:none}
 .d-none{display:none}
 /* ---------------  HEADER / NAV  --------------- */
 #navbar{position:fixed;inset:0 0 auto 0;z-index:1000;background:var(--surface);backdrop-filter:var(--blur);border-bottom:1px solid rgba(255,255,255,.08)}
-/* ----  navbar left/right breathing room  ---- */
 .nav-container{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding-inline:1.8rem;        /* ← push logo & toggle inward */
+  padding-inline:1.8rem;
   max-width:1200px;
   margin-inline:auto;
 }
@@ -84,7 +86,6 @@ a{color:inherit;text-decoration:none}
 }
 .sun{left:3px;color:#ffdf00}
 .moon{right:3px;color:#e4e6eb}
-/* ON state (dark mode) */
 input:checked + .slider{background:#00e5ff22}
 input:checked + .slider .sun{transform:translateX(34px);color:#777}
 input:checked + .slider .moon{transform:translateX(-34px);color:#fff}
@@ -117,21 +118,32 @@ footer .socials{justify-content:center;margin-top:1rem}
 .back-to-top:hover{background:var(--primary);box-shadow:var(--neon)}
 /* ---------------  LIGHT MODE  --------------- */
 body.light{--bg:#f2f4fc;--surface:rgba(255,255,255,.7);--text:#1b1c22;--text-dim:#5c6270;--primary:#0077cc;--accent:#00aaff}
+
+/* PARTICLE BACKGROUND */
+#particles-js {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
 /* ---------------  MOBILE  --------------- */
 @media (max-width: 768px) {
   .nav-list{
-    margin-top: 290px;  /* Added to push nav links below the header */
+    margin-top: 290px;
     position:fixed;
-    inset:0;                     /* Changed from just 'inset:0' to better structure */
+    inset:0;
     background:var(--bg);
     flex-direction:column;
     align-items:center;
-    justify-content:center;      /* Added/Changed for vertical centering */
+    justify-content:center;
     gap:2rem;
     font-size:1.4rem;
     transform:translateX(100%);
-    transition:transform .4s ease-in-out; /* Added ease-in-out */
-    z-index:1000;                /* Added to ensure it covers all content */
+    transition:transform .4s ease-in-out;
+    z-index:1000;
   }
   #navCheck:checked ~ .nav-list{transform:translateX(0)}
   .hamburger{display:block}
@@ -140,62 +152,8 @@ body.light{--bg:#f2f4fc;--surface:rgba(255,255,255,.7);--text:#1b1c22;--text-dim
   .big-title{font-size:2.4rem}
   .container-certs{grid-template-columns:1fr}
 }
-/* ===== FLOATING BLUR BACKGROUND ===== */
-.floating-bg{
-  position:fixed;
-  inset:0;                     /* top:0 right:0 bottom:0 left:0 */
-  z-index:-1;                  /* keep it behind hero / nav */
-  overflow:hidden;
-}
 
-.blob{
-  position:absolute;
-  border-radius:50%;
-  filter:blur(40px);           /* soft glow – tweak to taste */
-  opacity:.55;
-  animation:floatUp linear infinite;
-  bottom:-200px;               /* start below viewport */
-}
-
-/* --- sizes, colors, timing --- */
-.b1{width:260px;height:260px;background:#45a9e7;left:8%; animation-duration:32s;animation-delay:0s;}
-.b2{width:320px;height:320px;background:#00e5ff;left:30%;animation-duration:45s;animation-delay:3s;}
-.b3{width:220px;height:220px;background:#ff4e50;left:55%;animation-duration:28s;animation-delay:1.5s;}
-.b4{width:380px;height:380px;background:#f9d423;left:75%;animation-duration:50s;animation-delay:5s;}
-.b5{width:240px;height:240px;background:#a1ffce;left:45%;animation-duration:38s;animation-delay:2s;}
-
-/* --- keyframes  --- */
-@keyframes floatUp{
-  0%   {bottom:-200px; transform:translateX(0)   scale(1);   opacity:.5;}
-  50%  {                  transform:translateX(50px) scale(1.1); opacity:.75;}
-  100% {bottom:110%;      transform:translateX(-30px) scale(1);   opacity:.5;}
-}
-
-/* ----- LIGHT-MODE PALETTE SWAP ----- */
-body.light .b1{background:#0077cc;}
-body.light .b2{background:#00aaff;}
-body.light .b3{background:#ff4e50;}
-body.light .b4{background:#f9d423;}
-body.light .b5{background:#34c759;}
-
-/* ---------------  VISITOR COUNT  --------------- */
-/* #visitor-counter {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px 40px;
-      border-radius: 15px;
-      backdrop-filter: blur(10px);
-      font-size: 2rem;
-      font-weight: bold;
-      color: #e63946;
-      box-shadow: 0 0 15px rgba(255,0,0,0.3);
-      transition: transform 0.2s ease;
-    }
-
-    #visitor-counter:hover {
-      transform: scale(1.05);
-    } */
-  /* Popup Image Modal */
+/* Modal & Other Styles (unchanged) */
 .modal {
   display: none;
   position: fixed;
@@ -206,7 +164,6 @@ body.light .b5{background:#34c759;}
   justify-content: center;
   align-items: center;
 }
-
 .modal-content {
   max-width: 700px;
   max-height: 400px;
@@ -214,12 +171,10 @@ body.light .b5{background:#34c759;}
   box-shadow: 0 8px 30px rgba(0,0,0,0.5);
   animation: zoomIn 0.3s ease;
 }
-
 @keyframes zoomIn {
   from { transform: scale(0.7); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
-
 .close {
   position: absolute;
   top: 20px; right: 30px;
@@ -229,36 +184,13 @@ body.light .b5{background:#34c759;}
   cursor: pointer;
   transition: 0.3s;
 }
-
 .close:hover {
   color: #d7bb5e;
 }
 #loadMore {
  border-radius:var(--radius);box-shadow:0 0 20px -5px var(--primary);padding:0.8rem 1.5rem;border:1px solid var(--primary);background:var(--surface);color:var(--text);cursor:pointer;transition:var(--transition);margin:2rem auto;display:block;font-size:1rem;font-weight:500;
 }
-.org-logo {
-  margin: auto;
-  width: 100px;
-  height: auto;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.org-logo:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-}
-.org-name {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--text);
-  text-align: center;
-}
-.org-name:hover {
-  color: var(--primary);
-}
-/* edu pics */
+.org-logo,
 .edu-logo {
   margin: auto;
   width: 100px;
@@ -268,20 +200,22 @@ body.light .b5{background:#34c759;}
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+.org-logo:hover,
 .edu-logo:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 25px rgba(0,0,0,0.3);
 }
+.org-name,
 .edu-name {
   font-size: 1.2rem;
   font-weight: 600;
   color: var(--text);
   text-align: center;
 }
+.org-name:hover,
 .edu-name:hover {
   color: var(--primary);
 }
-/* know more modal */
 #knowMoreModal {
   display: none;
   position: fixed;
@@ -292,18 +226,12 @@ body.light .b5{background:#34c759;}
   justify-content: center;
   align-items: center;
 }
-
     </style>
   </head>
   <body>
-    <!-- ===== FLOATING BLUR BACKGROUND ===== -->
-    <div class="floating-bg">
-      <div class="blob b1"></div>
-      <div class="blob b2"></div>
-      <div class="blob b3"></div>
-      <div class="blob b4"></div>
-      <div class="blob b5"></div>
-    </div>
+    <!-- PARTICLE BACKGROUND -->
+    <div id="particles-js"></div>
+
     <!-- ---------------  HEADER  --------------- -->
     <header id="navbar">
       <div class="nav-container">
@@ -389,7 +317,6 @@ body.light .b5{background:#34c759;}
     </section>
     <hr />
     <br />
-    <!-- <div id="visitor-counter">Visitors Count: 0</div> -->
       <!-- Organisation -->
         <div class="about-card">
           <h2 class="section-title">Organizations</h2>
@@ -472,8 +399,8 @@ body.light .b5{background:#34c759;}
         <!-- Certificates Section -->
         <h2 class="section-title">Certificates</h2>
         <div class="container-certs" id="certs">
-          <!-- 16 cert cards -->
-           <div class="card">
+          <!-- Cert cards remain unchanged -->
+          <div class="card">
             <img src="assets/Infotech Computer Literacy Certificate Feb 24 to June 09 2018.jpg" alt="" />
             <div class="box">
               <h3>Computer Literacy Training Program</h3>
@@ -663,25 +590,12 @@ window.addEventListener("scroll", () => {
     link.classList.toggle("active", link.getAttribute("href").slice(1) === current);
   });
 });
-/* ---------------  VISITOR COUNT --------------- */
-  // async function updateVisitorCount() {
-  //     try {
-  //       const response = await fetch('https://api.countapi.xyz/hit/fea2127-github-io/portfolio');
-  //       const data = await response.json();
-  //       document.getElementById('visitor-counter').textContent = 'Visitors: ' + data.value;
-  //     } catch (err) {
-  //       console.error('Error fetching visitor count:', err);
-  //     }
-  //   }
 
-    // Update count on page load
-    // updateVisitorCount();
 // IMAGE / CERTIFICATE POPUP
 const imgModal = document.getElementById("imgModal");
 const modalImg = document.getElementById("modalImg");
 const closeImgBtn = imgModal.querySelector(".close");
 
-// Show certificate image in modal
 document.querySelectorAll(".card img").forEach((img) => {
   img.addEventListener("click", () => {
     imgModal.style.display = "flex";
@@ -689,16 +603,12 @@ document.querySelectorAll(".card img").forEach((img) => {
   });
 });
 
-// Close by clicking X
 closeImgBtn.onclick = () => {
   imgModal.style.display = "none";
 };
-
-// Close by clicking outside
 imgModal.onclick = (e) => {
   if (e.target === imgModal) imgModal.style.display = "none";
 };
-
 
 // KNOW MORE (Education Modal)
 const knowMoreModal = document.getElementById("knowMoreModal");
@@ -708,10 +618,95 @@ const closeKnowMoreBtn = knowMoreModal.querySelector(".close");
 knowMoreBtn.onclick = () => {
   knowMoreModal.style.display = "flex";
 };
-
 closeKnowMoreBtn.onclick = () => {
   knowMoreModal.style.display = "none";
 };
+
+/* =============== PARTICLE SYSTEM WITH REPULSION =============== */
+document.addEventListener('DOMContentLoaded', () => {
+  let mouseX = 0;
+  let mouseY = 0;
+  let currentPJS = null;
+  let animationId = null;
+
+  // Track mouse position
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  // Initialize particles
+  const particlesConfig = {
+    particles: {
+      number: { value: 80, density: { enable: true, value_area: 800 } },
+      color: { value: "#45a9e7" },
+      shape: { type: "circle" },
+      opacity: { value: 0.6, random: true, anim: { enable: true, speed: 1, opacity_min: 0.2 } },
+      size: { value: 2, random: true },
+      line_linked: {
+        enable: true,
+        distance: 150,
+        color: "#45a9e7",
+        opacity: 0.2,
+        width: 1
+      },
+      move: {
+        enable: true,
+        speed: 1,
+        direction: "none",
+        random: true,
+        straight: false,
+        out_mode: "out"
+      }
+    },
+    interactivity: {
+      detect_on: "canvas",
+      events: {
+        onhover: { enable: false },
+        onclick: { enable: false },
+        resize: true
+      }
+    },
+    retina_detect: true
+  };
+
+  // Initialize
+  particlesJS("particles-js", particlesConfig);
+  currentPJS = window.pJSDom[0].pJS;
+
+  // Custom repulsion (retina-aware)
+  function startRepulsion() {
+    if (animationId) cancelAnimationFrame(animationId);
+
+    function animate() {
+      if (!currentPJS || !currentPJS.particles) {
+        animationId = requestAnimationFrame(animate);
+        return;
+      }
+
+      const ratio = currentPJS.retina.pixelRatio || 1;
+      const scaledX = mouseX * ratio;
+      const scaledY = mouseY * ratio;
+      const repulsionRadius = 120;
+
+      currentPJS.particles.array.forEach(p => {
+        const dx = scaledX - p.x;
+        const dy = scaledY - p.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < repulsionRadius) {
+          const force = (repulsionRadius - dist) / repulsionRadius;
+          p.vx -= (dx / dist) * force * 1.5;
+          p.vy -= (dy / dist) * force * 1.5;
+        }
+      });
+
+      animationId = requestAnimationFrame(animate);
+    }
+    animate();
+  }
+
+  startRepulsion();
+});
     </script>
   </body>
 </html>
