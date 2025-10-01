@@ -147,7 +147,7 @@ const portfolioData = {
       image: "assets/portfolio.png",
       description: "Basic portfolio template.",
       technologies: ["HTML", "CSS", "JavaScript"],
-      viewLink: "assetsindex.html",
+      viewLink: "assets/index.html",
       docLink: "https://fea2127.github.io/assets/index.html",
       category: "web"
     }
