@@ -144,7 +144,7 @@ const portfolioData = {
     {
       id: 15,
       title: "Simple Portfolio",
-      image: "assets/portfolio.png",
+      image: "assets/New Portfolio.png",
       description: "Basic portfolio template.",
       technologies: ["HTML", "CSS", "JavaScript"],
       viewLink: "assets/index.html",
