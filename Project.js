@@ -134,7 +134,7 @@ const portfolioData = {
     {
       id: 14,
       title: "New Portfolio",
-      image: "assets/new port.png",
+      image: "assets/latest.png",
       description: "Updated personal portfolio.",
       technologies: ["HTML", "CSS", "JavaScript"],
       viewLink: "https://aerieljanemingua.github.io/",
