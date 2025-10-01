@@ -140,6 +140,16 @@ const portfolioData = {
       viewLink: "https://aerieljanemingua.github.io/",
       docLink: "https://aerieljanemingua.github.io/",
       category: "web"
+    },
+    {
+      id: 15,
+      title: "Simple Portfolio",
+      image: "assets/portfolio.png",
+      description: "Basic portfolio template.",
+      technologies: ["HTML", "CSS", "JavaScript"],
+      viewLink: "assetsindex.html",
+      docLink: "https://fea2127.github.io/assets/index.html",
+      category: "web"
     }
   ],
   categories: ["all", "web", "simulation", "animation"]
