@@ -212,7 +212,7 @@ body > *:not(#particles-js) {
 /* Responsive modal image for certificates */
 #imgModal img,
 .modal-content img {
-  max-width: 90vw;
+  max-width: 500px;
   max-height: 70vh;
   width: auto;
   height: auto;
@@ -227,5 +227,9 @@ body > *:not(#particles-js) {
   .modal-content img {
     max-width: 98vw;
     max-height: 60vh;
+  }
+   .modal-content, #imgModal {
+    padding: 0 2vw;
+    box-sizing: border-box;
   }
 }
