@@ -273,3 +273,60 @@ body.light .b5{background:#34c759;}
   justify-content: center;
   align-items: center;
 }
+/* Certificate Modal Styles */
+.certificate-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  overflow: auto;
+}
+
+.certificate-modal-content {
+  margin: auto;
+  display: block;
+  width: 95%;
+  max-width: none;
+  height: auto;
+  max-height: 95vh;
+  object-fit: contain;
+}
+
+.certificate-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* Certificate image styling for mobile */
+@media (max-width: 768px) {
+  .certificate-image {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .certificate-image:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Make modal full screen on mobile */
+  .certificate-modal-content {
+    width: 100%;
+    height: auto;
+    max-height: 100vh;
+    object-fit: contain;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+}

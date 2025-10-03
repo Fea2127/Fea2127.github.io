@@ -71,3 +71,46 @@ knowMoreBtn.onclick = () => {
 closeKnowMoreBtn.onclick = () => {
   knowMoreModal.style.display = "none";
 };
+// Certificate modal functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the modal
+  const modal = document.getElementById('certificateModal');
+  const modalImg = document.getElementById('certificateModalImg');
+  const closeBtn = document.querySelector('.certificate-modal-close');
+  
+  // Add click event to all certificate images
+  const certificateImages = document.querySelectorAll('.certificate-image');
+  
+  certificateImages.forEach(img => {
+    img.addEventListener('click', function() {
+      modal.style.display = 'block';
+      modalImg.src = this.src;
+      modalImg.alt = this.alt;
+      
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  
+  // Close modal when clicking X
+  closeBtn.addEventListener('click', function() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  });
+  
+  // Close modal when clicking outside the image
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+  });
+  
+  // Close modal with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && modal.style.display === 'block') {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+  });
+});
