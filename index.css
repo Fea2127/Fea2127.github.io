@@ -147,11 +147,7 @@ body > *:not(#particles-js) {
   justify-content: center;
   align-items: center;
 }
-.modal, #imgModal {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-}
+
 .modal-content {
   max-width: 700px;
   max-height: 400px;
