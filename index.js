@@ -54,88 +54,43 @@ closeKnowMoreBtn.onclick = () => {
   knowMoreModal.style.display = "none";
 };
 
-/* =============== PARTICLE SYSTEM WITH REPULSION =============== */
-document.addEventListener('DOMContentLoaded', () => {
-  let mouseX = 0;
-  let mouseY = 0;
-  let currentPJS = null;
-  let animationId = null;
+// ...existing code...
 
-  // Track mouse position
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
-
-  // Initialize particles
-  const particlesConfig = {
-    particles: {
-      number: { value: 80, density: { enable: true, value_area: 800 } },
-      color: { value: "#45a9e7" },
-      shape: { type: "circle" },
-      opacity: { value: 0.6, random: true, anim: { enable: true, speed: 1, opacity_min: 0.2 } },
-      size: { value: 2, random: true },
-      line_linked: {
-        enable: true,
-        distance: 150,
-        color: "#45a9e7",
-        opacity: 0.2,
-        width: 1
-      },
-      move: {
-        enable: true,
-        speed: 1,
-        direction: "none",
-        random: true,
-        straight: false,
-        out_mode: "out"
-      }
+// PARTICLES.JS INTERACTIVE BACKGROUND
+particlesJS("particles-js", {
+  particles: {
+    number: { value: 80, density: { enable: true, value_area: 800 } },
+    color: { value: "#45a9e7" },
+    shape: { type: "circle" },
+    opacity: { value: 0.6, random: true, anim: { enable: true, speed: 1, opacity_min: 0.2 } },
+    size: { value: 2, random: true },
+    line_linked: {
+      enable: true,
+      distance: 150,
+      color: "#45a9e7",
+      opacity: 0.2,
+      width: 1
     },
-    interactivity: {
-      detect_on: "canvas",
-      events: {
-        onhover: { enable: false },
-        onclick: { enable: false },
-        resize: true
-      }
-    },
-    retina_detect: true
-  };
-
-  // Initialize
-  particlesJS("particles-js", particlesConfig);
-  currentPJS = window.pJSDom[0].pJS;
-
-  // Custom repulsion (retina-aware)
-  function startRepulsion() {
-    if (animationId) cancelAnimationFrame(animationId);
-
-    function animate() {
-      if (!currentPJS || !currentPJS.particles) {
-        animationId = requestAnimationFrame(animate);
-        return;
-      }
-
-      const ratio = currentPJS.retina.pixelRatio || 1;
-      const scaledX = mouseX * ratio;
-      const scaledY = mouseY * ratio;
-      const repulsionRadius = 120;
-
-      currentPJS.particles.array.forEach(p => {
-        const dx = scaledX - p.x;
-        const dy = scaledY - p.y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < repulsionRadius) {
-          const force = (repulsionRadius - dist) / repulsionRadius;
-          p.vx -= (dx / dist) * force * 1.5;
-          p.vy -= (dy / dist) * force * 1.5;
-        }
-      });
-
-      animationId = requestAnimationFrame(animate);
+    move: {
+      enable: true,
+      speed: 1,
+      direction: "none",
+      random: true,
+      straight: false,
+      out_mode: "out"
     }
-    animate();
-  }
-
-  startRepulsion();
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: {
+      onhover: { enable: true, mode: "repulse" },
+      onclick: { enable: true, mode: "push" },
+      resize: true
+    },
+    modes: {
+      repulse: { distance: 100, duration: 0.4 },
+      push: { particles_nb: 4 }
+    }
+  },
+  retina_detect: true
 });
