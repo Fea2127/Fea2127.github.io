@@ -59,7 +59,7 @@ closeKnowMoreBtn.onclick = () => {
 // PARTICLES.JS INTERACTIVE BACKGROUND
 particlesJS("particles-js", {
   particles: {
-    number: { value: 80, density: { enable: true, value_area: 800 } },
+    number: { value: 240, density: { enable: true, value_area: 800 } },
     color: { value: "#45a9e7" },
     shape: { type: "circle" },
     opacity: { value: 0.6, random: true, anim: { enable: true, speed: 1, opacity_min: 0.2 } },
