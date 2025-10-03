@@ -230,21 +230,20 @@ body > *:not(#particles-js) {
 }
 @media (max-width: 768px) {
   .modal-content {
-    max-width: 98vw;
-    width: 98vw;
+    max-width: 96vw;
+    width: auto;
     max-height: 60vh;
-    padding: 0;
+    padding: 2vw;
+    box-sizing: border-box;
   }
-}
-
-@media (max-width: 768px) {
   #imgModal img,
   .modal-content img {
-    max-width: 98vw;
-    max-height: 60vh;
-  }
-   .modal-content, #imgModal {
-    padding: 0 2vw;
-    box-sizing: border-box;
+    max-width: 92vw;
+    max-height: 56vh;
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+    margin: 0 auto;
+    display: block;
   }
 }
