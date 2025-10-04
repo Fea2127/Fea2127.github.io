@@ -150,6 +150,16 @@ const portfolioData = {
       viewLink: "assets/index.html",
       docLink: "https://fea2127.github.io/assets/index.html",
       category: "web"
+    },
+    {
+      id: 16,
+      title: "Simple PJA Crafting Website",
+      image: "assets/PJA.png",
+      description: "A simple crafting website for PJA Crafts and Creations.",
+      technologies: ["HTML", "CSS", "JavaScript"],
+      viewLink: "https://PJACraftsCreations.github.io/index.html",
+      docLink: "https://PJACraftsCreations.github.io/index.html",
+      category: "web"
     }
   ],
   categories: ["all", "web", "simulation", "animation"]
