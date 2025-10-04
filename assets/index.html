@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alfea | Portfolio</title>
+
     <!-- ICONS / FONTS -->
-    <link rel="icon" href="assets/Logo.png" />
+    <link rel="icon" href="Logo.png" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
@@ -14,20 +15,24 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-     <!-- PARTICLES.JS -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
     <!-- CUSTOM -->
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="assets/index.css" />
   </head>
   <body>
-     <!-- PARTICLE BACKGROUND -->
-    <div id="particles-js"></div>
-
+    <!-- ===== FLOATING BLUR BACKGROUND ===== -->
+    <div class="floating-bg">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+      <div class="blob b3"></div>
+      <div class="blob b4"></div>
+      <div class="blob b5"></div>
+    </div>
     <!-- ---------------  HEADER  --------------- -->
     <header id="navbar">
       <div class="nav-container">
         <div class="logo">
-          <img src="assets/Logo.png" alt="Logo" id="imgLogo" />
+          <img src="Logo.png" alt="Logo" id="imgLogo" />
         </div>
 
         <nav>
@@ -82,7 +87,7 @@
           </p>
 
           <div class="socials">
-            <a href="index.html" aria-label="LinkedIn"
+            <a href="https://www.linkedin.com/in/alfea-aemiel-mingua-13406035b/" aria-label="LinkedIn"
               ><i class="bx bxl-linkedin"></i
             ></a>
             <a href="https://www.instagram.com/fea21_27/" aria-label="Instagram"
@@ -101,36 +106,37 @@
 
         <div class="hero-right">
           <div class="img-box hero-img-sm">
-            <img src="assets/Big smile cross arm.png" alt="Profile" />
+            <img src="Big smile cross arm.png" alt="Profile" />
           </div>
         </div>
       </div>
     </section>
     <hr />
     <br />
+    <!-- <div id="visitor-counter">Visitors Count: 0</div> -->
       <!-- Organisation -->
         <div class="about-card">
           <h2 class="section-title">Organizations</h2>
           <ul class="org-list">
             <li>
-              <img src="assets/gdsc banner.jpg" alt="GSDC PUPSTC" class="org-banner" />
+              <img src="gdsc banner.jpg" alt="GSDC PUPSTC" class="org-banner" />
               <span class="org-name">Google Developer Student Clubs</span> -
               PUP Sto. Tomas Batangas Campus
-              <img src="assets/GDSCPUP.jpg" alt="GSDC PUPSTC" class="org-logo" />
+              <img src="GDSCPUP.jpg" alt="GSDC PUPSTC" class="org-logo" />
               <br />
             </li>
             <li>
-              <img src="assets/ISKOnnovation banner.png" alt="ISC PUPSTC" class="org-banner" />
+              <img src="ISKOnnovation banner.png" alt="ISC PUPSTC" class="org-banner" />
               <span class="org-name">ISKOnnovators Student Community</span> -
               PUP Sto. Tomas  Batangas Campus
-              <img src="assets/ISKOnnovation logo.jpg" alt="ISC PUPSTC" class="org-logo" />
+              <img src="ISKOnnovation logo.jpg" alt="ISC PUPSTC" class="org-logo" />
               <br />
             </li>
             <li>
-              <img src="assets/COMSOC BANNER.jpg" alt="COMSOC PUPSTC" class="org-banner" />
+              <img src="COMSOC BANNER.jpg" alt="COMSOC PUPSTC" class="org-banner" />
               <span class="org-name">Computer Society</span> -
               PUP Sto. Tomas  Batangas Campus
-              <img src="assets/PUPSTC COMSOC.jpg" alt="COMSOC PUPSTC" class="org-logo" />
+              <img src="PUPSTC COMSOC.jpg" alt="COMSOC PUPSTC" class="org-logo" />
               <br />
             </li>
           </ul>
@@ -140,7 +146,7 @@
     <section id="about" class="about">
       <div class="about-container">
         <div class="about-card">
-          <img src="assets/Big Smile front.png" alt="Me" class="avatar" />
+          <img src="Big Smile front.png" alt="Me" class="avatar" />
           <p class="about-text">
             I'm <strong>Alfea Aemiel Mingua</strong>. Thank you for visiting my
             digital space. I'm open to opportunities in UI/UX, Project
@@ -154,7 +160,7 @@
               <span class="close">&times;</span>
               <h2>Education</h2>
                 <p>
-                  <img src="assets/PUP.jpg" alt="PUPSTC Logo" class="edu-logo" />
+                  <img src="PUP.jpg" alt="PUPSTC Logo" class="edu-logo" />
                   <span class="edu-name"><strong>Polytechnic University of the Philippines - Sto.
                     Tomas, Batangas Campus</strong></span><br />
                   Bachelor of Science in Information Technology<br />
@@ -162,7 +168,7 @@
                   </p>
                   <p>
                     <br/>
-                    <img src="assets/IINHS.jpg" alt="IINHS Logo" class="edu-logo" />
+                    <img src="IINHS.jpg" alt="IINHS Logo" class="edu-logo" />
                     <span class="edu-name"><strong>Ibayiw Integrated National High School</strong></span><br />
                     Senior High School - General Academic Strand<br />
                     2019 - 2021<br />
@@ -173,7 +179,7 @@
                   </p>
                   <p>
                     <br/>
-                    <img src="assets/SMESAL.jpg" alt="SMESAL Logo" class="edu-logo" />
+                    <img src="SMESAL.jpg" alt="SMESAL Logo" class="edu-logo" />
                     <span class="edu-name"><strong>San Miguel Elementary School</strong></span><br />
                     Elementary<br />
                     2009 - 2015<br />
@@ -190,100 +196,100 @@
         <!-- Certificates Section -->
         <h2 class="section-title">Certificates</h2>
         <div class="container-certs" id="certs">
-          <!-- Cert cards remain unchanged -->
-          <div class="card">
-            <img src="assets/Infotech Computer Literacy Certificate Feb 24 to June 09 2018.jpg" alt="" />
+          <!-- 16 cert cards -->
+           <div class="card">
+            <img src="Infotech Computer Literacy Certificate Feb 24 to June 09 2018.jpg" alt="" />
             <div class="box">
               <h3>Computer Literacy Training Program</h3>
               <p>Informatech San Pablo Colleges • June 9 2018</p>
             </div>
           </div>
           <div class="card">
-            <img src="assets/GDSC PUPSTB Hello World Dec 5 2021.png" alt="" />
+            <img src="GDSC PUPSTB Hello World Dec 5 2021.png" alt="" />
             <div class="box">
               <h3>Hello World: Introduction to Web Development</h3>
               <p>GDSC PUPSTB • Dec 04 2021</p>
             </div>
           </div>
           <div class="card">
-            <img src="assets/ReConnect D1 Jan 27 2022.png" alt="" />
+            <img src="ReConnect D1 Jan 27 2022.png" alt="" />
             <div class="box">
               <h3>Cybersecurity Workshop Day 1</h3>
               <p>PUPTPG • Jan 27-Feb 3 2022</p>
             </div>
           </div>
           <div class="card">
-            <img src="assets/ReConnect D2 Jan 28 2022.png" alt="" />
+            <img src="ReConnect D2 Jan 28 2022.png" alt="" />
             <div class="box">
               <h3>Cybersecurity Workshop Day 2</h3>
               <p>PUPTPG • Jan 27-Feb 3 2022</p>
             </div>
           </div>
           <div class="card">
-            <img src="assets/ReConnect D3 Feb 1 2022.png" alt="" />
+            <img src="ReConnect D3 Feb 1 2022.png" alt="" />
             <div class="box">
               <h3>Cybersecurity Workshop Day 3</h3>
               <p>PUPTPG • Jan 27-Feb 3 2022</p>
             </div>
           </div>
           <div class="card">
-            <img src="assets/ReConnect D4 Feb 3 2022.png" alt="" />
+            <img src="ReConnect D4 Feb 3 2022.png" alt="" />
             <div class="box">
               <h3>Cybersecurity Workshop Day 4</h3>
               <p>PUPTPG • Jan 27-Feb 3 2022</p>
             </div>
           </div>
           <div class="card">
-            <img src="assets/ComSoc Cyberworld July 9 2022.png" alt="" />
+            <img src="ComSoc Cyberworld July 9 2022.png" alt="" />
             <div class="box">
               <h3>Cyberworld: You in the online world</h3>
               <p>PUPSTB ComSoc • July 9-15 2022</p>
             </div>
           </div>
           <div class="card">
-            <img src="assets/ComSoc Cyberworld July 10 2022.png" alt="" />
+            <img src="ComSoc Cyberworld July 10 2022.png" alt="" />
             <div class="box">
               <h3>Cyberworld: You in the online world</h3>
               <p>PUPSTB ComSoc • July 9-15 2022</p>
             </div>
           </div>
           <div class="card">
-            <img src="assets/Laravel Nov 26 2022.png" alt="" />
+            <img src="Laravel Nov 26 2022.png" alt="" />
             <div class="box">
               <h3>Laravel: PHP Framework for Web Artisans</h3>
               <p>PUPSTB • Nov 26 2022</p>
             </div>
           </div>
           <div class="card">
-            <img src="assets/GDSCPH D1 Tara ML Dec 3 2022.png" alt="" />
+            <img src="GDSCPH D1 Tara ML Dec 3 2022.png" alt="" />
             <div class="box">
               <h3>Tara ML: Deep Dive in Machine Learning</h3>
               <p>GDSC PUPSTB • Dec 3-11 2022</p>
             </div>
           </div>
           <div class="card">
-            <img src="assets/GDSCPH D2 Tara ML Dec 7 2022.png" alt="" />
+            <img src="GDSCPH D2 Tara ML Dec 7 2022.png" alt="" />
             <div class="box">
               <h3>Tara ML: Deep Dive in Machine Learning</h3>
               <p>GDSC PUPSTB • Dec 3-11 2022</p>
             </div>
           </div>
           <div class="card">
-            <img src="assets/GDSCPH D3 Tara ML Dec 11 2022.png" alt="" />
+            <img src="GDSCPH D3 Tara ML Dec 11 2022.png" alt="" />
             <div class="box">
               <h3>Tara ML: Deep Dive in Machine Learning</h3>
               <p>GDSC PUPSTB • Dec 3-11 2022</p>
             </div>
           </div>
           <div class="card">
-            <img src="assets/React Native May 11 2024.png" alt="" />
+            <img src="React Native May 11 2024.png" alt="" />
             <div class="box">
               <h3>React Native Running the Starter Template</h3>
               <p>GDSC USC • May 4 2024</p>
             </div>
           </div>
           <div class="card">
-            <img src="assets/Zuitt GDSC Mapua May 19 2024.png" alt="" />
+            <img src="Zuitt GDSC Mapua May 19 2024.png" alt="" />
             <div class="box">
               <h3>Love at First Site: Web Development</h3>
               <p>GDSC Mapua MCM • May 19 2024</p>
@@ -291,7 +297,7 @@
           </div>
           <div class="card">
             <img
-              src="assets/Iskonnovation GDSC Ideathon May 20 2024.png"
+              src="Iskonnovation GDSC Ideathon May 20 2024.png"
               alt=""
             />
             <div class="box">
@@ -300,28 +306,28 @@
             </div>
           </div>
           <div class="card">
-            <img src="assets/GDSC Iskonnovation May 21 2024.png" alt="" />
+            <img src="GDSC Iskonnovation May 21 2024.png" alt="" />
             <div class="box">
               <h3>ISKOnnovation: Culture of Innovation</h3>
               <p>GDSC PUPSTC • May 20-21 2024</p>
             </div>
           </div>
           <div class="card">
-            <img src="assets/Luminara ISKOnnovation Hackathon.jpg" alt="" />
+            <img src="Luminara ISKOnnovation Hackathon.jpg" alt="" />
             <div class="box">
               <h3>ISKOnnovation: Culture of Innovation</h3>
               <p>GDSC PUPSTC • May 20-21 2024</p>
             </div>
           </div>
           <div class="card">
-            <img src="assets/DevCon Cagayan De Oro Aug 17 2025.png" alt="" />
+            <img src="DevCon Cagayan De Oro Aug 17 2025.png" alt="" />
             <div class="box">
               <h3>Think. Code. Build: Intro to Programming</h3>
               <p>DevCon CDO • Aug 17 2025</p>
             </div>
           </div>
           <div class="card">
-            <img src="assets/Gemini Sept 19 2025.png" alt="" />
+            <img src="Gemini Sept 19 2025.png" alt="" />
             <div class="box">
               <h3>Building a Web Solution with Gemini and Firebase Studio</h3>
               <p>GDSC CTU • Sept 19 2025</p>
@@ -329,12 +335,17 @@
           </div>
         </div>
     </section>
+    <!-- Certificate Modal -->
+<div id="certificateModal" class="certificate-modal">
+  <span class="certificate-modal-close">&times;</span>
+  <img class="certificate-modal-content" id="certificateModalImg">
+</div>
 
     <!-- ---------------  FOOTER  --------------- -->
     <footer id="contact">
       <p>© 2024 Alfea Aemiel Mingua. All rights reserved.</p>
       <div class="socials">
-        <a href="index.html" aria-label="LinkedIn"
+        <a href="https://www.linkedin.com/in/alfea-aemiel-mingua-13406035b/" aria-label="LinkedIn"
           ><i class="bx bxl-linkedin"></i
         ></a>
         <a href="https://www.instagram.com/fea21_27/" aria-label="Instagram"
@@ -356,6 +367,6 @@
       ><i class="bx bxs-up-arrow-circle"></i
     ></a>
 
-    <script src="index.js"></script>
+    <script src="assets/index.js"></script>
   </body>
 </html>

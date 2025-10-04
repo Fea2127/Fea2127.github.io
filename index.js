@@ -1,4 +1,4 @@
-/* ---------------  DARK / LIGHT --------------- */
+ /* ---------------  DARK / LIGHT --------------- */
 const darkModeToggle = document.getElementById("darkModeToggle");
 const body = document.body;
 if (localStorage.getItem("theme") === "light") {
@@ -22,25 +22,12 @@ window.addEventListener("scroll", () => {
     link.classList.toggle("active", link.getAttribute("href").slice(1) === current);
   });
 });
-/* ---------------  VISITOR COUNT --------------- */
-  // async function updateVisitorCount() {
-  //     try {
-  //       const response = await fetch('https://api.countapi.xyz/hit/fea2127-github-io/portfolio');
-  //       const data = await response.json();
-  //       document.getElementById('visitor-counter').textContent = 'Visitors: ' + data.value;
-  //     } catch (err) {
-  //       console.error('Error fetching visitor count:', err);
-  //     }
-  //   }
 
-    // Update count on page load
-    // updateVisitorCount();
 // IMAGE / CERTIFICATE POPUP
 const imgModal = document.getElementById("imgModal");
 const modalImg = document.getElementById("modalImg");
 const closeImgBtn = imgModal.querySelector(".close");
 
-// Show certificate image in modal
 document.querySelectorAll(".card img").forEach((img) => {
   img.addEventListener("click", () => {
     imgModal.style.display = "flex";
@@ -48,16 +35,12 @@ document.querySelectorAll(".card img").forEach((img) => {
   });
 });
 
-// Close by clicking X
 closeImgBtn.onclick = () => {
   imgModal.style.display = "none";
 };
-
-// Close by clicking outside
 imgModal.onclick = (e) => {
   if (e.target === imgModal) imgModal.style.display = "none";
 };
-
 
 // KNOW MORE (Education Modal)
 const knowMoreModal = document.getElementById("knowMoreModal");
@@ -67,7 +50,47 @@ const closeKnowMoreBtn = knowMoreModal.querySelector(".close");
 knowMoreBtn.onclick = () => {
   knowMoreModal.style.display = "flex";
 };
-
 closeKnowMoreBtn.onclick = () => {
   knowMoreModal.style.display = "none";
 };
+
+// ...existing code...
+
+// PARTICLES.JS INTERACTIVE BACKGROUND
+particlesJS("particles-js", {
+  particles: {
+    number: { value: 240, density: { enable: true, value_area: 800 } },
+    color: { value: "#45a9e7" },
+    shape: { type: "circle" },
+    opacity: { value: 0.6, random: true, anim: { enable: true, speed: 1, opacity_min: 0.2 } },
+    size: { value: 2, random: true },
+    line_linked: {
+      enable: true,
+      distance: 150,
+      color: "#45a9e7",
+      opacity: 0.2,
+      width: 1
+    },
+    move: {
+      enable: true,
+      speed: 1,
+      direction: "none",
+      random: true,
+      straight: false,
+      out_mode: "out"
+    }
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: {
+      onhover: { enable: true, mode: "repulse" },
+      onclick: { enable: true, mode: "push" },
+      resize: true
+    },
+    modes: {
+      repulse: { distance: 100, duration: 0.4 },
+      push: { particles_nb: 4 }
+    }
+  },
+  retina_detect: true
+});
