@@ -161,8 +161,6 @@ const portfolioData = {
       viewLink: "https://PJACraftsCreations.github.io/index.html",
       docLink: "https://PJACraftsCreations.github.io/index.html",
       category: "web"
-=======
->>>>>>> 4c3510648ace485daacc528171c879b0ddcd42e8
     }
   ],
   categories: ["all", "web", "simulation", "animation"]
