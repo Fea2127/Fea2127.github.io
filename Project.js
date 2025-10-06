@@ -140,7 +140,7 @@ const portfolioData = {
       viewLink: "https://aerieljanemingua.github.io/",
       docLink: "https://aerieljanemingua.github.io/",
       category: "web"
-<<<<<<< HEAD
+
     },
     {
       id: 15,
