@@ -1,79 +1,121 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Alfea | Projects</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alfea | Projects</title>
 
-  <!-- =====  same head as index  ===== -->
-  <link rel="icon" href="assets/Logo.png"/>
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-  <!-- <link rel="stylesheet" href="index.css"/>   re-use index styles -->
-  <link rel="stylesheet" href="Project.css"/> <!-- only small tweaks -->
-</head>
-<body>
-  <!-- =====  pastel blobs  ===== -->
-  <div class="floating-bg">
-    <div class="blob b1"></div><div class="blob b2"></div>
-    <div class="blob b3"></div><div class="blob b4"></div><div class="blob b5"></div>
-  </div>
+    <!-- =====  same head as index  ===== -->
+    <link rel="icon" href="assets/Logo.png" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <link rel="stylesheet" href="index.css"/>   re-use index styles -->
+    <link rel="stylesheet" href="Project.css" />
+    <!-- only small tweaks -->
+  </head>
+  <body>
+    <!-- =====  pastel blobs  ===== -->
+    <div class="floating-bg">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+      <div class="blob b3"></div>
+      <div class="blob b4"></div>
+      <div class="blob b5"></div>
+    </div>
 
-  <!-- =====  mini navbar (index look)  ===== -->
-  <header id="navbar">
-    <div class="nav-container">
-      <div class="logo"><img src="assets/Logo.png" alt="Logo"></div>
-      <nav>
-        <input type="checkbox" id="navCheck" class="d-none">
-        <label for="navCheck" class="hamburger"><i class="bx bx-menu"></i></label>
-        <ul class="nav-list">
-          <label for="navCheck" class="close-btn"><i class="bx bx-x"></i></label>
-          <li><a href="index.html" class="nav-link">Home</a></li>
-          <li><a href="index.html#about" class="nav-link">About</a></li>
-          <li><a href="Project.html" class="nav-link active">Projects</a></li>
-          <li><a href="https://lynx212427.github.io/" class="nav-link">Old Portfolio</a></li>
-          <li><a href="https://Fea2127.github.io/"class="nav-link">New Portfolio</a></li>
-          <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-        </ul>
-      </nav>
-      <!-- dark toggle -->
-      <div class="futur-toggle">
-        <input type="checkbox" id="darkModeToggle"/>
-        <label for="darkModeToggle" class="slider">
-          <span class="icon sun"><i class="bx bxs-sun"></i></span>
-          <span class="icon moon"><i class="bx bxs-moon"></i></span>
-        </label>
+    <!-- =====  mini navbar (index look)  ===== -->
+    <header id="navbar">
+      <div class="nav-container">
+        <div class="logo"><img src="assets/Logo.png" alt="Logo" /></div>
+        <nav>
+          <input type="checkbox" id="navCheck" class="d-none" />
+          <label for="navCheck" class="hamburger"
+            ><i class="bx bx-menu"></i
+          ></label>
+          <ul class="nav-list">
+            <label for="navCheck" class="close-btn"
+              ><i class="bx bx-x"></i
+            ></label>
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="index.html#about" class="nav-link">About</a></li>
+            <li><a href="Project.html" class="nav-link active">Projects</a></li>
+            <li>
+              <a href="https://lynx212427.github.io/" class="nav-link"
+                >Old Portfolio</a
+              >
+            </li>
+            <li>
+              <a href="https://Fea2127.github.io/" class="nav-link"
+                >New Portfolio</a
+              >
+            </li>
+            <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+        <!-- dark toggle -->
+        <div class="futur-toggle">
+          <input type="checkbox" id="darkModeToggle" />
+          <label for="darkModeToggle" class="slider">
+            <span class="icon sun"><i class="bx bxs-sun"></i></span>
+            <span class="icon moon"><i class="bx bxs-moon"></i></span>
+          </label>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- =====  projects section  ===== -->
-  <section class="about" style="padding-top:12rem">
-    <div class="container">
-      <h2 class="section-title">Personal Projects based on Academic Projects</h2>
-      <div class="container-certs" id="project-grid">
-        <!--  cards are injected here  -->
+    <!-- =====  projects section  ===== -->
+    <section class="about" style="padding-top: 12rem">
+      <div class="container">
+        <h2 class="section-title">
+          Personal Projects based on Academic Projects
+        </h2>
+        <div class="container-certs" id="project-grid">
+          <!--  cards are injected here  -->
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- =====  footer / back-to-top  ===== -->
-  <footer id="contact">
-    <p>© 2024 Alfea Aemiel Mingua. All rights reserved.</p>
-    <div class="socials">
-      <a href="https://www.linkedin.com/in/alfea-aemiel-mingua-13406035b/" aria-label="LinkedIn"><i class="bx bxl-linkedin"></i></a>
-      <a href="https://www.instagram.com/fea21_27/" aria-label="Instagram"><i class="bx bxl-instagram"></i></a>
-      <a href="https://github.com/Fea2127" aria-label="GitHub"><i class="bx bxl-github"></i></a>
-      <a href="https://www.facebook.com/profile.php?id=100087274301500" aria-label="Facebook"><i class="bx bxl-facebook-circle"></i></a>
-    </div>
-  </footer>
+    <!-- =====  footer / back-to-top  ===== -->
+    <footer id="contact">
+      <p>© 2024 Alfea Aemiel Mingua. All rights reserved.</p>
+      <div class="socials">
+        <a
+          href="https://www.linkedin.com/in/alfea-aemiel-mingua-13406035b/"
+          aria-label="LinkedIn"
+          ><i class="bx bxl-linkedin"></i
+        ></a>
+        <a href="https://www.instagram.com/fea21_27/" aria-label="Instagram"
+          ><i class="bx bxl-instagram"></i
+        ></a>
+        <a href="https://github.com/Fea2127" aria-label="GitHub"
+          ><i class="bx bxl-github"></i
+        ></a>
+        <a
+          href="https://www.facebook.com/profile.php?id=100087274301500"
+          aria-label="Facebook"
+          ><i class="bx bxl-facebook-circle"></i
+        ></a>
+      </div>
+    </footer>
 
-  <a href="#home" class="back-to-top"><i class="bx bxs-up-arrow-circle"></i></a>
+    <a href="#home" class="back-to-top"
+      ><i class="bx bxs-up-arrow-circle"></i
+    ></a>
 
     <!--  scripts section -->
-  <script src="Project.js"></script>        <!-- Your data -->
-  <script src="populate.js"></script>       <!-- Card generation -->
-  <script src="navigate.js"></script>       <!-- Filtering & navigation -->
-  <!-- <script src="index.js"></script>          Existing functionality -->
-</body>
+    <script src="Project.js"></script>
+    <!-- Your data -->
+    <script src="populate.js"></script>
+    <!-- Card generation -->
+    <script src="navigate.js"></script>
+    <!-- Filtering & navigation -->
+    <script src="index.js"></script>
+    <!-- Existing functionality -->
+  </body>
 </html>
