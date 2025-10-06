@@ -1,0 +1,14 @@
+/* PARTICLE BACKGROUND */
+#particles-js {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;           /* Raise above -1, but below your nav/content */
+  pointer-events: auto; /* Allow mouse events */
+}
+body > *:not(#particles-js) {
+  position: relative;
+  z-index: 2;           /* Ensure content is above particles visually */
+}

@@ -97,20 +97,6 @@ footer .socials{justify-content:center;margin-top:1rem}
 /* ---------------  LIGHT MODE  --------------- */
 body.light{--bg:#f2f4fc;--surface:rgba(255,255,255,.7);--text:#1b1c22;--text-dim:#5c6270;--primary:#0077cc;--accent:#00aaff}
 
-/* PARTICLE BACKGROUND */
-#particles-js {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 1;           /* Raise above -1, but below your nav/content */
-  pointer-events: auto; /* Allow mouse events */
-}
-body > *:not(#particles-js) {
-  position: relative;
-  z-index: 2;           /* Ensure content is above particles visually */
-}
 
 /* ---------------  MOBILE  --------------- */
 @media (max-width: 768px) {
