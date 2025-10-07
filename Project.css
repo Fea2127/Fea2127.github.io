@@ -245,7 +245,7 @@ body.light .b5{background:#34c759;}
   }
 }
 /* ---------------  BACK-TO-TOP  --------------- */
-.back-to-top {
+/* .back-to-top {
   position: fixed !important;
   bottom: 30px !important;
   right: 30px !important;
@@ -277,4 +277,4 @@ body.light .b5{background:#34c759;}
   transform: translateY(-5px);
   box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
   background: var(--primary);
-}
+} */
