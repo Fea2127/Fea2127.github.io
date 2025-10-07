@@ -1,13 +1,4 @@
 /* ---------------  BACK-TO-TOP  --------------- */
-/* Ensure back-to-top button appears above blobs */
-.back-to-top {
-  z-index: 1000 !important; /* Higher than blob z-index */
-  position: fixed !important;
-  bottom: 30px !important;
-  right: 30px !important;
-}
-/*==============new code============== */
-/* ---------------  BACK-TO-TOP  --------------- */
 .back-to-top {
   position: fixed !important;
   bottom: 30px !important;
@@ -25,15 +16,10 @@
   box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
   transition: all 0.3s ease;
   z-index: 9999 !important;
-  opacity: 0; /* Start hidden */
-  visibility: hidden; /* Start hidden */
+  opacity: 1 !important; /* CHANGED: Make it visible by default */
+  visibility: visible !important; /* CHANGED: Make it visible by default */
   text-decoration: none;
   color: white;
-}
-
-.back-to-top.show {
-  opacity: 1 !important;
-  visibility: visible !important;
 }
 
 .back-to-top:hover {
@@ -41,6 +27,7 @@
   box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
   background: var(--primary);
 }
+
 /* ===== FLOATING BLUR BACKGROUND ===== */
 /* Make sure blobs have lower z-index */
 .floating-bg,
@@ -84,6 +71,7 @@ body.light .b2{background:#00aaff;}
 body.light .b3{background:#ff4e50;}
 body.light .b4{background:#f9d423;}
 body.light .b5{background:#34c759;}
+
 /* =====  projects page extras  ===== */
 .section-title{margin-top:2rem}
 #project-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))} /* responsive */
@@ -91,6 +79,7 @@ body.light .b5{background:#34c759;}
 /* card button colours */
 .card a{background:var(--primary)}
 .card a:hover{background:var(--accent);box-shadow:var(--neon)}
+
 /* Project.css - Enhanced styles */
 .project-filters {
   display: flex;
@@ -244,37 +233,3 @@ body.light .b5{background:#34c759;}
     font-size: 0.9rem;
   }
 }
-/* ---------------  BACK-TO-TOP  --------------- */
-/* .back-to-top {
-  position: fixed !important;
-  bottom: 30px !important;
-  right: 30px !important;
-  left: auto !important;
-  background: var(--surface);
-  border: 1px solid var(--primary);
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
-  transition: all 0.3s ease;
-  z-index: 9999 !important;
-  opacity: 0;
-  visibility: hidden;
-  text-decoration: none;
-  color: white;
-}
-
-.back-to-top.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-.back-to-top:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
-  background: var(--primary);
-} */
