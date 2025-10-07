@@ -19,6 +19,36 @@
     <!-- CUSTOM -->
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="indPart.css" />
+    <style>
+      /* Additional CSS for download button */
+      .download-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 20px;
+        padding: 12px 24px;
+        background: linear-gradient(135deg, #8a2be2 0%, #6a1cb0 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+        cursor: pointer;
+        font-family: 'Inter', sans-serif;
+      }
+
+      .download-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
+        background: linear-gradient(135deg, #9d4edd 0%, #7b2cbf 100%);
+      }
+
+      .download-btn i {
+        font-size: 1.2em;
+      }
+    </style>
   </head>
   <body>
      <!-- PARTICLE BACKGROUND -->
@@ -81,6 +111,11 @@
             BSIT student at PUP-Sto.Tomas, UI/UX &amp; network enthusiast.
             Exploring Project Management, QA, and NetAdmin roles.
           </p>
+
+          <!-- DOWNLOAD RESUME BUTTON -->
+          <a href="assets/MINGUA RESUME.pdf" class="download-btn" download="MINGUA RESUME.pdf">
+            <i class='bx bxs-download'></i> Download Resume
+          </a>
 
           <div class="socials">
             <a href="index.html" aria-label="LinkedIn"
