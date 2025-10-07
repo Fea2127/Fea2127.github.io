@@ -56,24 +56,33 @@ closeKnowMoreBtn.onclick = () => {
 
 // ...existing code...
  // Back to top button functionality
-    document.addEventListener('DOMContentLoaded', function () {
-      const backToTopButton = document.querySelector('.back-to-top');
+document.addEventListener('DOMContentLoaded', function () {
+  const backToTopButton = document.querySelector('.back-to-top');
+  
+  // Debug: Check if button is found
+  console.log('Back to top button:', backToTopButton);
+  
+  if (!backToTopButton) {
+    console.error('Back to top button not found!');
+    return;
+  }
 
-      // Show/hide back to top button based on scroll position
-      window.addEventListener('scroll', function () {
-        if (window.pageYOffset > 300) {
-          backToTopButton.classList.add('show');
-        } else {
-          backToTopButton.classList.remove('show');
-        }
-      });
+  // Show/hide back to top button based on scroll position
+  window.addEventListener('scroll', function () {
+    if (window.pageYOffset > 300) {
+      backToTopButton.classList.add('show');
+    } else {
+      backToTopButton.classList.remove('show');
+    }
+  });
 
-      // Smooth scroll to top
-      backToTopButton.addEventListener('click', function (e) {
-        e.preventDefault();
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      });
+  // Smooth scroll to top
+  backToTopButton.addEventListener('click', function (e) {
+    console.log('Back to top clicked!'); // Debug
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
     });
+  });
+});
