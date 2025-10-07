@@ -161,6 +161,16 @@ const portfolioData = {
       viewLink: "https://PJACraftsCreations.github.io/index.html",
       docLink: "https://PJACraftsCreations.github.io/index.html",
       category: "web"
+    },
+    {
+      id: 17,
+      title: "Futuristic Resume",
+      image: "assets/Dj.png",
+      description: "A futuristic resume template.",
+      technologies: ["HTML", "CSS", "JavaScript"],
+      viewLink: "Dj.html",
+      docLink: "https://fea2127.github.io/Dj.html",
+      category: "web"
     }
   ],
   categories: ["all", "web", "simulation", "animation"]
