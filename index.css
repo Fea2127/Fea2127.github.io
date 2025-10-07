@@ -92,8 +92,38 @@ input:checked + .slider .moon{transform:translateX(-34px);color:#fff}
 footer{text-align:center;padding:3rem 1.2rem 2rem;font-size:.9rem;color:var(--text-dim)}
 footer .socials{justify-content:center;margin-top:1rem}
 /* ---------------  BACK-TO-TOP  --------------- */
-.back-to-top{position:fixed;bottom:2rem;right:2rem;background:var(--surface);border:1px solid var(--primary);width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:1.4rem;transition:var(--transition)}
-.back-to-top:hover{background:var(--primary);box-shadow:var(--neon)}
+.back-to-top{
+  position:fixed;
+  bottom:2rem;
+  right:2rem;
+  left: auto !important; /* Add this to override any left positioning */
+  background:var(--surface);
+  border:1px solid var(--primary);
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:1.4rem;
+  transition:var(--transition);
+  z-index: 9999; /* Add high z-index to ensure it's above other elements */
+  opacity: 0; /* Start hidden */
+  visibility: hidden; /* Start hidden */
+  transform: translateY(20px); /* Start slightly lower */
+  transition: all 0.3s ease; /* Smooth transition for show/hide */
+}
+
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0); /* Move to normal position when shown */
+}
+
+.back-to-top:hover{
+  background:var(--primary);
+  box-shadow:var(--neon);
+  transform: translateY(-2px); /* Lift on hover */
+}
 /* ---------------  LIGHT MODE  --------------- */
 body.light{--bg:#f2f4fc;--surface:rgba(255,255,255,.7);--text:#1b1c22;--text-dim:#5c6270;--primary:#0077cc;--accent:#00aaff}
 
