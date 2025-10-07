@@ -1,4 +1,12 @@
 /* ---------------  BACK-TO-TOP  --------------- */
+/* Ensure back-to-top button appears above blobs */
+.back-to-top {
+  z-index: 1000 !important; /* Higher than blob z-index */
+  position: fixed !important;
+  bottom: 30px !important;
+  right: 30px !important;
+}
+/*==============existing code============== */
 .back-to-top{
   position:fixed;
   bottom:2rem;
@@ -32,6 +40,12 @@
   transform: translateY(-2px); /* Lift on hover */
 }
 /* ===== FLOATING BLUR BACKGROUND ===== */
+/* Make sure blobs have lower z-index */
+.floating-bg,
+.blob {
+  z-index: 1 !important; /* Lower than back-to-top button */
+}
+
 .floating-bg{
   position:fixed;
   inset:0;                     /* top:0 right:0 bottom:0 left:0 */
