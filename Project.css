@@ -6,38 +6,40 @@
   bottom: 30px !important;
   right: 30px !important;
 }
-/*==============existing code============== */
-.back-to-top{
-  position:fixed;
-  bottom:2rem;
-  right:2rem;
-  left: auto !important; /* Add this to override any left positioning */
-  background:var(--surface);
-  border:1px solid var(--primary);
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  font-size:1.4rem;
-  transition:var(--transition);
-  z-index: 9999; /* Add high z-index to ensure it's above other elements */
+/*==============new code============== */
+/* ---------------  BACK-TO-TOP  --------------- */
+.back-to-top {
+  position: fixed !important;
+  bottom: 30px !important;
+  right: 30px !important;
+  left: auto !important;
+  background: var(--surface);
+  border: 1px solid var(--primary);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+  transition: all 0.3s ease;
+  z-index: 9999 !important;
   opacity: 0; /* Start hidden */
   visibility: hidden; /* Start hidden */
-  transform: translateY(20px); /* Start slightly lower */
-  transition: all 0.3s ease; /* Smooth transition for show/hide */
+  text-decoration: none;
+  color: white;
 }
 
 .back-to-top.show {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0); /* Move to normal position when shown */
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-.back-to-top:hover{
-  background:var(--primary);
-  box-shadow:var(--neon);
-  transform: translateY(-2px); /* Lift on hover */
+.back-to-top:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
+  background: var(--primary);
 }
 /* ===== FLOATING BLUR BACKGROUND ===== */
 /* Make sure blobs have lower z-index */
