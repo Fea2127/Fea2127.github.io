@@ -122,5 +122,33 @@
     <!-- Card generation -->
     <script src="navigate.js"></script>
     <!-- Filtering & navigation -->
+     <script>
+      // Back to top functionality for Project.html
+document.addEventListener('DOMContentLoaded', function() {
+    const backToTopButton = document.querySelector('.back-to-top');
+    
+    if (backToTopButton) {
+        // Show/hide on scroll
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        // Click to scroll to top
+        backToTopButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        console.log('Back to top button initialized in Project.js');
+    }
+});
+     </script>
   </body>
 </html>
