@@ -86,3 +86,61 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+
+// Mobile menu functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const navCheck = document.getElementById('navCheck');
+  const hamburger = document.querySelector('.hamburger');
+  const closeBtn = document.querySelector('.close-btn');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const body = document.body;
+
+  // Function to close menu
+  function closeMenu() {
+    navCheck.checked = false;
+    body.classList.remove('menu-open');
+  }
+
+  // Function to open menu
+  function openMenu() {
+    navCheck.checked = true;
+    body.classList.add('menu-open');
+  }
+
+  // Toggle menu on hamburger click
+  if (hamburger) {
+    hamburger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      openMenu();
+    });
+  }
+
+  // Close menu on close button click
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      closeMenu();
+    });
+  }
+
+  // Close menu when clicking on nav links
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      closeMenu();
+    });
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', function(e) {
+    if (navCheck.checked && !e.target.closest('.nav-list') && !e.target.closest('.hamburger')) {
+      closeMenu();
+    }
+  });
+
+  // Close menu on escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && navCheck.checked) {
+      closeMenu();
+    }
+  });
+});
