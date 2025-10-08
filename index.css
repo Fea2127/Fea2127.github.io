@@ -44,7 +44,7 @@ a{color:inherit;text-decoration:none}
   top: 0;
   left: 0;
   right: 0;
-  z-index:1000;
+  z-index:2000;
   background:var(--surface);
   backdrop-filter:var(--blur);
   border-bottom:1px solid rgba(255,255,255,.08);
@@ -100,7 +100,7 @@ hr{border:0;height:1px;background:var(--primary);margin:2rem 0}
   background: none;
   border: none;
   color: var(--text);
-  z-index: 1001;
+  z-index: 2001;
 }
 
 .close-btn{
@@ -111,7 +111,7 @@ hr{border:0;height:1px;background:var(--primary);margin:2rem 0}
   font-size:2rem;
   cursor:pointer;
   color:var(--text);
-  z-index: 1002;
+  z-index: 2002;
   background: none;
   border: none;
 }
