@@ -733,6 +733,6 @@ body.light{
 
   /* Make sure header doesn't interfere */
   #navbar {
-    z-index: 2000 !important;
+    z-index: 9000 !important;
   }
 }
