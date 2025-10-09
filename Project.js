@@ -146,10 +146,10 @@ const portfolioData = {
       id: 15,
       title: "Simple Portfolio",
       image: "assets/New Portfolio.png",
-      description: "Basic portfolio template.",
+      description: "Trial Portfolio.",
       technologies: ["HTML", "CSS", "JavaScript"],
-      viewLink: "assets/index.html",
-      docLink: "https://fea2127.github.io/assets/index.html",
+      viewLink: "trial.html",
+      docLink: "https://fea2127.github.io/trial.html",
       category: "web"
     },
     {
