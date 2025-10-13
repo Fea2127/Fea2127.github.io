@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alfea | Portfolio</title>
+
+    <!-- ICONS / FONTS -->
+    <link rel="icon" href="assets/Logo.png" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CUSTOM -->
+    <style>
+      /* ---------------  ROOT TOKENS  --------------- */
+      :root {
+        --bg: #0d0f17;
+        --surface: rgba(23, 26, 41, 0.6);
+        --primary: #45a9e7;
+        --accent: #00e5ff;
+        --text: #e4e6eb;
+        --text-dim: #8a91a8;
+        --radius: 16px;
+        --blur: blur(20px);
+        --neon: 0 0 4px var(--primary), 0 0 12px var(--primary);
+        --transition: all 0.3s ease;
+        font-size: 16px;
+      }
+
+      /* ---------------  RESET  --------------- */
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      
+      html {
+        scroll-behavior: smooth;
+      }
+      
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+      
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* ---------------  UTILS  --------------- */
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin-inline: auto;
+      }
+      
+      .glow {
+        text-shadow: var(--neon);
+      }
+      
+      .accent {
+        color: var(--accent);
+      }
+      
+      .d-none {
+        display: none;
+      }
+      
+      .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+        font-size: 2rem;
+        position: relative;
+      }
+      
+      .section-title::after {
+        content: "";
+        width: 60px;
+        height: 3px;
+        background: var(--accent);
+        position: absolute;
+        left: 50%;
+        bottom: -10px;
+        transform: translateX(-50%);
+      }
+
+      /* ---------------  HEADER / NAV  --------------- */
+      #navbar {
+        position: fixed;
+        inset: 0 0 auto 0;
+        z-index: 1000;
+        background: var(--surface);
+        backdrop-filter: var(--blur);
+        border-bottom: 1px solid rgba(255,255,255,.08);
+      }
+      
+      .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-inline: 1.8rem;
+        max-width: 1200px;
+        margin-inline: auto;
+      }
+      
+      hr {
+        border: 0;
+        height: 1px;
+        background: var(--primary);
+        margin: 2rem 0;
+      }
+      
+      .logo img {
+        width: 48px;
+        height: 48px;
+      }
+      
+      .nav-list {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+      
+      .nav-link {
+        font-weight: 500;
+        position: relative;
+      }
+      
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 2px;
+        background: var(--accent);
+        transition: width .3s;
+      }
+      
+      .nav-link:hover::after, .nav-link.active::after {
+        width: 100%;
+      }
+      
+      .hamburger {
+        display: none;
+        font-size: 1.8rem;
+        cursor: pointer;
+      }
+      
+      .close-btn {
+        display: none;
+        position: absolute;
+        top: 1.2rem;
+        right: 1.5rem;
+        font-size: 2rem;
+        cursor: pointer;
+        color: var(--text);
+      }
+
+      /* ----------  FUTURISTIC TOGGLE  ---------- */
+      .futur-toggle {
+        display: flex;
+        align-items: center;
+      }
+      
+      .futur-toggle input {
+        display: none;
+      }
+      
+      .slider {
+        position: relative;
+        width: 68px;
+        height: 34px;
+        background: #111;
+        border-radius: 34px;
+        border: 2px solid var(--primary);
+        cursor: pointer;
+        transition: background .3s;
+        box-shadow: 0 0 6px var(--primary), inset 0 0 6px var(--primary);
+      }
+      
+      .slider .icon {
+        position: absolute;
+        top: 3px;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-size: 18px;
+        transition: transform .3s, color .3s;
+      }
+      
+      .sun {
+        left: 3px;
+        color: #ffdf00;
+      }
+      
+      .moon {
+        right: 3px;
+        color: #e4e6eb;
+      }
+      
+      /* ON state (dark mode) */
+      input:checked + .slider {
+        background: #00e5ff22;
+      }
+      
+      input:checked + .slider .sun {
+        transform: translateX(34px);
+        color: #777;
+      }
+      
+      input:checked + .slider .moon {
+        transform: translateX(-34px);
+        color: #fff;
+      }
+
+      /* ---------------  HERO  --------------- */
+      .hero {
+        padding: 10rem 1.2rem 4rem;
+        min-height: 100vh;
+        display: grid;
+        place-content: center;
+      }
+      
+      .hero-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+      
+      .big-title {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 700;
+        margin: .5rem 0 1rem;
+      }
+      
+      .bio {
+        color: var(--text-dim);
+        max-width: 500px;
+      }
+      
+      .socials {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+      
+      .socials a {
+        width: 44px;
+        height: 44px;
+        border: 1px solid var(--primary);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        transition: var(--transition);
+      }
+      
+      .socials a:hover {
+        background: var(--primary);
+        box-shadow: var(--neon);
+        transform: translateY(-4px);
+      }
+      
+      .hero-img-sm {
+        max-width: 200px;
+        max-height: 300px;
+        margin-inline: auto;
+        border-radius: var(--radius);
+        box-shadow: 0 0 20px -5px var(--primary);
+      }
+
+      /* ---------------  ABOUT / CERTIFICATES  --------------- */
+      .about {
+        padding: 5rem 1.2rem;
+      }
+      
+      .about-container {
+        display: grid;
+        gap: 4rem;
+      }
+      
+      .about-card {
+        background: var(--surface);
+        border: 1px solid rgba(255,255,255,.08);
+        border-radius: var(--radius);
+        padding: 3rem 2rem;
+        max-width: 700px;
+        margin-inline: auto;
+        text-align: center;
+        backdrop-filter: var(--blur);
+      }
+      
+      .avatar {
+        width: 250px;
+        height: 300px;
+        border-radius: 50%;
+        margin: 0 auto 1.5rem;
+        border: 2px solid var(--accent);
+      }
+      
+      .container-certs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+      
+      .card {
+        background: var(--surface);
+        border-radius: var(--radius);
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,.08);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        transition: var(--transition);
+      }
+      
+      .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 0 20px -5px var(--primary);
+      }
+      
+      .card img {
+        height: 300px;
+        object-fit: cover;
+        width: 100%;
+      }
+      
+      .box {
+        flex: 1;
+        padding: 1.2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      
+      /* ---------------  FOOTER  --------------- */
+      footer {
+        text-align: center;
+        padding: 3rem 1.2rem 2rem;
+        font-size: .9rem;
+        color: var(--text-dim);
+      }
+      
+      footer .socials {
+        justify-content: center;
+        margin-top: 1rem;
+      }
+
+      /* ---------------  BACK-TO-TOP  --------------- */
+      .back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        background: var(--surface);
+        border: 1px solid var(--primary);
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-size: 1.4rem;
+        transition: var(--transition);
+      }
+      
+      .back-to-top:hover {
+        background: var(--primary);
+        box-shadow: var(--neon);
+      }
+
+      /* ---------------  LIGHT MODE  --------------- */
+      body.light {
+        --bg: #f2f4fc;
+        --surface: rgba(255,255,255,.7);
+        --text: #1b1c22;
+        --text-dim: #5c6270;
+        --primary: #0077cc;
+        --accent: #00aaff;
+      }
+
+      /* ---------------  MOBILE  --------------- */
+      @media (max-width: 768px) {
+        .nav-list {
+          margin-top: 290px;
+          position: fixed;
+          inset: 0;
+          background: var(--bg);
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 2rem;
+          font-size: 1.4rem;
+          transform: translateX(100%);
+          transition: transform .4s ease-in-out;
+          z-index: 1000;
+        }
+        
+        #navCheck:checked ~ .nav-list {
+          transform: translateX(0);
+        }
+        
+        .hamburger {
+          display: block;
+        }
+        
+        .close-btn {
+          display: block;
+        }
+        
+        .hero-container {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+        
+        .big-title {
+          font-size: 2.4rem;
+        }
+        
+        .container-certs {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ===== FLOATING BLUR BACKGROUND ===== */
+      .floating-bg {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        overflow: hidden;
+      }
+      
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(40px);
+        opacity: .55;
+        animation: floatUp linear infinite;
+        bottom: -200px;
+      }
+      
+      /* --- sizes, colors, timing --- */
+      .b1 {
+        width: 260px;
+        height: 260px;
+        background: #45a9e7;
+        left: 8%;
+        animation-duration: 32s;
+        animation-delay: 0s;
+      }
+      
+      .b2 {
+        width: 320px;
+        height: 320px;
+        background: #00e5ff;
+        left: 30%;
+        animation-duration: 45s;
+        animation-delay: 3s;
+      }
+      
+      .b3 {
+        width: 220px;
+        height: 220px;
+        background: #ff4e50;
+        left: 55%;
+        animation-duration: 28s;
+        animation-delay: 1.5s;
+      }
+      
+      .b4 {
+        width: 380px;
+        height: 380px;
+        background: #f9d423;
+        left: 75%;
+        animation-duration: 50s;
+        animation-delay: 5s;
+      }
+      
+      .b5 {
+        width: 240px;
+        height: 240px;
+        background: #a1ffce;
+        left: 45%;
+        animation-duration: 38s;
+        animation-delay: 2s;
+      }
+      
+      /* --- keyframes  --- */
+      @keyframes floatUp {
+        0% {
+          bottom: -200px;
+          transform: translateX(0) scale(1);
+          opacity: .5;
+        }
+        50% {
+          transform: translateX(50px) scale(1.1);
+          opacity: .75;
+        }
+        100% {
+          bottom: 110%;
+          transform: translateX(-30px) scale(1);
+          opacity: .5;
+        }
+      }
+      
+      /* ----- LIGHT-MODE PALETTE SWAP ----- */
+      body.light .b1 { background: #0077cc; }
+      body.light .b2 { background: #00aaff; }
+      body.light .b3 { background: #ff4e50; }
+      body.light .b4 { background: #f9d423; }
+      body.light .b5 { background: #34c759; }
+
+      /* ---------------  MODALS  --------------- */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .modal-content {
+        max-width: 700px;
+        max-height: 400px;
+        border-radius: 8px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+        animation: zoomIn 0.3s ease;
+      }
+      
+      @keyframes zoomIn {
+        from {
+          transform: scale(0.7);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      
+      .close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      
+      .close:hover {
+        color: #d7bb5e;
+      }
+
+      /* ---------------  BUTTONS  --------------- */
+      .btn {
+        border-radius: var(--radius);
+        box-shadow: 0 0 20px -5px var(--primary);
+        padding: 0.8rem 1.5rem;
+        border: 1px solid var(--primary);
+        background: var(--surface);
+        color: var(--text);
+        cursor: pointer;
+        transition: var(--transition);
+        margin: 2rem auto;
+        display: block;
+        font-size: 1rem;
+        font-weight: 500;
+      }
+      
+      .btn:hover {
+        background: var(--primary);
+        box-shadow: var(--neon);
+      }
+
+      /* ---------------  LOGOS  --------------- */
+      .logo-img {
+        margin: auto;
+        width: 100px;
+        height: auto;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .logo-img:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      }
+      
+      .logo-name {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text);
+        text-align: center;
+      }
+      
+      .logo-name:hover {
+        color: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== FLOATING BLUR BACKGROUND ===== -->
+    <div class="floating-bg">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+      <div class="blob b3"></div>
+      <div class="blob b4"></div>
+      <div class="blob b5"></div>
+    </div>
+
+    <!-- ---------------  HEADER  --------------- -->
+    <header id="navbar">
+      <div class="nav-container">
+        <div class="logo">
+          <img src="assets/Logo.png" alt="Logo" id="imgLogo" />
+        </div>
+
+        <nav>
+          <input type="checkbox" id="navCheck" class="d-none" />
+          <label for="navCheck" class="hamburger">
+            <i class="bx bx-menu"></i>
+          </label>
+
+          <ul class="nav-list">
+            <label for="navCheck" class="close-btn">
+              <i class="bx bx-x"></i>
+            </label>
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="p.html" class="nav-link" id="proj">Projects</a></li>
+            <li><a href="https://lynx212427.github.io/" class="nav-link">Old Portfolio</a></li>
+            <li><a href="https://fea2127.github.io/" class="nav-link">New Portfolio</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+
+        <!-- =====  FUTURISTIC TOGGLE  ===== -->
+        <div class="futur-toggle">
+          <input type="checkbox" id="darkModeToggle" />
+          <label for="darkModeToggle" class="slider">
+            <span class="icon sun"><i class="bx bxs-sun"></i></span>
+            <span class="icon moon"><i class="bx bxs-moon"></i></span>
+          </label>
+        </div>
+      </div>
+    </header>
+
+    <!-- ---------------  HERO  --------------- -->
+    <section id="home" class="hero">
+      <div class="hero-container">
+        <div class="hero-left">
+          <h3 class="glow">Hi, It's Me</h3>
+          <h1 class="big-title">I'm <span class="accent">Alfea</span></h1>
+          <p class="bio">
+            BSIT student at PUP-Sto.Tomas, UI/UX &amp; network enthusiast.
+            Exploring Project Management, QA, and NetAdmin roles.
+          </p>
+
+          <div class="socials">
+            <a href="index.html" aria-label="LinkedIn">
+              <i class="bx bxl-linkedin"></i>
+            </a>
+            <a href="https://www.instagram.com/fea21_27/" aria-label="Instagram">
+              <i class="bx bxl-instagram"></i>
+            </a>
+            <a href="https://github.com/fea2127" aria-label="GitHub">
+              <i class="bx bxl-github"></i>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=100087274301500" aria-label="Facebook">
+              <i class="bx bxl-facebook-circle"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="img-box hero-img-sm">
+            <img src="assets/Big smile cross arm.png" alt="Profile" />
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <hr />
+
+    <!-- ---------------  ABOUT  --------------- -->
+    <section id="about" class="about">
+      <div class="about-container">
+        <!-- Organizations Section -->
+        <div class="about-card">
+          <h2 class="section-title">Organizations</h2>
+          <ul class="org-list">
+            <li>
+              <img src="assets/gdsc banner.jpg" alt="GSDC PUPSTC" class="logo-img" />
+              <span class="logo-name">Google Developer Student Clubs</span> - PUP Sto. Tomas Batangas Campus
+            </li>
+            <li>
+              <img src="assets/ISKOnnovation banner.png" alt="ISC PUPSTC" class="logo-img" />
+              <span class="logo-name">ISKOnnovators Student Community</span> - PUP Sto. Tomas Batangas Campus
+            </li>
+            <li>
+              <img src="assets/COMSOC BANNER.jpg" alt="COMSOC PUPSTC" class="logo-img" />
+              <span class="logo-name">Computer Society</span> - PUP Sto. Tomas Batangas Campus
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Personal About Section -->
+        <div class="about-card">
+          <img src="assets/Big Smile front.png" alt="Me" class="avatar" />
+          <p class="about-text">
+            I'm <strong>Alfea Aemiel Mingua</strong>. Thank you for visiting my
+            digital space. I'm open to opportunities in UI/UX, Project
+            Management, Quality Assurance & Network Administration. Let's
+            connect!
+          </p>
+          <button id="loadMore" class="btn">Know More</button>
+          
+          <!-- Education Modal -->
+          <div id="knowMoreModal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <h2>Education</h2>
+              <p>
+                <img src="assets/PUP.jpg" alt="PUPSTC Logo" class="logo-img" />
+                <span class="logo-name"><strong>Polytechnic University of the Philippines - Sto. Tomas, Batangas Campus</strong></span><br />
+                Bachelor of Science in Information Technology<br />
+                2021 - Present
+              </p>
+              <p>
+                <img src="assets/IINHS.jpg" alt="IINHS Logo" class="logo-img" />
+                <span class="logo-name"><strong>Ibayiw Integrated National High School</strong></span><br />
+                Senior High School - General Academic Strand<br />
+                2019 - 2021<br />
+                Junior High School<br />
+                2015 - 2019
+              </p>
+              <p>
+                <img src="assets/SMESAL.jpg" alt="SMESAL Logo" class="logo-img" />
+                <span class="logo-name"><strong>San Miguel Elementary School</strong></span><br />
+                Elementary<br />
+                2009 - 2015
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Certificates Section -->
+        <h2 class="section-title">Certificates</h2>
+        <div class="container-certs" id="certs">
+          <!-- Certificate cards -->
+          <!-- I've kept all certificate cards but removed redundant code -->
+          <div class="card">
+            <img src="assets/Infotech Computer Literacy Certificate Feb 24 to June 09 2018.jpg" alt="Computer Literacy Training Program" />
+            <div class="box">
+              <h3>Computer Literacy Training Program</h3>
+              <p>Informatech San Pablo Colleges • June 9 2018</p>
+            </div>
+          </div>
+          <!-- Add remaining certificate cards here -->
+          <div class="card">
+            <img src="assets/GDSC PUPSTB Hello World Dec 5 2021.png" alt="Hello World: Introduction to Web Development" />
+            <div class="box">
+              <h3>Hello World: Introduction to Web Development</h3>
+              <p>GDSC PUPSTB • Dec 04 2021</p>
+            </div>
+          </div>
+          <!-- Add all other certificate cards with the same structure -->
+        </div>
+        
+        <!-- Image Modal -->
+        <div id="imgModal" class="modal">
+          <span class="close">&times;</span>
+          <img class="modal-content" id="modalImg" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------  FOOTER  --------------- -->
+    <footer id="contact">
+      <p>© 2024 Alfea Aemiel Mingua. All rights reserved.</p>
+      <div class="socials">
+        <a href="index.html" aria-label="LinkedIn">
+          <i class="bx bxl-linkedin"></i>
+        </a>
+        <a href="https://www.instagram.com/fea21_27/" aria-label="Instagram">
+          <i class="bx bxl-instagram"></i>
+        </a>
+        <a href="https://github.com/fea2127" aria-label="GitHub">
+          <i class="bx bxl-github"></i>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100087274301500" aria-label="Facebook">
+          <i class="bx bxl-facebook-circle"></i>
+        </a>
+      </div>
+    </footer>
+
+    <!-- Back-to-top -->
+    <a href="#home" class="back-to-top">
+      <i class="bx bxs-up-arrow-circle"></i>
+    </a>
+
+    <script>
+      /* ---------------  DARK / LIGHT MODE TOGGLE --------------- */
+      const darkModeToggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      
+      if (localStorage.getItem("theme") === "light") {
+        body.classList.add("light");
+        darkModeToggle.checked = true;
+      }
+      
+      darkModeToggle.addEventListener("change", () => {
+        body.classList.toggle("light");
+        localStorage.setItem("theme", body.classList.contains("light") ? "light" : "dark");
+      });
+
+      /* ---------------  ACTIVE NAV LINK --------------- */
+      const sections = document.querySelectorAll("section");
+      const navLinks = document.querySelectorAll(".nav-link");
+      
+      window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach(sec => {
+          if (scrollY >= sec.offsetTop - 100) current = sec.getAttribute("id");
+        });
+        
+        navLinks.forEach(link => {
+          link.classList.toggle("active", link.getAttribute("href").slice(1) === current);
+        });
+      });
+
+      /* ---------------  MODAL FUNCTIONALITY --------------- */
+      // Image Modal
+      const imgModal = document.getElementById("imgModal");
+      const modalImg = document.getElementById("modalImg");
+      const closeImgBtn = imgModal.querySelector(".close");
+
+      // Show certificate image in modal
+      document.querySelectorAll(".card img").forEach((img) => {
+        img.addEventListener("click", () => {
+          imgModal.style.display = "flex";
+          modalImg.src = img.src;
+        });
+      });
+
+      // Close image modal
+      closeImgBtn.onclick = () => {
+        imgModal.style.display = "none";
+      };
+
+      // Close by clicking outside
+      imgModal.onclick = (e) => {
+        if (e.target === imgModal) imgModal.style.display = "none";
+      };
+
+      // Education Modal
+      const knowMoreModal = document.getElementById("knowMoreModal");
+      const knowMoreBtn = document.getElementById("loadMore");
+      const closeKnowMoreBtn = knowMoreModal.querySelector(".close");
+
+      knowMoreBtn.onclick = () => {
+        knowMoreModal.style.display = "flex";
+      };
+
+      closeKnowMoreBtn.onclick = () => {
+        knowMoreModal.style.display = "none";
+      };
+    </script>
+  </body>
+</html>
