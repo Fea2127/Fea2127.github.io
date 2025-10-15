@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Tester</title>
+    <style>
+      html {
+        --s: 200px; /* control the size */
+
+        background: repeating-conic-gradient(
+              from 30deg,
+              #0000 0 120deg,
+              #3c3c3c 0 180deg
+            )
+            calc(0.5 * var(--s)) calc(0.5 * var(--s) * 0.577),
+          repeating-conic-gradient(
+            from 30deg,
+            #1d1d1d 0 60deg,
+            #4e4f51 0 120deg,
+            #3c3c3c 0 180deg
+          );
+        background-size: var(--s) calc(var(--s) * 0.577);
+        /* 0.577 = tan(30deg)*/
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container"></div>
+  </body>
+</html>
