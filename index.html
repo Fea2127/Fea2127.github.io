@@ -444,131 +444,45 @@
       }
     }
 
-    /* ===== FLOATING BLUR BACKGROUND ===== */
-    .floating-bg {
+    /* ===== HYPERLOOP PARTICLE BACKGROUND ===== */
+    #hyperloopCanvas {
       position: fixed;
-      inset: 0;
-      /* top:0 right:0 bottom:0 left:0 */
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
       z-index: -1;
-      /* keep it behind hero / nav */
-      overflow: hidden;
     }
 
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(40px);
-      /* soft glow – tweak to taste */
-      opacity: .55;
-      animation: floatUp linear infinite;
-      bottom: -200px;
-      /* start below viewport */
+    /* Additional CSS for download button */
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #8a2be2 0%, #6a1cb0 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
     }
 
-    /* --- sizes, colors, timing --- */
-    .b1 {
-      width: 260px;
-      height: 260px;
-      background: #45a9e7;
-      left: 8%;
-      animation-duration: 32s;
-      animation-delay: 0s;
+    .download-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
+      background: linear-gradient(135deg, #9d4edd 0%, #7b2cbf 100%);
     }
 
-    .b2 {
-      width: 320px;
-      height: 320px;
-      background: #00e5ff;
-      left: 30%;
-      animation-duration: 45s;
-      animation-delay: 3s;
+    .download-btn i {
+      font-size: 1.2em;
     }
 
-    .b3 {
-      width: 220px;
-      height: 220px;
-      background: #ff4e50;
-      left: 55%;
-      animation-duration: 28s;
-      animation-delay: 1.5s;
-    }
-
-    .b4 {
-      width: 380px;
-      height: 380px;
-      background: #f9d423;
-      left: 75%;
-      animation-duration: 50s;
-      animation-delay: 5s;
-    }
-
-    .b5 {
-      width: 240px;
-      height: 240px;
-      background: #a1ffce;
-      left: 45%;
-      animation-duration: 38s;
-      animation-delay: 2s;
-    }
-
-    /* --- keyframes  --- */
-    @keyframes floatUp {
-      0% {
-        bottom: -200px;
-        transform: translateX(0) scale(1);
-        opacity: .5;
-      }
-
-      50% {
-        transform: translateX(50px) scale(1.1);
-        opacity: .75;
-      }
-
-      100% {
-        bottom: 110%;
-        transform: translateX(-30px) scale(1);
-        opacity: .5;
-      }
-    }
-
-    /* ----- LIGHT-MODE PALETTE SWAP ----- */
-    body.light .b1 {
-      background: #0077cc;
-    }
-
-    body.light .b2 {
-      background: #00aaff;
-    }
-
-    body.light .b3 {
-      background: #ff4e50;
-    }
-
-    body.light .b4 {
-      background: #f9d423;
-    }
-
-    body.light .b5 {
-      background: #34c759;
-    }
-
-    /* ---------------  VISITOR COUNT  --------------- */
-    /* #visitor-counter {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px 40px;
-      border-radius: 15px;
-      backdrop-filter: blur(10px);
-      font-size: 2rem;
-      font-weight: bold;
-      color: #e63946;
-      box-shadow: 0 0 15px rgba(255,0,0,0.3);
-      transition: transform 0.2s ease;
-    }
-
-    #visitor-counter:hover {
-      transform: scale(1.05);
-    } */
     /* Popup Image Modal */
     .modal {
       display: none;
@@ -699,47 +613,13 @@
       justify-content: center;
       align-items: center;
     }
-
-    /* Additional CSS for download button */
-    .download-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 20px;
-      padding: 12px 24px;
-      background: linear-gradient(135deg, #8a2be2 0%, #6a1cb0 100%);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .download-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
-      background: linear-gradient(135deg, #9d4edd 0%, #7b2cbf 100%);
-    }
-
-    .download-btn i {
-      font-size: 1.2em;
-    }
   </style>
 </head>
 
 <body>
-  <!-- ===== FLOATING BLUR BACKGROUND ===== -->
-  <div class="floating-bg">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="blob b3"></div>
-    <div class="blob b4"></div>
-    <div class="blob b5"></div>
-  </div>
+  <!-- ===== HYPERLOOP PARTICLE BACKGROUND ===== -->
+  <canvas id="hyperloopCanvas"></canvas>
+
   <!-- ---------------  HEADER  --------------- -->
   <header id="navbar">
     <div class="nav-container">
@@ -1054,7 +934,151 @@
   <!-- Back-to-top -->
   <a href="#home" class="back-to-top"><i class="bx bxs-up-arrow-circle"></i></a>
 
-  <script>/* ---------------  DARK / LIGHT --------------- */
+  <script>
+    /* ===== HYPERLOOP PARTICLE SYSTEM ===== */
+    const hyperloopCanvas = document.getElementById("hyperloopCanvas");
+    const ctx = hyperloopCanvas.getContext("2d");
+
+    hyperloopCanvas.width = window.innerWidth;
+    hyperloopCanvas.height = window.innerHeight;
+
+    let particles = [];
+    const particleCount = 200;
+
+    // Neon colors in RGB format
+    const neonColors = [
+      {r: 255, g: 0, b: 128},    // Neon Red-Pink
+      {r: 0, g: 255, b: 255},    // Cyan
+      {r: 255, g: 255, b: 0},    // Yellow
+      {r: 255, g: 165, b: 0},    // Orange
+      {r: 0, g: 255, b: 0},      // Green
+      {r: 128, g: 0, b: 255}     // Purple
+    ];
+
+    class Particle {
+      constructor() {
+        this.reset();
+        this.z = Math.random() * hyperloopCanvas.width;
+        this.color = neonColors[Math.floor(Math.random() * neonColors.length)];
+      }
+
+      reset() {
+        this.x = Math.random() * hyperloopCanvas.width;
+        this.y = Math.random() * hyperloopCanvas.height;
+        this.z = hyperloopCanvas.width;
+        this.size = Math.random() * 5 + 1;
+        this.speedZ = Math.random() * 5 + 1;
+        this.color = neonColors[Math.floor(Math.random() * neonColors.length)];
+      }
+
+      update() {
+        // Move particle forward (toward viewer)
+        this.z -= this.speedZ;
+        
+        // Reset particle if it goes behind the viewer
+        if (this.z <= 0) {
+          this.reset();
+          this.z = hyperloopCanvas.width;
+        }
+      }
+
+      draw() {
+        // Calculate perspective
+        const perspective = hyperloopCanvas.width / (hyperloopCanvas.width + this.z);
+        const x = this.x * perspective;
+        const y = this.y * perspective;
+        const size = this.size * perspective;
+
+        // Draw particle with glow effect
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        
+        // Create gradient for glow effect
+        const gradient = ctx.createRadialGradient(x, y, 0, x, y, size * 2);
+        gradient.addColorStop(0, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, 1)`);
+        gradient.addColorStop(1, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, 0)`);
+        
+        ctx.fillStyle = gradient;
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function drawConnections() {
+      // Draw connecting lines between nearby particles
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const p1 = particles[i];
+          const p2 = particles[j];
+          
+          // Calculate perspective for both particles
+          const perspective1 = hyperloopCanvas.width / (hyperloopCanvas.width + p1.z);
+          const x1 = p1.x * perspective1;
+          const y1 = p1.y * perspective1;
+          
+          const perspective2 = hyperloopCanvas.width / (hyperloopCanvas.width + p2.z);
+          const x2 = p2.x * perspective2;
+          const y2 = p2.y * perspective2;
+          
+          // Calculate distance
+          const dx = x1 - x2;
+          const dy = y1 - y2;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          // Draw line if particles are close enough
+          if (distance < 100) {
+            // Calculate line opacity based on distance and z-position
+            const opacity = Math.max(0, 1 - distance / 100) * 0.3;
+            
+            // Create gradient for the line
+            const gradient = ctx.createLinearGradient(x1, y1, x2, y2);
+            gradient.addColorStop(0, `rgba(${p1.color.r}, ${p1.color.g}, ${p1.color.b}, ${opacity})`);
+            gradient.addColorStop(1, `rgba(${p2.color.r}, ${p2.color.g}, ${p2.color.b}, ${opacity})`);
+            
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animateHyperloop() {
+      // Clear with a fade effect for trails
+      ctx.fillStyle = 'rgba(13, 15, 23, 0.1)';
+      ctx.fillRect(0, 0, hyperloopCanvas.width, hyperloopCanvas.height);
+      
+      // Update and draw particles
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+      
+      // Draw connections between particles
+      drawConnections();
+      
+      requestAnimationFrame(animateHyperloop);
+    }
+
+    // Initialize and start hyperloop animation
+    initParticles();
+    animateHyperloop();
+
+    // Handle window resize
+    window.addEventListener("resize", () => {
+      hyperloopCanvas.width = window.innerWidth;
+      hyperloopCanvas.height = window.innerHeight;
+    });
+
+    /* ---------------  DARK / LIGHT --------------- */
     const darkModeToggle = document.getElementById("darkModeToggle");
     const body = document.body;
     if (localStorage.getItem("theme") === "light") {
@@ -1126,7 +1150,8 @@
 
     closeKnowMoreBtn.onclick = () => {
       knowMoreModal.style.display = "none";
-    };</script>
+    };
+  </script>
 </body>
 
 </html>
