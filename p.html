@@ -1,4 +1,3 @@
-<!-- index html start -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -478,7 +477,7 @@
       --accent: #00aaff
     }
 
-    /* ---------------  MODAL STYLES  --------------- */
+    /* ---------------  MODAL STYLES - FIXED --------------- */
     .modal {
       display: none;
       position: fixed;
@@ -496,12 +495,14 @@
 
     .modal-content {
       max-width: 90%;
-      max-height: 80vh;
+      max-height: 90vh;
       border-radius: 8px;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
       animation: zoomIn 0.3s ease;
       background: white;
       padding: 1rem;
+      margin: auto;
+      display: block;
     }
 
     @keyframes zoomIn {
@@ -509,7 +510,6 @@
         transform: scale(0.7);
         opacity: 0;
       }
-
       to {
         transform: scale(1);
         opacity: 1;
@@ -534,10 +534,32 @@
       color: #d7bb5e;
     }
 
-    /* Certificate Modal Specific */
+    /* Certificate Modal Specific - FIXED */
     #imgModal .modal-content {
       background: transparent;
       padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #modalImg {
+      max-width: 100%;
+      max-height: 90vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    /* Modal container for better centering */
+    .modal-content-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      position: relative;
     }
 
     /* ---------------  BUTTONS & OTHER ELEMENTS  --------------- */
@@ -698,7 +720,7 @@
       /* Modal mobile fixes */
       .modal-content {
         max-width: 95%;
-        max-height: 70vh;
+        max-height: 85vh;
         padding: 0.5rem;
       }
 
@@ -706,6 +728,10 @@
         top: 0.5rem;
         right: 1rem;
         font-size: 1.8rem;
+      }
+
+      #modalImg {
+        max-height: 85vh;
       }
 
       /* Back to top button mobile positioning */
@@ -1087,10 +1113,12 @@
     </div>
   </section>
   <hr />
-  <!-- Popup Image Modal -->
+  <!-- Popup Image Modal - UPDATED -->
   <div id="imgModal" class="modal">
     <span class="close">&times;</span>
-    <img class="modal-content" id="modalImg" />
+    <div class="modal-content-container">
+      <img class="modal-content" id="modalImg" />
+    </div>
   </div>
   <!-- Certificates Section -->
   <h2 class="section-title">Certificates</h2>
@@ -1316,21 +1344,25 @@
       });
     });
 
-    // IMAGE / CERTIFICATE POPUP
+    // IMAGE / CERTIFICATE POPUP - FIXED VERSION
     const imgModal = document.getElementById("imgModal");
     const modalImg = document.getElementById("modalImg");
     const closeImgBtn = imgModal.querySelector(".close");
 
     document.querySelectorAll(".card img").forEach((img) => {
       img.addEventListener("click", () => {
-        imgModal.style.display = "flex";
+        imgModal.style.display = "flex"; // Use flex to enable centering
         modalImg.src = img.src;
+        
+        // Force reflow to ensure proper centering
+        void imgModal.offsetWidth;
       });
     });
 
     closeImgBtn.onclick = () => {
       imgModal.style.display = "none";
     };
+
     imgModal.onclick = (e) => {
       if (e.target === imgModal) imgModal.style.display = "none";
     };
@@ -1672,4 +1704,3 @@ document.addEventListener('DOMContentLoaded', initializeNavigation);</script>
 </body>
 
 </html>
-<!-- index html end -->
