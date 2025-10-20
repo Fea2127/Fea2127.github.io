@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Alert</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        header {
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        p {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .status-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .location-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        
+        .location-icon {
+            color: #3498db;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .emergency-button {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 18px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .emergency-button:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.6);
+        }
+        
+        .emergency-button:active {
+            transform: translateY(0);
+        }
+        
+        .emergency-button:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .alert-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .alert-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 90%;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+        
+        .alert-title {
+            color: #e74c3c;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .alert-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .alert-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .cancel-button {
+            background: #ecf0f1;
+            color: #7f8c8d;
+        }
+        
+        .confirm-button {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .map-container {
+            height: 200px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7f8c8d;
+        }
+        
+        .instructions {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: left;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .instructions h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        footer {
+            margin-top: 30px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .loading {
+            display: none;
+            margin: 20px 0;
+        }
+        
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Emergency Alert</h1>
+            <p>Send an immediate alert to people within 1km radius when you need help</p>
+        </header>
+        
+        <div class="status-card">
+            <h2>Your Current Status</h2>
+            <div class="location-info">
+                <span class="location-icon">📍</span>
+                <span id="location-text">Acquiring your location...</span>
+            </div>
+            <div class="map-container" id="map-placeholder">
+                Map will appear here when location is available
+            </div>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Processing your request...</p>
+        </div>
+        
+        <button class="emergency-button" id="emergency-btn" disabled>
+            SEND EMERGENCY ALERT
+        </button>
+        
+        <div class="instructions">
+            <h3>How it works:</h3>
+            <ol>
+                <li>Allow location access when prompted</li>
+                <li>Press the emergency button when you need help</li>
+                <li>People within 1km will receive your alert with your location</li>
+                <li>Help will be on the way as quickly as possible</li>
+            </ol>
+        </div>
+        
+        <footer>
+            <p>This is a prototype. In a real implementation, alerts would be sent to registered users nearby.</p>
+        </footer>
+    </div>
+    
+    <div class="alert-modal" id="alert-modal">
+        <div class="alert-content">
+            <h2 class="alert-title">Emergency Alert</h2>
+            <p>Are you sure you want to send an emergency alert to people within 1km radius?</p>
+            <p><strong>This should only be used in real emergencies.</strong></p>
+            <div class="alert-buttons">
+                <button class="alert-button cancel-button" id="cancel-alert">Cancel</button>
+                <button class="alert-button confirm-button" id="confirm-alert">Send Alert</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM elements
+        const locationText = document.getElementById('location-text');
+        const emergencyBtn = document.getElementById('emergency-btn');
+        const alertModal = document.getElementById('alert-modal');
+        const cancelAlert = document.getElementById('cancel-alert');
+        const confirmAlert = document.getElementById('confirm-alert');
+        const loading = document.getElementById('loading');
+        const mapPlaceholder = document.getElementById('map-placeholder');
+        
+        // User location
+        let userLocation = null;
+        
+        // Initialize the app
+        function initApp() {
+            // Request location permission
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        userLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        locationText.textContent = `Location acquired: ${userLocation.lat.toFixed(4)}, ${userLocation.lng.toFixed(4)}`;
+                        emergencyBtn.disabled = false;
+                        
+                        // In a real app, you would display a map here
+                        mapPlaceholder.innerHTML = `<p>Map would show your location at (${userLocation.lat.toFixed(4)}, ${userLocation.lng.toFixed(4)})</p>`;
+                    },
+                    error => {
+                        console.error('Error getting location:', error);
+                        locationText.textContent = 'Unable to get your location. Please check permissions.';
+                    }
+                );
+            } else {
+                locationText.textContent = 'Geolocation is not supported by this browser.';
+            }
+            
+            // Set up event listeners
+            emergencyBtn.addEventListener('click', showAlertModal);
+            cancelAlert.addEventListener('click', hideAlertModal);
+            confirmAlert.addEventListener('click', sendEmergencyAlert);
+        }
+        
+        // Show the confirmation modal
+        function showAlertModal() {
+            alertModal.style.display = 'flex';
+        }
+        
+        // Hide the confirmation modal
+        function hideAlertModal() {
+            alertModal.style.display = 'none';
+        }
+        
+        // Send the emergency alert
+        function sendEmergencyAlert() {
+            hideAlertModal();
+            loading.style.display = 'block';
+            emergencyBtn.disabled = true;
+            
+            // Simulate API call to send alert
+            setTimeout(() => {
+                loading.style.display = 'none';
+                emergencyBtn.disabled = false;
+                
+                // In a real app, this would connect to your backend
+                alert('Emergency alert sent! People within 1km radius have been notified.');
+                
+                // Here you would typically:
+                // 1. Send the user's location to your server
+                // 2. The server would calculate users within 1km radius
+                // 3. Send push notifications to those users
+                
+            }, 2000);
+        }
+        
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
