@@ -1101,6 +1101,7 @@
     };
 
 
+   
     // KNOW MORE (Education Modal)
     const knowMoreModal = document.getElementById("knowMoreModal");
     const knowMoreBtn = document.getElementById("loadMore");
@@ -1110,4 +1111,13 @@
       knowMoreModal.style.display = "flex";
     };
 
-    closeKnowMoreBtn.oncl
+    closeKnowMoreBtn.onclick = () => {
+      knowMoreModal.style.display = "none";
+    };
+
+    // Initialize particles on load
+    createParticles();
+  </script>
+</body>
+
+</html>
