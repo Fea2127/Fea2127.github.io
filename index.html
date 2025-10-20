@@ -2,14 +2,15 @@
 <html lang="en">
 
 <head>
+<base href="https://v3vibotfhbtxe.ok.kimi.link">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trial| Portfolio</title>
 
   <!-- ICONS / FONTS -->
   <link rel="icon" href="assets/Logo.png" />
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css " rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300 ;400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- CUSTOM -->
   <style>
@@ -50,7 +51,7 @@
       position: relative;
     }
 
-    /* Fixed background for entire page - ONLY FOR BACKGROUND */
+    /* Fixed background for entire page */
     body::before {
       content: '';
       position: fixed;
@@ -58,20 +59,21 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: linear-gradient(135deg, rgba(13, 15, 23, 0.85) 0%, rgba(23, 26, 41, 0.75) 100%);
+      background: linear-gradient(135deg, rgba(13, 15, 23, 0.85) 0%, rgba(23, 26, 41, 0.75) 100%),
+                  url('human-figure-dark.png') center/cover no-repeat fixed;
+      background-blend-mode: overlay;
       z-index: -2;
     }
 
     body.light::before {
-      background: linear-gradient(135deg, rgba(242, 244, 252, 0.9) 0%, rgba(255, 255, 255, 0.8) 100%);
+      background: linear-gradient(135deg, rgba(242, 244, 252, 0.9) 0%, rgba(255, 255, 255, 0.8) 100%),
+                  url('human-figure-background.png') center/cover no-repeat fixed;
+      background-blend-mode: overlay;
     }
 
-    /* Ensure images display properly */
     img {
       max-width: 100%;
-      display: block;
-      position: relative;
-      z-index: 1;
+      display: block
     }
 
     a {
@@ -210,7 +212,7 @@
 
     .sun {
       left: 3px;
-      color: #ffdf00 !important; /* Always yellow */
+      color: #ffdf00
     }
 
     .moon {
@@ -225,7 +227,7 @@
 
     input:checked+.slider .sun {
       transform: translateX(34px);
-      color: #ffdf00 !important; /* Always yellow even when moved */
+      color: #ffdf00
     }
 
     input:checked+.slider .moon {
@@ -259,7 +261,7 @@
     }
 
     .bio {
-      color: var(--text-dim);
+      color: var(--text);
       max-width: 500px
     }
 
@@ -373,9 +375,7 @@
     .card img {
       height: 300px;
       object-fit: cover;
-      width: 100%;
-      position: relative;
-      z-index: 1;
+      width: 100%
     }
 
     .box {
@@ -699,7 +699,7 @@
   </style>
 </head>
 
-<body>
+<body class="light">
   <!-- ===== BACKGROUND ANIMATION ===== -->
   <div class="bg-animation">
     <div class="floating-particles" id="particles"></div>
@@ -724,10 +724,10 @@
             <a href="p.html" class="nav-link" id="proj">Projects</a>
           </li>
           <li>
-            <a href="https://lynx212427.github.io/" class="nav-link">Old Portfolio</a>
+            <a href="https://lynx212427.github.io/ " class="nav-link">Old Portfolio</a>
           </li>
           <li>
-            <a href="https://fea2127.github.io/" class="nav-link">New Portfolio</a>
+            <a href="https://fea2127.github.io/ " class="nav-link">New Portfolio</a>
           </li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
@@ -761,9 +761,9 @@
 
         <div class="socials">
           <a href="index.html" aria-label="LinkedIn"><i class="bx bxl-linkedin"></i></a>
-          <a href="https://www.instagram.com/fea21_27/" aria-label="Instagram"><i class="bx bxl-instagram"></i></a>
-          <a href="https://github.com/fea2127" aria-label="GitHub"><i class="bx bxl-github"></i></a>
-          <a href="https://www.facebook.com/profile.php?id=100087274301500" aria-label="Facebook"><i
+          <a href="https://www.instagram.com/fea21_27/ " aria-label="Instagram"><i class="bx bxl-instagram"></i></a>
+          <a href="https://github.com/fea2127 " aria-label="GitHub"><i class="bx bxl-github"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=100087274301500 " aria-label="Facebook"><i
               class="bx bxl-facebook-circle"></i></a>
         </div>
       </div>
@@ -1009,9 +1009,9 @@
     <p>© 2024 Alfea Aemiel Mingua. All rights reserved.</p>
     <div class="socials">
       <a href="index.html" aria-label="LinkedIn"><i class="bx bxl-linkedin"></i></a>
-      <a href="https://www.instagram.com/fea21_27/" aria-label="Instagram"><i class="bx bxl-instagram"></i></a>
-      <a href="https://github.com/fea2127" aria-label="GitHub"><i class="bx bxl-github"></i></a>
-      <a href="https://www.facebook.com/profile.php?id=100087274301500" aria-label="Facebook"><i
+      <a href="https://www.instagram.com/fea21_27/ " aria-label="Instagram"><i class="bx bxl-instagram"></i></a>
+      <a href="https://github.com/fea2127 " aria-label="GitHub"><i class="bx bxl-github"></i></a>
+      <a href="https://www.facebook.com/profile.php?id=100087274301500 " aria-label="Facebook"><i
           class="bx bxl-facebook-circle"></i></a>
     </div>
   </footer>
@@ -1046,15 +1046,11 @@
       }
     }
 
-    // Initialize particles
-    createParticles();
-
     /* ---------------  DARK / LIGHT --------------- */
     const darkModeToggle = document.getElementById("darkModeToggle");
     const body = document.body;
     
     // Set dark mode as default (toggle is checked by default in HTML)
-    // Remove any light class that might be set
     body.classList.remove("light");
     localStorage.setItem("theme", "dark");
     
@@ -1099,6 +1095,7 @@
       if (e.target === imgModal) imgModal.style.display = "none";
     };
 
+
     // KNOW MORE (Education Modal)
     const knowMoreModal = document.getElementById("knowMoreModal");
     const knowMoreBtn = document.getElementById("loadMore");
@@ -1112,10 +1109,8 @@
       knowMoreModal.style.display = "none";
     };
 
-    // Close modal by clicking outside
-    knowMoreModal.onclick = (e) => {
-      if (e.target === knowMoreModal) knowMoreModal.style.display = "none";
-    };
+    // Initialize particles on load
+    createParticles();
   </script>
 </body>
 
