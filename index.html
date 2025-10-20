@@ -2,15 +2,17 @@
 <html lang="en">
 
 <head>
+<base href="https://v3vibotfhbtxe.ok.kimi.link">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Realistic Human Portfolio | Alfea</title>
+  <title>Trial| Portfolio</title>
 
   <!-- ICONS / FONTS -->
   <link rel="icon" href="assets/Logo.png" />
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css " rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300 ;400;500;600;700&display=swap" rel="stylesheet" />
 
+  <!-- CUSTOM -->
   <style>
     /* ---------------  ROOT TOKENS  --------------- */
     :root {
@@ -45,7 +47,28 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      overflow-x: hidden
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Fixed background for entire page */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(135deg, rgba(13, 15, 23, 0.85) 0%, rgba(23, 26, 41, 0.75) 100%),
+                  url('human-figure-dark.png') center/cover no-repeat fixed;
+      background-blend-mode: overlay;
+      z-index: -2;
+    }
+
+    body.light::before {
+      background: linear-gradient(135deg, rgba(242, 244, 252, 0.9) 0%, rgba(255, 255, 255, 0.8) 100%),
+                  url('human-figure-background.png') center/cover no-repeat fixed;
+      background-blend-mode: overlay;
     }
 
     img {
@@ -217,14 +240,18 @@
       padding: 10rem 1.2rem 4rem;
       min-height: 100vh;
       display: grid;
-      place-content: center
+      place-content: center;
+      position: relative;
+      z-index: 1;
     }
 
     .hero-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
-      align-items: center
+      align-items: center;
+      position: relative;
+      z-index: 1;
     }
 
     .big-title {
@@ -270,7 +297,15 @@
 
     /* ---------------  ABOUT / CERTIFICATES  --------------- */
     .about {
-      padding: 5rem 1.2rem
+      padding: 5rem 1.2rem;
+      background: rgba(13, 15, 23, 0.85);
+      backdrop-filter: blur(10px);
+      position: relative;
+      z-index: 1;
+    }
+
+    body.light .about {
+      background: rgba(242, 244, 252, 0.85);
     }
 
     .about-container {
@@ -356,7 +391,15 @@
       text-align: center;
       padding: 3rem 1.2rem 2rem;
       font-size: .9rem;
-      color: var(--text-dim)
+      color: var(--text-dim);
+      background: rgba(13, 15, 23, 0.85);
+      backdrop-filter: blur(10px);
+      position: relative;
+      z-index: 1;
+    }
+
+    body.light footer {
+      background: rgba(242, 244, 252, 0.85);
     }
 
     footer .socials {
@@ -443,45 +486,35 @@
       }
     }
 
-    /* ===== REALISTIC HUMAN FIGURE BACKGROUND ===== */
-    #threeCanvas {
+    /* ===== BACKGROUND ANIMATION ===== */
+    .bg-animation {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       z-index: -1;
+      opacity: 0.3;
     }
 
-    .canvas-controls {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      z-index: 100;
-      background: var(--surface);
-      padding: 10px;
-      border-radius: 8px;
-      backdrop-filter: var(--blur);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
+    .floating-particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
     }
 
-    .canvas-controls button {
+    .particle {
+      position: absolute;
       background: var(--primary);
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: var(--transition);
-      font-size: 12px;
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: float 6s ease-in-out infinite;
     }
 
-    .canvas-controls button:hover {
-      background: var(--accent);
-      box-shadow: var(--neon);
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
     }
 
     /* Additional CSS for download button */
@@ -540,7 +573,6 @@
         transform: scale(0.7);
         opacity: 0;
       }
-
       to {
         transform: scale(1);
         opacity: 1;
@@ -667,24 +699,17 @@
   </style>
 </head>
 
-<body>
-  <!-- ===== REALISTIC HUMAN FIGURE BACKGROUND ===== -->
-  <canvas id="threeCanvas"></canvas>
-  
-  <!-- Canvas Controls -->
-  <div class="canvas-controls">
-    <button id="toggleRotation">Pause Rotation</button>
-    <button id="changeColor">Change Color</button>
-    <button id="toggleStipple">Disable Stipple</button>
-    <button id="toggleWireframe">Show Wireframe</button>
+<body class="light">
+  <!-- ===== BACKGROUND ANIMATION ===== -->
+  <div class="bg-animation">
+    <div class="floating-particles" id="particles"></div>
   </div>
 
   <!-- ---------------  HEADER  --------------- -->
   <header id="navbar">
     <div class="nav-container">
       <div class="logo">
-        <!-- Placeholder for logo -->
-        <div style="width:48px; height:48px; background:var(--primary); border-radius:8px;"></div>
+        <img src="assets/Logo.png" alt="Logo" id="imgLogo" />
       </div>
 
       <nav>
@@ -699,10 +724,10 @@
             <a href="p.html" class="nav-link" id="proj">Projects</a>
           </li>
           <li>
-            <a href="https://lynx212427.github.io/" class="nav-link">Old Portfolio</a>
+            <a href="https://lynx212427.github.io/ " class="nav-link">Old Portfolio</a>
           </li>
           <li>
-            <a href="https://fea2127.github.io/" class="nav-link">New Portfolio</a>
+            <a href="https://fea2127.github.io/ " class="nav-link">New Portfolio</a>
           </li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
@@ -710,7 +735,7 @@
 
       <!-- =====  FUTURISTIC TOGGLE  ===== -->
       <div class="futur-toggle">
-        <input type="checkbox" id="darkModeToggle" />
+        <input type="checkbox" id="darkModeToggle" checked />
         <label for="darkModeToggle" class="slider">
           <span class="icon sun"><i class="bx bxs-sun"></i></span>
           <span class="icon moon"><i class="bx bxs-moon"></i></span>
@@ -736,318 +761,299 @@
 
         <div class="socials">
           <a href="index.html" aria-label="LinkedIn"><i class="bx bxl-linkedin"></i></a>
-          <a href="https://www.instagram.com/fea21_27/" aria-label="Instagram"><i class="bx bxl-instagram"></i></a>
-          <a href="https://github.com/fea2127" aria-label="GitHub"><i class="bx bxl-github"></i></a>
-          <a href="https://www.facebook.com/profile.php?id=100087274301500" aria-label="Facebook"><i
+          <a href="https://www.instagram.com/fea21_27/ " aria-label="Instagram"><i class="bx bxl-instagram"></i></a>
+          <a href="https://github.com/fea2127 " aria-label="GitHub"><i class="bx bxl-github"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=100087274301500 " aria-label="Facebook"><i
               class="bx bxl-facebook-circle"></i></a>
         </div>
       </div>
 
       <div class="hero-right">
         <div class="img-box hero-img-sm">
-          <!-- Placeholder for profile image -->
-          <div style="width:200px; height:300px; background:var(--surface); border-radius:var(--radius); display:flex; align-items:center; justify-content:center;">
-            <i class='bx bx-user' style="font-size:80px; color:var(--text-dim);"></i>
-          </div>
+          <img src="assets/Big smile cross arm.png" alt="Profile" />
         </div>
       </div>
     </div>
   </section>
   <hr />
   <br />
+  <!-- <div id="visitor-counter">Visitors Count: 0</div> -->
+  <!-- Organisation -->
+  <div class="about-card">
+    <h2 class="section-title">Organizations</h2>
+    <ul class="org-list">
+      <li>
+        <img src="assets/gdsc banner.jpg" alt="GSDC PUPSTC" class="org-banner" />
+        <span class="org-name">Google Developer Student Clubs</span> -
+        PUP Sto. Tomas Batangas Campus
+        <img src="assets/GDSCPUP.jpg" alt="GSDC PUPSTC" class="org-logo" />
+        <br />
+      </li>
+      <li>
+        <img src="assets/ISKOnnovation banner.png" alt="ISC PUPSTC" class="org-banner" />
+        <span class="org-name">ISKOnnovators Student Community</span> -
+        PUP Sto. Tomas Batangas Campus
+        <img src="assets/ISKOnnovation logo.jpg" alt="ISC PUPSTC" class="org-logo" />
+        <br />
+      </li>
+      <li>
+        <img src="assets/COMSOC BANNER.jpg" alt="COMSOC PUPSTC" class="org-banner" />
+        <span class="org-name">Computer Society</span> -
+        PUP Sto. Tomas Batangas Campus
+        <img src="assets/PUPSTC COMSOC.jpg" alt="COMSOC PUPSTC" class="org-logo" />
+        <br />
+      </li>
+    </ul>
+  </div>
+  <hr />
+  <!-- ---------------  ABOUT  --------------- -->
+  <section id="about" class="about">
+    <div class="about-container">
+      <div class="about-card">
+        <img src="assets/Big Smile front.png" alt="Me" class="avatar" />
+        <p class="about-text">
+          I'm <strong>Alfea Aemiel Mingua</strong>. Thank you for visiting my
+          digital space. I'm open to opportunities in UI/UX, Project
+          Management, Quality Assurance & Network Administration. Let's
+          connect!
+        </p>
+        <button id="loadMore">Know More</button>
+        <!-- Popup knowMore Modal -->
+        <div id="knowMoreModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Education</h2>
+            <p>
+              <img src="assets/PUP.jpg" alt="PUPSTC Logo" class="edu-logo" />
+              <span class="edu-name"><strong>Polytechnic University of the Philippines - Sto.
+                  Tomas, Batangas Campus</strong></span><br />
+              Bachelor of Science in Information Technology<br />
+              2021 - Present<br />
+            </p>
+            <p>
+              <br />
+              <img src="assets/IINHS.jpg" alt="IINHS Logo" class="edu-logo" />
+              <span class="edu-name"><strong>Ibayiw Integrated National High School</strong></span><br />
+              Senior High School - General Academic Strand<br />
+              2019 - 2021<br />
+            </p>
+            <p>
+              Junior High School<br />
+              2015 - 2019<br />
+            </p>
+            <p>
+              <br />
+              <img src="assets/SMESAL.jpg" alt="SMESAL Logo" class="edu-logo" />
+              <span class="edu-name"><strong>San Miguel Elementary School</strong></span><br />
+              Elementary<br />
+              2009 - 2015<br />
+            </p>
+          </div>
+        </div>
+      </div>
 
-  <!-- Three.js Library -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+      <!-- Popup Image Modal -->
+      <div id="imgModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImg" />
+      </div>
+      <!-- Certificates Section -->
+      <h2 class="section-title">Certificates</h2>
+      <div class="container-certs" id="certs">
+        <!-- 16 cert cards -->
+        <div class="card">
+          <img src="assets/Infotech Computer Literacy Certificate Feb 24 to June 09 2018.jpg" alt="" />
+          <div class="box">
+            <h3>Computer Literacy Training Program</h3>
+            <p>Informatech San Pablo Colleges • June 9 2018</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/GDSC PUPSTB Hello World Dec 5 2021.png" alt="" />
+          <div class="box">
+            <h3>Hello World: Introduction to Web Development</h3>
+            <p>GDSC PUPSTB • Dec 04 2021</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/ReConnect D1 Jan 27 2022.png" alt="" />
+          <div class="box">
+            <h3>Cybersecurity Workshop Day 1</h3>
+            <p>PUPTPG • Jan 27-Feb 3 2022</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/ReConnect D2 Jan 28 2022.png" alt="" />
+          <div class="box">
+            <h3>Cybersecurity Workshop Day 2</h3>
+            <p>PUPTPG • Jan 27-Feb 3 2022</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/ReConnect D3 Feb 1 2022.png" alt="" />
+          <div class="box">
+            <h3>Cybersecurity Workshop Day 3</h3>
+            <p>PUPTPG • Jan 27-Feb 3 2022</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/ReConnect D4 Feb 3 2022.png" alt="" />
+          <div class="box">
+            <h3>Cybersecurity Workshop Day 4</h3>
+            <p>PUPTPG • Jan 27-Feb 3 2022</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/ComSoc Cyberworld July 9 2022.png" alt="" />
+          <div class="box">
+            <h3>Cyberworld: You in the online world</h3>
+            <p>PUPSTB ComSoc • July 9-15 2022</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/ComSoc Cyberworld July 10 2022.png" alt="" />
+          <div class="box">
+            <h3>Cyberworld: You in the online world</h3>
+            <p>PUPSTB ComSoc • July 9-15 2022</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/Laravel Nov 26 2022.png" alt="" />
+          <div class="box">
+            <h3>Laravel: PHP Framework for Web Artisans</h3>
+            <p>PUPSTB • Nov 26 2022</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/GDSCPH D1 Tara ML Dec 3 2022.png" alt="" />
+          <div class="box">
+            <h3>Tara ML: Deep Dive in Machine Learning</h3>
+            <p>GDSC PUPSTB • Dec 3-11 2022</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/GDSCPH D2 Tara ML Dec 7 2022.png" alt="" />
+          <div class="box">
+            <h3>Tara ML: Deep Dive in Machine Learning</h3>
+            <p>GDSC PUPSTB • Dec 3-11 2022</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/GDSCPH D3 Tara ML Dec 11 2022.png" alt="" />
+          <div class="box">
+            <h3>Tara ML: Deep Dive in Machine Learning</h3>
+            <p>GDSC PUPSTB • Dec 3-11 2022</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/React Native May 11 2024.png" alt="" />
+          <div class="box">
+            <h3>React Native Running the Starter Template</h3>
+            <p>GDSC USC • May 4 2024</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/Zuitt GDSC Mapua May 19 2024.png" alt="" />
+          <div class="box">
+            <h3>Love at First Site: Web Development</h3>
+            <p>GDSC Mapua MCM • May 19 2024</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/Iskonnovation GDSC Ideathon May 20 2024.png" alt="" />
+          <div class="box">
+            <h3>ISKOnnovation: Culture of Innovation</h3>
+            <p>GDSC PUPSTC • May 20-21 2024</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/GDSC Iskonnovation May 21 2024.png" alt="" />
+          <div class="box">
+            <h3>ISKOnnovation: Culture of Innovation</h3>
+            <p>GDSC PUPSTC • May 20-21 2024</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/Luminara ISKOnnovation Hackathon.jpg" alt="" />
+          <div class="box">
+            <h3>ISKOnnovation: Culture of Innovation</h3>
+            <p>GDSC PUPSTC • May 20-21 2024</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/DevCon Cagayan De Oro Aug 17 2025.png" alt="" />
+          <div class="box">
+            <h3>Think. Code. Build: Intro to Programming</h3>
+            <p>DevCon CDO • Aug 17 2025</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/Gemini Sept 19 2025.png" alt="" />
+          <div class="box">
+            <h3>Building a Web Solution with Gemini and Firebase Studio</h3>
+            <p>GDSC CTU • Sept 19 2025</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/Luxembourg.png" alt="" />
+          <div class="box">
+            <h3>AI Talks at LuxTechPulse & GDG Luxembourg</h3>
+            <p>GDG LUXEMBOURG • Sept 25 2025</p>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- ---------------  FOOTER  --------------- -->
+  <footer id="contact">
+    <p>© 2024 Alfea Aemiel Mingua. All rights reserved.</p>
+    <div class="socials">
+      <a href="index.html" aria-label="LinkedIn"><i class="bx bxl-linkedin"></i></a>
+      <a href="https://www.instagram.com/fea21_27/ " aria-label="Instagram"><i class="bx bxl-instagram"></i></a>
+      <a href="https://github.com/fea2127 " aria-label="GitHub"><i class="bx bxl-github"></i></a>
+      <a href="https://www.facebook.com/profile.php?id=100087274301500 " aria-label="Facebook"><i
+          class="bx bxl-facebook-circle"></i></a>
+    </div>
+  </footer>
+
+  <!-- Back-to-top -->
+  <a href="#home" class="back-to-top"><i class="bx bxs-up-arrow-circle"></i></a>
 
   <script>
-    /* ===== REALISTIC HUMAN FIGURE BACKGROUND ===== */
-    // Scene setup
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 0, 5);
-
-    const canvas = document.getElementById('threeCanvas');
-    const renderer = new THREE.WebGLRenderer({ 
-      antialias: true,
-      canvas: canvas,
-      alpha: true
-    });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x000000, 0); // Transparent background
-
-    // Enhanced lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambientLight);
-
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    directionalLight.position.set(2, 3, 4);
-    scene.add(directionalLight);
-
-    const backLight = new THREE.DirectionalLight(0x4455ff, 0.3);
-    backLight.position.set(-3, -1, -2);
-    scene.add(backLight);
-
-    // Create a more realistic human figure using advanced geometries
-    function createRealisticHumanFigure() {
-      const group = new THREE.Group();
+    /* ===== BACKGROUND PARTICLE ANIMATION ===== */
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 20;
       
-      // Head (ellipsoid for more natural shape)
-      const headGeometry = new THREE.SphereGeometry(0.25, 64, 64);
-      const head = new THREE.Mesh(headGeometry);
-      head.scale.set(1, 1.2, 0.9);
-      head.position.y = 1.6;
-      group.add(head);
-      
-      // Neck (small cylinder)
-      const neckGeometry = new THREE.CylinderGeometry(0.08, 0.1, 0.3, 32);
-      const neck = new THREE.Mesh(neckGeometry);
-      neck.position.y = 1.3;
-      group.add(neck);
-      
-      // Torso (tapered cylinder)
-      const torsoGeometry = new THREE.CylinderGeometry(0.3, 0.4, 1.2, 32);
-      const torso = new THREE.Mesh(torsoGeometry);
-      torso.position.y = 0.5;
-      group.add(torso);
-      
-      // Shoulders
-      const shoulderGeometry = new THREE.SphereGeometry(0.15, 32, 32);
-      
-      const leftShoulder = new THREE.Mesh(shoulderGeometry);
-      leftShoulder.position.set(-0.35, 1.1, 0);
-      group.add(leftShoulder);
-      
-      const rightShoulder = new THREE.Mesh(shoulderGeometry);
-      rightShoulder.position.set(0.35, 1.1, 0);
-      group.add(rightShoulder);
-      
-      // Upper arms (cylinders)
-      const upperArmGeometry = new THREE.CylinderGeometry(0.08, 0.1, 0.6, 32);
-      
-      const leftUpperArm = new THREE.Mesh(upperArmGeometry);
-      leftUpperArm.position.set(-0.5, 0.8, 0);
-      leftUpperArm.rotation.z = Math.PI / 6;
-      group.add(leftUpperArm);
-      
-      const rightUpperArm = new THREE.Mesh(upperArmGeometry);
-      rightUpperArm.position.set(0.5, 0.8, 0);
-      rightUpperArm.rotation.z = -Math.PI / 6;
-      group.add(rightUpperArm);
-      
-      // Lower arms (cylinders)
-      const lowerArmGeometry = new THREE.CylinderGeometry(0.07, 0.08, 0.5, 32);
-      
-      const leftLowerArm = new THREE.Mesh(lowerArmGeometry);
-      leftLowerArm.position.set(-0.75, 0.4, 0);
-      leftLowerArm.rotation.z = Math.PI / 12;
-      group.add(leftLowerArm);
-      
-      const rightLowerArm = new THREE.Mesh(lowerArmGeometry);
-      rightLowerArm.position.set(0.75, 0.4, 0);
-      rightLowerArm.rotation.z = -Math.PI / 12;
-      group.add(rightLowerArm);
-      
-      // Hands (spheres)
-      const handGeometry = new THREE.SphereGeometry(0.09, 32, 32);
-      
-      const leftHand = new THREE.Mesh(handGeometry);
-      leftHand.position.set(-0.85, 0.15, 0);
-      group.add(leftHand);
-      
-      const rightHand = new THREE.Mesh(handGeometry);
-      rightHand.position.set(0.85, 0.15, 0);
-      group.add(rightHand);
-      
-      // Hips
-      const hipGeometry = new THREE.SphereGeometry(0.25, 32, 32);
-      const hips = new THREE.Mesh(hipGeometry);
-      hips.position.y = -0.1;
-      hips.scale.set(1.5, 0.6, 0.8);
-      group.add(hips);
-      
-      // Upper legs (cylinders)
-      const upperLegGeometry = new THREE.CylinderGeometry(0.12, 0.1, 0.8, 32);
-      
-      const leftUpperLeg = new THREE.Mesh(upperLegGeometry);
-      leftUpperLeg.position.set(-0.2, -0.6, 0);
-      leftUpperLeg.rotation.x = -Math.PI / 24;
-      group.add(leftUpperLeg);
-      
-      const rightUpperLeg = new THREE.Mesh(upperLegGeometry);
-      rightUpperLeg.position.set(0.2, -0.6, 0);
-      rightUpperLeg.rotation.x = -Math.PI / 24;
-      group.add(rightUpperLeg);
-      
-      // Lower legs (cylinders)
-      const lowerLegGeometry = new THREE.CylinderGeometry(0.09, 0.08, 0.7, 32);
-      
-      const leftLowerLeg = new THREE.Mesh(lowerLegGeometry);
-      leftLowerLeg.position.set(-0.2, -1.3, 0);
-      group.add(leftLowerLeg);
-      
-      const rightLowerLeg = new THREE.Mesh(lowerLegGeometry);
-      rightLowerLeg.position.set(0.2, -1.3, 0);
-      group.add(rightLowerLeg);
-      
-      // Feet (boxes)
-      const footGeometry = new THREE.BoxGeometry(0.15, 0.08, 0.3);
-      
-      const leftFoot = new THREE.Mesh(footGeometry);
-      leftFoot.position.set(-0.2, -1.65, 0.1);
-      group.add(leftFoot);
-      
-      const rightFoot = new THREE.Mesh(footGeometry);
-      rightFoot.position.set(0.2, -1.65, 0.1);
-      group.add(rightFoot);
-      
-      return group;
-    }
-
-    // Advanced stipple shader material
-    const stippleMaterial = new THREE.ShaderMaterial({
-      uniforms: {
-        color: { value: new THREE.Color(0x45a9e7) },
-        time: { value: 0.0 },
-        stippleEnabled: { value: 1.0 },
-        wireframe: { value: 0.0 }
-      },
-      vertexShader: `
-        varying vec3 vNormal;
-        varying vec2 vUv;
-        varying vec3 vPosition;
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
         
-        void main() {
-          vNormal = normalize(normalMatrix * normal);
-          vUv = uv;
-          vPosition = position;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        varying vec3 vNormal;
-        varying vec2 vUv;
-        varying vec3 vPosition;
-        uniform vec3 color;
-        uniform float time;
-        uniform float stippleEnabled;
-        uniform float wireframe;
+        // Random size between 2-6px
+        const size = Math.random() * 4 + 2;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
         
-        // Random function for stipple pattern
-        float random(vec2 st) {
-          return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
-        }
+        // Random position
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
         
-        void main() {
-          // Calculate lighting
-          vec3 lightDir = normalize(vec3(1.0, 1.0, 1.0));
-          float diff = max(dot(vNormal, lightDir), 0.0);
-          float ambient = 0.3;
-          float lighting = ambient + diff * 0.7;
-          
-          // Create dynamic stipple pattern
-          vec2 coord = gl_FragCoord.xy;
-          float gridSize = 6.0;
-          float pulse = sin(time * 3.0) * 0.1 + 0.9;
-          float dotSize = 1.5 * pulse;
-          
-          // Create grid-based dot pattern
-          vec2 gridPos = mod(coord, gridSize);
-          float dist = length(gridPos - gridSize/2.0);
-          float inCircle = step(dist, dotSize);
-          
-          // Add some randomness to dot appearance
-          float rand = random(floor(coord / gridSize) + time);
-          float threshold = 0.7;
-          float dotAlpha = step(threshold, rand) * inCircle;
-          
-          // Apply stipple effect if enabled
-          float finalAlpha = stippleEnabled > 0.5 ? dotAlpha * lighting : lighting;
-          
-          // Wireframe effect
-          float wire = 0.0;
-          if (wireframe > 0.5) {
-            vec3 d = fwidth(vPosition);
-            vec3 f = 1.0 - smoothstep(vec3(0.0), d * 1.5, abs(vPosition));
-            wire = max(max(f.x, f.y), f.z);
-          }
-          
-          // Final color
-          vec3 finalColor = mix(color * lighting, vec3(1.0, 1.0, 1.0), wire);
-          gl_FragColor = vec4(finalColor, mix(finalAlpha, 1.0, wire));
-        }
-      `,
-      transparent: true
-    });
-
-    // Create and add human figure to scene
-    const humanFigure = createRealisticHumanFigure();
-    humanFigure.traverse((child) => {
-      if (child.isMesh) {
-        child.material = stippleMaterial;
+        // Random animation delay
+        particle.style.animationDelay = Math.random() * 6 + 's';
+        particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+        
+        particlesContainer.appendChild(particle);
       }
-    });
-    scene.add(humanFigure);
-
-    // Animation and rotation control
-    let isRotating = true;
-    let clock = new THREE.Clock();
-    
-    function animate() {
-      requestAnimationFrame(animate);
-      
-      // Update time uniform for animation
-      stippleMaterial.uniforms.time.value = clock.getElapsedTime();
-      
-      // Rotate model if enabled
-      if (isRotating) {
-        humanFigure.rotation.y += 0.003;
-      }
-      
-      renderer.render(scene, camera);
     }
-    animate();
-
-    // Resize handler
-    window.addEventListener("resize", () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    // Canvas controls
-    document.getElementById('toggleRotation').addEventListener('click', function() {
-      isRotating = !isRotating;
-      this.textContent = isRotating ? 'Pause Rotation' : 'Resume Rotation';
-    });
-
-    document.getElementById('changeColor').addEventListener('click', function() {
-      // Cycle through colors
-      const colors = [0x45a9e7, 0x00e5ff, 0x8a2be2, 0xff69b4, 0x00ffaa, 0xffaa00];
-      const currentColor = stippleMaterial.uniforms.color.value.getHex();
-      const currentIndex = colors.indexOf(currentColor);
-      const nextIndex = (currentIndex + 1) % colors.length;
-      stippleMaterial.uniforms.color.value.setHex(colors[nextIndex]);
-    });
-
-    document.getElementById('toggleStipple').addEventListener('click', function() {
-      const currentValue = stippleMaterial.uniforms.stippleEnabled.value;
-      stippleMaterial.uniforms.stippleEnabled.value = currentValue > 0.5 ? 0.0 : 1.0;
-      this.textContent = currentValue > 0.5 ? 'Enable Stipple' : 'Disable Stipple';
-    });
-
-    document.getElementById('toggleWireframe').addEventListener('click', function() {
-      const currentValue = stippleMaterial.uniforms.wireframe.value;
-      stippleMaterial.uniforms.wireframe.value = currentValue > 0.5 ? 0.0 : 1.0;
-      this.textContent = currentValue > 0.5 ? 'Hide Wireframe' : 'Show Wireframe';
-    });
 
     /* ---------------  DARK / LIGHT --------------- */
     const darkModeToggle = document.getElementById("darkModeToggle");
     const body = document.body;
-    if (localStorage.getItem("theme") === "light") {
-      body.classList.add("light");
-      darkModeToggle.checked = true;
-    }
+    
+    // Set dark mode as default (toggle is checked by default in HTML)
+    body.classList.remove("light");
+    localStorage.setItem("theme", "dark");
+    
     darkModeToggle.addEventListener("change", () => {
       body.classList.toggle("light");
       localStorage.setItem("theme", body.classList.contains("light") ? "light" : "dark");
@@ -1102,6 +1108,9 @@
     closeKnowMoreBtn.onclick = () => {
       knowMoreModal.style.display = "none";
     };
+
+    // Initialize particles on load
+    createParticles();
   </script>
 </body>
 
