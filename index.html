@@ -51,7 +51,7 @@
       position: relative;
     }
 
-    /* Fixed background for entire page */
+    /* Fixed background for entire page - ONLY FOR BACKGROUND */
     body::before {
       content: '';
       position: fixed;
@@ -71,9 +71,12 @@
       background-blend-mode: overlay;
     }
 
+    /* Ensure images display properly */
     img {
       max-width: 100%;
-      display: block
+      display: block;
+      position: relative;
+      z-index: 1;
     }
 
     a {
@@ -375,7 +378,9 @@
     .card img {
       height: 300px;
       object-fit: cover;
-      width: 100%
+      width: 100%;
+      position: relative;
+      z-index: 1;
     }
 
     .box {
@@ -1105,13 +1110,4 @@
       knowMoreModal.style.display = "flex";
     };
 
-    closeKnowMoreBtn.onclick = () => {
-      knowMoreModal.style.display = "none";
-    };
-
-    // Initialize particles on load
-    createParticles();
-  </script>
-</body>
-
-</html>
+    closeKnowMoreBtn.oncl
