@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Alfea!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --royal-red: #b30000;
+            --dark-red: #8B0000;
+            --royal-gold: #FFD700;
+            --light-gold: #FFC400;
+            --dark-bg: #0a0a0a;
+            --medium-bg: #1a0a0a;
+            --light-bg: rgba(20, 20, 20, 0.7);
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--medium-bg) 50%, #2a0a0a 100%);
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            min-height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .card {
+            position: relative;
+            width: 100%;
+            min-height: 500px;
+            background: rgba(10, 10, 10, 0.8);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(179, 0, 0, 0.5);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--royal-red), var(--dark-red), var(--royal-gold), var(--light-gold));
+            z-index: -1;
+            border-radius: 22px;
+            animation: borderGlow 3s linear infinite;
+        }
+
+        @keyframes borderGlow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px 15px;
+            background: linear-gradient(to right, rgba(179, 0, 0, 0.3), rgba(255, 215, 0, 0.2), rgba(179, 0, 0, 0.3));
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            background: linear-gradient(to right, var(--royal-gold), var(--light-gold), var(--royal-red));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.5rem, 3.5vw, 2rem);
+            font-weight: 700;
+            color: var(--royal-gold);
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .content {
+            display: flex;
+            flex: 1;
+            padding: 20px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .message-section {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+            background: var(--light-bg);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 0 20px rgba(179, 0, 0, 0.3);
+        }
+
+        .message-section h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            color: var(--royal-gold);
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+
+        .message-section p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            line-height: 1.6;
+            color: #fff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .traits {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .trait {
+            background: linear-gradient(45deg, rgba(179, 0, 0, 0.3), rgba(255, 215, 0, 0.2));
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: var(--royal-gold);
+        }
+
+        .interactive-section {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .hologram {
+            position: relative;
+            width: clamp(150px, 40vw, 200px);
+            height: clamp(150px, 40vw, 200px);
+            background: linear-gradient(45deg, rgba(179, 0, 0, 0.2), rgba(255, 215, 0, 0.1));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 30px rgba(179, 0, 0, 0.5);
+            animation: hologramFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes hologramFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.05); }
+        }
+
+        .hologram::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--royal-red), var(--royal-gold), var(--royal-red));
+            animation: rotate 3s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hologram-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: var(--royal-gold);
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .control-btn {
+            padding: 12px 20px;
+            background: linear-gradient(45deg, var(--royal-red), var(--dark-red));
+            border: none;
+            border-radius: 30px;
+            color: var(--royal-gold);
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(179, 0, 0, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .control-btn:hover {
+            background: linear-gradient(45deg, var(--dark-red), var(--royal-red));
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+            transform: translateY(-3px);
+        }
+
+        .control-btn:active {
+            transform: translateY(1px);
+        }
+
+        .signature {
+            text-align: center;
+            padding: 20px;
+            font-style: italic;
+            color: var(--royal-gold);
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        /* Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--royal-gold);
+            border-radius: 50%;
+            animation: particleFloat linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+        /* Matrix effect */
+        .matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        /* Celebration effects */
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--royal-gold), 0 0 20px var(--royal-red);
+            animation: fireworkExplode 1.5s ease-out forwards;
+        }
+
+        @keyframes fireworkExplode {
+            0% {
+                transform: translate(var(--x), 100vh) scale(0);
+                opacity: 1;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y)) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                height: auto;
+                min-height: 100vh;
+            }
+            
+            .content {
+                flex-direction: column;
+                padding: 15px;
+                gap: 15px;
+            }
+            
+            .message-section, .interactive-section {
+                min-width: 100%;
+            }
+            
+            .header {
+                padding: 15px 10px;
+            }
+            
+            .controls {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 0;
+            }
+            
+            .card {
+                min-height: 400px;
+            }
+            
+            .content {
+                padding: 10px;
+                gap: 10px;
+            }
+            
+            .message-section {
+                padding: 15px;
+            }
+            
+            .header {
+                padding: 10px 5px;
+            }
+            
+            .hologram {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .control-btn {
+                padding: 10px 15px;
+            }
+            
+            .traits {
+                gap: 5px;
+            }
+            
+            .trait {
+                padding: 5px 10px;
+            }
+        }
+
+        /* Small height devices */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .container {
+                min-height: 100vh;
+                padding: 10px 0;
+            }
+            
+            .card {
+                min-height: auto;
+            }
+            
+            .content {
+                padding: 10px;
+                gap: 10px;
+            }
+            
+            .header {
+                padding: 10px;
+            }
+            
+            .hologram {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .interactive-section {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix" id="matrix"></div>
+    <div class="particles" id="particles"></div>
+    <div class="celebration" id="celebration"></div>
+    
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h1>HAPPY BIRTHDAY</h1>
+                <h2>ALFEA</h2>
+            </div>
+            
+            <div class="content">
+                <div class="message-section">
+                    <h3>CELEBRATING A FUTURE LEGEND</h3>
+                    <p>On this special day, we honor a visionary whose light shines brighter than the stars. May your path be filled with extraordinary achievements and your journey through time be legendary.</p>
+                    
+                    <div class="traits">
+                        <div class="trait">Visionary</div>
+                        <div class="trait">Royal</div>
+                        <div class="trait">Brilliant</div>
+                        <div class="trait">Courageous</div>
+                        <div class="trait">Innovative</div>
+                        <div class="trait">Inspiring</div>
+                    </div>
+                </div>
+                
+                <div class="interactive-section">
+                    <div class="hologram">
+                        <div class="hologram-content">
+                            A L F E A
+                            <div style="font-size: 0.7rem; margin-top: 10px;">SYSTEM ONLINE</div>
+                        </div>
+                    </div>
+                    
+                    <div class="controls">
+                        <button class="control-btn" id="activateBtn">ACTIVATE CELEBRATION</button>
+                        <button class="control-btn" id="messageBtn">SPECIAL MESSAGE</button>
+                        <button class="control-btn" id="musicBtn">PLAY BIRTHDAY TUNE</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="signature">
+                Designed with futuristic energy for an extraordinary soul
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const activateBtn = document.getElementById('activateBtn');
+            const messageBtn = document.getElementById('messageBtn');
+            const musicBtn = document.getElementById('musicBtn');
+            const celebration = document.getElementById('celebration');
+            const particlesContainer = document.getElementById('particles');
+            const matrixContainer = document.getElementById('matrix');
+            
+            // Create background particles
+            createParticles(30);
+            
+            // Create matrix effect
+            createMatrixEffect();
+            
+            // Activate celebration
+            activateBtn.addEventListener('click', function() {
+                createFireworks(20);
+                celebration.style.opacity = '1';
+                
+                setTimeout(() => {
+                    celebration.style.opacity = '0';
+                }, 3000);
+                
+                // Add hologram animation
+                const hologram = document.querySelector('.hologram');
+                hologram.style.animation = 'hologramFloat 1s ease-in-out, rotate 1s linear infinite';
+                
+                setTimeout(() => {
+                    hologram.style.animation = 'hologramFloat 4s ease-in-out infinite';
+                }, 3000);
+            });
+            
+            // Special message
+            messageBtn.addEventListener('click', function() {
+                const messageSection = document.querySelector('.message-section p');
+                const originalMessage = messageSection.textContent;
+                
+                messageSection.textContent = "Your potential is limitless, your spirit is radiant, and your future is as bright as the stars. May this year bring you closer to your dreams than ever before. Happy Birthday, Alfea!";
+                messageSection.style.color = '#FFD700';
+                messageSection.style.textShadow = '0 0 10px rgba(255, 215, 0, 0.7)';
+                
+                setTimeout(() => {
+                    messageSection.textContent = originalMessage;
+                    messageSection.style.color = '#fff';
+                    messageSection.style.textShadow = 'none';
+                }, 8000);
+            });
+            
+            // Play birthday tune
+            musicBtn.addEventListener('click', function() {
+                playBirthdayTune();
+                
+                // Visual feedback
+                musicBtn.style.background = 'linear-gradient(45deg, #FFD700, #b30000)';
+                setTimeout(() => {
+                    musicBtn.style.background = 'linear-gradient(45deg, #b30000, #8B0000)';
+                }, 3000);
+            });
+            
+            // Create particles
+            function createParticles(count) {
+                for (let i = 0; i < count; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    particle.style.left = Math.random() * 100 + 'vw';
+                    particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
+                    particle.style.animationDelay = Math.random() * 5 + 's';
+                    particle.style.width = (Math.random() * 3 + 1) + 'px';
+                    particle.style.height = particle.style.width;
+                    particlesContainer.appendChild(particle);
+                }
+            }
+            
+            // Create matrix effect
+            function createMatrixEffect() {
+                const columns = Math.floor(window.innerWidth / 20);
+                for (let i = 0; i < columns; i++) {
+                    const column = document.createElement('div');
+                    column.style.position = 'absolute';
+                    column.style.top = '0';
+                    column.style.left = (i * 20) + 'px';
+                    column.style.width = '2px';
+                    column.style.height = '100%';
+                    column.style.background = 'linear-gradient(to bottom, transparent, #b30000, transparent)';
+                    column.style.animation = `matrixRain ${Math.random() * 5 + 3}s linear infinite`;
+                    column.style.animationDelay = Math.random() * 5 + 's';
+                    matrixContainer.appendChild(column);
+                }
+                
+                // Add the animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes matrixRain {
+                        0% { background-position: 0 0; opacity: 0; }
+                        10% { opacity: 1; }
+                        90% { opacity: 1; }
+                        100% { background-position: 0 100vh; opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            // Create fireworks
+            function createFireworks(count) {
+                celebration.innerHTML = '';
+                
+                for (let i = 0; i < count; i++) {
+                    setTimeout(() => {
+                        const firework = document.createElement('div');
+                        firework.classList.add('firework');
+                        
+                        const x = Math.random() * window.innerWidth;
+                        const y = Math.random() * window.innerHeight / 2;
+                        
+                        firework.style.setProperty('--x', x + 'px');
+                        firework.style.setProperty('--y', y + 'px');
+                        firework.style.background = i % 2 === 0 ? '#FFD700' : '#b30000';
+                        firework.style.animationDelay = (Math.random() * 0.5) + 's';
+                        
+                        celebration.appendChild(firework);
+                        
+                        setTimeout(() => {
+                            firework.remove();
+                        }, 1500);
+                    }, i * 100);
+                }
+            }
+            
+            // Play birthday tune
+            function playBirthdayTune() {
+                try {
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const notes = [523, 523, 587, 523, 698, 659, 523, 523, 587, 523, 784, 698];
+                    const durations = [0.3, 0.3, 0.5, 0.5, 0.5, 1, 0.3, 0.3, 0.5, 0.5, 0.5, 1];
+                    
+                    let time = audioContext.currentTime;
+                    
+                    notes.forEach((frequency, index) => {
+                        const oscillator = audioContext.createOscillator();
+                        const gainNode = audioContext.createGain();
+                        
+                        oscillator.connect(gainNode);
+                        gainNode.connect(audioContext.destination);
+                        
+                        oscillator.frequency.value = frequency;
+                        oscillator.type = 'sine';
+                        
+                        gainNode.gain.setValueAtTime(0, time);
+                        gainNode.gain.linearRampToValueAtTime(0.3, time + 0.01);
+                        gainNode.gain.exponentialRampToValueAtTime(0.001, time + durations[index]);
+                        
+                        oscillator.start(time);
+                        oscillator.stop(time + durations[index]);
+                        
+                        time += durations[index];
+                    });
+                } catch (e) {
+                    console.log("Audio not supported");
+                }
+            }
+        });
+    </script>
+</body>
+</html>
