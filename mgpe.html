@@ -1,0 +1,873 @@
+<!-- Uncommited Code 2024 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X = 26 A = 3</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #b0e0e6, #4169e1);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1a3c8b;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+            width: 100%;
+        }
+        
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            max-width: 600px;
+            margin: 0 auto 15px;
+            padding: 0 10px;
+        }
+        
+        .instructions {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 600px;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 2px solid #1a3c8b;
+            width: 90%;
+        }
+        
+        .treasure-map-container {
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .treasure-map {
+            width: 100%;
+            height: 70vh;
+            max-height: 500px;
+            min-height: 400px;
+            background-color: rgba(176, 224, 230, 0.7);
+            border: 8px solid #1a3c8b;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .water {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #b0e0e6 25%, #9bd3db 25%, #9bd3db 50%, #b0e0e6 50%, #b0e0e6 75%, #9bd3db 75%);
+            background-size: 50px 50px;
+            opacity: 0.4;
+        }
+        
+        .island {
+            position: absolute;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            border-radius: 50%;
+        }
+        
+        .island:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .island-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .island-label {
+            position: absolute;
+            bottom: -25px;
+            text-align: center;
+            width: 100%;
+            font-size: 0.9rem;
+            color: #1a3c8b;
+            text-shadow: 1px 1px 0 white;
+            z-index: 10;
+        }
+        
+        .island-content {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            max-width: 90%;
+            width: 300px;
+            text-align: center;
+            border: 3px solid #1a3c8b;
+        }
+        
+        .island-content img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .island-content img:hover {
+            transform: scale(1.05);
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #1a3c8b;
+        }
+        
+        /* Full-size image modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .image-modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .image-modal img {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .image-modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Hero Section Styles */
+        .hero-section {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border: 3px solid #1a3c8b;
+        }
+        
+        .hero-title {
+            color: #1a3c8b;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+        }
+        
+        .hero-photo-container {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid #1a3c8b;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+        
+        .hero-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        
+        .hero-caption {
+            text-align: center;
+            color: #1a3c8b;
+            font-size: 1.2rem;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+        
+        .message {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+            border: 5px solid #1a3c8b;
+            width: 90%;
+        }
+        
+        .message h2 {
+            color: #1a3c8b;
+            margin-bottom: 20px;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+        }
+        
+        .message p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+        }
+        
+        .signature {
+            font-style: italic;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #1a3c8b;
+        }
+        
+        .compass {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 60px;
+            height: 60px;
+            background-color: #1a3c8b;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 50;
+        }
+        
+        .compass:hover {
+            transform: scale(1.1);
+            background-color: #2a5cbb;
+        }
+        
+        .mobile-hint {
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+            color: #1a3c8b;
+            font-weight: bold;
+        }
+        
+        .progress {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 1px solid #1a3c8b;
+        }
+        
+        .progress-dot.active {
+            background-color: #1a3c8b;
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px #ffd700; }
+            50% { box-shadow: 0 0 20px #ffed4e, 0 0 30px #ffed4e; }
+            100% { box-shadow: 0 0 5px #ffd700; }
+        }
+        
+        .treasure-island {
+            animation: glow 2s infinite;
+        }
+        
+        /* Confetti effect */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #ffd700;
+            opacity: 0;
+            z-index: 1000;
+        }
+        
+        /* Secret Modal Styles */
+        .secret-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .secret-content {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 5px solid #1a3c8b;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .secret-title {
+            color: #1a3c8b;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .secret-message {
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px dashed #1a3c8b;
+            font-family: monospace;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            word-break: break-word;
+        }
+        
+        .decrypt-btn {
+            background-color: #1a3c8b;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+        
+        .decrypt-btn:hover {
+            background-color: #2a5cbb;
+            transform: scale(1.05);
+        }
+        
+        .decrypted-message {
+            display: none;
+            background-color: #e6f7ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #1a3c8b;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-align: left;
+            white-space: pre-line;
+        }
+        
+        .clue {
+            margin-top: 15px;
+            font-style: italic;
+            color: #1a3c8b;
+        }
+        
+        /* Mobile-specific styles */
+        @media (max-width: 768px) {
+            .treasure-map {
+                height: 60vh;
+                min-height: 350px;
+            }
+            
+            .island {
+                min-width: 80px;
+                min-height: 80px;
+            }
+            
+            .mobile-hint {
+                display: block;
+            }
+            
+            .compass {
+                width: 50px;
+                height: 50px;
+                font-size: 1rem;
+            }
+            
+            .message {
+                padding: 20px;
+            }
+            
+            .island-label {
+                font-size: 0.8rem;
+                bottom: -20px;
+            }
+            
+            .hero-photo-container {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .secret-content {
+                padding: 20px;
+            }
+            
+            .secret-title {
+                font-size: 1.5rem;
+            }
+            
+            .secret-message, .decrypted-message {
+                font-size: 1rem;
+                padding: 15px;
+            }
+            
+            .island-content img {
+                height: 150px;
+            }
+            
+            .image-modal img {
+                max-height: 70vh;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .treasure-map {
+                height: 50vh;
+                min-height: 300px;
+            }
+            
+            .island {
+                min-width: 70px;
+                min-height: 70px;
+            }
+            
+            .instructions {
+                padding: 10px;
+            }
+            
+            .compass {
+                width: 40px;
+                height: 40px;
+                font-size: 0.9rem;
+            }
+            
+            .hero-photo-container {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .hero-caption {
+                font-size: 1rem;
+            }
+            
+            .secret-content {
+                padding: 15px;
+            }
+            
+            .secret-message, .decrypted-message {
+                font-size: 0.9rem;
+                padding: 10px;
+            }
+            
+            .island-content img {
+                height: 120px;
+            }
+            
+            .image-modal img {
+                max-height: 60vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Mc Genrev's Treasure Hunt</h1>
+        <p class="subtitle">Explore the islands to uncover memories and find the final birthday message!</p>
+        <div class="progress">
+            <div class="progress-dot" id="dot1"></div>
+            <div class="progress-dot" id="dot2"></div>
+            <div class="progress-dot" id="dot3"></div>
+            <div class="progress-dot" id="dot4"></div>
+            <div class="progress-dot" id="dot5"></div>
+        </div>
+    </div>
+    
+    <div class="instructions">
+        <p>Click on each island to reveal a surprise. Find the special treasure island with the birthday message!</p>
+        <p class="mobile-hint"><i class="fas fa-hand-point-up"></i> Tap on the islands to explore</p>
+    </div>
+    
+    <div class="treasure-map-container">
+        <div class="treasure-map">
+            <div class="water"></div>
+            <div class="compass" id="secretCompass">M</div>
+            
+            <div class="island" id="island1" style="width: 20%; max-width: 120px; height: 20%; max-height: 120px; top: 15%; left: 10%;">
+                <img src="assets/island1.jpg" alt="Memory Island" class="island-img">
+                <div class="island-label">Memory 1</div>
+            </div>
+            
+            <div class="island" id="island2" style="width: 16%; max-width: 100px; height: 16%; max-height: 100px; top: 50%; left: 25%;">
+                <img src="assets/island2.jpg" alt="Friendship Isle" class="island-img">
+                <div class="island-label">Memory 2</div>
+            </div>
+            
+            <div class="island" id="island3" style="width: 22%; max-width: 140px; height: 22%; max-height: 140px; top: 30%; left: 45%;">
+                <img src="assets/island3.jpg" alt="Nostalgia Atoll" class="island-img">
+                <div class="island-label">Memory 3</div>
+            </div>
+            
+            <div class="island" id="island4" style="width: 18%; max-width: 110px; height: 18%; max-height: 110px; top: 60%; left: 60%;">
+                <img src="assets/island4.jpg" alt="Classmate Cay" class="island-img">
+                <div class="island-label">Memory 4</div>
+            </div>
+            
+            <div class="island treasure-island" id="island5" style="width: 20%; max-width: 130px; height: 20%; max-height: 130px; top: 20%; left: 75%;">
+                <img src="assets/island5.jpg" alt="Treasure Island" class="island-img">
+                <div class="island-label">Memory 5</div>
+            </div>
+            
+            <div class="island-content" id="content1">
+                <span class="close-btn">&times;</span>
+                <h3>Memory #1</h3>
+                <p>Remember this fun moment from our school days? Pinatay ang ilaw sa comlab sa klase ni Ma'am V</p>
+                <img src="assets/flashlight.jpg" alt="School memory" class="modal-image">
+            </div>
+            
+            <div class="island-content" id="content2">
+                <span class="close-btn">&times;</span>
+                <h3>Memory #2</h3>
+                <p>Picture together na dimo alam</p>
+                <img src="assets/last.jpg" alt="Project work" class="modal-image">
+            </div>
+            
+            <div class="island-content" id="content3">
+                <span class="close-btn">&times;</span>
+                <h3>Memory #3</h3>
+                <p>Yung Chat mo na diko nakita!</p>
+                <img src="assets/unsent.jpeg" alt="Chat" class="modal-image">
+            </div>
+            
+            <div class="island-content" id="content4">
+                <span class="close-btn">&times;</span>
+                <h3>Memory #4</h3>
+                <p>Pero Lucky me may notification bar at notif history!</p>
+                <img src="assets/chat.jpeg" alt="Fun times" class="modal-image">
+            </div>
+            
+            <div class="island-content" id="content5">
+                <span class="close-btn">&times;</span>
+                <h3>Happy Birthday!</h3>
+                <p>You've found the treasure! Wishing you an amazing birthday filled with joy, success, and wonderful moments. May this year bring you closer to all your dreams!</p>
+                <img src="assets/mcgenrev.jpg" alt="Birthday celebration" class="modal-image">
+            </div>
+        </div>
+    </div>
+    
+    <div class="message" id="finalMessage">
+        <h2>Happy Birthday Mc Genrev!</h2>
+        <p>Dear Mc Genrev,</p>
+        <p>Wishing you a fantastic birthday filled with joy, laughter, and all the things that make you happy!</p>
+        <p>May this new chapter of your life bring you success in all your endeavors and may all your dreams come true.</p>
+        <p>It was great having you as a classmate, and I hope for the Best Chapter!</p>
+        <p class="signature">Your classmate</p>
+    </div>
+    
+    <div class="hero-section">
+        <h2 class="hero-title">The Birthday Boy!</h2>
+        <div class="hero-photo-container">
+            <img src="assets/mcgenrev.jpg" alt="Mc Genrev" class="hero-photo modal-image">
+        </div>
+        <p class="hero-caption">This treasure hunt is dedicated to our amazing Class President Mc Genrev Protacio Egar! <br/> May your birthday be as special as you are to all of us.</p>
+    </div>
+
+    <div class="image-modal" id="imageModal">
+        <div class="image-modal-content">
+            <span class="image-modal-close">&times;</span>
+            <img id="fullSizeImage" src="" alt="Full size image">
+        </div>
+    </div>
+    
+    <div class="secret-modal" id="secretModal">
+        <div class="secret-content">
+            <span class="close-btn" id="closeSecretModal">&times;</span>
+            <h2 class="secret-title">Secret Message</h2>
+            <p>You found a hidden message! Use the clue to decrypt it:</p>
+            <p class="clue">Clue: A = 3, B = 4, C = 5, ... Z = 28, 2 = ', 27 = Y</p>
+            <div class="secret-message" id="encryptedMessage">
+                10-3-18-18-27 4-11-20-22-10-6-3-27 9-7-16-20-7-24 22-10-11-21 11-21 22-10-7 14-3-21-22 4-11-20-22-10-6-3-27 9-20-7-7-22-11-16-9 3-22 4-3-13-3 10-11-16-6-11 15-17 16-3 6-11-16 11-22-17 15-3-13-11-22-3, 4-3-13-11-22 15-17 13-3-21-7 11-16-11-23-16-21-7-16-22 27-23-16. 11-16-3-3-16-22-17-13 3-13-17 21-3 5-14-3-21-21 16-11 15-3-2-3-15 14-10-3-16-11-7 18-7-20-17 6-3-10-11-14 4-11-9-14-3 13-3-16-9 22-23-15-3-4-11 21-3-13-11-16 16-3-9-11-21-11-16-9 3-16-9 6-11-25-3 13-17. 16-23-16-9 18-3-16-3-10-17-16 16-9 18-7 3-16-9 14-3-13-3-21 16-9 22-20-11-18 15-17 16-3 21-3-4-11-10-11-16 16-3 18-3-23-23-14-11-22-11-16 3-13-17 16-11 21-11-20 5-3-14-3-4-11-9 25-7-14-14 23-22-17-23-22-17 3-13-17 22-10-3-22 22-11-15-7 13-3-27-3 13-3-10-11-22 4-11-16-3-25-11 15-17 27-23-16-9 21-11-16-3-4-11 15-17 7 22-11-16-3-16-17-16-9 13-17-18-3 27-23-16-9 11-4-3 16-3-22-11-16-9 5-14-3-21-21-15-3-22-7 12-23-21-22 22-17 15-3-13-7 21-23-20-7 16-3 6-11 3-13-17 23-23-14-11-22. 14-3-14-17 16-3 16-23-16-9 4-3-21-13-7-22-4-3-14-14 6-11-13-17 15-3-11-15-3-9-11-16-7 11-22-21-23-20-3 13-17 16-23-16-9 15-23-16-22-11-13 16-3 3-13-17-16-9 22-3-15-3-3-16 16-9 4-17-14-3 6-3-10-11-14 13-3-27 24-11-16-5-7-16-22 3-16-9 5-23-22-7 16-9 22-3-25-3 15-17 16-23-16. 16-3-9-17-24-7-20-22-10-11-16-13 3-13-17 3-8-22-7-20 22-10-3-22. 22-25-17 20-7-9-20-7-22-21 13-3-21-7 21-3-16-3 18-23-15-3-27-3-9 3-13-17 16-3 15-3-9-18-3-18-11-5-22-23-20-7 21-3-27-17 16-23-16-9 16-3-9-21-3-4-11 13-3 3-22 21-3-16-3 6-11 13-11-22-3 11-16-11-23-16-5-20-23-21-10 3-9-3-6 18-7-20-17 17-13 16-3 6-11-16 16-3 9-3-16-23-16 3-16-9 16-3-16-9-27-3-20-11, 21-3-16-3 17-13 3-16-9 12-17-23-20-16-7-27 15-17 3-22 11-22-23-14-17-27 15-17 3-16-9 18-3-9-14-7-14-7-3-6 15-17 13-3-10-11-22 21-3-3-16 3-22 13-3-10-11-22 3-16-17-16-9 21-11-22-25-3-21-27-17-16. 25-3-9 13-3-16-9 15-3-9-3-14-3-14-3 10-11-16-6-11 16-3 3-13-17 15-3-25-25-20-17-16-9 21-7-16-22 21-3-27-17. 27-17-23-20 8-17-20-7-24-7-20 8-3-16.
+            </div>
+            <button class="decrypt-btn" id="decryptBtn">Decrypt Message</button>
+            <div class="decrypted-message" id="decryptedMessage">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const islands = document.querySelectorAll('.island');
+            const contents = document.querySelectorAll('.island-content');
+            const closeButtons = document.querySelectorAll('.close-btn');
+            const finalMessage = document.getElementById('finalMessage');
+            const progressDots = document.querySelectorAll('.progress-dot');
+            const secretCompass = document.getElementById('secretCompass');
+            const secretModal = document.getElementById('secretModal');
+            const closeSecretModal = document.getElementById('closeSecretModal');
+            const decryptBtn = document.getElementById('decryptBtn');
+            const decryptedMessage = document.getElementById('decryptedMessage');
+            
+           
+            const imageModal = document.getElementById('imageModal');
+            const fullSizeImage = document.getElementById('fullSizeImage');
+            const imageModalClose = document.querySelector('.image-modal-close');
+            const modalImages = document.querySelectorAll('.modal-image');
+            
+            let discoveredIslands = [];
+            
+            islands.forEach((island, index) => {
+                island.addEventListener('click', function() {
+                    contents.forEach(content => {
+                        content.style.display = 'none';
+                    });
+                    
+                    const contentId = 'content' + (index + 1);
+                    document.getElementById(contentId).style.display = 'block';
+                    
+                    if (!discoveredIslands.includes(index)) {
+                        discoveredIslands.push(index);
+                        progressDots[index].classList.add('active');
+                    }
+                    
+                    if (index === 4) {
+                        setTimeout(function() {
+                            finalMessage.style.display = 'block';
+                            createConfetti();
+                        }, 1000);
+                    }
+                });
+            });
+            
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    this.parentElement.style.display = 'none';
+                });
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.island-content') && !e.target.closest('.island')) {
+                    contents.forEach(content => {
+                        content.style.display = 'none';
+                    });
+                }
+            });
+            
+            secretCompass.addEventListener('click', function() {
+                secretModal.style.display = 'flex';
+            });
+            
+            closeSecretModal.addEventListener('click', function() {
+                secretModal.style.display = 'none';
+            });
+       
+            secretModal.addEventListener('click', function(e) {
+                if (e.target === secretModal) {
+                    secretModal.style.display = 'none';
+                }
+            });
+            
+            // Full-size image modal functionality
+            modalImages.forEach(img => {
+                img.addEventListener('click', function() {
+                    fullSizeImage.src = this.src;
+                    fullSizeImage.alt = this.alt;
+                    imageModal.style.display = 'flex';
+                });
+            });
+            
+            imageModalClose.addEventListener('click', function() {
+                imageModal.style.display = 'none';
+            });
+            
+            imageModal.addEventListener('click', function(e) {
+                if (e.target === imageModal) {
+                    imageModal.style.display = 'none';
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    imageModal.style.display = 'none';
+                }
+            });
+            
+            decryptBtn.addEventListener('click', function() {
+                const encryptedText = document.getElementById('encryptedMessage').textContent;
+                const decryptedText = decryptMessage(encryptedText);
+                decryptedMessage.innerHTML = decryptedText;
+                decryptedMessage.style.display = 'block';
+                decryptBtn.textContent = "Message Decrypted!";
+                decryptBtn.disabled = true;
+                decryptBtn.style.backgroundColor = "#4CAF50";
+            });
+            
+            function decryptMessage(encrypted) {
+               
+                const charMap = {
+                    2: "'",
+                    3: 'A', 4: 'B', 5: 'C', 6: 'D', 7: 'E', 8: 'F', 9: 'G', 10: 'H',
+                    11: 'I', 12: 'J', 13: 'K', 14: 'L', 15: 'M', 16: 'N', 17: 'O', 18: 'P',
+                    19: 'Q', 20: 'R', 21: 'S', 22: 'T', 23: 'U', 24: 'V', 25: 'W', 26: 'X',
+                    27: 'Y', 28: 'Z'
+                };
+                
+                
+                const words = encrypted.split(' ');
+                let decrypted = '';
+                
+                words.forEach(word => {
+                    
+                    let punctuation = '';
+                    let cleanWord = word;
+                    
+                    
+                    if (word.endsWith('.') || word.endsWith(',') || word.endsWith('!') || word.endsWith('?')) {
+                        punctuation = word.slice(-1);
+                        cleanWord = word.slice(0, -1);
+                    }
+                    
+               
+                    const numbers = cleanWord.split('-');
+                    let decryptedWord = '';
+                    
+                    numbers.forEach(num => {
+                        const number = parseInt(num.trim());
+                        if (!isNaN(number) && charMap[number]) {
+                            decryptedWord += charMap[number];
+                        } else if (!isNaN(number)) {
+                            decryptedWord += `[${number}]`;
+                        }
+                    });
+                    
+                    decrypted += decryptedWord + punctuation + ' ';
+                });
+                
+                return decrypted;
+            }
+            
+            function createConfetti() {
+                const colors = ['#ffd700', '#4169e1', '#1a3c8b', '#b0e0e6', '#ffffff'];
+                const confettiCount = 100;
+                
+                for (let i = 0; i < confettiCount; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.opacity = Math.random() + 0.5;
+                    document.body.appendChild(confetti);
+                    
+                    const animation = confetti.animate([
+                        { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                        { transform: `translateY(${window.innerHeight}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                    ], {
+                        duration: Math.random() * 3000 + 2000,
+                        easing: 'cubic-bezier(0.1, 0.8, 0.3, 1)'
+                    });
+                    
+                    animation.onfinish = () => {
+                        confetti.remove();
+                    };
+                }
+            }
+            
+            window.addEventListener('resize', function() {
+                if (window.innerWidth < 480) {
+                    islands.forEach(island => {
+                        island.style.minWidth = '70px';
+                        island.style.minHeight = '70px';
+                    });
+                } else if (window.innerWidth < 768) {
+                    islands.forEach(island => {
+                        island.style.minWidth = '80px';
+                        island.style.minHeight = '80px';
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
