@@ -178,7 +178,7 @@ const portfolioData = {
       image: "assets/pokemon.png",
       description: "Academic Project 2024: A simple Pokemon API project.",
       technologies: ["HTML", "CSS", "JavaScript", "API"],
-      viewLink: "pokemon.html",
+      viewLink: "pokeAPI.html",
       docLink: "https://fea2127.github.io/pokeAPI.html",
       category: "web"
     }
