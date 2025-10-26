@@ -171,6 +171,16 @@ const portfolioData = {
       viewLink: "Dj.html",
       docLink: "https://fea2127.github.io/Dj.html",
       category: "web"
+    },
+    {
+      id: 18,
+      title: "Pokemon API Project",
+      image: "assets/pokemon.png",
+      description: "Academic Project 2024: A simple Pokemon API project.",
+      technologies: ["HTML", "CSS", "JavaScript", "API"],
+      viewLink: "pokemon.html",
+      docLink: "https://fea2127.github.io/pokeAPI.html",
+      category: "web"
     }
   ],
   categories: ["all", "web", "simulation", "animation"]
