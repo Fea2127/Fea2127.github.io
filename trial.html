@@ -291,7 +291,36 @@ body.light .b5{background:#34c759;}
   background: rgba(0,0,0,0.8);
   justify-content: center;
   align-items: center;
-}</style>
+}
+ /* Additional CSS for download button */
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #8a2be2 0%, #6a1cb0 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
+      background: linear-gradient(135deg, #9d4edd 0%, #7b2cbf 100%);
+    }
+
+    .download-btn i {
+      font-size: 1.2em;
+    }
+</style>
   </head>
   <body>
     <!-- ===== FLOATING BLUR BACKGROUND ===== -->
@@ -359,7 +388,10 @@ body.light .b5{background:#34c759;}
             BSIT student at PUP-Sto.Tomas, UI/UX &amp; network enthusiast.
             Exploring Project Management, QA, and NetAdmin roles.
           </p>
-
+          <!-- DOWNLOAD RESUME BUTTON -->
+        <a href="assets/minguaResume.pdf" class="download-btn" download="MINGUA RESUME.pdf">
+          <i class='bx bxs-download'></i> Download Resume
+        </a>
           <div class="socials">
             <a href="index.html" aria-label="LinkedIn"
               ><i class="bx bxl-linkedin"></i
@@ -416,199 +448,337 @@ body.light .b5{background:#34c759;}
           </ul>
         </div> 
     <hr />
-    <!-- ---------------  ABOUT  --------------- -->
-    <section id="about" class="about">
-      <div class="about-container">
-        <div class="about-card">
-          <img src="assets/Big Smile front.png" alt="Me" class="avatar" />
-          <p class="about-text">
-            I'm <strong>Alfea Aemiel Mingua</strong>. Thank you for visiting my
-            digital space. I'm open to opportunities in UI/UX, Project
-            Management, Quality Assurance & Network Administration. Let's
-            connect!
-          </p>
-          <button id="loadMore">Know More</button>
-          <!-- Popup knowMore Modal -->
-          <div id="knowMoreModal" class="modal">
-            <div class="modal-content">
-              <span class="close">&times;</span>
-              <h2>Education</h2>
-                <p>
-                  <img src="assets/PUP.jpg" alt="PUPSTC Logo" class="edu-logo" />
-                  <span class="edu-name"><strong>Polytechnic University of the Philippines - Sto.
-                    Tomas, Batangas Campus</strong></span><br />
-                  Bachelor of Science in Information Technology<br />
-                  2021 - Present<br />
-                  </p>
-                  <p>
-                    <br/>
-                    <img src="assets/IINHS.jpg" alt="IINHS Logo" class="edu-logo" />
-                    <span class="edu-name"><strong>Ibayiw Integrated National High School</strong></span><br />
-                    Senior High School - General Academic Strand<br />
-                    2019 - 2021<br />
-                  </p>
-                  <p>
-                    Junior High School<br />
-                    2015 - 2019<br />
-                  </p>
-                  <p>
-                    <br/>
-                    <img src="assets/SMESAL.jpg" alt="SMESAL Logo" class="edu-logo" />
-                    <span class="edu-name"><strong>San Miguel Elementary School</strong></span><br />
-                    Elementary<br />
-                    2009 - 2015<br />
-                  </p>
-            </div>
+  <!-- ---------------  ABOUT  --------------- -->
+  <section id="about" class="about">
+    <div class="about-container">
+      <div class="about-card">
+        <img src="assets/Big Smile front.png" alt="Me" class="avatar" />
+        <p class="about-text">
+          I'm <strong>Alfea Aemiel Mingua</strong>. Thank you for visiting my
+          digital space. I'm open to opportunities in UI/UX, Project
+          Management, Quality Assurance & Network Administration. Let's
+          connect!
+        </p>
+        <button id="loadMore">Know More</button>
+        <!-- Popup knowMore Modal -->
+        <div id="knowMoreModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Education</h2>
+            <p>
+              <img src="assets/PUP.jpg" alt="PUPSTC Logo" class="edu-logo" />
+              <span class="edu-name"><strong>Polytechnic University of the Philippines - Sto.
+                  Tomas, Batangas Campus</strong></span><br />
+              Bachelor of Science in Information Technology<br />
+              2021 - Present<br />
+            </p>
+            <p>
+              <br />
+              <img src="assets/IINHS.jpg" alt="IINHS Logo" class="edu-logo" />
+              <span class="edu-name"><strong>Ibayiw Integrated National High School</strong></span><br />
+              Senior High School - General Academic Strand<br />
+              2019 - 2021<br />
+            </p>
+            <p>
+              Junior High School<br />
+              2015 - 2019<br />
+            </p>
+            <p>
+              <br />
+              <img src="assets/SMESAL.jpg" alt="SMESAL Logo" class="edu-logo" />
+              <span class="edu-name"><strong>San Miguel Elementary School</strong></span><br />
+              Elementary<br />
+              2009 - 2015<br />
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Popup Image Modal -->
+      <div id="imgModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImg" />
+      </div>
+      <!-- Certificates Section -->
+      <h2 class="section-title">Certificates</h2>
+      <div class="container-certs" id="certs">
+        <!-- 16 cert cards -->
+        <div class="card">
+          <img src="assets/Infotech Computer Literacy Certificate Feb 24 to June 09 2018.jpg" alt="" />
+          <div class="box">
+            <h3>Computer Literacy Training Program</h3>
+            <p>Informatech San Pablo Colleges • June 9 2018</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/GDSC PUPSTB Hello World Dec 5 2021.png" alt="" />
+          <div class="box">
+            <h3>Hello World: Introduction to Web Development</h3>
+            <p>GDSC PUPSTB • Dec 04 2021</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/ReConnect D1 Jan 27 2022.png" alt="" />
+          <div class="box">
+            <h3>Cybersecurity Workshop Day 1</h3>
+            <p>PUPTPG • Jan 27-Feb 3 2022</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/ReConnect D2 Jan 28 2022.png" alt="" />
+          <div class="box">
+            <h3>Cybersecurity Workshop Day 2</h3>
+            <p>PUPTPG • Jan 27-Feb 3 2022</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/ReConnect D3 Feb 1 2022.png" alt="" />
+          <div class="box">
+            <h3>Cybersecurity Workshop Day 3</h3>
+            <p>PUPTPG • Jan 27-Feb 3 2022</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/ReConnect D4 Feb 3 2022.png" alt="" />
+          <div class="box">
+            <h3>Cybersecurity Workshop Day 4</h3>
+            <p>PUPTPG • Jan 27-Feb 3 2022</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/ComSoc Cyberworld July 9 2022.png" alt="" />
+          <div class="box">
+            <h3>Cyberworld: You in the online world</h3>
+            <p>PUPSTB ComSoc • July 9-15 2022</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/ComSoc Cyberworld July 10 2022.png" alt="" />
+          <div class="box">
+            <h3>Cyberworld: You in the online world</h3>
+            <p>PUPSTB ComSoc • July 9-15 2022</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/Laravel Nov 26 2022.png" alt="" />
+          <div class="box">
+            <h3>Laravel: PHP Framework for Web Artisans</h3>
+            <p>PUPSTB • Nov 26 2022</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/GDSCPH D1 Tara ML Dec 3 2022.png" alt="" />
+          <div class="box">
+            <h3>Tara ML: Deep Dive in Machine Learning</h3>
+            <p>GDSC PUPSTB • Dec 3-11 2022</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/GDSCPH D2 Tara ML Dec 7 2022.png" alt="" />
+          <div class="box">
+            <h3>Tara ML: Deep Dive in Machine Learning</h3>
+            <p>GDSC PUPSTB • Dec 3-11 2022</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/GDSCPH D3 Tara ML Dec 11 2022.png" alt="" />
+          <div class="box">
+            <h3>Tara ML: Deep Dive in Machine Learning</h3>
+            <p>GDSC PUPSTB • Dec 3-11 2022</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/React Native May 11 2024.png" alt="" />
+          <div class="box">
+            <h3>React Native Running the Starter Template</h3>
+            <p>GDSC USC • May 4 2024</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/Zuitt GDSC Mapua May 19 2024.png" alt="" />
+          <div class="box">
+            <h3>Love at First Site: Web Development</h3>
+            <p>GDSC Mapua MCM • May 19 2024</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/Iskonnovation GDSC Ideathon May 20 2024.png" alt="" />
+          <div class="box">
+            <h3>ISKOnnovation: Culture of Innovation</h3>
+            <p>GDSC PUPSTC • May 20-21 2024</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/GDSC Iskonnovation May 21 2024.png" alt="" />
+          <div class="box">
+            <h3>ISKOnnovation: Culture of Innovation</h3>
+            <p>GDSC PUPSTC • May 20-21 2024</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/Luminara ISKOnnovation Hackathon.jpg" alt="" />
+          <div class="box">
+            <h3>ISKOnnovation: Culture of Innovation</h3>
+            <p>GDSC PUPSTC • May 20-21 2024</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/DevCon Cagayan De Oro Aug 17 2025.png" alt="" />
+          <div class="box">
+            <h3>Think. Code. Build: Intro to Programming</h3>
+            <p>DevCon CDO • Aug 17 2025</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/Gemini Sept 19 2025.png" alt="" />
+          <div class="box">
+            <h3>Building a Web Solution with Gemini and Firebase Studio</h3>
+            <p>GDSC CTU • Sept 19 2025</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/Luxembourg.png" alt="" />
+          <div class="box">
+            <h3>AI Talks at LuxTechPulse & GDG Luxembourg</h3>
+            <p>GDG LUXEMBOURG • Sept 25 2025</p>
+          </div>
         </div>
       </div>
       
-        <!-- Popup Image Modal -->
-        <div id="imgModal" class="modal">
-          <span class="close">&times;</span>
-          <img class="modal-content" id="modalImg" />
-        </div>
-        <!-- Certificates Section -->
-        <h2 class="section-title">Certificates</h2>
-        <div class="container-certs" id="certs">
-          <!-- 16 cert cards -->
-           <div class="card">
-            <img src="assets/Infotech Computer Literacy Certificate Feb 24 to June 09 2018.jpg" alt="" />
-            <div class="box">
-              <h3>Computer Literacy Training Program</h3>
-              <p>Informatech San Pablo Colleges • June 9 2018</p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="assets/GDSC PUPSTB Hello World Dec 5 2021.png" alt="" />
-            <div class="box">
-              <h3>Hello World: Introduction to Web Development</h3>
-              <p>GDSC PUPSTB • Dec 04 2021</p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="assets/ReConnect D1 Jan 27 2022.png" alt="" />
-            <div class="box">
-              <h3>Cybersecurity Workshop Day 1</h3>
-              <p>PUPTPG • Jan 27-Feb 3 2022</p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="assets/ReConnect D2 Jan 28 2022.png" alt="" />
-            <div class="box">
-              <h3>Cybersecurity Workshop Day 2</h3>
-              <p>PUPTPG • Jan 27-Feb 3 2022</p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="assets/ReConnect D3 Feb 1 2022.png" alt="" />
-            <div class="box">
-              <h3>Cybersecurity Workshop Day 3</h3>
-              <p>PUPTPG • Jan 27-Feb 3 2022</p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="assets/ReConnect D4 Feb 3 2022.png" alt="" />
-            <div class="box">
-              <h3>Cybersecurity Workshop Day 4</h3>
-              <p>PUPTPG • Jan 27-Feb 3 2022</p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="assets/ComSoc Cyberworld July 9 2022.png" alt="" />
-            <div class="box">
-              <h3>Cyberworld: You in the online world</h3>
-              <p>PUPSTB ComSoc • July 9-15 2022</p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="assets/ComSoc Cyberworld July 10 2022.png" alt="" />
-            <div class="box">
-              <h3>Cyberworld: You in the online world</h3>
-              <p>PUPSTB ComSoc • July 9-15 2022</p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="assets/Laravel Nov 26 2022.png" alt="" />
-            <div class="box">
-              <h3>Laravel: PHP Framework for Web Artisans</h3>
-              <p>PUPSTB • Nov 26 2022</p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="assets/GDSCPH D1 Tara ML Dec 3 2022.png" alt="" />
-            <div class="box">
-              <h3>Tara ML: Deep Dive in Machine Learning</h3>
-              <p>GDSC PUPSTB • Dec 3-11 2022</p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="assets/GDSCPH D2 Tara ML Dec 7 2022.png" alt="" />
-            <div class="box">
-              <h3>Tara ML: Deep Dive in Machine Learning</h3>
-              <p>GDSC PUPSTB • Dec 3-11 2022</p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="assets/GDSCPH D3 Tara ML Dec 11 2022.png" alt="" />
-            <div class="box">
-              <h3>Tara ML: Deep Dive in Machine Learning</h3>
-              <p>GDSC PUPSTB • Dec 3-11 2022</p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="assets/React Native May 11 2024.png" alt="" />
-            <div class="box">
-              <h3>React Native Running the Starter Template</h3>
-              <p>GDSC USC • May 4 2024</p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="assets/Zuitt GDSC Mapua May 19 2024.png" alt="" />
-            <div class="box">
-              <h3>Love at First Site: Web Development</h3>
-              <p>GDSC Mapua MCM • May 19 2024</p>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="assets/Iskonnovation GDSC Ideathon May 20 2024.png"
-              alt=""
-            />
-            <div class="box">
-              <h3>ISKOnnovation: Culture of Innovation</h3>
-              <p>GDSC PUPSTC • May 20-21 2024</p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="assets/GDSC Iskonnovation May 21 2024.png" alt="" />
-            <div class="box">
-              <h3>ISKOnnovation: Culture of Innovation</h3>
-              <p>GDSC PUPSTC • May 20-21 2024</p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="assets/Luminara ISKOnnovation Hackathon.jpg" alt="" />
-            <div class="box">
-              <h3>ISKOnnovation: Culture of Innovation</h3>
-              <p>GDSC PUPSTC • May 20-21 2024</p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="assets/DevCon Cagayan De Oro Aug 17 2025.png" alt="" />
-            <div class="box">
-              <h3>Think. Code. Build: Intro to Programming</h3>
-              <p>DevCon CDO • Aug 17 2025</p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="assets/Gemini Sept 19 2025.png" alt="" />
-            <div class="box">
-              <h3>Building a Web Solution with Gemini and Firebase Studio</h3>
-              <p>GDSC CTU • Sept 19 2025</p>
-            </div>
+      <!-- DataCamp Certificates Section -->
+      <hr />
+      <h2 class="section-title">DataCamp Statement of Accomplishment</h2>
+      <div class="container-certs" id="datacamp-certs">
+        <!-- 13 DataCamp certificate cards -->
+        <div class="card">
+          <img src="assets/UDS102725.png" alt="DataCamp Certificate 1" />
+          <div class="box">
+            <h3>Understanding Data Science</h3>
+            <p>DataCamp • October 27, 2025</p>
           </div>
         </div>
-    </section>
+        <div class="card">
+          <img src="assets/UML102825.png" alt="DataCamp Certificate 2" />
+          <div class="box">
+            <h3>Understanding Machine Learning</h3>
+            <p>DataCamp • October 28, 2025</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/ITC102825.png" alt="DataCamp Certificate 3" />
+          <div class="box">
+            <h3>Intermediate ChatGPT</h3>
+            <p>DataCamp • October 28, 2025</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/UPE102825.png" alt="DataCamp Certificate 4" />
+          <div class="box">
+            <h3>Understanding Prompt Engineering</h3>
+            <p>DataCamp • October 28, 2025</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/GAIB102825.png" alt="DataCamp Certificate 5" />
+          <div class="box">
+            <h3>Generative AI for Business</h3>
+            <p>DataCamp • October 28, 2025</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/ISQL102925.png" alt="DataCamp Certificate 6" />
+          <div class="box">
+            <h3>Introduction to SQL</h3>
+            <p>DataCamp • October 29, 2025</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/UC102925.png" alt="DataCamp Certificate 7" />
+          <div class="box">
+            <h3>Understanding ChatGPT</h3>
+            <p>DataCamp • October 29, 2025</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/UAI102925.png" alt="DataCamp Certificate 8" />
+          <div class="box">
+            <h3>Understanding Artificial Intelligence</h3>
+            <p>DataCamp • October 29, 2025</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/UDV102925.png" alt="DataCamp Certificate 9" />
+          <div class="box">
+            <h3>Understanding Data Visualization</h3>
+            <p>DataCamp • October 29, 2025</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/UDE102925.png" alt="DataCamp Certificate 10" />
+          <div class="box">
+            <h3>Understanding Data Engineering</h3>
+            <p>DataCamp • October 29, 2025</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/IAIA103025.png" alt="DataCamp Certificate 11" />
+          <div class="box">
+            <h3>Introduction to AI Agents</h3>
+            <p>DataCamp • October 30, 2025</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/IC103125.png" alt="DataCamp Certificate 12" />
+          <div class="box">
+            <h3>Introduction to ChatGPT</h3>
+            <p>DataCamp • October 31, 2025</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/UCC110325.png" alt="DataCamp Certificate 13" />
+          <div class="box">
+            <h3>Understanding Cloud Computing</h3>
+            <p>DataCamp • November 03, 2025</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/UDT110425.png" alt="DataCamp Certificate 14" />
+          <div class="box">
+            <h3>Understanding Data Topics</h3>
+            <p>DataCamp • November 04, 2025</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/LLMOC110425.png" alt="DataCamp Certificate 15" />
+          <div class="box">
+            <h3>LLMOps Concepts</h3>
+            <p>DataCamp • November 04, 2025</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/VCR110725.png" alt="DataCamp Certificate 16" />
+          <div class="box">
+            <h3>Vibe Coding with Replit</h3>
+            <p>DataCamp • November 07, 2025</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/MAI111825.png" alt="DataCamp Certificate 17" />
+          <div class="box">
+            <h3>Monetizing Artificial Intelligence</h3>
+            <p>DataCamp • November 18, 2025</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="assets/RAIP112625.png" alt="DataCamp Certificate 18" />
+          <div class="box">
+            <h3>Responsible AI Practices</h3>
+            <p>DataCamp • November 26, 2025</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
     <!-- ---------------  FOOTER  --------------- -->
     <footer id="contact">
