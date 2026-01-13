@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>🎂 Happy Birthday — Fireworks Edition</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at top, #0b0f1a, #020409);
+  height: 100%;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+}
+
+canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.ui {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 5;
+}
+
+h1 {
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  letter-spacing: 4px;
+  text-align: center;
+  color: #fff;
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+p {
+  text-align: center;
+  margin-top: 12px;
+  opacity: 0.85;
+  color: #ff9800;
+}
+
+@keyframes glow {
+  from {
+    text-shadow:
+      0 0 20px #ff9800,
+      0 0 40px #ff9800;
+  }
+  to {
+    text-shadow:
+      0 0 60px #ffd700,
+      0 0 120px #ffd700;
+  }
+}
+
+.hint {
+  position: absolute;
+  bottom: 24px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="c"></canvas>
+
+<div class="ui">
+  <div>
+    <h1>🎉 HAPPY BIRTHDAY 🎂</h1>
+    <p>✨ May your life launch higher than fireworks ✨</p>
+  </div>
+</div>
+
+<div class="hint">Click / Tap anywhere • Enjoy the show</div>
+
+<script>
+/* ================= CORE ENGINE ================= */
+const canvas = document.getElementById("c");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+}
+resize();
+addEventListener("resize", resize);
+
+const rand = (a,b)=>Math.random()*(b-a)+a;
+const TAU = Math.PI*2;
+
+/* ================= COLORS ================= */
+const palette = [
+  "#ff5252", "#ffd740", "#40c4ff",
+  "#69f0ae", "#ff4081", "#7c4dff"
+];
+
+/* ================= PARTICLE ================= */
+class Particle {
+  constructor(x,y,vx,vy,size,color,life,gravity=0.15) {
+    this.x=x; this.y=y;
+    this.vx=vx; this.vy=vy;
+    this.size=size;
+    this.color=color;
+    this.life=life;
+    this.gravity=gravity;
+    this.rot=rand(0,TAU);
+    this.spin=rand(-0.15,0.15);
+  }
+  update() {
+    this.vy+=this.gravity;
+    this.x+=this.vx;
+    this.y+=this.vy;
+    this.rot+=this.spin;
+    this.life--;
+  }
+  draw() {
+    ctx.save();
+    ctx.translate(this.x,this.y);
+    ctx.rotate(this.rot);
+    ctx.globalCompositeOperation="lighter";
+    ctx.fillStyle=this.color;
+    ctx.fillRect(-this.size/2,-this.size/2,this.size,this.size);
+    ctx.restore();
+  }
+}
+
+/* ================= FIREWORK ================= */
+class Firework {
+  constructor(x,y) {
+    this.particles=[];
+    for(let i=0;i<120;i++){
+      const a=rand(0,TAU);
+      const s=rand(2,9);
+      this.particles.push(
+        new Particle(
+          x,y,
+          Math.cos(a)*s,
+          Math.sin(a)*s,
+          rand(3,6),
+          palette[Math.random()*palette.length|0],
+          rand(80,140)
+        )
+      );
+    }
+  }
+  update(){
+    this.particles.forEach(p=>p.update());
+    this.particles=this.particles.filter(p=>p.life>0);
+  }
+  draw(){
+    this.particles.forEach(p=>p.draw());
+  }
+}
+
+/* ================= POPPER ================= */
+function popper(x,y,dir){
+  for(let i=0;i<60;i++){
+    const a=rand(-0.6,0.6)+dir;
+    const s=rand(6,14);
+    fireworks.push(new Particle(
+      x,y,
+      Math.cos(a)*s,
+      Math.sin(a)*s,
+      rand(4,7),
+      palette[Math.random()*palette.length|0],
+      rand(60,100)
+    ));
+  }
+}
+
+/* ================= STATE ================= */
+let fireworks=[];
+let timeline=0;
+
+/* ================= AUTO CINEMATIC TIMELINE ================= */
+function choreography(){
+  timeline++;
+  if(timeline%90===0){
+    fireworks.push(
+      new Firework(
+        rand(150,canvas.width-150),
+        rand(120,canvas.height/2)
+      )
+    );
+  }
+  if(timeline%240===0){
+    popper(60,canvas.height-40,-Math.PI/2);
+    popper(canvas.width-60,canvas.height-40,-Math.PI/2);
+  }
+}
+
+/* ================= INTERACTION ================= */
+addEventListener("pointerdown",e=>{
+  fireworks.push(new Firework(e.clientX,e.clientY));
+});
+
+/* ================= RENDER LOOP ================= */
+function animate(){
+  ctx.fillStyle="rgba(0,0,0,0.25)";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  choreography();
+
+  fireworks.forEach(f=>{
+    f.update();
+    f.draw();
+  });
+
+  fireworks=fireworks.filter(f=>!f.particles||f.particles.length>0);
+
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>
