@@ -47,7 +47,7 @@
         }
 
         function updateCounter(type) {
-            fetch('https://Fea2127.github.io/v.html:3002?'+type)
+            fetch('https://127.0.0.1:3002?'+type)
             .then(response => response.json())
             .then(data => {
                 pageViewsCountElement.textContent = data.pageViews;
