@@ -1,0 +1,25 @@
+{
+  "name": "fea2127.github.io",
+  "version": "1.0.0",
+  "description": "🚀 **Continuing my web development journey**   🎨 **Designing and building amazing projects**   🔭 **Exploring new technologies and frameworks**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fea2127/Fea2127.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Fea2127/Fea2127.github.io/issues"
+  },
+  "homepage": "https://github.com/Fea2127/Fea2127.github.io#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  }
+}
