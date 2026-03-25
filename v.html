@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Count Sample</title>
+</head>
+<body>
+    <main id="container">
+        <div><span id="pageviews-count"></span><h4>PageViews</h4></div>
+        <div><span id="visits-count"></span><h4>Visits</h4></div>
+    </main>
+    <script>
+        const pageViewsCountElement = document.getElementById('pageviews-count');
+        const visitsCountElement = document.getElementById('visits-count');
+
+        if (sessionStorage.getItem('visit') ===null) {
+           //New visit and page view
+           updateCounter('type=visit-pageview');
+        } else {
+           //Pageview only
+           updateCounter('type=pageview');
+        }
+
+        function updateCounter(type) {
+            fetch('https://Fea2127.github.io/v.html:3002?'+type)
+            .then(response => response.json())
+            .then(data => {
+                pageViewsCountElement.textContent = data.pageViews;
+                visitsCountElement.textContent = data.visits;
+            })
+        }
+
+        sessionStorage.setItem('visit', 'x');
+    </script>
+</body>
+</html>
