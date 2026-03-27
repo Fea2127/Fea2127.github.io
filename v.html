@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Visitor Count Sample</title>
     <style>
+      :root {
+        --bg: #0d0f17;
+        --surface: rgba(23, 26, 41, 0.6);
+        --primary: #45a9e7;
+        --accent: #00e5ff;
+        --text: #e4e6eb;
+        --text-dim: #8a91a8;
+        --radius: 16px;
+        --blur: blur(20px);
+        --neon: 0 0 4px var(--primary), 0 0 12px var(--primary);
+        --transition: all 0.3s ease;
+        font-size: 16px;
+      }
+      #visitorCounter {
+        border: #333;
+        border-radius: 30px;
+        background-color: var(--surface);
+        padding: 50px;
+        margin: auto;
+      }
       body {
         font-family: Arial, sans-serif;
         display: flex;
@@ -31,22 +51,19 @@
   </head>
   <body>
     <!-- newest -->
-      <a href='https://www.counters-free.net/'>free Counters</a> <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=9bc68a71460c487e00c94672f0e75a7e98d46708'></script>
-<script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1524028/t/0"></script>
+    <div id="visitorCounter">
+      <a href="https://www.counters-free.net/">free Counters</a>
+      <script
+        type="text/javascript"
+        src="https://www.freevisitorcounters.com/auth.php?id=9bc68a71460c487e00c94672f0e75a7e98d46708"
+      ></script>
+      <script
+        type="text/javascript"
+        src="https://www.freevisitorcounters.com/en/home/counter/1524028/t/0"
+      ></script>
+    </div>
     <!-- newest -->
-    <!-- new visitor count -->
-    <p>Visitors: <span id="visitor-count">Loading...</span></p>
-    <!-- new visitor count -->
 
-    <!-- new script -->
-    <script>
-      fetch("https://api.countapi.xyz/hit/fea2127-portfolio/visits")
-        .then((res) => res.json())
-        .then((res) => {
-          document.getElementById("visitor-count").innerText = res.value;
-        });
-    </script>
-    <!-- new script -->
     <main id="container">
       <div>
         <span id="pageviews-count"></span>
