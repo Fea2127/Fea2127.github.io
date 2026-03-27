@@ -1,61 +1,80 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Visitor Count Sample</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        #container {
-            display: flex;
-            gap: 50px;
-            border: #333 1px solid;
-            border-radius: 15px;
-            padding: 20px;
-        }
-        div {
-            text-align: center;
-        }
-        span {
-            font-size: 2em;
-            color: #333;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      #container {
+        display: flex;
+        gap: 50px;
+        border: #333 1px solid;
+        border-radius: 15px;
+        padding: 20px;
+      }
+      div {
+        text-align: center;
+      }
+      span {
+        font-size: 2em;
+        color: #333;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <!-- new visitor count -->
+    <p>Visitors: <span id="visitor-count">Loading...</span></p>
+    <!-- new visitor count -->
+
+    <!-- new script -->
+    <script>
+      fetch("https://api.countapi.xyz/hit/fea2127-portfolio/visits")
+        .then((res) => res.json())
+        .then((res) => {
+          document.getElementById("visitor-count").innerText = res.value;
+        });
+    </script>
+    <!-- new script -->
     <main id="container">
-        <div><span id="pageviews-count"></span><h4>PageViews</h4></div>
-        <div><span id="visits-count"></span><h4>Visits</h4></div>
+      <div>
+        <span id="pageviews-count"></span>
+        <h4>PageViews</h4>
+      </div>
+      <div>
+        <span id="visits-count"></span>
+        <h4>Visits</h4>
+      </div>
     </main>
     <script>
-        const pageViewsCountElement = document.getElementById('pageviews-count');
-        const visitsCountElement = document.getElementById('visits-count');
+      const pageViewsCountElement = document.getElementById("pageviews-count");
+      const visitsCountElement = document.getElementById("visits-count");
 
-        if (sessionStorage.getItem('visit') ===null) {
-           //New visit and page view
-           updateCounter('type=visit-pageview');
-        } else {
-           //Pageview only
-           updateCounter('type=pageview');
-        }
+      if (sessionStorage.getItem("visit") === null) {
+        //New visit and page view
+        updateCounter("type=visit-pageview");
+      } else {
+        //Pageview only
+        updateCounter("type=pageview");
+      }
 
-        function updateCounter(type) {
-            fetch('https://127.0.0.1:3000?'+type)
-            .then(response => response.json())
-            .then(data => {
-                pageViewsCountElement.textContent = data.pageViews;
-                visitsCountElement.textContent = data.visits;
-            })
-        }
+      function updateCounter(type) {
+        fetch("https://127.0.0.1:3000?" + type)
+          .then((response) => response.json())
+          .then((data) => {
+            pageViewsCountElement.textContent = data.pageViews;
+            visitsCountElement.textContent = data.visits;
+          });
+      }
 
-        sessionStorage.setItem('visit', 'x');
+      sessionStorage.setItem("visit", "x");
     </script>
-</body>
+  </body>
 </html>
