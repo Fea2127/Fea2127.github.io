@@ -22,10 +22,12 @@
         border: #333;
         border-radius: 30px;
         background-color: var(--surface);
+        border: var(--accent);
         padding: 50px;
         margin: auto;
       }
       body {
+        background-color: #0d0f17;
         font-family: Arial, sans-serif;
         display: flex;
         justify-content: center;
@@ -33,7 +35,7 @@
         height: 100vh;
         margin: 0;
       }
-      #container {
+      /* #container {
         display: flex;
         gap: 50px;
         border: #333 1px solid;
@@ -46,7 +48,7 @@
       span {
         font-size: 2em;
         color: #333;
-      }
+      } */
     </style>
   </head>
   <body>
@@ -64,7 +66,7 @@
     </div>
     <!-- newest -->
 
-    <main id="container">
+    <!-- <main id="container">
       <div>
         <span id="pageviews-count"></span>
         <h4>PageViews</h4>
@@ -73,7 +75,7 @@
         <span id="visits-count"></span>
         <h4>Visits</h4>
       </div>
-    </main>
+    </main> -->
     <script>
       const pageViewsCountElement = document.getElementById("pageviews-count");
       const visitsCountElement = document.getElementById("visits-count");
