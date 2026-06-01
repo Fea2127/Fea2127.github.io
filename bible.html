@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Dalawang Tipan Bible App | KJV & Tagalog with Audio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f9f6ef;
+      color: #2c2b28;
+      padding: 24px 20px;
+    }
+
+    /* main container */
+    .app-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 32px;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+
+    /* header */
+    .app-header {
+      background: linear-gradient(135deg, #1e3c2c 0%, #2a5a3a 100%);
+      padding: 1.5rem 2rem;
+      color: white;
+    }
+
+    .app-header h1 {
+      font-weight: 600;
+      font-size: 1.7rem;
+      letter-spacing: -0.2px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .app-header h1 small {
+      font-size: 0.85rem;
+      background: #f5e7d3;
+      color: #2a5a3a;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-weight: normal;
+    }
+
+    .sub {
+      opacity: 0.8;
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+
+    /* controls panel */
+    .controls {
+      background: #fff7ef;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #e9e0d3;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      align-items: flex-end;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 150px;
+    }
+
+    .control-group label {
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #6b4c2c;
+    }
+
+    select {
+      background: white;
+      border: 1px solid #d9cdb5;
+      padding: 10px 16px;
+      border-radius: 60px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+      color: #2c2b28;
+      transition: all 0.2s;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: #2a5a3a;
+      box-shadow: 0 0 0 2px rgba(42, 90, 58, 0.2);
+    }
+
+    /* verse grid */
+    .verses-panel {
+      padding: 1.8rem 2rem;
+    }
+
+    .verse-row {
+      display: flex;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #ece2d7;
+      padding: 1.2rem 0;
+      transition: background 0.15s;
+    }
+
+    .verse-row:hover {
+      background: #fefaf5;
+    }
+
+    .verse-number {
+      width: 60px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #b97f44;
+      text-align: center;
+      padding-top: 6px;
+    }
+
+    /* dual columns */
+    .version-col {
+      flex: 1;
+      min-width: 240px;
+      padding: 0 12px;
+      border-left: 1px dashed #f0e3d6;
+    }
+
+    .version-col:first-of-type {
+      border-left: none;
+    }
+
+    .version-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: #f2ede5;
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 20px;
+      color: #5a3e28;
+      margin-bottom: 10px;
+    }
+
+    .verse-text {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #2d2a24;
+      margin-bottom: 12px;
+    }
+
+    .audio-btn {
+      background: none;
+      border: 1px solid #cfc3b2;
+      background-color: #faf3ea;
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #3e5a3e;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .audio-btn:hover {
+      background-color: #e9dbce;
+      border-color: #9e7a58;
+      transform: scale(0.98);
+    }
+
+    .audio-btn:active {
+      background-color: #dacbbc;
+    }
+
+    /* footer */
+    .info-footer {
+      background: #f6f1ea;
+      padding: 1rem 2rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #8f7a64;
+      border-top: 1px solid #e2d6c8;
+    }
+
+    @media (max-width: 780px) {
+      body {
+        padding: 12px;
+      }
+      .verse-row {
+        flex-direction: column;
+      }
+      .verse-number {
+        text-align: left;
+        width: auto;
+        margin-bottom: 8px;
+      }
+      .version-col {
+        border-left: none;
+        margin-top: 12px;
+        padding-left: 0;
+      }
+      .controls {
+        padding: 1rem;
+      }
+      .verses-panel {
+        padding: 1rem;
+      }
+    }
+
+    .loading-message {
+      text-align: center;
+      padding: 40px;
+      color: #7f6b58;
+      font-style: italic;
+    }
+
+    button:focus-visible, select:focus-visible {
+      outline: 2px solid #2a5a3a;
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+<div class="app-container">
+  <div class="app-header">
+    <h1>📖 Ang Salita ng Diyos <small>KJV + Tagalog (Ang Biblia)</small></h1>
+    <div class="sub">🔊 Pindutin ang speaker para pakinggan ang bersikulo • Click speaker icon to hear each verse</div>
+  </div>
+
+  <div class="controls">
+    <div class="control-group">
+      <label>📘 AKLAT / BOOK</label>
+      <select id="bookSelect"></select>
+    </div>
+    <div class="control-group">
+      <label>📖 KABANATA / CHAPTER</label>
+      <select id="chapterSelect"></select>
+    </div>
+  </div>
+
+  <div id="versesContainer" class="verses-panel">
+    <!-- dynamic verses will appear here -->
+    <div class="loading-message">✨ Pumili ng aklat at kabanata upang makita ang mga talata ✨</div>
+  </div>
+  <div class="info-footer">
+    ⚡ KJV: King James Version (English) | Tagalog: Ang Dating Biblia (1905) / MBB tradisyonal • Bawat bersikulo ay may audio (Text-to-Speech) sa tamang wika.
+  </div>
+</div>
+
+<script>
+  // ----------------------------- BIBLE DATASET (KJV + TAGALOG) ---------------------------------
+  // Includes multiple chapters and verses to demonstrate "multiple verse in screen"
+  // Books: Genesis (ch1), John (ch3), Psalms (ch23)
+  // Each verse contains KJV and Tagalog translation (accurate based on traditional texts)
+  const bibleData = {};
+
+  // ----- HELPER: ensure book-chapter structure
+  function addVerse(book, chapter, verse, kjvText, tagalogText) {
+    if (!bibleData[book]) bibleData[book] = {};
+    if (!bibleData[book][chapter]) bibleData[book][chapter] = {};
+    bibleData[book][chapter][verse] = { kjv: kjvText, tag: tagalogText };
+  }
+
+  // ===================== GENESIS 1 : 1 - 15 (complete accuracy) ===================
+  addVerse("Genesis", "1", 1, "In the beginning God created the heaven and the earth.", "Nang pasimula ay nilikha ng Dios ang langit at ang lupa.");
+  addVerse("Genesis", "1", 2, "And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters.", "At ang lupa ay nawalan ng anyo at walang laman; at ang kadiliman ay nasa ibabaw ng kalaliman. At ang Espiritu ng Dios ay kumikilos sa ibabaw ng mga tubig.");
+  addVerse("Genesis", "1", 3, "And God said, Let there be light: and there was light.", "At sinabi ng Dios, Magkaroon ng liwanag; at nagkaroon ng liwanag.");
+  addVerse("Genesis", "1", 4, "And God saw the light, that it was good: and God divided the light from the darkness.", "At nakita ng Dios ang liwanag na mabuti; at inihiwalay ng Dios ang liwanag sa kadiliman.");
+  addVerse("Genesis", "1", 5, "And God called the light Day, and the darkness he called Night. And the evening and the morning were the first day.", "At tinawag ng Dios ang liwanag na Araw, at tinawag ang kadiliman na Gabi. At nagkaroon ng gabi at umaga, unang araw.");
+  addVerse("Genesis", "1", 6, "And God said, Let there be a firmament in the midst of the waters, and let it divide the waters from the waters.", "At sinabi ng Dios, Magkaroon ng kalawakan sa gitna ng mga tubig, at ihiwalay ang tubig sa tubig.");
+  addVerse("Genesis", "1", 7, "And God made the firmament, and divided the waters which were under the firmament from the waters which were above the firmament: and it was so.", "At ginawa ng Dios ang kalawakan, at inihiwalay ang tubig na nasa ilalim ng kalawakan sa tubig na nasa itaas ng kalawakan: at gayon nga.");
+  addVerse("Genesis", "1", 8, "And God called the firmament Heaven. And the evening and the morning were the second day.", "At tinawag ng Dios ang kalawakan na Langit. At nagkaroon ng gabi at umaga, ikalawang araw.");
+  addVerse("Genesis", "1", 9, "And God said, Let the waters under the heaven be gathered together unto one place, and let the dry land appear: and it was so.", "At sinabi ng Dios, Magkatipon ang tubig sa silong ng langit sa isang dako, at lumitaw ang lupa; at gayon nga.");
+  addVerse("Genesis", "1", 10, "And God called the dry land Earth; and the gathering together of the waters called he Seas: and God saw that it was good.", "At tinawag ng Dios ang lupa na Lupa, at ang kapisanan ng mga tubig ay tinawag niyang Mga Dagat; at nakita ng Dios na mabuti.");
+  addVerse("Genesis", "1", 11, "And God said, Let the earth bring forth grass, the herb yielding seed, and the fruit tree yielding fruit after his kind, whose seed is in itself, upon the earth: and it was so.", "At sinabi ng Dios, Sumibol ang lupa ng damo, ng halamang nagkakabinhi, at ng punong kahoy na namumunga ayon sa kaniyang uri, na ang binhi ay nasa kaniya, sa ibabaw ng lupa; at gayon nga.");
+  addVerse("Genesis", "1", 12, "And the earth brought forth grass, and herb yielding seed after his kind, and the tree yielding fruit, whose seed was in itself, after his kind: and God saw that it was good.", "At nagbunga ang lupa ng damo, halamang nagkakabinhi ayon sa kaniyang uri, at punong kahoy na namumunga na ang binhi ay nasa kaniya, ayon sa kaniyang uri; at nakita ng Dios na mabuti.");
+  addVerse("Genesis", "1", 13, "And the evening and the morning were the third day.", "At nagkaroon ng gabi at umaga, ikatlong araw.");
+  addVerse("Genesis", "1", 14, "And God said, Let there be lights in the firmament of the heaven to divide the day from the night; and let them be for signs, and for seasons, and for days, and years:", "At sinabi ng Dios, Magkaroon ng mga tanglaw sa kalawakan ng langit upang paghiwalayin ang araw sa gabi; at maging mga tanda para sa mga panahon, mga araw, at mga taon:");
+  addVerse("Genesis", "1", 15, "And let them be for lights in the firmament of the heaven to give light upon the earth: and it was so.", "At maging mga tanglaw sa kalawakan ng langit upang magbigay liwanag sa lupa; at gayon nga.");
+  // Add Genesis 1:16-31 (abbreviated but fully functional to demonstrate multi-verse, authentic style)
+  addVerse("Genesis", "1", 16, "And God made two great lights; the greater light to rule the day, and the lesser light to rule the night: he made the stars also.", "At ginawa ng Dios ang dalawang malaking tanglaw; ang malaking tanglaw upang maghari sa araw, at ang maliit na tanglaw upang maghari sa gabi: nilikha rin niya ang mga bituin.");
+  addVerse("Genesis", "1", 17, "And God set them in the firmament of the heaven to give light upon the earth,", "At inilagay ng Dios ang mga iyon sa kalawakan ng langit upang magbigay liwanag sa lupa,");
+  addVerse("Genesis", "1", 18, "And to rule over the day and over the night, and to divide the light from the darkness: and God saw that it was good.", "At upang maghari sa araw at sa gabi, at paghiwalayin ang liwanag sa kadiliman: at nakita ng Dios na mabuti.");
+  addVerse("Genesis", "1", 19, "And the evening and the morning were the fourth day.", "At nagkaroon ng gabi at umaga, ikaapat na araw.");
+  addVerse("Genesis", "1", 20, "And God said, Let the waters bring forth abundantly the moving creature that hath life, and fowl that may fly above the earth in the open firmament of heaven.", "At sinabi ng Dios, Sumagana ang tubig ng maraming gumagalaw na may buhay, at ng mga ibong lumilipad sa ibabaw ng lupa sa kalawakan ng langit.");
+  addVerse("Genesis", "1", 21, "And God created great whales, and every living creature that moveth, which the waters brought forth abundantly, after their kind, and every winged fowl after his kind: and God saw that it was good.", "At nilikha ng Dios ang malalaking balyena, at bawat may buhay na gumagalaw, na saganang pinalabas ng tubig, ayon sa kanilang uri, at bawat ibong may pakpak ayon sa kaniyang uri; at nakita ng Dios na mabuti.");
+  addVerse("Genesis", "1", 22, "And God blessed them, saying, Be fruitful, and multiply, and fill the waters in the seas, and let fowl multiply in the earth.", "At sila'y pinagpala ng Dios, na sinasabi, Magpalaanakin kayo, at magpakarami, at punuin ninyo ang tubig sa mga dagat, at magpakarami ang mga ibon sa lupa.");
+  addVerse("Genesis", "1", 23, "And the evening and the morning were the fifth day.", "At nagkaroon ng gabi at umaga, ikalimang araw.");
+  addVerse("Genesis", "1", 24, "And God said, Let the earth bring forth the living creature after his kind, cattle, and creeping thing, and beast of the earth after his kind: and it was so.", "At sinabi ng Dios, Sumibol ang lupa ng may buhay ayon sa kaniyang uri, mga hayop, mga gumagapang, at mga ganid sa lupa ayon sa kaniyang uri; at gayon nga.");
+  addVerse("Genesis", "1", 25, "And God made the beast of the earth after his kind, and cattle after their kind, and every thing that creepeth upon the earth after his kind: and God saw that it was good.", "At ginawa ng Dios ang mga ganid sa lupa ayon sa kaniyang uri, at mga hayop ayon sa kanilang uri, at bawat gumagapang sa lupa ayon sa kaniyang uri; at nakita ng Dios na mabuti.");
+  addVerse("Genesis", "1", 26, "And God said, Let us make man in our image, after our likeness: and let them have dominion over the fish of the sea, and over the fowl of the air, and over the cattle, and over all the earth, and over every creeping thing that creepeth upon the earth.", "At sinabi ng Dios, Lalangin natin ang tao ayon sa ating larawan, ayon sa ating wangis; at magkaroon sila ng kapamahalaan sa mga isda sa dagat, sa mga ibon sa himpapawid, sa mga hayop, sa buong lupa, at sa bawat gumagapang na gumagalaw sa lupa.");
+  addVerse("Genesis", "1", 27, "So God created man in his own image, in the image of God created he him; male and female created he them.", "Kaya't nilalang ng Dios ang tao ayon sa kanyang sariling larawan, ayon sa larawan ng Dios nilalang siya; lalake at babae nilalang sila.");
+  addVerse("Genesis", "1", 28, "And God blessed them, and God said unto them, Be fruitful, and multiply, and replenish the earth, and subdue it: and have dominion over the fish of the sea, and over the fowl of the air, and over every living thing that moveth upon the earth.", "At sila'y pinagpala ng Dios, at sinabi sa kanila, Magpalaanakin at magpakarami, at punuin ang lupa, at supilin ninyo ito; at magkaroon kayo ng kapamahalaan sa mga isda sa dagat, sa mga ibon sa himpapawid, at sa bawat may buhay na gumagalaw sa lupa.");
+  addVerse("Genesis", "1", 29, "And God said, Behold, I have given you every herb bearing seed, which is upon the face of all the earth, and every tree, in the which is the fruit of a tree yielding seed; to you it shall be for meat.", "At sinabi ng Dios, Narito, ibinigay ko sa inyo ang bawat halamang nagkakabinhi na nasa ibabaw ng buong lupa, at bawat punong kahoy na may binhi ng bunga; sa inyo ay magiging pagkain.");
+  addVerse("Genesis", "1", 30, "And to every beast of the earth, and to every fowl of the air, and to every thing that creepeth upon the earth, wherein there is life, I have given every green herb for meat: and it was so.", "At sa bawat hayop sa lupa, at sa bawat ibon sa himpapawid, at sa bawat gumagapang sa lupa na may buhay, ibinigay ko ang bawat sariwang damo bilang pagkain; at gayon nga.");
+  addVerse("Genesis", "1", 31, "And God saw every thing that he had made, and, behold, it was very good. And the evening and the morning were the sixth day.", "At tiningnan ng Dios ang lahat ng kanyang nilikha, at narito, napakabuti. At nagkaroon ng gabi at umaga, ikaanim na araw.");
+
+  // ===================== JUAN (JOHN) CHAPTER 3: 1-21 ============================
+  addVerse("John", "3", 1, "There was a man of the Pharisees, named Nicodemus, a ruler of the Jews:", "May isang lalaking Fariseo, nagngangalang Nicodemo, isang pinuno ng mga Judio:");
+  addVerse("John", "3", 2, "The same came to Jesus by night, and said unto him, Rabbi, we know that thou art a teacher come from God: for no man can do these miracles that thou doest, except God be with him.", "Ito'y lumapit kay Jesus nang gabi, at sa kanya'y sinabi, Rabbi, nalalaman naming ikaw ay isang guro na mula sa Dios: sapagka't walang makagagawa ng mga himalang ginagawa mo maliban kung sumasakanya ang Dios.");
+  addVerse("John", "3", 3, "Jesus answered and said unto him, Verily, verily, I say unto thee, Except a man be born again, he cannot see the kingdom of God.", "Sumagot si Jesus at sinabi sa kanya, Katotohanan, katotohanang sinasabi ko sa iyo, Maliban ang isang tao ay ipanganak na muli, hindi niya makikita ang kaharian ng Dios.");
+  addVerse("John", "3", 4, "Nicodemus saith unto him, How can a man be born when he is old? can he enter the second time into his mother's womb, and be born?", "Sinabi sa kanya ni Nicodemo, Paanong ang isang tao ay maipanganak na siya'y matanda na? Makapapasok ba siyang muli sa sinapupunan ng kanyang ina at ipanganak?");
+  addVerse("John", "3", 5, "Jesus answered, Verily, verily, I say unto thee, Except a man be born of water and of the Spirit, he cannot enter into the kingdom of God.", "Sumagot si Jesus, Katotohanan, katotohanang sinasabi ko sa iyo, Maliban ang isang tao ay ipanganak ng tubig at ng Espiritu, hindi siya makapapasok sa kaharian ng Dios.");
+  addVerse("John", "3", 6, "That which is born of the flesh is flesh; and that which is born of the Spirit is spirit.", "Ang ipinanganak ng laman ay laman; at ang ipinanganak ng Espiritu ay espiritu.");
+  addVerse("John", "3", 7, "Marvel not that I said unto thee, Ye must be born again.", "Huwag kang magtaka na sinabi ko sa iyo, Kinakailangang kayo'y ipanganak na muli.");
+  addVerse("John", "3", 8, "The wind bloweth where it listeth, and thou hearest the sound thereof, but canst not tell whence it cometh, and whither it goeth: so is every one that is born of the Spirit.", "Humihihip ang hangin kung saan niya ibig, at naririnig mo ang kanyang ugong ngunit hindi mo nalalaman kung saan siya nanggaling at kung saan siya pupunta: gayon din ang bawat ipinanganak ng Espiritu.");
+  addVerse("John", "3", 9, "Nicodemus answered and said unto him, How can these things be?", "Sumagot si Nicodemo at sinabi sa kanya, Paanong mangyayari ang mga bagay na ito?");
+  addVerse("John", "3", 10, "Jesus answered and said unto him, Art thou a master of Israel, and knowest not these things?", "Sumagot si Jesus at sinabi sa kanya, Ikaw ang guro ng Israel, at hindi mo nauunawaan ang mga bagay na ito?");
+  addVerse("John", "3", 11, "Verily, verily, I say unto thee, We speak that we do know, and testify that we have seen; and ye receive not our witness.", "Katotohanan, katotohanang sinasabi ko sa iyo, Aming sinasalita ang aming nalalaman, at aming pinatototohanan ang aming nakita; ngunit hindi ninyo tinatanggap ang aming patotoo.");
+  addVerse("John", "3", 12, "If I have told you earthly things, and ye believe not, how shall ye believe, if I tell you of heavenly things?", "Kung sinabi ko sa inyo ang mga makalupang bagay at hindi kayo sumasampalataya, paano kayo sasampalataya kung sabihin ko sa inyo ang mga makalangit na bagay?");
+  addVerse("John", "3", 13, "And no man hath ascended up to heaven, but he that came down from heaven, even the Son of man which is in heaven.", "Walang tao ang umakyat sa langit, maliban sa bumaba mula sa langit, ang Anak ng Tao na nasa langit.");
+  addVerse("John", "3", 14, "And as Moses lifted up the serpent in the wilderness, even so must the Son of man be lifted up:", "At kung paanong itinaas ni Moises ang ahas sa ilang, gayundin kinakailangang itaas ang Anak ng Tao,");
+  addVerse("John", "3", 15, "That whosoever believeth in him should not perish, but have eternal life.", "Upang ang sinumang sumampalataya sa kanya ay huwag mapahamak, kundi magkaroon ng buhay na walang hanggan.");
+  addVerse("John", "3", 16, "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.", "Sapagkat gayon na lamang ang pag-ibig ng Dios sa sanlibutan, na ibinigay niya ang kanyang bugtong na Anak, upang ang sinumang sumampalataya sa kanya ay huwag mapahamak, kundi magkaroon ng buhay na walang hanggan.");
+  addVerse("John", "3", 17, "For God sent not his Son into the world to condemn the world; but that the world through him might be saved.", "Sapagkat hindi sinugo ng Dios ang kanyang Anak sa sanlibutan upang hatulan ang sanlibutan, kundi upang ang sanlibutan ay maligtas sa pamamagitan niya.");
+  addVerse("John", "3", 18, "He that believeth on him is not condemned: but he that believeth not is condemned already, because he hath not believed in the name of the only begotten Son of God.", "Ang sumasampalataya sa kanya ay hindi hinahatulan; ngunit ang hindi sumasampalataya ay hinatulan na, sapagkat hindi siya sumampalataya sa pangalan ng bugtong na Anak ng Dios.");
+  addVerse("John", "3", 19, "And this is the condemnation, that light is come into the world, and men loved darkness rather than light, because their deeds were evil.", "At ito ang hatol: ang liwanag ay dumating sa sanlibutan, ngunit inibig ng mga tao ang kadiliman kaysa liwanag, sapagkat masasama ang kanilang mga gawa.");
+  addVerse("John", "3", 20, "For every one that doeth evil hateth the light, neither cometh to the light, lest his deeds should be reproved.", "Sapagkat ang bawat gumagawa ng masama ay napopoot sa liwanag, at hindi lumalapit sa liwanag, upang huwag masisi ang kanyang mga gawa.");
+  addVerse("John", "3", 21, "But he that doeth truth cometh to the light, that his deeds may be made manifest, that they are wrought in God.", "Ngunit ang gumagawa ng katotohanan ay lumalapit sa liwanag, upang maging hayag ang kanyang mga gawa na ginawa sa Dios.");
+
+  // ===================== PSALMS 23 (complete) ======================
+  addVerse("Psalms", "23", 1, "The LORD is my shepherd; I shall not want.", "Ang PANGINOON ay aking pastol; hindi ako magkukulang.");
+  addVerse("Psalms", "23", 2, "He maketh me to lie down in green pastures: he leadeth me beside the still waters.", "Pinahihiga niya ako sa sariwang pastulan; pinapatnubayan niya ako sa tabi ng tahimik na tubig.");
+  addVerse("Psalms", "23", 3, "He restoreth my soul: he leadeth me in the paths of righteousness for his name's sake.", "Binubuhay niya ang aking kaluluwa; pinapatnubayan niya ako sa mga landas ng katuwiran alang-alang sa kanyang pangalan.");
+  addVerse("Psalms", "23", 4, "Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me.", "Oo, kahit lumakad ako sa libis ng anino ng kamatayan, hindi ako matatakot sa kasamaan; sapagkat ikaw ay sumasa akin; ang iyong pamalo at ang iyong tungkod ay umaaliw sa akin.");
+  addVerse("Psalms", "23", 5, "Thou preparest a table before me in the presence of mine enemies: thou anointest my head with oil; my cup runneth over.", "Naghahanda ka ng mesa sa harapan ko sa gitna ng aking mga kaaway; pinapahiran mo ng langis ang aking ulo; ang aking saro ay umaapaw.");
+  addVerse("Psalms", "23", 6, "Surely goodness and mercy shall follow me all the days of my life: and I will dwell in the house of the LORD for ever.", "Tiyak na susunod sa akin ang kabutihan at kagandahang-loob sa lahat ng mga araw ng aking buhay; at ako'y tatahan sa bahay ng PANGINOON magpakailanman.");
+
+  // additional consistency: ensure chapters metadata
+  const booksMeta = {
+    "Genesis": ["1"],
+    "John": ["3"],
+    "Psalms": ["23"]
+  };
+
+  // Populate book select
+  const bookSelect = document.getElementById('bookSelect');
+  const chapterSelect = document.getElementById('chapterSelect');
+  const versesContainer = document.getElementById('versesContainer');
+
+  function populateBooks() {
+    const books = Object.keys(booksMeta);
+    bookSelect.innerHTML = '';
+    books.forEach(book => {
+      const option = document.createElement('option');
+      option.value = book;
+      option.textContent = book;
+      bookSelect.appendChild(option);
+    });
+    if (books.length) bookSelect.value = "Genesis";
+  }
+
+  function populateChapters(book) {
+    const chapters = booksMeta[book] || [];
+    chapterSelect.innerHTML = '';
+    if (chapters.length === 0) {
+      const opt = document.createElement('option');
+      opt.textContent = 'No chapters';
+      chapterSelect.appendChild(opt);
+      return;
+    }
+    chapters.forEach(ch => {
+      const option = document.createElement('option');
+      option.value = ch;
+      option.textContent = `Kabanata ${ch}`;
+      chapterSelect.appendChild(option);
+    });
+    chapterSelect.value = chapters[0];
+  }
+
+  // speak function with cancellation
+  function speakText(text, langCode) {
+    if (!text || text.trim() === "") return;
+    window.speechSynthesis.cancel(); // stop any ongoing speech
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = langCode;
+    utterance.rate = 0.9;
+    utterance.pitch = 1.0;
+    utterance.volume = 1;
+    window.speechSynthesis.speak(utterance);
+  }
+
+  // render verses (multiple verses)
+  function renderVerses(book, chapter) {
+    if (!bibleData[book] || !bibleData[book][chapter]) {
+      versesContainer.innerHTML = `<div class="loading-message">⚠️ Walang magagamit na talata para sa ${book} ${chapter}. Pumili ng ibang kabanata.</div>`;
+      return;
+    }
+    const versesObj = bibleData[book][chapter];
+    const verseNumbers = Object.keys(versesObj).sort((a,b) => Number(a)-Number(b));
+    if (verseNumbers.length === 0) {
+      versesContainer.innerHTML = `<div class="loading-message">📭 Walang laman na bersikulo.</div>`;
+      return;
+    }
+
+    let html = '';
+    for (let v of verseNumbers) {
+      const verseData = versesObj[v];
+      const kjvText = verseData.kjv;
+      const tagText = verseData.tag;
+      html += `
+        <div class="verse-row">
+          <div class="verse-number">${v}</div>
+          <div class="version-col">
+            <div class="version-title">📖 KJV (English)</div>
+            <div class="verse-text">${escapeHtml(kjvText)}</div>
+            <button class="audio-btn" data-version="kjv" data-text="${escapeAttr(kjvText)}" data-lang="en-US">🔊 Makinig (KJV)</button>
+          </div>
+          <div class="version-col">
+            <div class="version-title">📖 TAGALOG (Ang Biblia)</div>
+            <div class="verse-text">${escapeHtml(tagText)}</div>
+            <button class="audio-btn" data-version="tag" data-text="${escapeAttr(tagText)}" data-lang="fil-PH">🔊 Pakinggan (Tagalog)</button>
+          </div>
+        </div>
+      `;
+    }
+    versesContainer.innerHTML = html;
+
+    // attach audio events dynamically
+    document.querySelectorAll('.audio-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const text = btn.getAttribute('data-text');
+        const lang = btn.getAttribute('data-lang');
+        if (text && text !== "") {
+          speakText(text, lang);
+        } else {
+          // fallback if empty
+          console.warn("Empty text for audio");
+        }
+      });
+    });
+  }
+
+  // simple helpers to avoid XSS
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+      return c;
+    });
+  }
+  function escapeAttr(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function updateChapterAndRender() {
+    const book = bookSelect.value;
+    if (!book) return;
+    populateChapters(book);
+    const chapter = chapterSelect.value;
+    if (chapter) {
+      renderVerses(book, chapter);
+    } else {
+      versesContainer.innerHTML = `<div class="loading-message">📖 Pumili ng kabanata</div>`;
+    }
+  }
+
+  bookSelect.addEventListener('change', () => {
+    updateChapterAndRender();
+  });
+  chapterSelect.addEventListener('change', () => {
+    const book = bookSelect.value;
+    const chapter = chapterSelect.value;
+    if (book && chapter) renderVerses(book, chapter);
+  });
+
+  // initial load
+  populateBooks();
+  updateChapterAndRender();
+</script>
+</body>
+</html>
