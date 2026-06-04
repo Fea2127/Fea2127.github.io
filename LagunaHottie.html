@@ -1,457 +1,538 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Laguna Hottie Fan Page</title>
-     <link rel="icon" href="assets/LaLogo.ico" />
-    <style>
-      /* ========= COVER & PROFILE (facebook style) ========= */
-      .cover-section {
-        position: relative;
-        margin-bottom: 80px;
-      }
-      .cover-img {
-        width: 100%;
-        height: 280px;
-        object-fit: cover;
-        border-radius: 20px 20px 0 0;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        background-color: #cfd9e6;
-      }
-      .profile-pic-frame {
-        position: absolute;
-        bottom: -50px;
-        left: 40px;
-        background: white;
-        border-radius: 50%;
-        padding: 4px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-      }
-      .profile-pic {
-        width: 140px;
-        height: 140px;
-        object-fit: cover;
-        border-radius: 50%;
-        border: 3px solid white;
-        display: block;
-      }
-      .profile-name {
-        position: absolute;
-        bottom: -35px;
-        left: 200px;
-        background: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(8px);
-        padding: 8px 18px;
-        border-radius: 60px;
-        color: white;
-        font-weight: 700;
-        font-size: 1.6rem;
-        letter-spacing: -0.3px;
-      }
-      .profile-name span {
-        font-weight: 400;
-        font-size: 0.9rem;
-        background: #1877f2;
-        padding: 2px 10px;
-        border-radius: 30px;
-        margin-left: 12px;
-        vertical-align: middle;
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Laguna Hottie · Male Models of Laguna Pageantry</title>
+  <link rel="icon" href="assets/LaLogo.ico">
+  <!-- Boxicons (required for project overlay icons) -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <!-- Google Fonts + smooth base -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0f17;
+      --surface: rgba(23, 26, 41, 0.6);
+      --primary: #45a9e7;
+      --accent: #00e5ff;
+      --text: #e4e6eb;
+      --text-dim: #8a91a8;
+      --text-light: #b0b7ce;
+      --radius: 16px;
+      --neon: 0 0 4px var(--primary), 0 0 12px var(--primary);
+      --transition: all 0.3s ease;
+    }
 
-      @media (max-width: 700px) {
-        .profile-pic {
-          width: 100px;
-          height: 100px;
-        }
-        .profile-pic-frame {
-          bottom: -35px;
-          left: 20px;
-        }
-        .profile-name {
-          left: 140px;
-          font-size: 1.2rem;
-          bottom: -28px;
-          white-space: nowrap;
-        }
-        .profile-name span {
-          font-size: 0.7rem;
-          margin-left: 6px;
-        }
-        .cover-img {
-          height: 200px;
-        }
-        .cover-section {
-          margin-bottom: 65px;
-        }
-      }
-      /* cards */
-      .container {
-        width: 90%;
-        max-width: 1200px;
-        margin-inline: auto;
-      }
-      .container-certs {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-      }
-      .container-certs {
-        grid-template-columns: 1fr;
-      }
-      .project-filters {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        margin: 2rem 0 3rem;
-        flex-wrap: wrap;
-      }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      .filter-btn {
-        padding: 0.5rem 1.5rem;
-        border: 2px solid var(--primary);
-        background: transparent;
-        color: var(--text);
-        border-radius: 2rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-weight: 500;
-      }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
 
-      .filter-btn.active,
-      .filter-btn:hover {
-        background: var(--primary);
-        color: var(--bg);
-        transform: translateY(-2px);
-        box-shadow: var(--neon);
-      }
+    /* ========= COVER & PROFILE (facebook style) ========= */
+    .cover-section {
+      position: relative;
+      margin-bottom: 80px;
+    }
+    .cover-img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      background-color: #cfd9e6;
+    }
+    .profile-pic-frame {
+      position: absolute;
+      bottom: -50px;
+      left: 40px;
+      background: white;
+      border-radius: 50%;
+      padding: 4px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    .profile-pic {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid white;
+      display: block;
+    }
+    .profile-name {
+      position: absolute;
+      bottom: -35px;
+      left: 200px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      padding: 8px 18px;
+      border-radius: 60px;
+      color: white;
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: -0.3px;
+    }
+    .profile-name span {
+      font-weight: 400;
+      font-size: 0.9rem;
+      background: #1877f2;
+      padding: 2px 10px;
+      border-radius: 30px;
+      margin-left: 12px;
+      vertical-align: middle;
+    }
 
-      #project-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        margin-top: 2rem;
-      }
+    @media (max-width: 700px) {
+      .profile-pic { width: 100px; height: 100px; }
+      .profile-pic-frame { bottom: -35px; left: 20px; }
+      .profile-name { left: 140px; font-size: 1.2rem; bottom: -28px; white-space: nowrap; }
+      .profile-name span { font-size: 0.7rem; margin-left: 6px; }
+      .cover-img { height: 200px; }
+      .cover-section { margin-bottom: 65px; }
+    }
 
-      .project-card {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border-radius: 1rem;
-        overflow: hidden;
-        transition:
-          transform 0.3s ease,
-          box-shadow 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-      }
+    /* container and main layout */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin-inline: auto;
+    }
 
-      .project-card:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--neon);
-      }
+    .about {
+      padding: 2rem 1rem 4rem;
+    }
 
-      .project-image {
-        position: relative;
-        height: 200px;
-        overflow: hidden;
-      }
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .section-title::after {
+      content: "";
+      width: 70px;
+      height: 3px;
+      background: var(--accent);
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 3px;
+    }
 
-      .project-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.3s ease;
-      }
+    /* FILTER BUTTONS (Alfea style) */
+    .project-filters {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0 2.5rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 0.5rem 1.5rem;
+      border: 2px solid var(--primary);
+      background: transparent;
+      color: var(--text);
+      border-radius: 2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--primary);
+      color: var(--bg);
+      transform: translateY(-2px);
+      box-shadow: var(--neon);
+    }
 
-      .project-card:hover .project-image img {
-        transform: scale(1.1);
-      }
+    /* PROJECT GRID (cards) */
+    #project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
 
-      .project-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
+    .project-card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      border-radius: 1.2rem;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--neon);
+    }
 
-      .project-card:hover .project-overlay {
-        opacity: 1;
-      }
+    .project-image {
+      position: relative;
+      height: 240px;
+      overflow: hidden;
+      background: #1e1f2c;
+    }
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .project-card:hover .project-image img {
+      transform: scale(1.08);
+    }
 
-      .project-links {
-        display: flex;
-        gap: 1rem;
-      }
+    .project-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .project-card:hover .project-overlay {
+      opacity: 1;
+    }
 
-      .project-link {
-        width: 50px;
-        height: 50px;
-        background: var(--primary);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--bg);
-        font-size: 1.5rem;
-        transition: all 0.3s ease;
-      }
+    .project-links {
+      display: flex;
+      gap: 1rem;
+    }
+    .project-link {
+      width: 48px;
+      height: 48px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bg);
+      font-size: 1.6rem;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .project-link:hover {
+      background: var(--accent);
+      transform: scale(1.1);
+    }
 
-      .project-link:hover {
-        background: var(--accent);
-        transform: scale(1.1);
-      }
+    .project-content {
+      padding: 1.3rem;
+    }
+    .project-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .project-description {
+      color: var(--text-light);
+      margin-bottom: 0.9rem;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+    .project-technologies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .tech-tag {
+      background: var(--primary);
+      color: var(--bg);
+      padding: 0.2rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
 
-      .project-content {
-        padding: 1.5rem;
-      }
+    /* small footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 2rem;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
 
-      .project-title {
-        font-size: 1.25rem;
-        margin-bottom: 0.5rem;
-        color: var(--text);
-      }
+<!-- COVER + PROFILE (Facebook style) -->
+<div class="cover-section">
+  <img class="cover-img" src="assets/Labanner.png" alt="Laguna Beach cover" onerror="this.src='https://picsum.photos/id/104/1400/400'">
+  <div class="profile-pic-frame">
+    <img class="profile-pic" src="assets/Lalogo.png.png" alt="Laguna Hottie profile" onerror="this.src='https://picsum.photos/id/64/300/300'">
+  </div>
+  <div class="profile-name">Laguna Hottie <span>⭐ fan page</span></div>
+</div>
 
-      .project-description {
-        color: var(--text-light);
-        margin-bottom: 1rem;
-        line-height: 1.5;
+<!-- ===== MODELS SECTION (dynamic project grid) ===== -->
+<section class="about">
+  <div class="container">
+    <h2 class="section-title">Male Models of Laguna Pageantry</h2>
+    <!-- filters and grid will be injected here -->
+    <div id="project-grid"></div>
+  </div>
+</section>
+
+<footer>
+  <p>✨ Unofficial fan page — celebrating the Hotties of Laguna ✨</p>
+  <p style="margin-top: 8px;">© Laguna Hottie Fan Page | #LagunaPageantry</p>
+</footer>
+
+<script>
+  // ============================================================
+  // DATA MODEL (portfolioData) – fully fixed with technologies array
+  // each model includes image, title, description, viewLink, category, and tech tags
+  // ============================================================
+  const portfolioData = {
+    projects: [
+      {
+        id: 1,
+        title: "Zaki Capuno",
+        image: "assets/zaki.jpg",
+        description: "The charismatic heartthrob of Laguna. Known for his smoldering gaze and confident walk.",
+        technologies: ["Model", "Stylish", "Lakan ng Alaminos 2025"],
+        viewLink: "zakicapuno.html",
+        docLink: "#",
+        category: "Model"
+      },
+      {
+        id: 2,
+        title: "Charlie Calupig",
+        image: "assets/charlie.jpg",
+        description: "Fresh face with undeniable charm. Charlie brings energy and style to every shoot.",
+        technologies: ["Model", "Editorial", "Streetwear"],
+        viewLink: "charliecalupig.html",
+        docLink: "#",
+        category: "Model"
+      },
+      {
+        id: 3,
+        title: "Heinrich Sanchez",
+        image: "assets/heinrich.jpg",
+        description: "Veteran of the pageant circuit. Elegance, poise, and a jawline that steals the show.",
+        technologies: ["Model", "Pageant Pro", "Grooming"],
+        viewLink: "heinrichsanchez.html",
+        docLink: "#",
+        category: "Model"
+      },
+      {
+        id: 4,
+        title: "Ethan Manalo",
+        image: "assets/ethan.jpg",
+        description: "The boy-next-door with a fierce passion for fashion. Rising star of Laguna.",
+        technologies: ["Model", "Commercial", "Smile"],
+        viewLink: "ethanmanalo.html",
+        docLink: "#",
+        category: "Model"
+      },
+      {
+        id: 5,
+        title: "Raylon Dizon",
+        image: "assets/raylon.jpg",
+        description: "Athletic build and magnetic presence. Raylon dominates the swimwear category.",
+        technologies: ["Model", "Fitness", "Beach"],
+        viewLink: "raylondizon.html",
+        docLink: "#",
+        category: "Model"
+      },
+      {
+        id: 6,
+        title: "Charles Vita",
+        image: "assets/charles.jpg",
+        description: "Sophisticated and versatile. Charles shines in both formal and casual themes.",
+        technologies: ["Model", "Formal", "Versatile"],
+        viewLink: "charlesvita.html",
+        docLink: "#",
+        category: "Model"
+      },
+      {
+        id: 7,
+        title: "Deve Silva",
+        image: "assets/deve.jpg",
+        description: "Mysterious aura and editorial favorite. Deve brings intensity to every lens.",
+        technologies: ["Model", "High Fashion", "Dark Chic"],
+        viewLink: "devesilva.html",
+        docLink: "#",
+        category: "Model"
+      },
+      {
+        id: 8,
+        title: "Carl Santiago",
+        image: "assets/carl.jpg",
+        description: "Youthful energy with a heart of gold. Carl is the crowd favorite at local pageants.",
+        technologies: ["Model", "Youth", "Charisma", "Lakan ng Laguna Anilag 2026"],
+        viewLink: "carlsantiago.html",
+        docLink: "#",
+        category: "Model"
+      },
+      {
+        id: 9,
+        title: "Joaquin Ramos",
+        image: "assets/joaquin.jpg",
+        description: "Tall, dark, and debonair. Joaquin's walk is pure poetry on the runway.",
+        technologies: ["Model", "Runway", "GK Style"],
+        viewLink: "joaquinramos.html",
+        docLink: "#",
+        category: "Model"
+      },
+      {
+        id: 10,
+        title: "Genart Nido",
+        image: "assets/genart.jpg",
+        description: "Artistic soul with a passion for avant-garde fashion. Genart is a true original.",
+        technologies: ["Model", "Avant-garde", "Creative"],
+        viewLink: "genartnido.html",
+        docLink: "#",
+        category: "Model"
+      },
+      {
+        id: 11,
+        title: "Jhenier Capitan",
+        image: "assets/jhenier.jpg",
+        description: "The people's champ. Jhenier's humility and stunning looks win hearts everywhere.",
+        technologies: ["Model", "Heartthrob", "Friendly"],
+        viewLink: "jheniercapitan.html",
+        docLink: "#",
+        category: "Model"
       }
-    </style>
-  </head>
-  <body>
-    <!-- COVER + PROFILE (Facebook style header) -->
-    <div class="cover-section">
-      <img
-        class="cover-img"
-        src="assets/Labanner.png"
-        alt="Laguna Beach cover"
-        onerror="this.src = 'assets/Labanner.png'"
-      />
-      <div class="profile-pic-frame">
-        <img
-          class="profile-pic"
-          src="assets/Lalogo.png.png"
-          alt="Laguna Hottie profile"
-          onerror="this.src = 'assets/Lalogo.png.png'"
-        />
-      </div>
-      <div class="profile-name">Laguna Hottie <span>⭐ fan page</span></div>
-    </div>
-    <!-- =====  projects section  ===== -->
-    <section class="about">
-      <div class="container">
-        <h2 class="section-title">Male Models of Laguna Pageantry</h2>
-        <div class="container-certs" id="project-grid">
-          <!--  cards are injected here  -->
+    ],
+    // categories: 'all' and 'Model' (Candidate could be added later)
+    categories: ["all", "Model"]
+  };
+
+  // ========== RENDER FUNCTION (cards + overlay links) ==========
+  function populateProjects(filter = "all") {
+    const projectGrid = document.getElementById("project-grid");
+    if (!projectGrid) return;
+
+    const filteredProjects = filter === "all"
+      ? portfolioData.projects
+      : portfolioData.projects.filter(project => project.category === filter);
+
+    // If no projects match, show friendly message
+    if (filteredProjects.length === 0) {
+      projectGrid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;">✨ No models in this category yet. Stay tuned! ✨</div>`;
+      return;
+    }
+
+    projectGrid.innerHTML = filteredProjects.map(project => `
+      <div class="project-card" data-category="${project.category}">
+        <div class="project-image">
+          <img src="${project.image}" alt="${project.title}" loading="lazy" onerror="this.src='assets/placeholder.png'">
+          <div class="project-overlay">
+            <div class="project-links">
+              <a href="${project.viewLink}" class="project-link" title="View Profile">
+                <i class='bx bx-user-circle'></i>
+              </a>
+              <a href="#" class="project-link like-demo" data-id="${project.id}" title="Fan favorite ❤️">
+                <i class='bx bx-heart'></i>
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
-    <script>
-      // populate.js
-      function populateProjects(filter = "all") {
-        const projectGrid = document.getElementById("project-grid");
-        if (!projectGrid) return;
-
-        const filteredProjects =
-          filter === "all"
-            ? portfolioData.projects
-            : portfolioData.projects.filter(
-                (project) => project.category === filter,
-              );
-
-        projectGrid.innerHTML = filteredProjects
-          .map(
-            (project) => `
-    <div class="project-card" data-category="${project.category}">
-      <div class="project-image">
-        <img src="${project.image}" alt="${project.title}" loading="lazy">
-        <div class="project-overlay">
-          <div class="project-links">
-            <a href="${project.viewLink}" class="project-link" title="View Project">
-              <i class='bx bx-show'></i>
-            </a>
-            <a href="${project.docLink}" class="project-link" title="Documentation">
-              <i class='bx bx-code-alt'></i>
-            </a>
+        <div class="project-content">
+          <h3 class="project-title">${project.title}</h3>
+          <p class="project-description">${project.description}</p>
+          <div class="project-technologies">
+            ${project.technologies.map(tech => `<span class="tech-tag">#${tech}</span>`).join('')}
           </div>
         </div>
       </div>
-      <div class="project-content">
-        <h3 class="project-title">${project.title}</h3>
-        <p class="project-description">${project.description}</p>
-        <div class="project-technologies">
-          ${project.technologies.map((tech) => `<span class="tech-tag">${tech}</span>`).join("")}
-        </div>
+    `).join('');
+
+    // Optional: simple like animation (just for fun)
+    document.querySelectorAll('.like-demo').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const card = btn.closest('.project-card');
+        const heartIcon = btn.querySelector('i');
+        if (heartIcon) {
+          heartIcon.style.transform = 'scale(1.3)';
+          heartIcon.style.color = '#ff4d4d';
+          setTimeout(() => {
+            heartIcon.style.transform = '';
+            heartIcon.style.color = '';
+          }, 200);
+        }
+        alert('❤️ Thanks for supporting ' + card.querySelector('.project-title').innerText + '!');
+      });
+    });
+  }
+
+  // ========== CREATE FILTER BUTTONS (exactly like Alfea's logic) ==========
+  function createFilterButtons() {
+    const container = document.querySelector(".container");
+    const title = document.querySelector(".section-title");
+    if (!container || !title) return;
+
+    const filterHTML = `
+      <div class="project-filters">
+        ${portfolioData.categories.map(category => `
+          <button class="filter-btn ${category === 'all' ? 'active' : ''}" data-filter="${category}">
+            ${category === 'all' ? 'ALL MODELS' : category.toUpperCase()}
+          </button>
+        `).join('')}
       </div>
-    </div>
-  `,
-          )
-          .join("");
-      }
-    </script>
-    <script>
-      // navigate.js
-      function initializeNavigation() {
-        // Create filter buttons
-        createFilterButtons();
+    `;
+    title.insertAdjacentHTML("afterend", filterHTML);
 
-        // Initialize first load
-        populateProjects();
+    // Add event listeners to filter buttons
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        populateProjects(btn.dataset.filter);
+      });
+    });
+  }
 
-        // Add smooth scrolling
-        addSmoothScrolling();
-      }
-
-      function createFilterButtons() {
-        const container = document.querySelector(".container");
-        const title = document.querySelector(".section-title");
-
-        const filterHTML = `
-    <div class="project-filters">
-      ${portfolioData.categories
-        .map(
-          (category) => `
-        <button class="filter-btn ${category === "all" ? "active" : ""}" 
-                data-filter="${category}">
-          ${category.charAt(0).toUpperCase() + category.slice(1)}
-        </button>
-      `,
-        )
-        .join("")}
-    </div>
-  `;
-
-        title.insertAdjacentHTML("afterend", filterHTML);
-
-        // Add filter event listeners
-        document.querySelectorAll(".filter-btn").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            document
-              .querySelectorAll(".filter-btn")
-              .forEach((b) => b.classList.remove("active"));
-            btn.classList.add("active");
-            populateProjects(btn.dataset.filter);
-          });
-        });
-      }
-
-      function addSmoothScrolling() {
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-          anchor.addEventListener("click", function (e) {
+  // ========== SMOOTH SCROLL (optional but nice) ==========
+  function addSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener("click", function(e) {
+        const hash = this.getAttribute("href");
+        if (hash !== "#" && hash !== "#/") {
+          const target = document.querySelector(hash);
+          if (target) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute("href"));
-            if (target) {
-              target.scrollIntoView({ behavior: "smooth" });
-            }
-          });
-        });
-      }
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+        }
+      });
+    });
+  }
 
-      // Initialize when DOM is loaded
-      document.addEventListener("DOMContentLoaded", initializeNavigation);
-    </script>
-    <script>
-      // Project.js - Updated structure
-      const portfolioData = {
-        projects: [
-          {
-            id: 1,
-            title: "Zaki Capuno",
-            image: "assets/zaki.png",
-            description: "Laguna Hottie no1.",
-            viewLink: "zakicapuno.html",
-            category: "Model",
-          },
-          {
-            id: 2,
-            title: "Charlie Calupig",
-            image: "assets/charlie.png",
-            description: "Laguna Hottie no2.",
-            viewLink: "charliecalupig.html",
-            category: "Model",
-          },
-          {
-            id: 3,
-            title: "Heinrich Sanchez",
-            image: "assets/heinrich.png",
-            description: "Laguna Hottie no3.",
-            viewLink: "heinrichsanchez.html",
-            category: "Model",
-          },
-          {
-            id: 4,
-            title: "Ethan Manalo",
-            image: "assets/ethan.png",
-            description: "Laguna Hottie no4.",
-            viewLink: "ethanmanalo.html",
-            category: "Model",
-          },
-          {
-            id: 5,
-            title: "Raylon Dizon",
-            image: "assets/raylon.png",
-            description: "Laguna Hottie no5.",
-            viewLink: "raylondizon.html",
-            category: "Model",
-          },
-          {
-            id: 6,
-            title: "Charles Vita",
-            image: "assets/charles.png",
-            description: "Laguna Hottie no6.",
-            viewLink: "charlesvita.html",
-            category: "Model",
-          },
-          {
-            id: 7,
-            title: "Deve Silva",
-            image: "assets/deve.png",
-            description: "Laguna Hottie no7.",
-            viewLink: "devesilva.html",
-            category: "Model",
-          },
-          {
-            id: 8,
-            title: "Carl Santiago",
-            image: "assets/carl.png",
-            description: "Laguna Hottie no8.",
-            viewLink: "carlsantiago.html",
-            category: "Model",
-          },
-          {
-            id: 9,
-            title: "Joaquin Ramos",
-            image: "assets/joaquin.png",
-            description: "Laguna Hottie no9.",
-            viewLink: "joaquinramos.html",
-            category: "Model",
-          },
-          {
-            id: 10,
-            title: "Genart Nido",
-            image: "assets/genart.png",
-            description: "Laguna Hottie no10.",
-            viewLink: "genartnido.html",
-            category: "Model",
-          },
-          {
-            id: 11,
-            title: "Jhenier Capitan",
-            image: "assets/jhenier.png",
-            description: "Laguna Hottie no11.",
-            viewLink: "jheniercapitan.html",
-            category: "Model",
-          },
-        ],
-        categories: ["all", "Candidate", "Model"],
-      };
-    </script>
-  </body>
+  // ========== INITIALIZE EVERYTHING ==========
+  document.addEventListener("DOMContentLoaded", () => {
+    // First render (all models)
+    populateProjects("all");
+    // Build filter buttons dynamically
+    createFilterButtons();
+    // Smooth scroll enhancement
+    addSmoothScrolling();
+  });
+</script>
+</body>
 </html>
