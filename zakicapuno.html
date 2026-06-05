@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Laguna Hottie · Zaki Capuno (Dark Mode)</title>
+  <title>Laguna Hottie · Zaki Capuno</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    /* ---------- DARK MODE ROOT VARIABLES (already dark) ---------- */
+    /* ---------- DARK MODE ROOT (immersive) ---------- */
     :root {
       --bg: #0a0c15;
       --surface: rgba(18, 21, 35, 0.85);
@@ -42,7 +42,7 @@
       margin: 0 auto;
     }
 
-    /* ========= COVER & PROFILE (facebook style) ========= */
+    /* ========= COVER & PROFILE (modern facebook style) ========= */
     .cover-section {
       position: relative;
       margin-bottom: 80px;
@@ -114,7 +114,7 @@
       margin-top: 30px;
     }
 
-    /* LEFT COLUMN (facebook-like feed) – DARK CARDS */
+    /* LEFT COLUMN: FACEBOOK-STYLE FEED WITH MULTI-PHOTO SUPPORT */
     .feed-column {
       display: flex;
       flex-direction: column;
@@ -161,15 +161,49 @@
       font-size: 1rem;
       color: var(--text-light);
     }
-    .post-media {
-      width: 100%;
-      max-height: 480px;
-      object-fit: cover;
-      background: #1a1e2c;
-      display: block;
+    
+    /* ---------- MULTI-PHOTO GALLERY - NO STRETCH, PRESERVE ASPECT RATIO ---------- */
+    .post-media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 8px;
+      background: #0a0c15;
+      padding: 8px;
       border-top: 1px solid var(--border-dim);
       border-bottom: 1px solid var(--border-dim);
     }
+    /* For single image: simpler layout, no stretch, natural dimensions */
+    .post-media-grid.single-grid {
+      display: block;
+      padding: 0;
+      background: transparent;
+    }
+    .post-media-grid.single-grid .grid-photo {
+      max-height: 550px;
+      width: 100%;
+      object-fit: contain;
+      background: #0a0c15;
+    }
+    .grid-photo {
+      width: 100%;
+      height: auto;           /* natural height based on image ratio */
+      object-fit: contain;   /* never stretch, never crop — full image visible with letterboxing if needed */
+      background: #0a0c15;   /* elegant dark background for any empty space */
+      display: block;
+      border-radius: 12px;
+      transition: transform 0.2s ease, filter 0.2s;
+    }
+    /* subtle hover effect on images (no stretching) */
+    .grid-photo:hover {
+      transform: scale(1.01);
+      filter: brightness(1.02);
+    }
+    /* For multi-image grids, we keep consistent gap and let images keep their shape */
+    .post-media-grid:not(.single-grid) .grid-photo {
+      border-radius: 12px;
+      background: #11131f;
+    }
+    
     .post-actions {
       padding: 10px 18px 14px;
       border-top: 1px solid var(--border-dim);
@@ -212,8 +246,16 @@
     .like-stats i {
       color: #f91880;
     }
+    .photo-badge {
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 500;
+    }
 
-    /* RIGHT COLUMN (Wikipedia style infobox + links) – DARK */
+    /* RIGHT COLUMN (wikipedia style infobox + links) – deep dark */
     .wiki-column {
       display: flex;
       flex-direction: column;
@@ -311,17 +353,6 @@
       transform: translateY(-2px);
       border-color: var(--primary);
     }
-
-    @media (max-width: 860px) {
-      .two-columns {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-      .profile-name span {
-        display: inline-block;
-      }
-    }
-
     .fan-badge {
       font-size: 0.7rem;
       background: rgba(0, 229, 255, 0.1);
@@ -331,7 +362,6 @@
       margin-top: 8px;
       color: var(--accent);
     }
-
     footer {
       margin-top: 50px;
       text-align: center;
@@ -343,15 +373,28 @@
     a {
       text-decoration: none;
     }
-    /* additional hover glow for account buttons */
     .account-link-btn:active {
       transform: scale(0.97);
+    }
+    @media (max-width: 860px) {
+      .two-columns {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .post-media-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+    }
+    @media (max-width: 540px) {
+      .post-media-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
 <div class="fan-container">
-  <!-- COVER + PROFILE (Facebook style header) -->
+  <!-- COVER + PROFILE HEADER -->
   <div class="cover-section">
     <img class="cover-img" src="assets/Labanner.png" alt="Laguna Beach cover"
          onerror="this.src='assets/Labanner.png'">
@@ -362,12 +405,12 @@
     <div class="profile-name">Zaki Capuno <span>⭐ fan page</span></div>
   </div>
 
-  <!-- 2-COLUMN GRID: FEED (photo+text+account links) | WIKI INFO PANEL -->
+  <!-- MAIN 2-COLUMN: FEED + WIKI INFO -->
   <div class="two-columns">
-    <!-- LEFT: dynamic posts -->
+    <!-- LEFT: MULTI-PHOTO POSTS FEED (NO STRETCH) -->
     <div class="feed-column" id="postsFeed"></div>
 
-    <!-- RIGHT: Wikipedia style information & links to account -->
+    <!-- RIGHT: WIKIPEDIA STYLE INFO + SOCIAL LINKS -->
     <div class="wiki-column">
       <div class="infobox-card">
         <div class="infobox-title">
@@ -392,19 +435,18 @@
           </div>
           <div class="info-row">
             <div class="info-label">Followers</div>
-            <div class="info-value">2.4M (social media combined)</div>
+            <div class="info-value">5.4k </div>
           </div>
           <div class="bio-text">
             <i class="fas fa-quote-left" style="margin-right: 6px; opacity: 0.7"></i>
-            Zaki Capuno, the Laguna Hottie, is a rising star in pageantry and social media. With a magnetic presence and heart for his hometown, he represents Laguna with pride and passion. Beyond looks, Zaki promotes tourism and cultural identity — a true modern icon.
+            Zaki Capuno, the Laguna Hottie, is a rising star in pageantry and social media. With a magnetic presence and heart for his hometown, he represents Alaminos, Laguna with pride and passion. Beyond looks, Zaki promotes tourism and cultural identity — a true modern icon.
           </div>
           <div class="fan-badge">
-            <i class="fas fa-star-of-life"></i> Official fan-run page · info curated by admirers
+            <i class="fas fa-star-of-life"></i> Official fan-run page · no stretch, pure original ratio
           </div>
         </div>
       </div>
 
-      <!-- direct links to their main accounts -->
       <div class="social-links-box">
         <h4><i class="fas fa-link"></i> 🔗 Official accounts (follow Zaki Capuno)</h4>
         <div class="social-icon-list">
@@ -420,17 +462,17 @@
   </div>
   <footer>
     <i class="far fa-heart"></i> unofficial fan page for Laguna Hottie · #LagunaForever
-    <div style="margin-top: 10px; font-size: 0.7rem; opacity: 0.7;">🌙 — every post includes photo, text & active account link</div>
+    <div style="margin-top: 10px; font-size: 0.7rem; opacity: 0.7;">📸 multi‑photo posts | images keep original proportions — no stretching, just authentic vibes</div>
   </footer>
 </div>
 
 <script>
-  // DATA MODEL : 
+  // ======================= MULTI-PHOTO POSTS MODEL =======================
+  // each post supports "mediaUrls" array. Images are displayed without stretching (object-fit: contain)
   const fanPageModel = {
     profile: {
       name: "Zaki Capuno",
       handle: "@zakicapuno",
-      bio: "Sun-chaser | beach lover | spreading good vibes only 🌊✨",
     },
     posts: [
       {
@@ -438,12 +480,12 @@
         author: "Zaki Capuno",
         avatarPlaceholder: "assets/zaki.jpg",
         timeAgo: "May 31, 2026 - Tapusan Brgy. Poblacion 1 Alaminos, Laguna",
-        text: "Tapusan 2026 captured by Spotted Potato 📸✨",
-        imageUrl: "assets/Tapusan5.jpg",
+        text: "Tapusan 2026 captured by Spotted Potato 📸✨ — authentic moments, no filters needed.",
+        mediaUrls: ["assets/Tapusan3.jpg","assets/Tapusan2.jpg","assets/Tapusan1.jpg","assets/Tapusan5.jpg","assets/Tapusan4.jpg"],
         accountLink: "https://instagram.com/zakicapuno?igsh=MTRpcWdzbXNtN2lqZg",
         linkLabel: "Follow @zakicapuno on Instagram",
-        likes: 33,
-        comments: 2,
+        likes: 433,
+        comments: 27,
       },
       {
         id: 2,
@@ -451,7 +493,7 @@
         avatarPlaceholder: "assets/zaki.jpg",
         timeAgo: "April 18, 2026",
         text: "no plans, just magic hands. ✨Thanks for the quick slay💕 HMUA: @mkcubillejohmua MK Cubillejo Hairstylist: @onlyxphipoy._ Phipoy Cariño Lechuga",
-        imageUrl: "assets/Mk3.jpg",
+        mediaUrls: ["assets/Mk3.jpg"],
         accountLink: "https://twitter.com/zakicapuno",
         linkLabel: "🐦 Twitter (no twitter account)",
         likes: 289,
@@ -462,70 +504,171 @@
         author: "Zaki Capuno",
         avatarPlaceholder: "assets/zaki.jpg",
         timeAgo: "January 12, 2026 - studio shoot",
-        text: "Soft smile, strong energy.✨ Photographer: Robert Bryan C. DelaRosa Grooming: Fretch Alvarez Studio: ICadge Studios Pasarela: Pasarela PH Camp: GK Kings and Queens Official Handler: Katigbak Ghune ",
-        imageUrl: "assets/Soft1.jpg",
+        text: "Soft smile, strong energy.✨ Photographer: Robert Bryan C. DelaRosa Grooming: Fretch Alvarez Studio: ICadge Studios Pasarela: Pasarela PH Camp: GK Kings and Queens Official Handler: Katigbak Ghune",
+        mediaUrls: ["assets/Soft1.jpg"],
         accountLink: "https://www.tiktok.com/@zcapuno",
         linkLabel: "🎵 TikTok: @zcapuno",
-        likes: 56,
-        comments: 15,
+        likes: 356,
+        comments: 35,
       },
       {
         id: 4,
         author: "Zaki Capuno",
         avatarPlaceholder: "assets/zaki.jpg",
         timeAgo: "January 9, 2026 - Tagaytay City",
-        text: "At ease, above it all. ✨🌄",
-        imageUrl: "assets/Tpp2.jpg",
-        accountLink: "https://facebook.com/zaki.capuno.9",
+        text: "At ease, above it all. ✨🌄 The perfect escape from the city noise.",
+        mediaUrls: ["assets/Tpp1.jpg", "assets/Tpp2.jpg", "assets/Tpp3.jpg"],
+        accountLink: "https://www.facebook.com/share/p/1CmCvvGYuo/",
         linkLabel: "📘 Facebook: Zaki Capuno",
-        likes: 210,
-        comments: 500,
+        likes: 510,
+        comments: 0,
       },
-       {
+      {
         id: 5,
+        author: "Zaki Capuno",
+        avatarPlaceholder: "assets/zaki.jpg",
+        timeAgo: "October 14, 2025 - Lakan at Mutya ng Alaminos 2025 Cororation Night",
+        text: "📸✨ recent frames that own my heart. From studio magic to golden hour escapes — notice how each photo keeps its natural look (no stretching!).",
+        mediaUrls: ["assets/LakanAwards.jpg", "assets/Lakanpool.jpg", "assets/LakanFam.jpg"],
+        accountLink: "https://www.facebook.com/share/v/18WXC8vyME/",
+        linkLabel: "📸 View all on Facebook",
+        likes: 1247,
+        comments: 19,
+      },
+      {
+        id: 6,
+        author: "Zaki Capuno",
+        avatarPlaceholder: "assets/zaki.jpg",
+        timeAgo: "December 1, 2025 - behind the scenes",
+        text: "Behind the scenes of the latest pictorial. Always grateful for the team that brings the vision to life. 🎬🔥 ",
+        mediaUrls: ["assets/Br1.jpg", "assets/Br2.jpg", "assets/Br3.jpg"],
+        accountLink: "https://www.tiktok.com/@zcapuno",
+        linkLabel: "🎥 Watch BTS on TikTok",
+        likes: 892,
+        comments: 114,
+      },
+      {
+        id: 7,
+        avatarPlaceholder: "assets/zaki.jpg",
+        timeAgo: "December 1, 2025 - behind the scenes",
+        text: "Behind the scenes of the latest pictorial. Always grateful for the team that brings the vision to life. 🎬🔥 ",
+        mediaUrls: ["assets/Br4.jpg", "assets/Br5.jpg", "assets/Br6.jpg"],
+        accountLink: "https://www.tiktok.com/@zcapuno",
+        linkLabel: "🎥 Watch BTS on TikTok",
+        likes: 892,
+        comments: 114,
+      },
+      {
+        id: 8,
+        avatarPlaceholder: "assets/zaki.jpg",
+        timeAgo: "December 1, 2025 - behind the scenes",
+        text: "Behind the scenes of the latest pictorial. Always grateful for the team that brings the vision to life. 🎬🔥 ",
+        mediaUrls: ["assets/Br7.jpg", "assets/Br8.jpg", "assets/Br9.jpg"],
+        accountLink: "https://www.tiktok.com/@zcapuno",
+        linkLabel: "🎥 Watch BTS on TikTok",
+        likes: 892,
+        comments: 114,
+      },
+      {
+        id: 9,
+        avatarPlaceholder: "assets/zaki.jpg",
+        timeAgo: "December 1, 2025 - behind the scenes",
+        text: "Behind the scenes of the latest pictorial. Always grateful for the team that brings the vision to life. 🎬🔥 ",
+        mediaUrls: ["assets/Bad1.jpg", "assets/Bad2.jpg", "assets/Bad3.jpg"],
+        accountLink: "https://www.tiktok.com/@zcapuno",
+        linkLabel: "🎥 Watch BTS on TikTok",
+        likes: 892,
+        comments: 114,
+      },
+      {
+        id: 11,
         author: "Zaki Capuno",
         avatarPlaceholder: "assets/zaki.jpg",
         timeAgo: "September 4, 2023 - Boracay Island",
         text: "Zaki at Boracay ✨ The light was unreal today. Feeling so grateful for this beautiful province. 🌅 #LagunaVibes #BeachMood",
-        imageUrl: "assets/zaki beach.jpg",
+        mediaUrls: ["assets/zaki beach.jpg"],
         accountLink: "https://instagram.com/zakicapuno?igsh=MTRpcWdzbXNtN2lqZg",
         linkLabel: "Follow @zakicapuno on Instagram",
         likes: 479,
         comments: 89,
       },
-      
     ],
   };
 
+  // render gallery with proper non-stretch handling
+  function renderMediaGallery(mediaUrls) {
+    if (!mediaUrls || mediaUrls.length === 0) {
+      const emptyDiv = document.createElement("div");
+      emptyDiv.className = "post-media-grid single-grid";
+      emptyDiv.style.padding = "12px";
+      emptyDiv.style.textAlign = "center";
+      emptyDiv.style.color = "var(--text-dim)";
+      emptyDiv.innerText = "📷 no media attached";
+      return emptyDiv;
+    }
+    
+    const galleryDiv = document.createElement("div");
+    galleryDiv.className = "post-media-grid";
+    if (mediaUrls.length === 1) {
+      galleryDiv.classList.add("single-grid");
+    }
+    
+    mediaUrls.forEach((url, idx) => {
+      const img = document.createElement("img");
+      img.src = url;
+      img.alt = `Zaki Capuno photo ${idx + 1}`;
+      img.className = "grid-photo";
+      img.loading = "lazy";
+      // fallback if image fails to load (still no stretch)
+      img.onerror = function() {
+        this.src = "https://picsum.photos/id/64/800/600";
+        this.style.objectFit = "contain";
+      };
+      galleryDiv.appendChild(img);
+    });
+    return galleryDiv;
+  }
+
+  // Render all posts with multi-photo capability & non-stretch images
   function renderPosts() {
     const feedContainer = document.getElementById("postsFeed");
     if (!feedContainer) return;
     feedContainer.innerHTML = "";
+    
     fanPageModel.posts.forEach((post) => {
       const postDiv = document.createElement("div");
       postDiv.className = "post-card";
+      
+      // Header
       const headerDiv = document.createElement("div");
       headerDiv.className = "post-header";
       headerDiv.innerHTML = `
-        <img class="post-avatar" src="${post.avatarPlaceholder}" alt="avatar" onerror="this.src='https://picsum.photos/id/64/44/44'">
+        <img class="post-avatar" src="${post.avatarPlaceholder}" alt="avatar" onerror="this.src='https://randomuser.me/api/portraits/men/32.jpg'">
         <div>
-          <div class="post-author">${post.author} <span style="font-weight:normal; font-size:0.7rem; background:rgba(255,255,255,0.1); border-radius:12px; padding:2px 6px; margin-left:6px;">official fan content</span></div>
+          <div class="post-author">${post.author} <span style="font-weight:normal; font-size:0.7rem; background:rgba(255,255,255,0.1); border-radius:12px; padding:2px 8px; margin-left:6px;">official fan content</span></div>
           <div class="post-time"><i class="far fa-clock"></i> ${post.timeAgo}</div>
         </div>
       `;
+      
+      // Text
       const textDiv = document.createElement("div");
       textDiv.className = "post-text";
       textDiv.innerHTML = `<p style="margin-bottom:4px;">${post.text}</p>`;
-      const img = document.createElement("img");
-      img.src = post.imageUrl;
-      img.alt = "Post image from Zaki Capuno";
-      img.className = "post-media";
-      img.onerror = function () { this.src = "https://picsum.photos/id/15/800/500"; };
+      
+      // Gallery (no stretch)
+      const mediaGallery = renderMediaGallery(post.mediaUrls || []);
+      
+      // Actions
       const actionsDiv = document.createElement("div");
       actionsDiv.className = "post-actions";
+      
       const likeStatsSpan = document.createElement("div");
       likeStatsSpan.className = "like-stats";
-      likeStatsSpan.innerHTML = `<i class="fas fa-heart"></i> ${post.likes.toLocaleString()} likes · <i class="far fa-comment"></i> ${post.comments} comments`;
+      const photoCountInfo = (post.mediaUrls && post.mediaUrls.length > 1) 
+        ? ` · <i class="fas fa-images"></i> ${post.mediaUrls.length} photos` 
+        : '';
+      likeStatsSpan.innerHTML = `<i class="fas fa-heart"></i> ${post.likes.toLocaleString()} likes · <i class="far fa-comment"></i> ${post.comments} comments${photoCountInfo}`;
+      
       const accountLinkElem = document.createElement("a");
       accountLinkElem.href = post.accountLink;
       accountLinkElem.target = "_blank";
@@ -533,14 +676,19 @@
       accountLinkElem.className = "account-link-btn";
       const linkText = post.linkLabel ? post.linkLabel : `🔗 Follow ${fanPageModel.profile.handle}`;
       accountLinkElem.innerHTML = `<i class="fas fa-user-circle"></i> ${linkText}`;
+      
       actionsDiv.appendChild(likeStatsSpan);
       actionsDiv.appendChild(accountLinkElem);
+      
+      // Assemble
       postDiv.appendChild(headerDiv);
       postDiv.appendChild(textDiv);
-      postDiv.appendChild(img);
+      postDiv.appendChild(mediaGallery);
       postDiv.appendChild(actionsDiv);
+      
       feedContainer.appendChild(postDiv);
     });
+    
     if (fanPageModel.posts.length === 0) {
       feedContainer.innerHTML = '<div class="post-card" style="padding: 40px; text-align:center;">✨ No posts yet, but Zaki is cooking something 🔥</div>';
     }
@@ -548,7 +696,7 @@
 
   window.addEventListener("DOMContentLoaded", () => {
     renderPosts();
-    console.log("Dark mode fan page ready — fully dark themed.");
+    console.log("✅ Multi-photo gallery active — images preserve original aspect ratio (no stretch, object-fit: contain)");
   });
 </script>
 </body>
