@@ -24,7 +24,7 @@
   <meta property="profile:last_name" content="Capuno" />
   <meta property="profile:username" content="zakicapuno" />
   
-  <!-- Schema.org JSON-LD for Person (fully updated with awards, education, and achievements) -->
+  <!-- Schema.org JSON-LD for Person -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -65,19 +65,19 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    /* ---------- DARK MODE ROOT (same stunning immersive style) ---------- */
+    /* ---------- RED THEME (unique for Zaki) ---------- */
     :root {
       --bg: #0a0c15;
       --surface: rgba(18, 21, 35, 0.85);
       --card-bg: #11131f;
-      --primary: #45a9e7;
-      --accent: #00e5ff;
+      --primary: #e63946;
+      --accent: #ff8c8c;
       --text: #eef2ff;
       --text-dim: #9ca3af;
       --text-light: #cbd5e6;
       --border-dim: rgba(255, 255, 255, 0.08);
       --radius: 16px;
-      --neon: 0 0 5px var(--primary), 0 0 12px var(--primary);
+      --neon: 0 0 5px var(--primary), 0 0 12px var(--accent);
       --transition: all 0.2s ease;
     }
 
@@ -111,7 +111,7 @@
       object-fit: cover;
       border-radius: 20px 20px 0 0;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-      background-color: #1e2a3a;
+      background-color: #2a1a1a;
     }
     .profile-pic-frame {
       position: absolute;
@@ -148,7 +148,7 @@
     .profile-name span {
       font-weight: 400;
       font-size: 0.9rem;
-      background: #1877f2;
+      background: var(--primary);
       padding: 2px 10px;
       border-radius: 30px;
       margin-left: 12px;
@@ -217,6 +217,7 @@
       padding: 8px 18px 12px 18px;
       font-size: 1rem;
       color: var(--text-light);
+      line-height: 1.5;
     }
     
     .post-media-grid {
@@ -262,7 +263,7 @@
       gap: 12px;
     }
     .account-link-btn {
-      background: rgba(69, 169, 231, 0.15);
+      background: rgba(230, 57, 70, 0.15);
       padding: 8px 16px;
       border-radius: 40px;
       font-size: 0.85rem;
@@ -273,7 +274,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      border: 1px solid rgba(69, 169, 231, 0.3);
+      border: 1px solid rgba(230, 57, 70, 0.3);
     }
     .account-link-btn i {
       font-size: 1rem;
@@ -395,7 +396,7 @@
     }
     .fan-badge {
       font-size: 0.7rem;
-      background: rgba(0, 229, 255, 0.1);
+      background: rgba(255, 140, 140, 0.1);
       border-radius: 30px;
       padding: 4px 10px;
       display: inline-block;
@@ -443,10 +444,10 @@
 <div class="fan-container">
   <h1 class="seo-h1">Zaki Capuno – Lakan ng Alaminos 2025 | BSIS Graduate, Best Paper Awardee & Tech Advocate from Alaminos, Laguna</h1>
   
-  <!-- COVER + PROFILE HEADER (unchanged) -->
+  <!-- COVER + PROFILE HEADER -->
   <div class="cover-section">
-    <img class="cover-img" src="https://placehold.co/1200x400/2c1e2a/f3b3a6?text=Zaki+Capuno+%7C+Lakan+ng+Alaminos+2025" alt="Laguna Beach cover featuring Zaki Capuno - Lakan ng Alaminos banner"
-         onerror="this.src='https://placehold.co/1200x400/2c1e2a/f3b3a6?text=Zaki+Capuno+%7C+Lakan+ng+Alaminos+2025'">
+    <img class="cover-img" src="https://placehold.co/1200x400/2a1a1a/ff8c8c?text=Zaki+Capuno+%7C+Lakan+ng+Alaminos+2025" alt="Zaki Capuno cover banner - red theme"
+         onerror="this.src='https://placehold.co/1200x400/2a1a1a/ff8c8c?text=Zaki+Capuno+%7C+Lakan+ng+Alaminos+2025'">
     <div class="profile-pic-frame">
       <img class="profile-pic" src="assets/zaki.jpg" alt="Zaki Capuno profile – Lakan ng Alaminos 2025 winner"
            onerror="this.src='assets/zaki.jpg'">
@@ -454,9 +455,8 @@
     <div class="profile-name">Zaki Capuno <span>🏆 Lakan ng Alaminos 2025</span></div>
   </div>
 
-  <!-- MAIN 2-COLUMN: FEED + REVISED WIKI INFO (detailed biography) -->
+  <!-- MAIN 2-COLUMN: FEED + WIKI INFO -->
   <div class="two-columns">
-    <!-- LEFT: MULTI-PHOTO POSTS FEED (same as original) -->
     <div class="feed-column" id="postsFeed"></div>
 
     <div class="wiki-column">
@@ -528,7 +528,7 @@
 </div>
 
 <script>
-  // ======================= SAME POSTS AS ORIGINAL (preserved) =======================
+  // ======================= POSTS (same as original, preserved) =======================
   const fanPageModel = {
     profile: { name: "Zaki Capuno", handle: "@zakicapuno" },
     posts: [
@@ -554,11 +554,9 @@
       { id:22, author:"Zaki Capuno", avatarPlaceholder:"assets/zaki.jpg", timeAgo:"January 9, 2026 - Tagaytay City", text:"At ease, above it all. ✨🌄 The perfect escape from the city noise.", mediaUrls:["assets/Tpp1.jpg","assets/Tpp2.jpg","assets/Tpp3.jpg"], accountLink:"https://www.facebook.com/share/p/1CmCvvGYuo/", linkLabel:"📘 Facebook: Zaki Capuno", likes:513, comments:0 },
       { id:21, author:"Zaki Capuno", avatarPlaceholder:"assets/zaki.jpg", timeAgo:"December 3, 2025 - Outside Laguna", text:"Out here making ordinary days look aesthetic.😎", mediaUrls:["assets/Zp1.jpg","assets/Zp2.jpg","assets/Zp3.jpg"], accountLink:"https://www.facebook.com/share/p/1EVCrPJJTR/", linkLabel:"📘 Facebook: Zaki Capuno", likes:510, comments:7 },
       { id:20, author:"Zaki Capuno", avatarPlaceholder:"assets/zaki.jpg", timeAgo:"November 24, 2025 - Puerto Princesa, Palawan", text:"Summer may be far, but adventure isn’t. 🏖️", mediaUrls:["assets/Beach1.jpg","assets/Beach2.jpg","assets/Beach3.jpg","assets/Beach4.jpg"], accountLink:"https://www.facebook.com/share/p/18fHCgxF7c/", linkLabel:"📘 Facebook: Zaki Capuno", likes:510, comments:7 },
-      { id:19, author:"Zaki Capuno", avatarPlaceholder:"assets/zaki.jpg", timeAgo:"November 18, 2025 - Sunstar Mall Sta. Cruz, Laguna", text:"𝙕𝙖𝙠𝙞 𝘾𝙖𝙥𝙪𝙣𝙤<br/>👑𝚈𝚘𝚞𝚛 𝙼𝚛. 𝚂𝚞𝚗𝚜𝚝𝚊𝚛 2025 2𝚗𝚍 𝚁𝚞𝚗𝚗𝚎𝚛 𝚄𝚙👑<br/> • 𝙱𝚎𝚜𝚝 𝚒𝚗 𝚃𝚘𝚞𝚛𝚒𝚜𝚖 𝙲𝚘𝚜𝚝𝚞𝚖𝚎✨<br/> • 𝙲𝚅𝙱 𝙲𝚕𝚒𝚗𝚒𝚌 𝙲𝚑𝚘𝚒𝚌𝚎 𝙰𝚠𝚊𝚛𝚍✨<br/> • 𝚅𝚘𝚗𝚠𝚎𝚕𝚝 𝚁𝚎𝚜𝚘𝚛𝚝 𝙲𝚑𝚘𝚒𝚌𝚎 𝙰𝚠𝚊𝚛𝚍✨<br/> • 𝙳𝚎𝚗𝚗𝚒𝚜 𝚂𝚊𝚗𝚝𝚘𝚜 𝙰𝚖𝚋𝚊𝚜𝚜𝚊𝚍𝚘𝚛✨<br/><br/>' 𝚆𝚑𝚎𝚗 𝚝𝚑𝚎 𝚝𝚒𝚖𝚎 𝚒𝚜 𝚛𝚒𝚐𝚑𝚝, 𝙸, 𝚃𝙷𝙴 𝙻𝙾𝚁𝙳, 𝚠𝚒𝚕𝚕 𝚖𝚊𝚔𝚎 𝚒𝚝 𝚑𝚊𝚙𝚙𝚎𝚗.'  - 𝙸𝚜𝚊𝚒𝚊𝚑 60:22<br/><br/>To the people of Alaminos and to all the people who supported me, this crown is for you.<br/><br/>Last November 15, 2025 as I bring home the title Mr. Sunstarmall 2025 – 2nd Runner Up, my heart overflows with gratitude. This achievement is not just a personal milestone. It is a testament to the faith, love, and support that so many people have poured into me.<br/><br/>First and foremost, I want to recognize my whole family. Especially my mama<strong> Lovel Villanueva Capuno</strong> and papa <strong>Denz Capuno</strong>, whose unwavering support has always been my source of strength. To my handler, <strong>Katigbak Ghune</strong>, thank you for guiding me, believing in me, and pushing me beyond my limits. To my hair and makeup artist,<strong> Fretch Alvarez</strong>, my GK Family, and my co-teammates, thank you for embracing me, uplifting me, and standing with me throughout this journey.<br/><br/>A special congratulations to my teammates <strong>Heinrich Sanchez</strong> ,<strong> Kent Leinard Buera</strong> , and <strong>Venz Ruazol</strong>. We trained together, we learned together, and we fought a good fight as one solid team. I am truly proud of what we have achieved side by side.<br/><br/>To the entire Lakan at Mutya ng Alaminos 2025 candidates, I am grateful to stand beside you because of the love and support that you showed me and to the people of Alaminos, your cheers, messages, and faith in me carried me throughout this journey. I am more than grateful and my heart is full.<br/><br/>I never planned to enter the world of pageantry. But because of the many people who encouraged me, believed in me, and saw potential in me long before I saw it in myself, I found the courage to embrace this path and to bring home the crown. Joining this competition allowed me to discover new strengths, overcome fears, and prove to myself what I am capable of. Winning isn’t just about wearing a crown, it is about carrying integrity, purpose, and confidence as we represent our community.<br/><br/>To all the candidates, congratulations to each one of you. We stepped on that stage with courage, passion, and pride. Tonight, we all won. This crown may be placed on my head, but it will forever belong to the people who walked with me on this journey. Thank you, Alaminos. Maraming salamat po, from the bottom of my heart.<br/><br/>From being your Lakan ng Alaminos 2025 to now bringing home the title Mr. SunStarMall 2025 – 2nd Runner Up, I stand here with honor, pride, and deep gratitude. Every step I took on that stage, I carried our town with me. Every cheer, every message, and every ounce of support reminded me of why I strive to give my best.<br/><br/>I want to extend my heartfelt thanks to all who supported me, especially the following sponsors and leaders who continue to uplift and empower our youth:<br/><br/><strong>• Mayor Eric Bolado Lopez<br/>• Mayora Erlyn Lopez<br/>• Vice Mayor Vic Landicho Mitra<br/> • Congressman Amben Amante<br/>• Gov. Sol Aragones<br/>• Vice Gov. Atty. Jm Carait<br/>• Kap. Andrew Avenido Avenido<br/>• Ariane Avenido Torres<br/>• Sherwin Patiga<br/>• Dr. Jonathan Sotoya Viterbo<br/>• Nay Josel Aringo - Remoz<br/>• Hon. Bhenj Stephen Felismino<br/>• VM Justin Colago<br/>• Femiel Villmin<br/>• Gail Vi<br/>• Albert Capuno<br/>• Carmelo Saniel Jr.<br/>• Maxim Quidayan Salvosa<br/>• Joella Ocampo<br/>• Johan Atienza<br/>• Tenorio's Events Place and Private Resort<br/>•  Youkno Syd</strong>", mediaUrls:["assets/Sunstar2nd.jpg","assets/Swimport.jpg","assets/Sunstarformal.jpg","assets/Sunstar.jpg","assets/Cvbrose.jpg","assets/CrownedHall.jpg"], accountLink:"https://www.facebook.com/share/v/1GXXa2q73Y/", linkLabel:"📘 View Full Post on Facebook", likes:510, comments:20 },
-      // (remaining posts truncated for brevity but kept in original code; the actual code includes all posts up to id:1)
+      { id:19, author:"Zaki Capuno", avatarPlaceholder:"assets/zaki.jpg", timeAgo:"November 18, 2025 - Sunstar Mall Sta. Cruz, Laguna", text:"𝙕𝙖𝙠𝙞 𝘾𝙖𝙥𝙪𝙣𝙤<br/>👑𝚈𝚘𝚞𝚛 𝙼𝚛. 𝚂𝚞𝚗𝚜𝚝𝚊𝚛 2025 2𝚗𝚍 𝚁𝚞𝚗𝚗𝚎𝚛 𝚄𝚙👑<br/> • 𝙱𝚎𝚜𝚝 𝚒𝚗 𝚃𝚘𝚞𝚛𝚒𝚜𝚖 𝙲𝚘𝚜𝚝𝚞𝚖𝚎✨<br/> • 𝙲𝚅𝙱 𝙲𝚕𝚒𝚗𝚒𝚌 𝙲𝚑𝚘𝚒𝚌𝚎 𝙰𝚠𝚊𝚛𝚍✨<br/> • 𝚅𝚘𝚗𝚠𝚎𝚕𝚝 𝚁𝚎𝚜𝚘𝚛𝚝 𝙲𝚑𝚘𝚒𝚌𝚎 𝙰𝚠𝚊𝚛𝚍✨<br/> • 𝙳𝚎𝚗𝚗𝚒𝚜 𝚂𝚊𝚗𝚝𝚘𝚜 𝙰𝚖𝚋𝚊𝚜𝚜𝚊𝚍𝚘𝚛✨<br/><br/>' 𝚆𝚑𝚎𝚗 𝚝𝚑𝚎 𝚝𝚒𝚖𝚎 𝚒𝚜 𝚛𝚒𝚐𝚑𝚝, 𝙸, 𝚃𝙷𝙴 𝙻𝙾𝚁𝙳, 𝚠𝚒𝚕𝚕 𝚖𝚊𝚔𝚎 𝚒𝚝 𝚑𝚊𝚙𝚙𝚎𝚗.'  - 𝙸𝚜𝚊𝚒𝚊𝚑 60:22<br/><br/>To the people of Alaminos and to all the people who supported me, this crown is for you.<br/><br/>Last November 15, 2025 as I bring home the title Mr. Sunstarmall 2025 – 2nd Runner Up, my heart overflows with gratitude. This achievement is not just a personal milestone. It is a testament to the faith, love, and support that so many people have poured into me.<br/><br/>First and foremost, I want to recognize my whole family. Especially my mama<strong> Lovel Villanueva Capuno</strong> and papa <strong>Denz Capuno</strong>, whose unwavering support has always been my source of strength. To my handler, <strong>Katigbak Ghune</strong>, thank you for guiding me, believing in me, and pushing me beyond my limits. To my hair and makeup artist,<strong> Fretch Alvarez</strong>, my GK Family, and my co-teammates, thank you for embracing me, uplifting me, and standing with me throughout this journey.<br/><br/>A special congratulations to my teammates <strong>Heinrich Sanchez</strong> ,<strong> Kent Leinard Buera</strong> , and <strong>Venz Ruazol</strong>. We trained together, we learned together, and we fought a good fight as one solid team. I am truly proud of what we have achieved side by side.<br/><br/>To the entire Lakan at Mutya ng Alaminos 2025 candidates, I am grateful to stand beside you because of the love and support that you showed me and to the people of Alaminos, your cheers, messages, and faith in me carried me throughout this journey. I am more than grateful and my heart is full.<br/><br/>I never planned to enter the world of pageantry. But because of the many people who encouraged me, believed in me, and saw potential in me long before I saw it in myself, I found the courage to embrace this path and to bring home the crown. Joining this competition allowed me to discover new strengths, overcome fears, and prove to myself what I am capable of. Winning isn’t just about wearing a crown, it is about carrying integrity, purpose, and confidence as we represent our community.<br/><br/>To all the candidates, congratulations to each one of you. We stepped on that stage with courage, passion, and pride. Tonight, we all won. This crown may be placed on my head, but it will forever belong to the people who walked with me on this journey. Thank you, Alaminos. Maraming salamat po, from the bottom of my heart.<br/><br/>From being your Lakan ng Alaminos 2025 to now bringing home the title Mr. SunStarMall 2025 – 2nd Runner Up, I stand here with honor, pride, and deep gratitude. Every step I took on that stage, I carried our town with me. Every cheer, every message, and every ounce of support reminded me of why I strive to give my best.<br/><br/>I want to extend my heartfelt thanks to all who supported me, especially the following sponsors and leaders who continue to uplift and empower our youth:<br/><br/><strong>• Mayor Eric Bolado Lopez<br/>• Mayora Erlyn Lopez<br/>• Vice Mayor Vic Landicho Mitra<br/> • Congressman Amben Amante<br/>• Gov. Sol Aragones<br/>• Vice Gov. Atty. Jm Carait<br/>• Kap. Andrew Avenido Avenido<br/>• Ariane Avenido Torres<br/>• Sherwin Patiga<br/>• Dr. Jonathan Sotoya Viterbo<br/>• Nay Josel Aringo - Remoz<br/>• Hon. Bhenj Stephen Felismino<br/>• VM Justin Colago<br/>• Femiel Villmin<br/>• Gail Vi<br/>• Albert Capuno<br/>• Carmelo Saniel Jr.<br/>• Maxim Quidayan Salvosa<br/>• Joella Ocampo<br/>• Johan Atienza<br/>• Tenorio's Events Place and Private Resort<br/>•  Youkno Syd</strong>", mediaUrls:["assets/Sunstar2nd.jpg","assets/Swimport.jpg","assets/Sunstarformal.jpg","assets/Sunstar.jpg","assets/Cvbrose.jpg","assets/CrownedHall.jpg"], accountLink:"https://www.facebook.com/share/v/1GXXa2q73Y/", linkLabel:"📘 View Full Post on Facebook", likes:510, comments:20 }
     ]
   };
-  // Adding the remaining posts (id 18 to 1) to keep completeness. I'll include them dynamically to avoid excessive length but ensure functionality.
   const remainingPosts = [
     { id:18, author:"Zaki Capuno", avatarPlaceholder:"assets/zaki.jpg", timeAgo:"November 10, 2025 - iCadge Studios San Pablo, Laguna", text:"Serving not just on the court, but in confidence, discipline, and purpose.🎾", mediaUrls:["assets/Bad1.jpg","assets/Bad2.jpg","assets/Bad3.jpg"], accountLink:"https://www.facebook.com/share/p/18tZy2j982/", linkLabel:"📘 Facebook: Zaki Capuno", likes:510, comments:7 },
     { id:17, author:"Zaki Capuno", avatarPlaceholder:"assets/zaki.jpg", timeAgo:"November 8, 2025 - iCadge Studios San Pablo, Laguna", text:"One step closer to the crown!<br/>Catch me today at the Mr. SunStar 2025 Prelims! ✨", mediaUrls:["assets/Zblack1.jpg","assets/Zblack2.jpg","assets/Zblack3.jpg"], accountLink:"https://www.facebook.com/share/p/1b2wnMbCdj//", linkLabel:"📘 Facebook: Zaki Capuno", likes:510, comments:6 },
@@ -633,7 +631,7 @@
       container.appendChild(postDiv);
     });
   }
-  window.addEventListener("DOMContentLoaded", () => { renderPosts(); console.log("✅ Zaki Capuno fan page with detailed biography live."); });
+  window.addEventListener("DOMContentLoaded", () => { renderPosts(); console.log("✅ Zaki Capuno fan page – RED THEME active, unique from Charlie and Heinrich."); });
 </script>
 </body>
 </html>
