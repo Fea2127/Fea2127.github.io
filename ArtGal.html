@@ -632,7 +632,7 @@
                     </div>
                 </div>
                 <!-- Card F -->
-                 <div class="sub-card">
+                <div class="sub-card">
                     <img src="assets/Draft.jpg" alt="Old Man Drafting Exercise — Inspiration" />
                     <div class="sub-body">
                         <h4>Old Man Drafting Exercise</h4>
@@ -648,6 +648,13 @@
         <!-- ============================================================ -->
         <!-- ===== MAIN ARTWORKS GALLERY ===== -->
         <!-- ============================================================ -->
+        <!--
+        ═══════════════════════════════════════════════════════════════
+        📌  IMPORTANT – ADD NEW CARDS AT THE BOTTOM OF THIS SECTION
+            The script will automatically sort them by the date in the
+            last <p> tag (newest first). Just keep adding below!
+        ═══════════════════════════════════════════════════════════════
+        -->
         <h2 class="section-title">🎨 <span class="highlight">ARTWORKS</span></h2>
         <div class="container-certs" id="certs">
             <!-- Card 1 -->
@@ -853,6 +860,11 @@
                     <p>The Love Birds • September 2, 2026</p>
                 </div>
             </div>
+            <!--
+            ═══════════════════════════════════════════════════════════════
+            ✏️  ADD NEW CARDS BELOW THIS LINE — they'll be sorted by date!
+            ═══════════════════════════════════════════════════════════════
+            -->
         </div>
     </div>
 
@@ -915,6 +927,46 @@
                 modal.style.display = "none";
             }
         });
+
+        /* ---------- SORT GALLERY BY DATE (NEWEST FIRST) ---------- */
+        (function sortGalleryByDate() {
+            const container = document.getElementById('certs');
+            const cards = Array.from(container.querySelectorAll('.card'));
+
+            cards.sort((a, b) => {
+                // Helper to extract the date from the last <p> inside .box
+                const getDate = (card) => {
+                    const paragraphs = card.querySelectorAll('.box p');
+                    const lastP = paragraphs[paragraphs.length - 1];
+                    if (!lastP) return new Date(0);
+                    
+                    const text = lastP.textContent.trim();
+                    // Split by bullet '•' and take the last part (the date)
+                    const parts = text.split('•');
+                    let dateStr = parts[parts.length - 1].trim();
+                    
+                    // Try to parse it as a date
+                    const date = new Date(dateStr);
+                    // If invalid (e.g., just a year), fallback to Jan 1 of that year
+                    if (isNaN(date.getTime())) {
+                        // Try to extract a 4-digit year
+                        const yearMatch = dateStr.match(/\b(19|20)\d{2}\b/);
+                        if (yearMatch) {
+                            return new Date(parseInt(yearMatch[0]), 0, 1);
+                        }
+                        return new Date(0);
+                    }
+                    return date;
+                };
+
+                const dateA = getDate(a);
+                const dateB = getDate(b);
+                return dateB - dateA; // Newest first
+            });
+
+            // Re-append sorted cards
+            cards.forEach(card => container.appendChild(card));
+        })();
     </script>
 </body>
 </html>
