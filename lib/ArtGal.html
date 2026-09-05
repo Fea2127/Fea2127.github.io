@@ -1394,8 +1394,36 @@
             })();
 
             /* ================================================================
-                   L I K E   S Y S T E M   (localStorage-based)
+                   L I K E   S Y S T E M   (with custom default likes)
                    ================================================================ */
+
+            // ----- Map each artwork file path to its default like count -----
+            const DEFAULT_LIKES_MAP = {
+                'assets/Zportrait.jpg': 98,      // Jimro Capuno Lakan ng Alaminos
+                'assets/Z3port.jpg': 99,         // Jimro Capuno SunStar 2nd Runner Up
+                'assets/cportrait.jpg': 110,     // Charlie Calupig
+                'assets/Gportrait.jpg': 97,      // Genart Nido
+                'assets/Lportrait.jpg': 100,     // Lovel Capuno
+                'assets/gdraft.jpg': 99,         // Blonde Girl
+                'assets/cole.jpg': 100,          // Cole Sprouse
+                'assets/teengirl.jpg': 24,       // Teen Girl
+                'assets/teenboy.jpg': 27,        // Teen Boy
+                'assets/jj.jpg': 98,             // Jermaine Jefferson Doria
+                'assets/cj.jpg': 16,             // Christopher Jay De Claro
+                'assets/sasuke.jpg': 30,         // Sasuke Uchiha
+                'assets/flower.jpg': 10,         // Flower
+                'assets/half.jpg': 46,           // Half-Face Blue Ink Portrait
+                'assets/younglady.jpg': 25,      // Young Lady
+                'assets/old.jpg': 95,            // Red Ink Old Man
+                'assets/Draft.jpg': 90,          // Old Man Drafting Exercise
+                'assets/trix.jpg': 18,           // Trisha Trix Lozada
+                'assets/nobody.jpg': 55,         // Being Nobody
+                'assets/kid.jpg': 99,            // Another Drafting Exercises – The Girl
+                'assets/hombre.jpg': 99,         // Another Drafting – El Hombre
+                'assets/Tito onel.jpg': 54,      // Uncle Leonel
+                'assets/lovebirds.jpg': 150,     // Joshua & Daniell
+                'assets/inay.jpg': 99            // Carmelita Villanueva
+            };
 
             // ----- Helper: get all artwork src keys from the page -----
             function getAllArtworkSrcs() {
@@ -1447,21 +1475,21 @@
                 localStorage.setItem('artworkLikes', JSON.stringify(data));
             }
 
-            // ----- Seed initial likes for artworks that don't have data -----
+            // ----- Seed likes with custom defaults (override any existing) -----
             function seedLikes() {
                 const data = loadLikeData();
                 const allSrcs = getAllArtworkSrcs();
                 let changed = false;
-                allSrcs.forEach((src, idx) => {
-                    if (!data[src]) {
-                        const seed = (idx * 7 + 13) % 19 + 2;
-                        data[src] = { likes: seed, liked: false };
-                        changed = true;
-                    }
-                    if (data[src] && data[src].liked === undefined) {
-                        data[src].liked = false;
-                        changed = true;
-                    }
+                allSrcs.forEach(src => {
+                    // Set the default like count from the map, or fallback to 0
+                    const defaultLikes = DEFAULT_LIKES_MAP[src] || 0;
+                    // Always set to default, but preserve the "liked" status if it exists
+                    const existingLiked = data[src] ? data[src].liked : false;
+                    data[src] = {
+                        likes: defaultLikes,
+                        liked: existingLiked // keep user's liked status if they already liked it
+                    };
+                    changed = true;
                 });
                 if (changed) saveLikeData(data);
                 return data;
@@ -1495,7 +1523,6 @@
 
             // ----- Toggle like for a specific artwork -----
             function toggleLike(src) {
-                console.log("Liking:", src);
                 const data = loadLikeData();
                 if (!data[src]) {
                     data[src] = { likes: 0, liked: false };
@@ -1570,10 +1597,10 @@
 
             // ----- Initialize everything -----
             function initLikes() {
-                seedLikes();
-                renderAllLikes();
+                seedLikes();        // set default counts
+                renderAllLikes();   // display them
                 attachLikeHandlers();
-                console.log("Like system initialized!");
+                console.log("Like system initialized with custom defaults!");
             }
 
             initLikes();
