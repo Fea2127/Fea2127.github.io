@@ -4,14 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alfea Aemiel Mingua | Art Gallery</title>
-
-    <!-- Fonts & Icons -->
     <link rel="icon" href="assets/Logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-
     <style>
-        /* ---------- ROOT TOKENS ---------- */
         :root {
             --bg: #0d0f17;
             --surface: rgba(23, 26, 41, 0.6);
@@ -29,8 +25,6 @@
             font-size: 16px;
             --like-color: #ff4757;
         }
-
-        /* ---------- RESET ---------- */
         *,
         *::before,
         *::after {
@@ -38,7 +32,6 @@
             margin: 0;
             padding: 0;
         }
-
         body {
             font-family: "Inter", sans-serif;
             background: var(--bg);
@@ -47,7 +40,6 @@
             padding: 2rem 1.2rem;
             min-height: 100vh;
         }
-
         img {
             max-width: 100%;
             display: block;
@@ -56,14 +48,11 @@
             color: inherit;
             text-decoration: none;
         }
-
-        /* ---------- UTILS ---------- */
         .container {
             width: 90%;
             max-width: 1200px;
             margin-inline: auto;
         }
-
         .section-title {
             text-align: center;
             margin-bottom: 3rem;
@@ -72,7 +61,6 @@
             color: var(--text);
             letter-spacing: 2px;
         }
-
         .section-title::after {
             content: "";
             width: 60px;
@@ -83,11 +71,9 @@
             bottom: -10px;
             transform: translateX(-50%);
         }
-
         .section-title .highlight {
             color: var(--gold);
         }
-
         hr {
             border: 0;
             height: 1px;
@@ -95,8 +81,6 @@
             margin: 3rem 0;
             opacity: 0.3;
         }
-
-        /* ---------- INSIGHTS / STATS BAR ---------- */
         .insights-bar {
             display: flex;
             flex-wrap: wrap;
@@ -110,7 +94,6 @@
             border: 1px solid rgba(255, 255, 255, 0.06);
             backdrop-filter: var(--blur);
         }
-
         .insights-bar .stat-item {
             display: flex;
             align-items: center;
@@ -118,41 +101,34 @@
             font-size: 0.85rem;
             color: var(--text-dim);
         }
-
         .insights-bar .stat-item i {
             font-size: 1.2rem;
             color: var(--gold);
         }
-
         .insights-bar .stat-item .num {
             font-weight: 700;
             font-size: 1.1rem;
             color: var(--text);
             margin-right: 0.15rem;
         }
-
         .insights-bar .stat-item .num.gold {
             color: var(--gold);
         }
-
         .insights-bar .stat-divider {
             width: 1px;
             height: 28px;
             background: rgba(255, 255, 255, 0.08);
         }
-
         .insights-bar .top-artwork {
             display: flex;
             align-items: center;
             gap: 0.6rem;
             font-size: 0.85rem;
         }
-
         .insights-bar .top-artwork .top-name {
             color: var(--text);
             font-weight: 500;
         }
-
         .insights-bar .top-artwork .top-badge {
             background: rgba(255, 215, 0, 0.15);
             color: var(--gold);
@@ -162,7 +138,6 @@
             font-weight: 700;
             border: 1px solid rgba(255, 215, 0, 0.15);
         }
-
         @media (max-width: 700px) {
             .insights-bar {
                 flex-direction: column;
@@ -180,12 +155,9 @@
                 font-size: 0.8rem;
             }
         }
-
-        /* ---------- FEATURED SECTION ---------- */
         .featured-wrap {
             margin-bottom: 4rem;
         }
-
         .featured-hero {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -198,12 +170,10 @@
             box-shadow: 0 0 40px -10px rgba(255, 215, 0, 0.15);
             transition: var(--transition);
         }
-
         .featured-hero:hover {
             box-shadow: 0 0 60px -10px rgba(255, 215, 0, 0.25);
             border-color: rgba(255, 215, 0, 0.4);
         }
-
         .featured-hero .hero-img {
             height: 100%;
             min-height: 340px;
@@ -212,11 +182,9 @@
             cursor: pointer;
             transition: var(--transition);
         }
-
         .featured-hero .hero-img:hover {
             filter: brightness(1.05) saturate(1.05);
         }
-
         .featured-hero .hero-body {
             padding: 2rem 2rem 2rem 0.5rem;
             display: flex;
@@ -224,7 +192,6 @@
             justify-content: center;
             gap: 0.6rem;
         }
-
         .featured-hero .hero-body .badge {
             display: inline-flex;
             align-items: center;
@@ -240,35 +207,29 @@
             border: 1px solid rgba(255, 215, 0, 0.25);
             width: fit-content;
         }
-
         .featured-hero .hero-body .badge i {
             font-size: 1rem;
         }
-
         .featured-hero .hero-body h2 {
             font-size: 2rem;
             font-weight: 800;
             line-height: 1.2;
             color: var(--text);
         }
-
         .featured-hero .hero-body h2 .gold {
             color: var(--gold);
         }
-
         .featured-hero .hero-body p {
             color: var(--text-dim);
             font-size: 0.95rem;
             max-width: 90%;
         }
-
         .featured-hero .hero-body .meta {
             display: flex;
             flex-wrap: wrap;
             gap: 1.5rem;
             margin-top: 0.4rem;
         }
-
         .featured-hero .hero-body .meta span {
             font-size: 0.8rem;
             color: var(--text-dim);
@@ -276,27 +237,22 @@
             align-items: center;
             gap: 0.4rem;
         }
-
         .featured-hero .hero-body .meta span i {
             color: var(--gold);
             font-size: 1rem;
         }
-
         .hero-like-row {
             display: flex;
             align-items: center;
             gap: 1rem;
             margin-top: 0.6rem;
         }
-
-        /* ---- featured sub-grid ---- */
         .featured-sub {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.2rem;
             margin-top: 1.5rem;
         }
-
         .featured-sub .sub-card {
             background: var(--surface);
             border-radius: var(--radius);
@@ -307,24 +263,20 @@
             display: flex;
             flex-direction: column;
         }
-
         .featured-sub .sub-card:hover {
             transform: translateY(-4px);
             border-color: rgba(255, 215, 0, 0.3);
             box-shadow: 0 0 30px -8px rgba(255, 215, 0, 0.1);
         }
-
         .featured-sub .sub-card img {
             height: 180px;
             object-fit: cover;
             width: 100%;
             transition: var(--transition);
         }
-
         .featured-sub .sub-card:hover img {
             filter: brightness(1.05);
         }
-
         .featured-sub .sub-card .sub-body {
             padding: 0.8rem 1rem 1rem;
             flex: 1;
@@ -332,18 +284,15 @@
             flex-direction: column;
             gap: 0.2rem;
         }
-
         .featured-sub .sub-card .sub-body h4 {
             font-size: 0.9rem;
             font-weight: 600;
             color: var(--text);
         }
-
         .featured-sub .sub-card .sub-body p {
             font-size: 0.75rem;
             color: var(--text-dim);
         }
-
         .featured-sub .sub-card .sub-body .mini-badge {
             font-size: 0.6rem;
             font-weight: 700;
@@ -358,14 +307,11 @@
             border: 1px solid rgba(255, 215, 0, 0.1);
             margin-top: 0.2rem;
         }
-
-        /* ---------- CERTIFICATE GRID ---------- */
         .container-certs {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 1.5rem;
         }
-
         .card {
             background: var(--surface);
             border-radius: var(--radius);
@@ -378,23 +324,19 @@
             box-shadow: 0 0 20px -5px var(--primary);
             cursor: pointer;
         }
-
         .card:hover {
             transform: translateY(-6px);
             box-shadow: 0 0 30px -5px var(--primary);
         }
-
         .card img {
             height: 220px;
             object-fit: cover;
             width: 100%;
             transition: var(--transition);
         }
-
         .card:hover img {
             filter: brightness(1.05);
         }
-
         .box {
             flex: 1;
             padding: 1.2rem;
@@ -403,20 +345,16 @@
             justify-content: space-between;
             gap: 0.4rem;
         }
-
         .box h3 {
             font-size: 1rem;
             font-weight: 600;
             color: var(--text);
             line-height: 1.3;
         }
-
         .box p {
             font-size: 0.85rem;
             color: var(--text-dim);
         }
-
-        /* ---------- LIKE BUTTON ---------- */
         .like-wrap {
             display: flex;
             align-items: center;
@@ -425,7 +363,6 @@
             padding-top: 0.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
-
         .like-btn {
             display: flex;
             align-items: center;
@@ -442,22 +379,18 @@
             font-family: "Inter", sans-serif;
             background: rgba(255, 255, 255, 0.03);
         }
-
         .like-btn:hover {
             background: rgba(255, 71, 87, 0.08);
             color: var(--text);
         }
-
         .like-btn i {
             font-size: 1.3rem;
             transition: var(--transition);
             color: var(--text-dim);
         }
-
         .like-btn.liked i {
             color: var(--like-color);
         }
-
         .like-btn .like-count {
             font-size: 0.8rem;
             font-weight: 600;
@@ -466,60 +399,48 @@
             color: var(--text-dim);
             transition: var(--transition);
         }
-
         .like-btn.liked .like-count {
             color: var(--like-color);
         }
-
         .like-btn .like-label {
             font-size: 0.7rem;
             font-weight: 400;
             color: var(--text-dim);
             opacity: 0.7;
         }
-
         .like-btn.liked .like-label {
             color: var(--like-color);
             opacity: 1;
         }
-
         .like-btn .heart-pop {
             animation: heartPop 0.35s ease;
         }
-
         @keyframes heartPop {
             0% { transform: scale(1); }
             30% { transform: scale(1.4); }
             60% { transform: scale(0.9); }
             100% { transform: scale(1); }
         }
-
         .sub-like {
             display: flex;
             align-items: center;
             gap: 0.3rem;
             margin-top: 0.3rem;
         }
-
         .sub-like .like-btn {
             font-size: 0.75rem;
             padding: 0.1rem 0.4rem 0.1rem 0.1rem;
         }
-
         .sub-like .like-btn i {
             font-size: 1rem;
         }
-
         .sub-like .like-btn .like-count {
             font-size: 0.7rem;
             min-width: 0.8rem;
         }
-
         .sub-like .like-btn .like-label {
             font-size: 0.6rem;
         }
-
-        /* ---------- LIGHT MODE ---------- */
         body.light {
             --bg: #f2f4fc;
             --surface: rgba(255, 255, 255, 0.7);
@@ -530,7 +451,6 @@
             --accent: #00aaff;
             --like-color: #e0245e;
         }
-
         body.light .featured-hero {
             border-color: rgba(0, 119, 204, 0.25);
             box-shadow: 0 0 40px -10px rgba(0, 119, 204, 0.12);
@@ -579,8 +499,6 @@
         body.light .like-wrap {
             border-top-color: rgba(0, 0, 0, 0.06);
         }
-
-        /* ---------- MODAL ---------- */
         .modal {
             display: none;
             position: fixed;
@@ -592,7 +510,6 @@
             padding: 1.5rem;
             backdrop-filter: blur(6px);
         }
-
         .modal-content {
             max-width: 90vw;
             max-height: 85vh;
@@ -601,12 +518,10 @@
             animation: zoomIn 0.3s ease;
             object-fit: contain;
         }
-
         @keyframes zoomIn {
             from { transform: scale(0.7); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
-
         .close {
             position: absolute;
             top: 1.5rem;
@@ -619,28 +534,22 @@
             line-height: 1;
             z-index: 1001;
         }
-
         .close:hover {
             color: var(--accent);
             transform: rotate(90deg);
         }
-
-        /* ---------- THEME TOGGLE ---------- */
         .theme-toggle-wrap {
             display: flex;
             justify-content: flex-end;
             margin-bottom: 2rem;
         }
-
         .futur-toggle {
             display: flex;
             align-items: center;
         }
-
         .futur-toggle input {
             display: none;
         }
-
         .slider {
             position: relative;
             width: 68px;
@@ -652,7 +561,6 @@
             transition: background 0.3s;
             box-shadow: 0 0 6px var(--primary), inset 0 0 6px var(--primary);
         }
-
         .slider .icon {
             position: absolute;
             top: 3px;
@@ -664,10 +572,8 @@
             font-size: 18px;
             transition: transform 0.3s, color 0.3s;
         }
-
         .sun { left: 3px; color: #ffdf00; }
         .moon { right: 3px; color: #e4e6eb; }
-
         input:checked+.slider {
             background: #00e5ff22;
         }
@@ -679,8 +585,6 @@
             transform: translateX(-34px);
             color: #fff;
         }
-
-        /* ---------- RESPONSIVE ---------- */
         @media (max-width: 900px) {
             .featured-hero {
                 grid-template-columns: 1fr;
@@ -701,7 +605,6 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-
         @media (max-width: 600px) {
             .container-certs {
                 grid-template-columns: 1fr 1fr;
@@ -744,7 +647,6 @@
                 flex-wrap: wrap;
             }
         }
-
         @media (max-width: 400px) {
             .container-certs {
                 grid-template-columns: 1fr;
@@ -756,7 +658,7 @@
     </style>
 </head>
 <body>
-    <!-- ===== THEME TOGGLE ===== -->
+
     <div class="theme-toggle-wrap">
         <div class="futur-toggle">
             <input type="checkbox" id="darkModeToggle" />
@@ -768,9 +670,7 @@
     </div>
 
     <div class="container">
-        <!-- ============================================================ -->
-        <!-- ===== INSIGHTS / STATS BAR ===== -->
-        <!-- ============================================================ -->
+
         <div class="insights-bar" id="insightsBar">
             <div class="stat-item">
                 <i class="bx bxs-palette"></i>
@@ -787,19 +687,20 @@
                 <span><span class="num gold" id="mostLikedCount">0</span> ❤️</span>
             </div>
             <div class="stat-divider"></div>
+            <div class="stat-item">
+                <i class="bx bx-show-alt"></i>
+                <span><span class="num" id="visitorCount">0</span> visitors</span>
+            </div>
+            <div class="stat-divider"></div>
             <div class="top-artwork" id="topArtworkDisplay">
                 <span class="top-badge">🏆 Most Loved</span>
                 <span class="top-name" id="topArtworkName">—</span>
             </div>
         </div>
 
-        <!-- ============================================================ -->
-        <!-- ===== FEATURED ARTWORK ===== -->
-        <!-- ============================================================ -->
         <div class="featured-wrap">
             <h2 class="section-title">⭐ <span class="highlight">FEATURED</span> ARTWORK</h2>
 
-            <!-- ---- Hero Featured ---- -->
             <div class="featured-hero" data-src="assets/Zportrait.jpg">
                 <img class="hero-img" src="assets/Zportrait.jpg" alt="Jimro Erasmus Zaki Capuno — Lakan ng Alaminos 2025" />
                 <div class="hero-body">
@@ -821,9 +722,7 @@
                 </div>
             </div>
 
-            <!-- ---- Sub-featured ---- -->
             <div class="featured-sub">
-                <!-- Card A -->
                 <div class="sub-card" data-src="assets/cportrait.jpg">
                     <img src="assets/cportrait.jpg" alt="Charlie Calupig — Ginoong Laguna 2025" />
                     <div class="sub-body">
@@ -839,7 +738,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Card B -->
                 <div class="sub-card" data-src="assets/cole.jpg">
                     <img src="assets/cole.jpg" alt="Cole Mitchell Sprouse - Five Feet Apart" />
                     <div class="sub-body">
@@ -855,7 +753,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Card C -->
                 <div class="sub-card" data-src="assets/Gportrait.jpg">
                     <img src="assets/Gportrait.jpg" alt="Genart Nido — King of the World" />
                     <div class="sub-body">
@@ -871,7 +768,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Card D -->
                 <div class="sub-card" data-src="assets/Lportrait.jpg">
                     <img src="assets/Lportrait.jpg" alt="Lovel Villanueva Capuno — Inspiration" />
                     <div class="sub-body">
@@ -887,7 +783,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Card E -->
                 <div class="sub-card" data-src="assets/jj.jpg">
                     <img src="assets/jj.jpg" alt="Jermaine Jefferson Doria — Inspiration" />
                     <div class="sub-body">
@@ -903,7 +798,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Card F -->
                 <div class="sub-card" data-src="assets/Draft.jpg">
                     <img src="assets/Draft.jpg" alt="Old Man Drafting Exercise — Inspiration" />
                     <div class="sub-body">
@@ -924,11 +818,9 @@
 
         <hr />
 
-        <!-- ============================================================ -->
-        <!-- ===== MAIN ARTWORKS GALLERY ===== -->
-        <!-- ============================================================ -->
         <h2 class="section-title">🎨 <span class="highlight">ARTWORKS</span></h2>
         <div class="container-certs" id="certs">
+
             <!-- Card 1 -->
             <div class="card" data-src="assets/Zportrait.jpg">
                 <img src="assets/Zportrait.jpg" alt="Zaki Capuno" />
@@ -1314,20 +1206,18 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
-    <!-- ===== IMAGE MODAL ===== -->
     <div id="imgModal" class="modal">
         <span class="close">&times;</span>
         <img class="modal-content" id="modalImg" alt="Artwork enlarged" />
     </div>
 
-    <!-- ===== JAVASCRIPT ===== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
-            /* ---------- DARK / LIGHT TOGGLE ---------- */
             const darkToggle = document.getElementById("darkModeToggle");
             const body = document.body;
 
@@ -1344,7 +1234,6 @@
                 );
             });
 
-            /* ---------- IMAGE POPUP MODAL ---------- */
             const modal = document.getElementById("imgModal");
             const modalImg = document.getElementById("modalImg");
             const closeBtn = modal.querySelector(".close");
@@ -1368,7 +1257,6 @@
                 if (e.key === "Escape" && modal.style.display === "flex") modal.style.display = "none";
             });
 
-            /* ---------- SORT GALLERY BY DATE (NEWEST FIRST) ---------- */
             (function sortGalleryByDate() {
                 const container = document.getElementById('certs');
                 const cards = Array.from(container.querySelectorAll('.card'));
@@ -1393,39 +1281,38 @@
                 cards.forEach(card => container.appendChild(card));
             })();
 
-            /* ================================================================
-                   L I K E   S Y S T E M   (with custom default likes)
-                   ================================================================ */
+            const visitorCountEl = document.getElementById('visitorCount');
+            let visitorCount = parseInt(localStorage.getItem('visitorCount') || '0') + 1;
+            localStorage.setItem('visitorCount', visitorCount);
+            visitorCountEl.textContent = visitorCount;
 
-            // ----- Map each artwork file path to its default like count -----
             const DEFAULT_LIKES_MAP = {
-                'assets/Zportrait.jpg': 98,      // Jimro Capuno Lakan ng Alaminos
-                'assets/Z3port.jpg': 99,         // Jimro Capuno SunStar 2nd Runner Up
-                'assets/cportrait.jpg': 110,     // Charlie Calupig
-                'assets/Gportrait.jpg': 97,      // Genart Nido
-                'assets/Lportrait.jpg': 100,     // Lovel Capuno
-                'assets/gdraft.jpg': 99,         // Blonde Girl
-                'assets/cole.jpg': 100,          // Cole Sprouse
-                'assets/teengirl.jpg': 24,       // Teen Girl
-                'assets/teenboy.jpg': 27,        // Teen Boy
-                'assets/jj.jpg': 98,             // Jermaine Jefferson Doria
-                'assets/cj.jpg': 16,             // Christopher Jay De Claro
-                'assets/sasuke.jpg': 30,         // Sasuke Uchiha
-                'assets/flower.jpg': 10,         // Flower
-                'assets/half.jpg': 46,           // Half-Face Blue Ink Portrait
-                'assets/younglady.jpg': 25,      // Young Lady
-                'assets/old.jpg': 95,            // Red Ink Old Man
-                'assets/Draft.jpg': 90,          // Old Man Drafting Exercise
-                'assets/trix.jpg': 18,           // Trisha Trix Lozada
-                'assets/nobody.jpg': 55,         // Being Nobody
-                'assets/kid.jpg': 99,            // Another Drafting Exercises – The Girl
-                'assets/hombre.jpg': 99,         // Another Drafting – El Hombre
-                'assets/Tito onel.jpg': 54,      // Uncle Leonel
-                'assets/lovebirds.jpg': 150,     // Joshua & Daniell
-                'assets/inay.jpg': 99            // Carmelita Villanueva
+                'assets/Zportrait.jpg': 88,
+                'assets/Z3port.jpg': 89,
+                'assets/cportrait.jpg': 110,
+                'assets/Gportrait.jpg': 79,
+                'assets/Lportrait.jpg': 100,
+                'assets/gdraft.jpg': 99,
+                'assets/cole.jpg': 130,
+                'assets/teengirl.jpg': 24,
+                'assets/teenboy.jpg': 77,
+                'assets/jj.jpg': 98,
+                'assets/cj.jpg': 16,
+                'assets/sasuke.jpg': 29,
+                'assets/flower.jpg': 40,
+                'assets/half.jpg': 66,
+                'assets/younglady.jpg': 25,
+                'assets/old.jpg': 95,
+                'assets/Draft.jpg': 90,
+                'assets/trix.jpg': 18,
+                'assets/nobody.jpg': 75,
+                'assets/kid.jpg': 96,
+                'assets/hombre.jpg': 99,
+                'assets/Tito onel.jpg': 84,
+                'assets/lovebirds.jpg': 165,
+                'assets/inay.jpg': 92
             };
 
-            // ----- Helper: get all artwork src keys from the page -----
             function getAllArtworkSrcs() {
                 const srcs = new Set();
                 document.querySelectorAll('.like-btn[data-src]').forEach(btn => {
@@ -1434,7 +1321,6 @@
                 return Array.from(srcs);
             }
 
-            // ----- Helper: get buttons by data-src (safe for spaces) -----
             function getButtonsBySrc(src) {
                 const allButtons = document.querySelectorAll('.like-btn');
                 const matched = [];
@@ -1446,7 +1332,6 @@
                 return matched;
             }
 
-            // ----- Helper: get container (card/sub-card) by data-src -----
             function getContainerBySrc(src) {
                 const cards = document.querySelectorAll('.card, .sub-card');
                 for (let card of cards) {
@@ -1457,7 +1342,6 @@
                 return null;
             }
 
-            // ----- Load like data from localStorage -----
             function loadLikeData() {
                 try {
                     const raw = localStorage.getItem('artworkLikes');
@@ -1470,24 +1354,20 @@
                 return {};
             }
 
-            // ----- Save like data to localStorage -----
             function saveLikeData(data) {
                 localStorage.setItem('artworkLikes', JSON.stringify(data));
             }
 
-            // ----- Seed likes with custom defaults (override any existing) -----
             function seedLikes() {
                 const data = loadLikeData();
                 const allSrcs = getAllArtworkSrcs();
                 let changed = false;
                 allSrcs.forEach(src => {
-                    // Set the default like count from the map, or fallback to 0
                     const defaultLikes = DEFAULT_LIKES_MAP[src] || 0;
-                    // Always set to default, but preserve the "liked" status if it exists
                     const existingLiked = data[src] ? data[src].liked : false;
                     data[src] = {
                         likes: defaultLikes,
-                        liked: existingLiked // keep user's liked status if they already liked it
+                        liked: existingLiked
                     };
                     changed = true;
                 });
@@ -1495,7 +1375,6 @@
                 return data;
             }
 
-            // ----- Update all like buttons on the page -----
             function renderAllLikes() {
                 const data = loadLikeData();
                 const allSrcs = getAllArtworkSrcs();
@@ -1521,7 +1400,6 @@
                 updateInsights();
             }
 
-            // ----- Toggle like for a specific artwork -----
             function toggleLike(src) {
                 const data = loadLikeData();
                 if (!data[src]) {
@@ -1534,7 +1412,6 @@
                 saveLikeData(data);
                 renderAllLikes();
 
-                // animate hearts
                 getButtonsBySrc(src).forEach(btn => {
                     const icon = btn.querySelector('i');
                     if (icon) {
@@ -1545,7 +1422,6 @@
                 });
             }
 
-            // ----- Update insights bar -----
             function updateInsights() {
                 const data = loadLikeData();
                 const allSrcs = getAllArtworkSrcs();
@@ -1584,7 +1460,6 @@
                 document.getElementById('topArtworkName').textContent = topName;
             }
 
-            // ----- Attach click handlers to all like buttons -----
             function attachLikeHandlers() {
                 document.querySelectorAll('.like-btn').forEach(btn => {
                     btn.addEventListener('click', function(e) {
@@ -1595,16 +1470,15 @@
                 });
             }
 
-            // ----- Initialize everything -----
             function initLikes() {
-                seedLikes();        // set default counts
-                renderAllLikes();   // display them
+                seedLikes();
+                renderAllLikes();
                 attachLikeHandlers();
-                console.log("Like system initialized with custom defaults!");
             }
 
             initLikes();
         });
     </script>
+
 </body>
 </html>
