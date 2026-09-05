@@ -689,7 +689,7 @@
             <div class="stat-divider"></div>
             <div class="stat-item">
                 <i class="bx bx-show-alt"></i>
-                <span><span class="num" id="visitorCount">0</span> visitors</span>
+                <span><span class="num" id="visitorCount">…</span> visitors</span>
             </div>
             <div class="stat-divider"></div>
             <div class="top-artwork" id="topArtworkDisplay">
@@ -1281,14 +1281,37 @@
                 cards.forEach(card => container.appendChild(card));
             })();
 
+            // ----- GLOBAL VISITOR COUNTER (CountAPI) -----
             const visitorCountEl = document.getElementById('visitorCount');
-            let visitorCount = parseInt(localStorage.getItem('visitorCount') || '0');
-            if (visitorCount === 0) {
-                visitorCount = Math.floor(Math.random() * 500) + 1500;
+            const COUNTER_NAMESPACE = 'alfea-gallery';
+            const COUNTER_KEY = 'visitors';
+
+            async function updateVisitorCount() {
+                try {
+                    const getRes = await fetch(`https://api.countapi.xyz/get/${COUNTER_NAMESPACE}/${COUNTER_KEY}`);
+                    if (!getRes.ok) throw new Error('Failed to fetch count');
+                    const data = await getRes.json();
+                    let count = data.value || 0;
+
+                    const incRes = await fetch(`https://api.countapi.xyz/update/${COUNTER_NAMESPACE}/${COUNTER_KEY}?amount=1`);
+                    if (!incRes.ok) throw new Error('Failed to increment count');
+                    const incData = await incRes.json();
+                    count = incData.value;
+
+                    visitorCountEl.textContent = count;
+                } catch (err) {
+                    console.warn('Visitor counter fallback to localStorage:', err);
+                    let localCount = parseInt(localStorage.getItem('visitorCount_fallback') || '0');
+                    if (localCount === 0) {
+                        localCount = Math.floor(Math.random() * 500) + 1500;
+                    }
+                    localCount += 1;
+                    localStorage.setItem('visitorCount_fallback', localCount);
+                    visitorCountEl.textContent = localCount;
+                }
             }
-            visitorCount += 1;
-            localStorage.setItem('visitorCount', visitorCount);
-            visitorCountEl.textContent = visitorCount;
+
+            updateVisitorCount();
 
             const DEFAULT_LIKES_MAP = {
                 'assets/Zportrait.jpg': 88,
@@ -1362,18 +1385,20 @@
                 localStorage.setItem('artworkLikes', JSON.stringify(data));
             }
 
+            // ----- FIX: only set defaults for artworks that don't have a stored value -----
             function seedLikes() {
                 const data = loadLikeData();
                 const allSrcs = getAllArtworkSrcs();
                 let changed = false;
                 allSrcs.forEach(src => {
-                    const defaultLikes = DEFAULT_LIKES_MAP[src] || 0;
-                    const existingLiked = data[src] ? data[src].liked : false;
-                    data[src] = {
-                        likes: defaultLikes,
-                        liked: existingLiked
-                    };
-                    changed = true;
+                    if (!data[src]) {
+                        const defaultLikes = DEFAULT_LIKES_MAP[src] || 0;
+                        data[src] = {
+                            likes: defaultLikes,
+                            liked: false
+                        };
+                        changed = true;
+                    }
                 });
                 if (changed) saveLikeData(data);
                 return data;
@@ -1488,10 +1513,10 @@
             }
 
             function initLikes() {
-                seedLikes();
-                renderAllLikes();
+                seedLikes();           
+                renderAllLikes();     
                 attachLikeHandlers();
-                autoIncrementLikes();
+                autoIncrementLikes();   
             }
 
             initLikes();
