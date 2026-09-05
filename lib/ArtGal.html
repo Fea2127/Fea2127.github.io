@@ -282,7 +282,6 @@
             font-size: 1rem;
         }
 
-        /* Hero like row */
         .hero-like-row {
             display: flex;
             align-items: center;
@@ -484,27 +483,17 @@
             opacity: 1;
         }
 
-        /* heart pop animation */
         .like-btn .heart-pop {
             animation: heartPop 0.35s ease;
         }
 
         @keyframes heartPop {
-            0% {
-                transform: scale(1);
-            }
-            30% {
-                transform: scale(1.4);
-            }
-            60% {
-                transform: scale(0.9);
-            }
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(1); }
+            30% { transform: scale(1.4); }
+            60% { transform: scale(0.9); }
+            100% { transform: scale(1); }
         }
 
-        /* small like for featured sub */
         .sub-like {
             display: flex;
             align-items: center;
@@ -614,14 +603,8 @@
         }
 
         @keyframes zoomIn {
-            from {
-                transform: scale(0.7);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .close {
@@ -682,14 +665,8 @@
             transition: transform 0.3s, color 0.3s;
         }
 
-        .sun {
-            left: 3px;
-            color: #ffdf00;
-        }
-        .moon {
-            right: 3px;
-            color: #e4e6eb;
-        }
+        .sun { left: 3px; color: #ffdf00; }
+        .moon { right: 3px; color: #e4e6eb; }
 
         input:checked+.slider {
             background: #00e5ff22;
@@ -835,7 +812,7 @@
                         <span><i class="bx bxs-heart" style="color:#ff6b6b;"></i> Most Loved</span>
                     </div>
                     <div class="hero-like-row">
-                        <button class="like-btn" data-src="assets/Zportrait.jpg">
+                        <button type="button" class="like-btn" data-src="assets/Zportrait.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -854,7 +831,7 @@
                         <p>Ginoong Laguna 2025</p>
                         <span class="mini-badge"><i class="bx bxs-star"></i> Winner</span>
                         <div class="sub-like">
-                            <button class="like-btn" data-src="assets/cportrait.jpg">
+                            <button type="button" class="like-btn" data-src="assets/cportrait.jpg">
                                 <i class="bx bx-heart"></i>
                                 <span class="like-count">0</span>
                                 <span class="like-label">Like</span>
@@ -870,7 +847,7 @@
                         <p>Five Feet Apart as William Newman</p>
                         <span class="mini-badge"><i class="bx bxs-star"></i> Jughead of Riverdale</span>
                         <div class="sub-like">
-                            <button class="like-btn" data-src="assets/cole.jpg">
+                            <button type="button" class="like-btn" data-src="assets/cole.jpg">
                                 <i class="bx bx-heart"></i>
                                 <span class="like-count">0</span>
                                 <span class="like-label">Like</span>
@@ -886,7 +863,7 @@
                         <p>King of the World - Laguna</p>
                         <span class="mini-badge"><i class="bx bxs-crown"></i> Royal</span>
                         <div class="sub-like">
-                            <button class="like-btn" data-src="assets/Gportrait.jpg">
+                            <button type="button" class="like-btn" data-src="assets/Gportrait.jpg">
                                 <i class="bx bx-heart"></i>
                                 <span class="like-count">0</span>
                                 <span class="like-label">Like</span>
@@ -902,7 +879,7 @@
                         <p>Inspiration</p>
                         <span class="mini-badge"><i class="bx bxs-heart"></i> Beloved</span>
                         <div class="sub-like">
-                            <button class="like-btn" data-src="assets/Lportrait.jpg">
+                            <button type="button" class="like-btn" data-src="assets/Lportrait.jpg">
                                 <i class="bx bx-heart"></i>
                                 <span class="like-count">0</span>
                                 <span class="like-label">Like</span>
@@ -918,7 +895,7 @@
                         <p>PUP - Inspiration</p>
                         <span class="mini-badge"><i class="bx bxs-heart"></i> Beloved</span>
                         <div class="sub-like">
-                            <button class="like-btn" data-src="assets/jj.jpg">
+                            <button type="button" class="like-btn" data-src="assets/jj.jpg">
                                 <i class="bx bx-heart"></i>
                                 <span class="like-count">0</span>
                                 <span class="like-label">Like</span>
@@ -934,7 +911,7 @@
                         <p>Drafting Inspiration</p>
                         <span class="mini-badge"><i class="bx bxs-heart"></i> Beloved</span>
                         <div class="sub-like">
-                            <button class="like-btn" data-src="assets/Draft.jpg">
+                            <button type="button" class="like-btn" data-src="assets/Draft.jpg">
                                 <i class="bx bx-heart"></i>
                                 <span class="like-count">0</span>
                                 <span class="like-label">Like</span>
@@ -959,7 +936,7 @@
                     <h3>Jimro Erasmus Zaki Capuno</h3>
                     <p>Lakan ng Alaminos 2025 • December 30, 2025</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/Zportrait.jpg">
+                        <button type="button" class="like-btn" data-src="assets/Zportrait.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -975,7 +952,7 @@
                     <h3>Jimro Erasmus Zaki Capuno</h3>
                     <p>Mr SunStar Mall 2nd Runner Up • December 30, 2025</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/Z3port.jpg">
+                        <button type="button" class="like-btn" data-src="assets/Z3port.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -991,7 +968,7 @@
                     <h3>Charlie Calupig</h3>
                     <p>Ginoong Laguna 2025 • August 24, 2026</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/cportrait.jpg">
+                        <button type="button" class="like-btn" data-src="assets/cportrait.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1007,7 +984,7 @@
                     <h3>Genart Nido</h3>
                     <p>King of the World - Laguna • August 21, 2026</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/Gportrait.jpg">
+                        <button type="button" class="like-btn" data-src="assets/Gportrait.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1023,7 +1000,7 @@
                     <h3>Lovel Villanueva Capuno</h3>
                     <p>Inspiration • August 23, 2026</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/Lportrait.jpg">
+                        <button type="button" class="like-btn" data-src="assets/Lportrait.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1039,7 +1016,7 @@
                     <h3>Blonde Girl</h3>
                     <p>Drafting Exercise Redraw • August 25, 2026</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/gdraft.jpg">
+                        <button type="button" class="like-btn" data-src="assets/gdraft.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1055,7 +1032,7 @@
                     <h3>Cole Mitchell Sprouse</h3>
                     <p>Inspiration • 2021</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/cole.jpg">
+                        <button type="button" class="like-btn" data-src="assets/cole.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1071,7 +1048,7 @@
                     <h3>Teen Girl</h3>
                     <p>Inspiration • 2024</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/teengirl.jpg">
+                        <button type="button" class="like-btn" data-src="assets/teengirl.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1087,7 +1064,7 @@
                     <h3>Teen Boy</h3>
                     <p>Inspiration • 2018</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/teenboy.jpg">
+                        <button type="button" class="like-btn" data-src="assets/teenboy.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1103,7 +1080,7 @@
                     <h3>Jermaine Jefferson Doria</h3>
                     <p>PUP Student Main Campus • September 3, 2021</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/jj.jpg">
+                        <button type="button" class="like-btn" data-src="assets/jj.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1119,7 +1096,7 @@
                     <h3>Christopher Jay De Claro</h3>
                     <p>PUP Instructor • November 16, 2023</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/cj.jpg">
+                        <button type="button" class="like-btn" data-src="assets/cj.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1135,7 +1112,7 @@
                     <h3>Sasuke Uchiha</h3>
                     <p>Inspiration • 2015</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/sasuke.jpg">
+                        <button type="button" class="like-btn" data-src="assets/sasuke.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1151,7 +1128,7 @@
                     <h3>Flower</h3>
                     <p>Drafting Ideas • 2017</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/flower.jpg">
+                        <button type="button" class="like-btn" data-src="assets/flower.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1167,7 +1144,7 @@
                     <h3>Half-Face Blue Ink Portrait</h3>
                     <p>Drafting Ideas • 2019</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/half.jpg">
+                        <button type="button" class="like-btn" data-src="assets/half.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1183,7 +1160,7 @@
                     <h3>Young Lady</h3>
                     <p>Inspiration • 2021</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/younglady.jpg">
+                        <button type="button" class="like-btn" data-src="assets/younglady.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1199,7 +1176,7 @@
                     <h3>Red Ink Old Man</h3>
                     <p>Inspiration • 2022</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/old.jpg">
+                        <button type="button" class="like-btn" data-src="assets/old.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1215,7 +1192,7 @@
                     <h3>Old Man Drafting Exercise</h3>
                     <p>Drafting Ideas • 2022</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/Draft.jpg">
+                        <button type="button" class="like-btn" data-src="assets/Draft.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1231,7 +1208,7 @@
                     <h3>Trisha Trix Lozada</h3>
                     <p>Facebook Friend - Caepup • August 16, 2021</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/trix.jpg">
+                        <button type="button" class="like-btn" data-src="assets/trix.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1247,7 +1224,7 @@
                     <h3>Being Nobody</h3>
                     <p>Human being as nobody person • August 26, 2026</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/nobody.jpg">
+                        <button type="button" class="like-btn" data-src="assets/nobody.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1263,7 +1240,7 @@
                     <h3>Another Drafting Exercises</h3>
                     <p>The Girl • August 27, 2026</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/kid.jpg">
+                        <button type="button" class="like-btn" data-src="assets/kid.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1279,7 +1256,7 @@
                     <h3>Another Drafting Exercises</h3>
                     <p>El Hombre • August 28, 2026</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/hombre.jpg">
+                        <button type="button" class="like-btn" data-src="assets/hombre.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1296,7 +1273,7 @@
                     <p>December 16, 1984 • July 13, 1992</p>
                     <p>In Loving Memory • August 31, 2026</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/Tito onel.jpg">
+                        <button type="button" class="like-btn" data-src="assets/Tito onel.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1312,7 +1289,7 @@
                     <h3>Joshua & Daniell</h3>
                     <p>The Love Birds • September 2, 2026</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/lovebirds.jpg">
+                        <button type="button" class="like-btn" data-src="assets/lovebirds.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1329,7 +1306,7 @@
                     <p>October 26, 1949 • January 28, 2010</p>
                     <p>My Grandma • September 3, 2026</p>
                     <div class="like-wrap">
-                        <button class="like-btn" data-src="assets/inay.jpg">
+                        <button type="button" class="like-btn" data-src="assets/inay.jpg">
                             <i class="bx bx-heart"></i>
                             <span class="like-count">0</span>
                             <span class="like-label">Like</span>
@@ -1348,256 +1325,259 @@
 
     <!-- ===== JAVASCRIPT ===== -->
     <script>
-        /* ---------- DARK / LIGHT TOGGLE ---------- */
-        const darkToggle = document.getElementById("darkModeToggle");
-        const body = document.body;
+        document.addEventListener('DOMContentLoaded', function() {
 
-        if (localStorage.getItem("theme") === "light") {
-            body.classList.add("light");
-            darkToggle.checked = true;
-        }
+            /* ---------- DARK / LIGHT TOGGLE ---------- */
+            const darkToggle = document.getElementById("darkModeToggle");
+            const body = document.body;
 
-        darkToggle.addEventListener("change", () => {
-            body.classList.toggle("light");
-            localStorage.setItem(
-                "theme",
-                body.classList.contains("light") ? "light" : "dark"
+            if (localStorage.getItem("theme") === "light") {
+                body.classList.add("light");
+                darkToggle.checked = true;
+            }
+
+            darkToggle.addEventListener("change", () => {
+                body.classList.toggle("light");
+                localStorage.setItem(
+                    "theme",
+                    body.classList.contains("light") ? "light" : "dark"
+                );
+            });
+
+            /* ---------- IMAGE POPUP MODAL ---------- */
+            const modal = document.getElementById("imgModal");
+            const modalImg = document.getElementById("modalImg");
+            const closeBtn = modal.querySelector(".close");
+
+            const allClickableImages = document.querySelectorAll(
+                ".card img, .featured-hero .hero-img, .featured-sub .sub-card img"
             );
-        });
 
-        /* ---------- IMAGE POPUP MODAL ---------- */
-        const modal = document.getElementById("imgModal");
-        const modalImg = document.getElementById("modalImg");
-        const closeBtn = modal.querySelector(".close");
-
-        const allClickableImages = document.querySelectorAll(
-            ".card img, .featured-hero .hero-img, .featured-sub .sub-card img"
-        );
-
-        allClickableImages.forEach((img) => {
-            img.addEventListener("click", (e) => {
-                e.stopPropagation();
-                modal.style.display = "flex";
-                modalImg.src = img.src;
-                modalImg.alt = img.alt || "Artwork";
-            });
-        });
-
-        closeBtn.onclick = () => { modal.style.display = "none"; };
-        modal.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape" && modal.style.display === "flex") modal.style.display = "none";
-        });
-
-        /* ---------- SORT GALLERY BY DATE (NEWEST FIRST) ---------- */
-        (function sortGalleryByDate() {
-            const container = document.getElementById('certs');
-            const cards = Array.from(container.querySelectorAll('.card'));
-            cards.sort((a, b) => {
-                const getDate = (card) => {
-                    const paragraphs = card.querySelectorAll('.box p');
-                    const lastP = paragraphs[paragraphs.length - 1];
-                    if (!lastP) return new Date(0);
-                    const text = lastP.textContent.trim();
-                    const parts = text.split('•');
-                    let dateStr = parts[parts.length - 1].trim();
-                    const date = new Date(dateStr);
-                    if (isNaN(date.getTime())) {
-                        const yearMatch = dateStr.match(/\b(19|20)\d{2}\b/);
-                        if (yearMatch) return new Date(parseInt(yearMatch[0]), 0, 1);
-                        return new Date(0);
-                    }
-                    return date;
-                };
-                return getDate(b) - getDate(a);
-            });
-            cards.forEach(card => container.appendChild(card));
-        })();
-
-        /* ================================================================
-               L I K E   S Y S T E M   (localStorage-based)
-               ================================================================ */
-
-        // ----- Helper: get all artwork src keys from the page -----
-        function getAllArtworkSrcs() {
-            const srcs = new Set();
-            document.querySelectorAll('.like-btn[data-src]').forEach(btn => {
-                srcs.add(btn.getAttribute('data-src'));
-            });
-            return Array.from(srcs);
-        }
-
-        // ----- Load like data from localStorage -----
-        function loadLikeData() {
-            const raw = localStorage.getItem('artworkLikes');
-            if (raw) {
-                try { return JSON.parse(raw); } catch (e) { /* fall through */ }
-            }
-            return {};
-        }
-
-        // ----- Save like data to localStorage -----
-        function saveLikeData(data) {
-            localStorage.setItem('artworkLikes', JSON.stringify(data));
-        }
-
-        // ----- Seed initial likes for artworks that don't have data -----
-        function seedLikes() {
-            const data = loadLikeData();
-            const allSrcs = getAllArtworkSrcs();
-            let changed = false;
-            const names = [
-                'Zaki Capuno', 'Zaki Runner Up', 'Charlie Calupig', 'Genart Nido',
-                'Lovel Capuno', 'Blonde Girl', 'Cole Sprouse', 'Teen Girl',
-                'Teen Boy', 'Jermaine Doria', 'Christopher De Claro', 'Sasuke',
-                'Flower', 'Half-Face', 'Young Lady', 'Red Ink Old Man',
-                'Old Man Draft', 'Trisha Lozada', 'Being Nobody', 'The Girl',
-                'El Hombre', 'Uncle Leonel', 'Joshua & Daniell', 'Grandma'
-            ];
-            allSrcs.forEach((src, idx) => {
-                if (!data[src]) {
-                    // generate a random like count between 2 and 18
-                    const seed = (idx * 7 + 13) % 19 + 2;
-                    data[src] = { likes: seed, liked: false };
-                    changed = true;
-                }
-                // ensure 'liked' field exists
-                if (data[src] && data[src].liked === undefined) {
-                    data[src].liked = false;
-                    changed = true;
-                }
-            });
-            if (changed) saveLikeData(data);
-            return data;
-        }
-
-        // ----- Update all like buttons on the page -----
-        function renderAllLikes() {
-            const data = loadLikeData();
-            const allSrcs = getAllArtworkSrcs();
-
-            allSrcs.forEach(src => {
-                const info = data[src] || { likes: 0, liked: false };
-                const buttons = document.querySelectorAll(`.like-btn[data-src="${CSS.escape(src)}"]`);
-                buttons.forEach(btn => {
-                    const icon = btn.querySelector('i');
-                    const countSpan = btn.querySelector('.like-count');
-                    const labelSpan = btn.querySelector('.like-label');
-
-                    if (countSpan) countSpan.textContent = info.likes || 0;
-                    if (icon) {
-                        icon.className = info.liked ? 'bx bxs-heart' : 'bx bx-heart';
-                    }
-                    if (labelSpan) {
-                        labelSpan.textContent = info.liked ? 'Liked' : 'Like';
-                    }
-                    btn.classList.toggle('liked', !!info.liked);
-                });
-            });
-
-            updateInsights();
-        }
-
-        // ----- Toggle like for a specific artwork -----
-        function toggleLike(src) {
-            const data = loadLikeData();
-            if (!data[src]) {
-                data[src] = { likes: 0, liked: false };
-            }
-            const info = data[src];
-            info.liked = !info.liked;
-            info.likes += info.liked ? 1 : -1;
-            if (info.likes < 0) info.likes = 0;
-            saveLikeData(data);
-            renderAllLikes();
-
-            // animate hearts on all buttons for this src
-            document.querySelectorAll(`.like-btn[data-src="${CSS.escape(src)}"]`).forEach(btn => {
-                const icon = btn.querySelector('i');
-                if (icon) {
-                    icon.classList.remove('heart-pop');
-                    void icon.offsetWidth; // reflow
-                    icon.classList.add('heart-pop');
-                }
-            });
-        }
-
-        // ----- Update insights bar -----
-        function updateInsights() {
-            const data = loadLikeData();
-            const allSrcs = getAllArtworkSrcs();
-
-            let totalLikes = 0;
-            let maxLikes = 0;
-            let topSrc = null;
-            let topName = '—';
-
-            allSrcs.forEach(src => {
-                const info = data[src];
-                if (info) {
-                    totalLikes += info.likes || 0;
-                    if ((info.likes || 0) > maxLikes) {
-                        maxLikes = info.likes || 0;
-                        topSrc = src;
-                    }
-                }
-            });
-
-            // Try to get a display name for the top artwork
-            if (topSrc) {
-                const card = document.querySelector(`.card[data-src="${CSS.escape(topSrc)}"]`);
-                if (card) {
-                    const h3 = card.querySelector('.box h3');
-                    if (h3) topName = h3.textContent.trim();
-                } else {
-                    // fallback: look in featured
-                    const sub = document.querySelector(`.sub-card[data-src="${CSS.escape(topSrc)}"]`);
-                    if (sub) {
-                        const h4 = sub.querySelector('.sub-body h4');
-                        if (h4) topName = h4.textContent.trim();
-                    }
-                }
-                // if still not found, use filename
-                if (topName === '—' && topSrc) {
-                    const parts = topSrc.split('/');
-                    topName = parts[parts.length - 1].replace(/\.[^.]+$/, '').replace(/_/g, ' ');
-                }
-            }
-
-            document.getElementById('totalArtworks').textContent = allSrcs.length;
-            document.getElementById('totalLikes').textContent = totalLikes;
-            document.getElementById('mostLikedCount').textContent = maxLikes;
-            document.getElementById('topArtworkName').textContent = topName;
-        }
-
-        // ----- Attach click handlers to all like buttons -----
-        function attachLikeHandlers() {
-            document.querySelectorAll('.like-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
+            allClickableImages.forEach((img) => {
+                img.addEventListener("click", (e) => {
                     e.stopPropagation();
-                    const src = this.getAttribute('data-src');
-                    if (src) toggleLike(src);
+                    modal.style.display = "flex";
+                    modalImg.src = img.src;
+                    modalImg.alt = img.alt || "Artwork";
                 });
             });
-        }
 
-        // ----- Initialize everything -----
-        function initLikes() {
-            seedLikes();
-            renderAllLikes();
-            attachLikeHandlers();
-        }
+            closeBtn.onclick = () => { modal.style.display = "none"; };
+            modal.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape" && modal.style.display === "flex") modal.style.display = "none";
+            });
 
-        // Run after DOM is ready
-        initLikes();
+            /* ---------- SORT GALLERY BY DATE (NEWEST FIRST) ---------- */
+            (function sortGalleryByDate() {
+                const container = document.getElementById('certs');
+                const cards = Array.from(container.querySelectorAll('.card'));
+                cards.sort((a, b) => {
+                    const getDate = (card) => {
+                        const paragraphs = card.querySelectorAll('.box p');
+                        const lastP = paragraphs[paragraphs.length - 1];
+                        if (!lastP) return new Date(0);
+                        const text = lastP.textContent.trim();
+                        const parts = text.split('•');
+                        let dateStr = parts[parts.length - 1].trim();
+                        const date = new Date(dateStr);
+                        if (isNaN(date.getTime())) {
+                            const yearMatch = dateStr.match(/\b(19|20)\d{2}\b/);
+                            if (yearMatch) return new Date(parseInt(yearMatch[0]), 0, 1);
+                            return new Date(0);
+                        }
+                        return date;
+                    };
+                    return getDate(b) - getDate(a);
+                });
+                cards.forEach(card => container.appendChild(card));
+            })();
 
-        // Also re-run when new cards might be added (e.g., after sort, but we already sorted before init)
-        // For safety, re-run after a tiny delay to catch any dynamic changes
-        setTimeout(() => {
-            // re-attach handlers just in case
-            attachLikeHandlers();
-            renderAllLikes();
-        }, 100);
+            /* ================================================================
+                   L I K E   S Y S T E M   (localStorage-based)
+                   ================================================================ */
+
+            // ----- Helper: get all artwork src keys from the page -----
+            function getAllArtworkSrcs() {
+                const srcs = new Set();
+                document.querySelectorAll('.like-btn[data-src]').forEach(btn => {
+                    srcs.add(btn.getAttribute('data-src'));
+                });
+                return Array.from(srcs);
+            }
+
+            // ----- Helper: get buttons by data-src (safe for spaces) -----
+            function getButtonsBySrc(src) {
+                const allButtons = document.querySelectorAll('.like-btn');
+                const matched = [];
+                allButtons.forEach(btn => {
+                    if (btn.getAttribute('data-src') === src) {
+                        matched.push(btn);
+                    }
+                });
+                return matched;
+            }
+
+            // ----- Helper: get container (card/sub-card) by data-src -----
+            function getContainerBySrc(src) {
+                const cards = document.querySelectorAll('.card, .sub-card');
+                for (let card of cards) {
+                    if (card.getAttribute('data-src') === src) {
+                        return card;
+                    }
+                }
+                return null;
+            }
+
+            // ----- Load like data from localStorage -----
+            function loadLikeData() {
+                try {
+                    const raw = localStorage.getItem('artworkLikes');
+                    if (raw) {
+                        return JSON.parse(raw);
+                    }
+                } catch (e) {
+                    console.warn("Failed to parse likes data", e);
+                }
+                return {};
+            }
+
+            // ----- Save like data to localStorage -----
+            function saveLikeData(data) {
+                localStorage.setItem('artworkLikes', JSON.stringify(data));
+            }
+
+            // ----- Seed initial likes for artworks that don't have data -----
+            function seedLikes() {
+                const data = loadLikeData();
+                const allSrcs = getAllArtworkSrcs();
+                let changed = false;
+                allSrcs.forEach((src, idx) => {
+                    if (!data[src]) {
+                        const seed = (idx * 7 + 13) % 19 + 2;
+                        data[src] = { likes: seed, liked: false };
+                        changed = true;
+                    }
+                    if (data[src] && data[src].liked === undefined) {
+                        data[src].liked = false;
+                        changed = true;
+                    }
+                });
+                if (changed) saveLikeData(data);
+                return data;
+            }
+
+            // ----- Update all like buttons on the page -----
+            function renderAllLikes() {
+                const data = loadLikeData();
+                const allSrcs = getAllArtworkSrcs();
+
+                allSrcs.forEach(src => {
+                    const info = data[src] || { likes: 0, liked: false };
+                    const buttons = getButtonsBySrc(src);
+                    buttons.forEach(btn => {
+                        const icon = btn.querySelector('i');
+                        const countSpan = btn.querySelector('.like-count');
+                        const labelSpan = btn.querySelector('.like-label');
+
+                        if (countSpan) countSpan.textContent = info.likes || 0;
+                        if (icon) {
+                            icon.className = info.liked ? 'bx bxs-heart' : 'bx bx-heart';
+                        }
+                        if (labelSpan) {
+                            labelSpan.textContent = info.liked ? 'Liked' : 'Like';
+                        }
+                        btn.classList.toggle('liked', !!info.liked);
+                    });
+                });
+                updateInsights();
+            }
+
+            // ----- Toggle like for a specific artwork -----
+            function toggleLike(src) {
+                console.log("Liking:", src);
+                const data = loadLikeData();
+                if (!data[src]) {
+                    data[src] = { likes: 0, liked: false };
+                }
+                const info = data[src];
+                info.liked = !info.liked;
+                info.likes += info.liked ? 1 : -1;
+                if (info.likes < 0) info.likes = 0;
+                saveLikeData(data);
+                renderAllLikes();
+
+                // animate hearts
+                getButtonsBySrc(src).forEach(btn => {
+                    const icon = btn.querySelector('i');
+                    if (icon) {
+                        icon.classList.remove('heart-pop');
+                        void icon.offsetWidth;
+                        icon.classList.add('heart-pop');
+                    }
+                });
+            }
+
+            // ----- Update insights bar -----
+            function updateInsights() {
+                const data = loadLikeData();
+                const allSrcs = getAllArtworkSrcs();
+
+                let totalLikes = 0;
+                let maxLikes = 0;
+                let topSrc = null;
+                let topName = '—';
+
+                allSrcs.forEach(src => {
+                    const info = data[src];
+                    if (info) {
+                        totalLikes += info.likes || 0;
+                        if ((info.likes || 0) > maxLikes) {
+                            maxLikes = info.likes || 0;
+                            topSrc = src;
+                        }
+                    }
+                });
+
+                if (topSrc) {
+                    const container = getContainerBySrc(topSrc);
+                    if (container) {
+                        const titleEl = container.querySelector('h3, h4');
+                        if (titleEl) topName = titleEl.textContent.trim();
+                    }
+                    if (topName === '—' && topSrc) {
+                        const parts = topSrc.split('/');
+                        topName = parts[parts.length - 1].replace(/\.[^.]+$/, '').replace(/_/g, ' ');
+                    }
+                }
+
+                document.getElementById('totalArtworks').textContent = allSrcs.length;
+                document.getElementById('totalLikes').textContent = totalLikes;
+                document.getElementById('mostLikedCount').textContent = maxLikes;
+                document.getElementById('topArtworkName').textContent = topName;
+            }
+
+            // ----- Attach click handlers to all like buttons -----
+            function attachLikeHandlers() {
+                document.querySelectorAll('.like-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const src = this.getAttribute('data-src');
+                        if (src) toggleLike(src);
+                    });
+                });
+            }
+
+            // ----- Initialize everything -----
+            function initLikes() {
+                seedLikes();
+                renderAllLikes();
+                attachLikeHandlers();
+                console.log("Like system initialized!");
+            }
+
+            initLikes();
+        });
     </script>
 </body>
 </html>
