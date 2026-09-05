@@ -1281,13 +1281,15 @@
                 cards.forEach(card => container.appendChild(card));
             })();
 
-  
             const visitorCountEl = document.getElementById('visitorCount');
-            let visitorCount = parseInt(localStorage.getItem('visitorCount') || '0') + 1;
+            let visitorCount = parseInt(localStorage.getItem('visitorCount') || '0');
+            if (visitorCount === 0) {
+                visitorCount = Math.floor(Math.random() * 500) + 1500;
+            }
+            visitorCount += 1;
             localStorage.setItem('visitorCount', visitorCount);
             visitorCountEl.textContent = visitorCount;
 
-           
             const DEFAULT_LIKES_MAP = {
                 'assets/Zportrait.jpg': 88,
                 'assets/Z3port.jpg': 89,
