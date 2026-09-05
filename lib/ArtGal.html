@@ -1281,19 +1281,21 @@
                 cards.forEach(card => container.appendChild(card));
             })();
 
+  
             const visitorCountEl = document.getElementById('visitorCount');
             let visitorCount = parseInt(localStorage.getItem('visitorCount') || '0') + 1;
             localStorage.setItem('visitorCount', visitorCount);
             visitorCountEl.textContent = visitorCount;
 
+           
             const DEFAULT_LIKES_MAP = {
                 'assets/Zportrait.jpg': 88,
                 'assets/Z3port.jpg': 89,
-                'assets/cportrait.jpg': 110,
+                'assets/cportrait.jpg': 95,
                 'assets/Gportrait.jpg': 79,
                 'assets/Lportrait.jpg': 100,
                 'assets/gdraft.jpg': 99,
-                'assets/cole.jpg': 130,
+                'assets/cole.jpg': 145,
                 'assets/teengirl.jpg': 24,
                 'assets/teenboy.jpg': 77,
                 'assets/jj.jpg': 98,
@@ -1400,6 +1402,19 @@
                 updateInsights();
             }
 
+            function autoIncrementLikes() {
+                const data = loadLikeData();
+                const allSrcs = getAllArtworkSrcs();
+                if (allSrcs.length === 0) return;
+
+                const randomSrc = allSrcs[Math.floor(Math.random() * allSrcs.length)];
+                if (data[randomSrc]) {
+                    data[randomSrc].likes += 1;
+                    saveLikeData(data);
+                    renderAllLikes();
+                }
+            }
+
             function toggleLike(src) {
                 const data = loadLikeData();
                 if (!data[src]) {
@@ -1474,6 +1489,7 @@
                 seedLikes();
                 renderAllLikes();
                 attachLikeHandlers();
+                autoIncrementLikes();
             }
 
             initLikes();
