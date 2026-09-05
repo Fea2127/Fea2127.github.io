@@ -25,9 +25,7 @@
             font-size: 16px;
             --like-color: #ff4757;
         }
-        *,
-        *::before,
-        *::after {
+        *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -145,19 +143,11 @@
                 gap: 0.8rem;
                 padding: 1.2rem;
             }
-            .insights-bar .stat-divider {
-                display: none;
-            }
-            .insights-bar .stat-item {
-                font-size: 0.8rem;
-            }
-            .insights-bar .top-artwork {
-                font-size: 0.8rem;
-            }
+            .insights-bar .stat-divider { display: none; }
+            .insights-bar .stat-item { font-size: 0.8rem; }
+            .insights-bar .top-artwork { font-size: 0.8rem; }
         }
-        .featured-wrap {
-            margin-bottom: 4rem;
-        }
+        .featured-wrap { margin-bottom: 4rem; }
         .featured-hero {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -207,18 +197,14 @@
             border: 1px solid rgba(255, 215, 0, 0.25);
             width: fit-content;
         }
-        .featured-hero .hero-body .badge i {
-            font-size: 1rem;
-        }
+        .featured-hero .hero-body .badge i { font-size: 1rem; }
         .featured-hero .hero-body h2 {
             font-size: 2rem;
             font-weight: 800;
             line-height: 1.2;
             color: var(--text);
         }
-        .featured-hero .hero-body h2 .gold {
-            color: var(--gold);
-        }
+        .featured-hero .hero-body h2 .gold { color: var(--gold); }
         .featured-hero .hero-body p {
             color: var(--text-dim);
             font-size: 0.95rem;
@@ -274,9 +260,7 @@
             width: 100%;
             transition: var(--transition);
         }
-        .featured-sub .sub-card:hover img {
-            filter: brightness(1.05);
-        }
+        .featured-sub .sub-card:hover img { filter: brightness(1.05); }
         .featured-sub .sub-card .sub-body {
             padding: 0.8rem 1rem 1rem;
             flex: 1;
@@ -334,9 +318,7 @@
             width: 100%;
             transition: var(--transition);
         }
-        .card:hover img {
-            filter: brightness(1.05);
-        }
+        .card:hover img { filter: brightness(1.05); }
         .box {
             flex: 1;
             padding: 1.2rem;
@@ -388,9 +370,7 @@
             transition: var(--transition);
             color: var(--text-dim);
         }
-        .like-btn.liked i {
-            color: var(--like-color);
-        }
+        .like-btn.liked i { color: var(--like-color); }
         .like-btn .like-count {
             font-size: 0.8rem;
             font-weight: 600;
@@ -399,9 +379,7 @@
             color: var(--text-dim);
             transition: var(--transition);
         }
-        .like-btn.liked .like-count {
-            color: var(--like-color);
-        }
+        .like-btn.liked .like-count { color: var(--like-color); }
         .like-btn .like-label {
             font-size: 0.7rem;
             font-weight: 400;
@@ -431,16 +409,12 @@
             font-size: 0.75rem;
             padding: 0.1rem 0.4rem 0.1rem 0.1rem;
         }
-        .sub-like .like-btn i {
-            font-size: 1rem;
-        }
+        .sub-like .like-btn i { font-size: 1rem; }
         .sub-like .like-btn .like-count {
             font-size: 0.7rem;
             min-width: 0.8rem;
         }
-        .sub-like .like-btn .like-label {
-            font-size: 0.6rem;
-        }
+        .sub-like .like-btn .like-label { font-size: 0.6rem; }
         body.light {
             --bg: #f2f4fc;
             --surface: rgba(255, 255, 255, 0.7);
@@ -476,18 +450,12 @@
             background: rgba(0, 119, 204, 0.08);
             border-color: rgba(0, 119, 204, 0.1);
         }
-        body.light .featured-hero .hero-body .meta span i {
-            color: #005a99;
-        }
-        body.light .section-title .highlight {
-            color: #005a99;
-        }
+        body.light .featured-hero .hero-body .meta span i { color: #005a99; }
+        body.light .section-title .highlight { color: #005a99; }
         body.light .insights-bar {
             border-color: rgba(0, 0, 0, 0.06);
         }
-        body.light .insights-bar .stat-item i {
-            color: #005a99;
-        }
+        body.light .insights-bar .stat-item i { color: #005a99; }
         body.light .insights-bar .top-artwork .top-badge {
             background: rgba(0, 119, 204, 0.1);
             color: #005a99;
@@ -1385,7 +1353,6 @@
                 localStorage.setItem('artworkLikes', JSON.stringify(data));
             }
 
-            // ----- FIX: only set defaults for artworks that don't have a stored value -----
             function seedLikes() {
                 const data = loadLikeData();
                 const allSrcs = getAllArtworkSrcs();
@@ -1427,19 +1394,6 @@
                     });
                 });
                 updateInsights();
-            }
-
-            function autoIncrementLikes() {
-                const data = loadLikeData();
-                const allSrcs = getAllArtworkSrcs();
-                if (allSrcs.length === 0) return;
-
-                const randomSrc = allSrcs[Math.floor(Math.random() * allSrcs.length)];
-                if (data[randomSrc]) {
-                    data[randomSrc].likes += 1;
-                    saveLikeData(data);
-                    renderAllLikes();
-                }
             }
 
             function toggleLike(src) {
@@ -1513,10 +1467,9 @@
             }
 
             function initLikes() {
-                seedLikes();           
+                seedLikes();
                 renderAllLikes();     
-                attachLikeHandlers();
-                autoIncrementLikes();   
+                attachLikeHandlers(); 
             }
 
             initLikes();
