@@ -15,6 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script src="https://unpkg.com/@dfinity/agent@2.4.0/dist/index.js"></script>
 
     <!-- CUSTOM -->
     <style>
@@ -633,15 +634,36 @@
       .download-btn i {
         font-size: 1.2em;
       }
-      /* visitorcount */
-      #visitorcount {
-        padding: 50px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        box-shadow: 0 0 20px -5px var(--primary);
-      }
+      /* ✨ Neon Glow for View Counter */
+#view-count-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #00e5ff;
+  text-shadow:
+    0 0 5px #00e5ff,
+    0 0 10px #00e5ff,
+    0 0 20px #00e5ff,
+    0 0 40px #00e5ff;
+  animation: neonPulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes neonPulse {
+  from {
+    text-shadow:
+      0 0 5px #00e5ff,
+      0 0 10px #00e5ff,
+      0 0 20px #00e5ff,
+      0 0 40px #00e5ff;
+  }
+  to {
+    text-shadow:
+      0 0 10px #00e5ff,
+      0 0 20px #00e5ff,
+      0 0 40px #00e5ff,
+      0 0 80px #00e5ff,
+      0 0 120px #00e5ff;
+  }
+}
     </style>
   </head>
   <body>
@@ -1105,19 +1127,14 @@
     </section>
 
     <!-- ---------------  FOOTER  --------------- -->
-    <section id="visitorcount">
-      <div class="card">
-        <a href="https://www.counters-free.net/">free Counters</a>
-        <script
-          type="text/javascript"
-          src="https://www.freevisitorcounters.com/auth.php?id=4bbb65733ff06eb06397d049a12c4418ee854fbb"
-        ></script>
-        <script
-          type="text/javascript"
-          src="https://www.freevisitorcounters.com/en/home/counter/1524030/t/0"
-        ></script>
-      </div>
-    </section>
+   <section id="visitorcount">
+  <div class="card" style="padding: 2rem; text-align: center;">
+    <h3 style="margin-bottom: 0.5rem;">Visitors</h3>
+    <p>
+      <span id="view-count-number">Loading...</span>
+    </p>
+  </div>
+</section>
     <footer id="contact">
       <p>© 2026 Alfea Aemiel Mingua. All rights reserved.</p>
       <div class="socials">
@@ -1213,5 +1230,33 @@
         knowMoreModal.style.display = "none";
       };
     </script>
+    <script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const countElement = document.getElementById('view-count-number');
+    const canisterId = 'uxrrr-q7777-77774-qaaaq-cai'; // Your Canister ID!
+
+    try {
+      const agent = await window.ic_agent.HttpAgent.create();
+
+      const counterActor = window.ic_agent.Actor.createActor(
+        ({ IDL }) => {
+          return IDL.Service({
+            'increment': IDL.Func([], [IDL.Nat], []),
+            'get': IDL.Func([], [IDL.Nat], ['query']),
+          });
+        },
+        { agent, canisterId }
+      );
+
+      await counterActor.increment();
+      const count = await counterActor.get();
+      countElement.textContent = count.toString();
+
+    } catch (error) {
+      console.error('View counter error:', error);
+      countElement.textContent = 'N/A';
+    }
+  });
+</script>
   </body>
 </html>
